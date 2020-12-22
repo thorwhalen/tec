@@ -1,3 +1,10 @@
+"""
+Counting dependencies.
+
+Note: Several of the import_counting module's functions require
+having snakefood installed. See: http://furius.ca/snakefood/doc/snakefood-doc.html#installation
+
+"""
 from numpy import unique
 from collections import Counter
 import re
@@ -30,7 +37,10 @@ def imports_in_module(module):
     :param module: An actual module object the file of the module (as given by inspect.getfile(module)
     :return: A list of strings showing the imported objects (modules, functions, variables, classes...)
 
-    >>> print('\\n'.join(imports_in_module(__file__)))
+    Note: Requires having snakefood installed:
+    http://furius.ca/snakefood/doc/snakefood-doc.html#installation
+
+    >>> print('\\n'.join(imports_in_module(__file__)))  # doctest: +SKIP
     StringIO.StringIO
     collections.Counter
     inspect
@@ -56,7 +66,11 @@ def base_modules_used_in_module(module):
     Get a list of strings showing what base modules that are imported in a module.
     :param module: An actual module object the file of the module (as given by inspect.getfile(module)
     :return: A list of strings showing the imported base modules (i.e. the X of import X.Y.Z or from X.Y import Z).
-    >>> base_modules_used_in_module(__file__)
+
+    Note: Requires having snakefood installed:
+    http://furius.ca/snakefood/doc/snakefood-doc.html#installation
+
+    >>> base_modules_used_in_module(__file__)  # doctest: +SKIP
     ['StringIO', 'collections', 'inspect', 'numpy', 'os', 'pandas', 're', 'subprocess', 'ut']
     """
     return list(unique([re.compile('\w+').findall(x)[0] for x in imports_in_module(module)]))

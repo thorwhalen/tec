@@ -30,11 +30,11 @@ def second_party_names(module, obj_filt=None):
     :param obj_filt: Boolean function applied to object to filter it in
     :return:
 
-    >>> from ut.util.code import modules
+    >>> from tec import modules
     >>> sorted(second_party_names(modules))[:5]
     ['DOTPATH', 'FILEPATH', 'FOLDERPATH', 'LOADED', 'ModuleSpecKind']
-    >>> sorted(second_party_names(modules, callable))[:5]
-    ['ModuleSpecKind', 'coerce_module_spec', 'get_imported_module_paths', 'is_from_module', 'is_module_dotpath']
+    >>> sorted(second_party_names(modules, callable))[:4]
+    ['ModuleSpecKind', 'coerce_module_spec', 'filepath_to_dotpath', 'finding_objects_of_module_with_given_methods']
     >>> sorted(second_party_names(modules, lambda obj: isinstance(obj, type)))
     ['ModuleSpecKind']
     """

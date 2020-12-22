@@ -11,7 +11,10 @@ dflt_specs = {
 
 
 def create_github_repo(name, description='', login_or_token=None, password=None):
-    """Create a new github repository"""
+    """Create a new github repository
+
+    Note: Requires github (pip install github)
+    """
     from github import Github
     gg = Github(login_or_token=login_or_token, password=password)
 
