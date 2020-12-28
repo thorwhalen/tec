@@ -1,6 +1,7 @@
 """(py2store) stores (i.e. mapping interfaces) to access python files"""
 
 import os
+import re
 from py2store import wrap_kvs, filt_iter, KvReader
 from py2store.filesys import mk_relative_path_store, DirCollection, FileStringReader
 
@@ -30,3 +31,18 @@ class PkgFilesReader(FileStringReader, KvReader):
 class PkgReader(DirCollection, KvReader):
     def __getitem__(self, k):
         return PkgFilesReader(os.path.join(self.rootdir, k))
+
+
+commented_header_re = re.compile('(?<=""")\s?.+')
+triple_quotes_re = re.compile('"""$|\'\'\'$')
+
+
+def find_short_description_for_pkg(s):
+    """Generator of (pkg_name, short_description) pairs (using the header comments of init files as description)"""
+    for k, v in s.items():
+        if k.endswith('__init__.py') and (v.startswith('"""') or v.startswith("'''")):
+            k = k[:-(len('__init__.py') + 1)]
+            m = commented_header_re.search(v)
+            t = m.group(0).strip()
+            t = triple_quotes_re.sub('', t)
+            yield k, t
