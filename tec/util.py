@@ -49,7 +49,7 @@ def decode_or_default(b: bytes, dflt=decoding_problem_sentinel, use_cchardet=DFL
             return dflt
 
 
-def resolve_module_contents(module_spec, dflt=None):
+def resolve_module_filepath(module_spec):
     if not isinstance(module_spec, str):
         module_spec = inspect.getfile(module_spec)
         if module_spec.endswith('c'):
@@ -60,6 +60,13 @@ def resolve_module_contents(module_spec, dflt=None):
         assert os.path.isfile(module_spec), \
             f"You specified the module as a directory {module_dir}, " \
             f"but this directory wasn't a package (it didn't have an __init__.py file)"
+    assert os.path.isfile(module_spec), "module_spec should be a file at this point"
+    return module_spec
+
+
+def resolve_module_contents(module_spec, dflt=None):
+    if not isinstance(module_spec, str) or os.path.isdir(module_spec):
+        module_spec = resolve_module_filepath(module_spec)
     if os.path.isfile(module_spec):
         with open(module_spec, 'rb') as fp:
             module_bytes = fp.read()

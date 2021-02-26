@@ -11,11 +11,12 @@ from io import StringIO
 from collections import Counter
 import inspect
 from tec.util import resolve_module_contents
+from tec.stores import PyFilesReader
 
 file_sep = os.path.sep
 module_import_regex_tmpl = "(?<=from) {package_name}|(?<=[^\s]import) {package_name}"
 
-any_module_import_regex = re.compile(module_import_regex_tmpl.format(package_name='\w+'))
+any_module_import_regex = re.compile(module_import_regex_tmpl.format(package_name=r'\w+'))
 
 # r"(?<!from)import (?P<single>\w+)[^,]"
 spaced_comma_re = re.compile(r"\s*,\s*")
@@ -27,8 +28,8 @@ another_import_regex = re.compile(
     r"^\s*from\s+(?P<from_import>[\w\.]+)\s+import"
     r"|^\s*import (?P<multiple>[\w\.,]+)"
 )
-commented_line_re = re.compile('\s*#')
-token_re = re.compile('[\w\.]+')
+commented_line_re = re.compile(r'\s*#')
+token_re = re.compile(r'[\w\.]+')
 
 
 def _normalize_line(line):
@@ -75,7 +76,7 @@ def modules_imported_by_module(module):
     The input can be a filepath
 
     >>> list(modules_imported_by_module(__file__))
-    ['re', 'os', 'io', 'collections', 'inspect', 'tec.util', 'os.path']
+    ['re', 'os', 'io', 'collections', 'inspect', 'tec.util', 'tec.stores', 'os.path']
 
     ... a imported module object
 
@@ -136,16 +137,17 @@ def base_modules_used_in_module(module):
 #
 #     if os.path.isdir(module):
 #         c = Counter()
-#         it = get_filepath_iterator(module, pattern='.py$')
-#         next(it)  # to skip the seed module itself, and not get into an infinite loop
+#         it = PyFilesReader(module).values()
+#         # next(it)  # to skip the seed module itself, and not get into an infinite loop
 #         for _module in it:
 #             try:
 #                 c.update(base_module_imports_in_module_recursive(_module))
 #             except Exception as e:
-#                 if 'sfood-imports' in e.args[1]:
-#                     raise RuntimeError("You don't have sfood-imports installed (snakefood), so I can't do my job")
-#                 else:
-#                     print(("Error with module {}: {}".format(_module, e)))
+#                 print('asdf')
+#                 # if 'sfood-imports' in e.args[1]:
+#                 #     raise RuntimeError("You don't have sfood-imports installed (snakefood), so I can't do my job")
+#                 # else:
+#                 #     print(("Error with module {}: {}".format(_module, e)))
 #         return c
 #     elif not os.path.isfile(module):
 #         raise ValueError("module file not found: {}".format(module))
