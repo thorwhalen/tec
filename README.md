@@ -6,10 +6,24 @@ Tools to inspect python objects
 To install:	```pip install tec```
 
 
-
 # Examples
 
-Generator of module attribute names that point to object the module actually defines.
+## Counting imported names
+
+``modules_imported`` is a generator of module names from obj. 
+It uses string parsing, so is not as accurate as some other methods, but is fast and flexible, 
+and doesn't require actually running any of the code analyzed.
+    
+```python
+>>> from tec import modules_imported
+>>> import os.path  # single module
+>>> list(modules_imported(os.path))  # list of names in the order they were found
+['os', 'sys', 'stat', 'genericpath', 'genericpath', 'pwd', 'pwd', 're', 're']
+>>> import os  # package with several modules
+>>> from collections import Counter
+>>> Counter(modules_imported(os, only_base_name=True)).most_common()  #doctest: +ELLIPSIS
+[('nt', 5), ('posix', 4), ... ('warnings', 1), ('subprocess', 1)]
+```
 
 ## Modules
 

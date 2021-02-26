@@ -27,3 +27,19 @@ from tec.stores import (
     builtins_py_files,
     sitepackages_py_files,
 )
+
+from tec.import_counting import (
+    modules_imported,
+    modules_imported_count,
+    base_module_name
+)
+
+from tec.util import (
+    extract_encoding_from_contents,
+    get_encoding,
+    decoding_problem_sentinel,
+    decode_or_default,
+    resolve_module_filepath,
+    resolve_to_folder,
+    resolve_module_contents,
+)
