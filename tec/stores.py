@@ -1,17 +1,29 @@
 """(py2store) stores (i.e. mapping interfaces) to access python files"""
-
+import site
 import os
 import re
-from py2store import wrap_kvs, filt_iter, KvReader
-from py2store.filesys import mk_relative_path_store, DirCollection, FileStringReader
+from py2store import wrap_kvs, filt_iter, KvReader, cached_keys
+from py2store.filesys import mk_relative_path_store, DirCollection, FileBytesReader
+from tec.util import decode_or_default
 
 
 @filt_iter(filt=lambda k: k.endswith('.py') and '__pycache__' not in k)
 @mk_relative_path_store(prefix_attr='rootdir')
-class PkgFilesReader(FileStringReader, KvReader):
+class PyFilesBytes(FileBytesReader):
+    """Mapping interface to .py files' bytes"""
+
+
+@wrap_kvs(obj_of_data=decode_or_default)
+@filt_iter(filt=lambda k: k.endswith('.py') and '__pycache__' not in k)
+@mk_relative_path_store(prefix_attr='rootdir')
+class PyFilesReader(FileBytesReader, KvReader):
     """Mapping interface to .py files of a folder.
     Keys are relative .py paths.
     Values are the string contents of the .py file.
+
+    Important Note: If the byte contents of the .py file can't be decoded (with a simple bytes.decode()),
+    an empty string will be returned as it's value (i.e. contents).
+
     """
 
     def init_file_contents(self):
@@ -24,13 +36,22 @@ class PkgFilesReader(FileStringReader, KvReader):
         return '__init__.py' in self
 
 
+PkgFilesReader = PyFilesReader  # back-compatibility alias
+
+builtins_rootdir = os.path.dirname(os.__file__)
+builtins_py_files = cached_keys(PyFilesReader(builtins_rootdir))
+
+sitepackages_rootdir = next(iter(site.getsitepackages()))
+sitepackages_py_files = cached_keys(PyFilesReader(sitepackages_rootdir))
+
+
 @filt_iter(filt=lambda k: not k.endswith('__pycache__'))
 @wrap_kvs(key_of_id=lambda x: x[:-1],
           id_of_key=lambda x: x + os.path.sep)
 @mk_relative_path_store(prefix_attr='rootdir')
 class PkgReader(DirCollection, KvReader):
     def __getitem__(self, k):
-        return PkgFilesReader(os.path.join(self.rootdir, k))
+        return PyFilesReader(os.path.join(self.rootdir, k))
 
 
 commented_header_re = re.compile('("""|\'\'\')\s?.+')

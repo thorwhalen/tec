@@ -22,5 +22,8 @@ from tec.stores import (
     file_contents_to_short_description,
     find_short_description_for_pkg,
     PkgReader,
-    PkgFilesReader
+    PkgFilesReader,  # TODO: Deprecate in favor of PyFilesReader
+    PyFilesReader,
+    builtins_py_files,
+    sitepackages_py_files,
 )
