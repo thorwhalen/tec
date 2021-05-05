@@ -43,7 +43,7 @@ def get_last_pypi_version_number(package: str, url_template=DLFT_PYPI_PACKAGE_JS
     Return version of package on pypi.python.org using json.
 
     ```
-    > get_version('py2store')
+    > get_version('tec')
     '0.0.7'
     ```
 
@@ -65,7 +65,7 @@ def next_version_for_package(package: str, url_template=DLFT_PYPI_PACKAGE_JSON_U
         return increment_version(current_version)
 
 
-get_last_pypi_version_number('py2store')
+# get_last_pypi_version_number('dol')
 
 
 def my_setup(**setup_kwargs):

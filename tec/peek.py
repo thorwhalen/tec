@@ -61,7 +61,7 @@ def print_signature(func, sep: Optional[str] = '\n', prefix: str = '', suffix: s
 
 
 def submodule_path_strings(module):
-    from py2store.filesys import FileCollection
+    from dol.filesys import FileCollection
 
     root_name = os.path.dirname(module.__file__)
     root_name_length = len(root_name) + 1

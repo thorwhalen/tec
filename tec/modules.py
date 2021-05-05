@@ -1,15 +1,87 @@
+"""
+Tools to explore modules
+"""
 import os
 import sys
 import inspect
 import importlib
 import importlib.util
+from importlib import import_module
 from dataclasses import dataclass
 import ast
 import site
 from enum import Enum
 from collections import namedtuple
 import inspect
+from types import ModuleType
 
+from dol import wrap_kvs
+from tec.stores import PyFilesReader
+from tec.util import resolve_to_folder
+
+path_sep = os.path.sep
+
+
+def py_path_to_dot_path(py_path, root_module_str=''):
+    assert py_path.endswith('.py')
+    return '.'.join((root_module_str, py_path[:-3].replace(path_sep, '.')))  # 3 == len('.py')
+
+
+def dot_path_to_py_path(dot_path, root_module_str=''):
+    dot_path = dot_path[len(root_module_str):]
+    if dot_path.startswith('.'):
+        dot_path = dot_path[1:]
+    return dot_path.replace('.', path_sep) + '.py'
+
+
+def _py_path_to_dot_path(self, py_path):
+    return py_path_to_dot_path(py_path, root_module_str=self.root_module_str)
+
+
+def _dot_path_to_py_path(self, dot_path):
+    return dot_path_to_py_path(dot_path, root_module_str=self.root_module_str)
+
+
+@wrap_kvs(key_of_id=_py_path_to_dot_path)
+class ModulesReader(PyFilesReader):
+    def __init__(self, module_src, root_module_str=''):
+        self.module_src = module_src
+        if isinstance(module_src, str) and not os.path.exists(module_src):
+            root_module_str = root_module_str or module_src
+            module_src = import_module(module_src)
+        if isinstance(module_src, ModuleType):
+            root_module_str = root_module_str or module_src.__name__
+            module_src = resolve_to_folder(module_src)
+        self.root_module_str = root_module_str
+        super().__init__(module_src)
+
+    def __getitem__(self, k):
+        return import_module(k)
+
+@wrap_kvs(obj_of_data=lambda obj: {k: getattr(obj, k) for k in dir(obj)})
+class ModuleAllAttrsReader(ModulesReader):
+    """Keys are module strings and values are {attr_name: attr_obj,...} dicts of the attributes of the module"""
+
+
+@wrap_kvs(obj_of_data=lambda obj: {k: getattr(obj, k) for k in dir(obj) if not k.startswith('_')})
+class ModuleAttrsReader(ModulesReader):
+    """Like ModuleAllAttrsReader but will only give you attributes whose names don't start with an underscore."""
+
+@wrap_kvs(key_of_id=_py_path_to_dot_path)
+class ModulesReader(PyFilesReader):
+    def __init__(self, module_src, root_module_str=''):
+        self.module_src = module_src
+        if isinstance(module_src, str) and not os.path.exists(module_src):
+            root_module_str = root_module_str or module_src
+            module_src = import_module(module_src)
+        if isinstance(module_src, ModuleType):
+            root_module_str = root_module_str or module_src.__name__
+            module_src = resolve_to_folder(module_src)
+        self.root_module_str = root_module_str
+        super().__init__(module_src)
+
+    def __getitem__(self, k):
+        return import_module(k)
 
 def is_from_module(obj, module):
     """Check if an object "belongs" to a module.
@@ -106,7 +178,7 @@ def module_path(module):
 
 
 def submodules(module, on_error='print', prefix=None):
-    from py2store.filesys import FileCollection
+    from dol.filesys import FileCollection
 
     prefix = prefix or site.getsitepackages()[0]
 

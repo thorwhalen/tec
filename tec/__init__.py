@@ -4,7 +4,10 @@ from tec.modules import (
     loaded_module_from_dotpath_and_filepath,
     second_party_names,
     filepath_to_dotpath,
-    get_imported_module_paths
+    get_imported_module_paths,
+    ModulesReader,
+    ModuleAllAttrsReader,
+    ModuleAttrsReader,
 )
 
 from tec.pip_packaging import (

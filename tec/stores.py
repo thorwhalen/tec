@@ -1,9 +1,9 @@
-"""(py2store) stores (i.e. mapping interfaces) to access python files"""
+"""(dol) stores (i.e. mapping interfaces) to access python files"""
 import site
 import os
 import re
-from py2store import wrap_kvs, filt_iter, KvReader, cached_keys
-from py2store.filesys import mk_relative_path_store, DirCollection, FileBytesReader
+from dol import wrap_kvs, filt_iter, KvReader, cached_keys
+from dol.filesys import mk_relative_path_store, DirCollection, FileBytesReader
 from tec.util import decode_or_default
 
 

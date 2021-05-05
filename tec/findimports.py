@@ -134,7 +134,7 @@ def count_imports(rootdir: str,
     return Counter(import_obj_func(x) for x in re_find_imports(rootdir, pathfilt))
 
 
-from py2store import Collection, KvReader, lazyprop, wrap_kvs
+from dol import Collection, KvReader, lazyprop, wrap_kvs
 
 
 class ModulesColl(Collection):
