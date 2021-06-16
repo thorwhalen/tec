@@ -4,7 +4,7 @@ import os
 import re
 from dol import wrap_kvs, filt_iter, KvReader, cached_keys
 from dol.filesys import mk_relative_path_store, DirCollection, FileBytesReader
-from tec.util import decode_or_default
+from tec.util import decode_or_default, resolve_to_folder
 
 
 @filt_iter(filt=lambda k: k.endswith('.py') and '__pycache__' not in k)
@@ -25,6 +25,9 @@ class PyFilesReader(FileBytesReader, KvReader):
     an empty string will be returned as it's value (i.e. contents).
 
     """
+
+    def __init__(self, src, *, max_levels=None):
+        super().__init__(rootdir=resolve_to_folder(src), max_levels=max_levels)
 
     def init_file_contents(self):
         """Returns the string of contents of the __init__.py file if it exists, and None if not"""
