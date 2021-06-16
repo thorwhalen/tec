@@ -29,6 +29,7 @@ from tec.stores import (
     PyFilesReader,
     builtins_py_files,
     sitepackages_py_files,
+    py_files_with_contents_matching_pattern
 )
 
 from tec.import_counting import (
