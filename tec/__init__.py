@@ -39,6 +39,7 @@ from tec.import_counting import (
 )
 
 from tec.util import (
+    find,
     extract_encoding_from_contents,
     get_encoding,
     decoding_problem_sentinel,
