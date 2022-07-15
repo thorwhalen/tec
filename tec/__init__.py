@@ -14,12 +14,10 @@ from tec.pip_packaging import (
     create_github_repo,
     get_last_pypi_version_number,
     format_str_vals_of_dict,
-    ujoin
+    ujoin,
 )
 
-from tec.packages import (
-    print_top_level_diagnosis
-)
+from tec.packages import print_top_level_diagnosis
 
 from tec.stores import (
     file_contents_to_short_description,
@@ -29,13 +27,13 @@ from tec.stores import (
     PyFilesReader,
     builtins_py_files,
     sitepackages_py_files,
-    py_files_with_contents_matching_pattern
+    py_files_with_contents_matching_pattern,
 )
 
 from tec.import_counting import (
     modules_imported,
     modules_imported_count,
-    base_module_name
+    base_module_name,
 )
 
 from tec.util import (
@@ -47,4 +45,8 @@ from tec.util import (
     resolve_module_filepath,
     resolve_to_folder,
     resolve_module_contents,
+    import_and_add_if_available,
+    find_objects,
+    name_and_object_pairs,
+    print_signatures,
 )
