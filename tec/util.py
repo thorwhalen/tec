@@ -316,28 +316,72 @@ def _if_not_iterable_get_attributes(x: Any) -> Iterable[str]:
     return x
 
 
+def _attribute_name_object_pairs(obj: Any):
+    for attr_name in ddir(obj):
+        yield attr_name, getattr(obj, attr_name)
+
+
+def _not_prefixed_by_underscore(x: str) -> bool:
+    return not x.startswith('_')
+
+
 def _is_pair(x):
     return isinstance(x, Iterable) and isinstance(x, Sized) and len(x) == 2
 
 
 # Pattern: meshed
 def name_and_object_pairs(
-    objects,
+    objects: Any,
+    objects_to_iterable: Callable[..., Iterable] = _attribute_name_object_pairs,
+    *,
+    name_filt: Callable[..., bool] = _not_prefixed_by_underscore,
+    obj_filt: Callable[..., bool] = callable,
     name_of_obj: ObjectToString = attrgetter('__name__'),
-    objects_to_strings: StringIterableFactory = _if_not_iterable_get_attributes,
 ):
-    """Get (name, object) pairs from source of objects"""
-    if isinstance(objects, Iterable):
-        if isinstance(objects, Mapping):
-            yield from objects.items()
+    """Get (name, object) pairs from source of objects
+
+    :param objects: The source we want to extract name and object pairs from.
+        Could be an explicit list of pairs, or a single object (like a module)
+        from which we'll generate these (using ``objects_to_iterable``)
+    :param objects_to_iterable: If the input ``objects`` isn't already an iterable,
+        the function to make it so
+    :param name_filt: A condition on the name
+    :param obj_filt: A condition on the object
+    :param name_of_obj: when an element of the iterable isn't a (name, obj) pair,
+        the function to get the name of a the object.
+
+    Get method names of the dict class:
+
+    >>> next(zip(*name_and_object_pairs(dict)))
+
+    Get only those names of dict methods that contain the string 'keys':
+
+    >>> next(zip(*name_and_object_pairs(dict, name_filt=lambda x: 'keys' in x)))
+
+    """
+    if not isinstance(objects, Iterable):
+        objects = objects_to_iterable(objects)
+
+    let_everything_through_filter = lambda x: True
+    name_filt = name_filt or let_everything_through_filter
+    obj_filt = obj_filt or let_everything_through_filter
+
+    def filt(pair):
+        obj_name, obj = pair
+        return name_filt(obj_name) and obj_filt(obj)
+
+    def ensure_pair(pair):
+        if _is_pair(pair):
+            # unpack pair (assuming it's a (name, obj) pair already)
+            return pair  # assume it's a (name, obj) pair already
         else:
-            for obj in objects:
-                if _is_pair(obj):
-                    yield obj  # assume it's a (name, obj) pair already
-                else:
-                    yield name_of_obj(obj), obj
+            obj = pair
+            return name_of_obj(obj), obj
+
+    if isinstance(objects, Mapping):
+        yield from filter(filt, objects.items())
     else:
-        yield from ((objects_to_strings(o), o) for o in objects)
+        yield from filter(filt, map(ensure_pair, objects))
 
 
 def signature_strings(objects, object_to_strings: StringIterableFactory = ddir):
