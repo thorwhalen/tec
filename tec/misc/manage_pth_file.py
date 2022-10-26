@@ -11,7 +11,7 @@ from operator import methodcaller
 from pathlib import Path
 from typing import Iterable, Union
 import site
-from functools import partial
+from functools import partial, lru_cache
 from itertools import chain
 
 # Pattern: mesh
@@ -167,7 +167,7 @@ Packages = Pipe(
     cache_iter,
 )
 
-
+@lru_cache
 def root_dirpaths_to_packages(rootdir):
     return list(Packages(rootdir))
 
