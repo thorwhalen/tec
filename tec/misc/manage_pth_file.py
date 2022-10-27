@@ -135,6 +135,39 @@ def add_to_pth_file(lines, pth_filepath=None):
 from dol import Files, filt_iter, wrap_kvs, Pipe, cache_iter
 from dol.filesys import FileCollection
 from pathlib import Path
+from dol.filesys import DirCollection
+
+
+def dir_whose_parent_has_same_name(k):
+    path = Path(k)
+    return path.is_dir() and path.parent.name == path.name
+
+
+def package_root_dirs(rootdir, max_levels=None, only_if_has_init=False):
+    if only_if_has_init:
+        init_filt = filt_iter(filt=lambda p: (Path(p) / '__init__.py').is_file())
+    else:
+        init_filt = lambda x: x
+    S = Pipe(
+        filt_iter(DirCollection, filt=dir_whose_parent_has_same_name),
+        init_filt,
+        wrap_kvs(
+            key_of_id=lambda x: str(Path(x).parent),
+            id_of_key=lambda x: str(Path(x) / Path(x).name),
+        ),
+        cache_iter,
+    )
+    return S(rootdir, max_levels=max_levels)
+
+
+@lru_cache
+def root_dirpaths_to_packages(rootdir, max_levels=None, only_if_has_init=False):
+    return list(
+        package_root_dirs(rootdir, max_levels, only_if_has_init=only_if_has_init)
+    )
+
+
+Packages = package_root_dirs  # backcomp alias
 
 
 def init_root(init_filepath):
@@ -159,17 +192,13 @@ def is_package_init(k):
     return parent.name == grandparent.name and (grandparent / 'setup.py').is_file()
 
 
-# TODO: A quicker Packages (therefore root_dirpaths_to_packages) this can be done with DirCollection
+# This one is slower than the one given by package_root_dirs
 #  since here we look through all files to only filter for the name/name/__init__.py
-Packages = Pipe(
+_OldPackages = Pipe(
     filt_iter(FileCollection, filt=is_package_init),
     wrap_kvs(key_of_id=pkg_root, id_of_key=init_file_of_pkg_root),
     cache_iter,
 )
-
-@lru_cache
-def root_dirpaths_to_packages(rootdir):
-    return list(Packages(rootdir))
 
 
 def add_paths_of_packages_under_rootdir(rootdir, pth_filepath=None):
@@ -188,6 +217,7 @@ def add_paths_of_packages_under_rootdir(rootdir, pth_filepath=None):
 #     ps.rm(f"-rf {pkg_rootdir}")
 #     ps.git(f"clone {url} {pkg_rootdir}")
 
+
 def simple_run_command(cmd, *, strip_output=True):
     with os.popen(cmd) as stream:
         output = stream.read()
@@ -195,12 +225,15 @@ def simple_run_command(cmd, *, strip_output=True):
         output = output.strip()
     return output
 
+
 def reclone_pkg_commands(pkg_rootdir):
     import ps
 
     if pkg_rootdir[-1] != os.path.sep:
         pkg_rootdir += os.path.sep
-    url = simple_run_command(f"git --work-tree {pkg_rootdir} --git-dir {pkg_rootdir}.git remote get-url origin")
+    url = simple_run_command(
+        f'git --work-tree {pkg_rootdir} --git-dir {pkg_rootdir}.git remote get-url origin'
+    )
 
     yield 'echo "----------------------------------------------------"'
     yield f'echo "{pkg_rootdir}"'
