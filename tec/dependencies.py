@@ -1,4 +1,6 @@
-"""Tools to analyze dependencies between python objects
+"""Tools to analyze dependencies between python objects.
+
+You may also wish to look at the unbox package for a more complete solution.
 
 Packages to extract module dependencies are easy to find. Example:
 * https://github.com/thebjorn/pydeps
@@ -23,6 +25,12 @@ Gathered here are some tools to get the problem's solution off the ground.
 Note: The module requires `ast_scope` and `graphviz` to be installed.
 """
 
+def dependencies_of_package(pkg: str):
+    """Get the dependencies of a package"""
+    from pkg_resources import get_distribution
+
+    pkg = importlib.import_module(pkg)
+    return dependencies_of_module(pkg)
 
 def get_source_string(obj: object) -> str:
     import inspect
@@ -57,7 +65,7 @@ def edges_to_dot_graph_edges(edges):
         yield f'{from_} -> {to_}'
 
 
-def dependency_graph_for(obj: object, prefix='rankdir=LR', suffix='', **digraph_kwargs):
+def dependency_graph_for(obj: object, prefix='rankdir="LR"', suffix='', **digraph_kwargs):
     """Get graphviz Digraph object of the dependencies of a python object"""
     graph = to_ast_scope_graph(obj)
     from graphviz import Digraph
