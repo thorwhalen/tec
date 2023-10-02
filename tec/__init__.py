@@ -22,13 +22,13 @@ from tec.packages import print_top_level_diagnosis
 from tec.stores import (
     file_contents_to_short_description,
     find_short_description_for_pkg,
-    PkgReader,
-    PkgFilesReader,  # TODO: Deprecate in favor of PyFilesReader
     PyFilesReader,
     builtins_py_files,
     sitepackages_py_files,
     py_files_with_contents_matching_pattern,
 )
+
+from xdol import PkgReader  # because used to be defined in tec
 
 from tec.import_counting import (
     modules_imported,

@@ -14,7 +14,7 @@ except ModuleNotFoundError:
     except ModuleNotFoundError:
         DFLT_USE_CCHARDET = False
 
-encoding_spec_re = re.compile(b'-*- coding: (.+) -*-')
+encoding_spec_re = re.compile(b"-*- coding: (.+) -*-")
 
 
 import operator
@@ -84,7 +84,7 @@ def find(
 
 
 def _old_find_left_for_educational_purposes(
-    strings, query, how='subset', content_func='everywhere'
+    strings, query, how="subset", content_func="everywhere"
 ):
     """
     Example use:
@@ -106,21 +106,21 @@ def _old_find_left_for_educational_purposes(
 
     """
     if isinstance(content_func, str):
-        if content_func == 'leafs':
-            content_func = lambda x: x.split('.')[-1]
-        elif content_func == 'everywhere':
+        if content_func == "leafs":
+            content_func = lambda x: x.split(".")[-1]
+        elif content_func == "everywhere":
             content_func = lambda x: x
         else:
             raise ValueError(
-                f'Not a recognised value for content_func argument: {content_func}'
+                f"Not a recognised value for content_func argument: {content_func}"
             )
 
-    if how == 'exact':
+    if how == "exact":
         filt = lambda x: query == content_func(x)
-    elif how == 'subset':
+    elif how == "subset":
         filt = lambda x: query in content_func(x)
     else:
-        raise ValueError(f'Not a recognised value for how argument: {how}')
+        raise ValueError(f"Not a recognised value for how argument: {how}")
 
     return list(filter(filt, strings))
 
@@ -141,11 +141,11 @@ def get_encoding(content_bytes: bytes, use_cchardet=DFLT_USE_CCHARDET):
         if use_cchardet:
             r = chardet.detect(content_bytes)
             if r:
-                return r['encoding']
+                return r["encoding"]
     return None  # if all else fails
 
 
-decoding_problem_sentinel = '# --- did not manage to decode .py file bytes --- #'
+decoding_problem_sentinel = "# --- did not manage to decode .py file bytes --- #"
 
 
 def decode_or_default(
@@ -161,43 +161,11 @@ def decode_or_default(
             return dflt
 
 
-# Pattern: meshed
-def resolve_module_filepath(
-    module_spec, assert_output_is_existing_filepath=True
-) -> str:
-    if inspect.ismodule(module_spec):
-        module_spec = inspect.getsourcefile(module_spec)
-    elif not isinstance(module_spec, str):
-        module_spec = inspect.getfile(module_spec)
-    if module_spec.endswith('c'):
-        module_spec = module_spec[:-1]  # remove the 'c' of '.pyc'
-    if os.path.isdir(module_spec):
-        module_dir = module_spec
-        module_spec = os.path.join(module_dir, '__init__.py')
-        assert os.path.isfile(module_spec), (
-            f'You specified the module as a directory {module_dir}, '
-            f"but this directory wasn't a package (it didn't have an __init__.py file)"
-        )
-    if assert_output_is_existing_filepath:
-        assert os.path.isfile(module_spec), 'module_spec should be a file at this point'
-    return module_spec
-
-
-# Pattern: meshed
-def resolve_to_folder(obj, assert_output_is_existing_folder=True):
-    if inspect.ismodule(obj):
-        obj = inspect.getsourcefile(obj)
-    elif not isinstance(obj, str):
-        obj = inspect.getfile(obj)
-
-    if not os.path.isdir(obj):
-        if obj.endswith('c'):
-            obj = obj[:-1]  # remove the 'c' of '.pyc'
-        if obj.endswith('__init__.py'):
-            obj = os.path.dirname(obj)
-    if assert_output_is_existing_folder:
-        assert os.path.isdir(obj), 'obj should be a folder at this point'
-    return obj
+from xdol import (
+    # because it used to be defined here
+    resolve_to_folder,
+    resolve_module_filepath,
+)
 
 
 # Pattern: meshed
@@ -205,13 +173,13 @@ def resolve_module_contents(module_spec, dflt=None, assert_output_is_str=True):
     if not isinstance(module_spec, str) or os.path.isdir(module_spec):
         module_spec = resolve_module_filepath(module_spec)
     if os.path.isfile(module_spec):
-        with open(module_spec, 'rb') as fp:
+        with open(module_spec, "rb") as fp:
             module_bytes = fp.read()
         return decode_or_default(module_bytes, dflt=dflt)
     if assert_output_is_str:
         assert isinstance(
             module_spec, str
-        ), f'module_spec should be a string at this point, but was a {type(module_spec)}'
+        ), f"module_spec should be a string at this point, but was a {type(module_spec)}"
     return module_spec
 
 
@@ -282,7 +250,7 @@ def import_and_add_if_available(
 
     """
     as_name = as_name or obj_name
-    assert scope is not None, 'You need to specify a scope. Usually, scope=locals()'
+    assert scope is not None, "You need to specify a scope. Usually, scope=locals()"
     with module_not_found_ignore:
         module_obj = import_module(module_name)
         obj = getattr(module_obj, obj_name, not_found_sentinel)
@@ -302,7 +270,7 @@ def import_and_add_if_available(
 
 
 # ---------------------------------------------------------------------------------------
-ddir = lambda o: filter(lambda x: not x.startswith('_'), dir(o))
+ddir = lambda o: filter(lambda x: not x.startswith("_"), dir(o))
 
 StringIterableFactory = Callable[[Any], Iterable[str]]
 ObjectToString = Callable[[Any], str]
@@ -322,7 +290,7 @@ def _attribute_name_object_pairs(obj: Any):
 
 
 def _not_prefixed_by_underscore(x: str) -> bool:
-    return not x.startswith('_')
+    return not x.startswith("_")
 
 
 def _is_pair(x):
@@ -336,7 +304,7 @@ def name_and_object_pairs(
     *,
     name_filt: Callable[..., bool] = _not_prefixed_by_underscore,
     obj_filt: Callable[..., bool] = callable,
-    name_of_obj: ObjectToString = attrgetter('__name__'),
+    name_of_obj: ObjectToString = attrgetter("__name__"),
 ):
     """Get (name, object) pairs from source of objects
 
@@ -388,12 +356,12 @@ def signature_strings(objects, object_to_strings: StringIterableFactory = ddir):
     """A generator of strings describing the callables in obj (module, class, ...)"""
     for name, obj in name_and_object_pairs(objects):
         if callable(obj):
-            yield f'{name}{signature(obj)}'
+            yield f"{name}{signature(obj)}"
 
 
-def print_signatures(obj, object_to_strings: StringIterableFactory = ddir, sep='\n * '):
+def print_signatures(obj, object_to_strings: StringIterableFactory = ddir, sep="\n * "):
     """Prints information on callable attributes of obj (module, class, ...)"""
-    print('', *signature_strings(obj, object_to_strings), sep=sep)
+    print("", *signature_strings(obj, object_to_strings), sep=sep)
 
 
 def find_objects(
@@ -463,7 +431,7 @@ def find_objects(
 
     # instead of getting the strings from strings, we get them from the re.Match objects'
     # 'string' attribute, because these contain more information to be able to sort with
-    return map(attrgetter('string'), match_objects)
+    return map(attrgetter("string"), match_objects)
 
 
 def func_fanout(*args, funcs: Iterable[Callable], **kwargs):
