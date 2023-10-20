@@ -19,7 +19,7 @@ from tec.pip_packaging import (
 
 from tec.packages import print_top_level_diagnosis
 
-from tec.stores import (
+from tec.stores import (  # lots of this moved to xdol/pystores
     file_contents_to_short_description,
     find_short_description_for_pkg,
     PyFilesReader,

@@ -25,12 +25,35 @@ Gathered here are some tools to get the problem's solution off the ground.
 Note: The module requires `ast_scope` and `graphviz` to be installed.
 """
 
-def dependencies_of_package(pkg: str):
-    """Get the dependencies of a package"""
-    from pkg_resources import get_distribution
+from i2.footprints import object_dependencies as _object_dependencies
 
-    pkg = importlib.import_module(pkg)
-    return dependencies_of_module(pkg)
+object_dependencies = _object_dependencies
+
+# def dependencies_of_package(pkg: str):
+#     """Get the dependencies of a package"""
+#     from pkg_resources import get_distribution
+#     import importlib
+
+#     pkg = importlib.import_module(pkg)
+#     return dependencies_of_module(pkg)
+
+
+# def dependencies_of_module(module):
+#     """Get the dependencies of a module"""
+#     import inspect
+
+#     return dependencies_of_source(get_source_string(module))
+
+
+# def dependencies_of_source(source: str):
+#     """Get the dependencies of a source string"""
+#     import ast
+#     import ast_scope
+
+#     tree = ast.parse(source)
+#     scope_info = ast_scope.annotate(tree)
+#     return scope_info.static_dependencies
+
 
 def get_source_string(obj: object) -> str:
     import inspect
@@ -51,6 +74,7 @@ def source_string_to_ast_scope_graph(source_string: str):
 
 def to_ast_scope_graph(obj: object):
     import ast_scope.graph
+
     if isinstance(obj, ast_scope.graph.DiGraph):
         return obj
     return source_string_to_ast_scope_graph(get_source_string(obj))
@@ -62,15 +86,17 @@ def ast_scope_graph_to_dot(ast_scope_graph):
 
 def edges_to_dot_graph_edges(edges):
     for from_, to_ in edges:
-        yield f'{from_} -> {to_}'
+        yield f"{from_} -> {to_}"
 
 
-def dependency_graph_for(obj: object, prefix='rankdir="LR"', suffix='', **digraph_kwargs):
+def dependency_graph_for(
+    obj: object, prefix='rankdir="LR"', suffix="", **digraph_kwargs
+):
     """Get graphviz Digraph object of the dependencies of a python object"""
     graph = to_ast_scope_graph(obj)
     from graphviz import Digraph
 
     return Digraph(
         **digraph_kwargs,
-        body=[*prefix.split('\n'), *ast_scope_graph_to_dot(graph), *suffix.split('\n')],
+        body=[*prefix.split("\n"), *ast_scope_graph_to_dot(graph), *suffix.split("\n")],
     )
