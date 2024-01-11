@@ -42,7 +42,7 @@ def is_project_root(path):
 
 def is_package_directory(path):
     path = Path(path)
-    return is_project_root(path.parent)
+    return folder_has_init(path)
 
 
 # TODO: package_root_dirs and root_dirpaths_to_packages were writte before
