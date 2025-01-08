@@ -8,7 +8,7 @@ DFLT_USE_CCHARDET = True
 
 try:
     import cchardet as chardet
-except ModuleNotFoundError:
+except (ModuleNotFoundError, ImportError):
     try:
         import chardet
     except ModuleNotFoundError:
