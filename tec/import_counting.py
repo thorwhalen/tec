@@ -10,6 +10,8 @@ import re
 import os
 from io import StringIO
 from collections import Counter
+import sys, sysconfig, importlib.util, pathlib
+
 from tec.util import resolve_module_contents, resolve_to_folder, resolve_module_filepath
 from tec.stores import PyFilesReader
 
@@ -42,8 +44,6 @@ def mk_multiple_package_import_regex(module_names):
         '|'.join([mk_single_package_import_regex(x).pattern for x in module_names])
     )
 
-
-import sys, sysconfig, importlib.util, pathlib
 
 _STDLIB = pathlib.Path(sysconfig.get_paths()["stdlib"])
 _PLATSTDLIB = pathlib.Path(sysconfig.get_paths().get("platstdlib", _STDLIB))
@@ -88,7 +88,7 @@ def is_stdlib_module(name: str) -> bool:
     return False
 
 
-def modules_imported(obj, only_base_name=False):
+def modules_imported(obj, only_base_name=False, exclude_stdlib=False):
     """Generator of module names from obj.
 
     Note: The process uses regular expressions to parse out imported names from string contents.
@@ -112,6 +112,10 @@ def modules_imported(obj, only_base_name=False):
     [('nt', 5), ('posix', 4), ... ('warnings', 1), ('subprocess', 1)]
 
     """
+    if exclude_stdlib:
+        filt = lambda name: not is_stdlib_module(name)
+    else:
+        filt = lambda name: True
     if isinstance(obj, str):
         # if the string is a valid python identifier, then try to import it as a module
         if obj.isidentifier():
@@ -120,14 +124,14 @@ def modules_imported(obj, only_base_name=False):
             except ImportError:
                 pass
     if only_base_name:
-        yield from map(base_module_name, modules_imported(obj))
+        yield from filter(filt, map(base_module_name, modules_imported(obj)))
     else:
         obj = resolve_module_filepath(obj, assert_output_is_existing_filepath=False)
         if obj.endswith('__init__.py'):
             folder = resolve_to_folder(obj)
-            yield from modules_imported_under_folder(folder)
+            yield from filter(filt, modules_imported_under_folder(folder))
         else:  # so obj is a filepath or the code string to be analyzed
-            yield from modules_imported_by_module(obj)
+            yield from filter(filt, modules_imported_by_module(obj))
 
 
 def modules_imported_count(obj, only_base_name=False):
