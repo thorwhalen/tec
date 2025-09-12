@@ -134,9 +134,12 @@ def modules_imported(obj, only_base_name=False, exclude_stdlib=False):
             yield from filter(filt, modules_imported_by_module(obj))
 
 
-def modules_imported_count(obj, only_base_name=False):
+def modules_imported_count(obj, only_base_name=False, exclude_stdlib=False):
     """A dict containing the imported names and their counts, sorted from most frequent to least."""
-    return dict(Counter(set(modules_imported(obj, only_base_name=only_base_name))))
+    _modules_imported = modules_imported(
+        obj, only_base_name=only_base_name, exclude_stdlib=exclude_stdlib
+    )
+    return dict(Counter(set(_modules_imported)))
 
 
 def _normalize_line(line):
