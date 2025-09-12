@@ -62,6 +62,13 @@ def modules_imported(obj, only_base_name=False):
     [('nt', 5), ('posix', 4), ... ('warnings', 1), ('subprocess', 1)]
 
     """
+    if isinstance(obj, str):
+        # if the string is a valid python identifier, then try to import it as a module
+        if obj.isidentifier():
+            try:
+                obj = __import__(obj)
+            except ImportError:
+                pass
     if only_base_name:
         yield from map(base_module_name, modules_imported(obj))
     else:
