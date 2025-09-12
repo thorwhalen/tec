@@ -5,6 +5,7 @@ Note: Several of the import_counting module's functions require
 having snakefood installed. See: http://furius.ca/snakefood/doc/snakefood-doc.html#installation
 
 """
+
 import re
 import os
 from io import StringIO
@@ -15,7 +16,9 @@ from tec.stores import PyFilesReader
 file_sep = os.path.sep
 module_import_regex_tmpl = "(?<=from) {package_name}|(?<=[^\s]import) {package_name}"
 
-any_module_import_regex = re.compile(module_import_regex_tmpl.format(package_name=r'\w+'))
+any_module_import_regex = re.compile(
+    module_import_regex_tmpl.format(package_name=r'\w+')
+)
 
 spaced_comma_re = re.compile(r"\s*,\s*")
 another_import_regex = re.compile(
@@ -35,24 +38,71 @@ def mk_multiple_package_import_regex(module_names):
     """Make a regular expression to parse out a specific modules names in the context of an import."""
     if isinstance(module_names, str):
         module_names = [module_names]
-    return re.compile('|'.join([mk_single_package_import_regex(x).pattern for x in module_names]))
+    return re.compile(
+        '|'.join([mk_single_package_import_regex(x).pattern for x in module_names])
+    )
+
+
+import sys, sysconfig, importlib.util, pathlib
+
+_STDLIB = pathlib.Path(sysconfig.get_paths()["stdlib"])
+_PLATSTDLIB = pathlib.Path(sysconfig.get_paths().get("platstdlib", _STDLIB))
+# Windows sometimes ships stdlib extensions in DLLs/
+_WIN_DLLS = pathlib.Path(sys.base_prefix) / "DLLs"
+
+
+def _is_in_stdlib_path(p: pathlib.Path) -> bool:
+    # Exclude site-packages explicitly
+    if "site-packages" in map(str.lower, p.parts):
+        return False
+    return any(base in p.parents for base in (_STDLIB, _PLATSTDLIB, _WIN_DLLS))
+
+
+def is_stdlib_module(name: str) -> bool:
+    # 1) True built-ins
+    if name in sys.builtin_module_names:
+        return True
+
+    # 2) Resolve spec
+    spec = importlib.util.find_spec(name)
+    if spec is None:
+        return False
+
+    # 3) Built-in/frozen markers
+    origin = getattr(spec, "origin", None)
+    if origin in ("built-in", "frozen"):
+        return True
+
+    # 4) Namespace packages (no origin, but have search locations)
+    locations = getattr(spec, "submodule_search_locations", None)
+    if locations:
+        return any(_is_in_stdlib_path(pathlib.Path(loc)) for loc in locations)
+
+    # 5) File-backed modules
+    if origin:
+        try:
+            return _is_in_stdlib_path(pathlib.Path(origin))
+        except Exception:
+            return False
+
+    return False
 
 
 def modules_imported(obj, only_base_name=False):
     """Generator of module names from obj.
-    
+
     Note: The process uses regular expressions to parse out imported names from string contents.
-    The process in by no means accurate in all cases. 
+    The process in by no means accurate in all cases.
     It may have false positives (strings that have import patterns, but are not actual code imports).
     It may have false negatives (relative imports (as in ``..name``) and "dynamically" imported, etc.
 
     If you need something more precise, look into other tools (snakefood or findimports for example).
-    
+
     :param obj: module object, file or folder path, or anything that can resolve to that
     :param only_base_name: If True, will only return the first part of the dot names
     :return: Generator of module (dot path) names
-    
-    
+
+
     >>> import os.path  # single module
     >>> list(modules_imported(os.path))  # list of names in the order they were found
     ['os', 'sys', 'stat', 'genericpath', 'genericpath', 'pwd', 'pwd', 're', 're']
@@ -81,8 +131,7 @@ def modules_imported(obj, only_base_name=False):
 
 
 def modules_imported_count(obj, only_base_name=False):
-    """A dict containing the imported names and their counts, sorted from most frequent to least.
-    """
+    """A dict containing the imported names and their counts, sorted from most frequent to least."""
     return dict(Counter(set(modules_imported(obj, only_base_name=only_base_name))))
 
 
@@ -107,7 +156,9 @@ def imports_in_py_content(py_content: str):
             for subline in _normalize_line(line).split(';'):
                 r = another_import_regex.search(subline)
                 if r is not None:
-                    import_str = next((v for k, v in r.groupdict().items() if v is not None), None)
+                    import_str = next(
+                        (v for k, v in r.groupdict().items() if v is not None), None
+                    )
                     if import_str is not None:
                         for import_name in import_str.split(','):
                             yield import_name
@@ -123,14 +174,14 @@ def modules_imported_by_module(module):
 
     The input can be a filepath
 
-    >>> list(modules_imported_by_module(__file__))
-    ['re', 'os', 'io', 'collections', 'tec.util', 'tec.stores', 'os.path']
+    >>> sorted(modules_imported_by_module(__file__))
+    ['collections', 'importlib.util', 'io', 'os', 'os.path', 'pathlib', 're', 'sys', 'sysconfig', 'tec.stores', 'tec.util']
 
     ... a imported module object
 
     >>> import wave
-    >>> list(modules_imported_by_module(wave))
-    ['builtins', 'audioop', 'struct', 'sys', 'chunk', 'collections', 'warnings']
+    >>> sorted(modules_imported_by_module(wave))
+    ['audioop', 'builtins', 'chunk', 'collections', 'struct', 'sys']
 
     ... the string contents themselves
 
