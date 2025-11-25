@@ -9,7 +9,8 @@ Works with 3.8+ (and perhaps lower).
 import os
 from operator import methodcaller
 from pathlib import Path
-from typing import Iterable, Union
+from typing import Union
+from collections.abc import Iterable
 import site
 from functools import partial, lru_cache
 from itertools import chain

@@ -8,7 +8,7 @@ def file_to_string(filepath):
     """
     returns the string contents of a pfile
     """
-    with open(filepath, 'r') as fid:
+    with open(filepath) as fid:
         s = fid.read()
     return s
 
@@ -62,7 +62,7 @@ def requirements_comparison_objects(requirements_filepath_1, requirements_filepa
             v1_num.append(v1)
             v2_num.append(v2)
         else:
-            print(("!!! Couldn't get the version NUMBER for {}\n".format(dict(row))))
+            print(f"!!! Couldn't get the version NUMBER for {dict(row)}\n")
     v1_num = array(v1_num)
     v2_num = array(v2_num)
 
@@ -111,17 +111,17 @@ def print_requirements_comparison(requirements_filepath_1, requirements_filepath
 
     name1, name2 = file_unique_identifiers(requirements_filepath_1, requirements_filepath_2)
 
-    print(("\n-------- Missing in {}:".format(name1)))
+    print(f"\n-------- Missing in {name1}:")
     print(missing_1)
 
-    print(("\n-------- Missing in {}:".format(name2)))
+    print(f"\n-------- Missing in {name2}:")
     print(missing_2)
 
-    print(("\n-------- {} in advance of {}:".format(name1, name2)))
-    print((v1_greater_than_v2_df.rename(columns={'version_x': name1, 'version_y': name2})))
+    print(f"\n-------- {name1} in advance of {name2}:")
+    print(v1_greater_than_v2_df.rename(columns={'version_x': name1, 'version_y': name2}))
 
-    print(("\n-------- {} in advance of {}:".format(name2, name1)))
-    print((v2_greater_than_v1_df.rename(columns={'version_x': name1, 'version_y': name2})))
+    print(f"\n-------- {name2} in advance of {name1}:")
+    print(v2_greater_than_v1_df.rename(columns={'version_x': name1, 'version_y': name2}))
 
 
 def get_requirements_to_update_second_requirements_when_behind_first(

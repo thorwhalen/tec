@@ -21,7 +21,7 @@ from pathlib import Path
 
 config_file = Path(__file__).absolute().parent.parent / 'setup.cfg'  # same folder as setup.py
 config = ConfigParser()
-config.read_file(open(config_file, 'r'))
+config.read_file(open(config_file))
 
 project = config['metadata']['name']
 copyright = config['metadata'].get('copyright', '')

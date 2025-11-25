@@ -33,7 +33,7 @@ def print_source(o, start=None, end=None, doc=True):
     print(''.join(_lines[slice(start, end)]))
 
 
-def print_signature(func, sep: Optional[str] = '\n', prefix: str = '', suffix: str = ''):
+def print_signature(func, sep: str | None = '\n', prefix: str = '', suffix: str = ''):
     """Print the signature of a callable
     :param func: Callable to print the signature of
     :param sep: If None, will print the signature as inspect.signature would.

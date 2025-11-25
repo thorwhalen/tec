@@ -18,7 +18,8 @@ encoding_spec_re = re.compile(b"-*- coding: (.+) -*-")
 
 
 import operator
-from typing import Any, Callable, Iterable
+from typing import Any
+from collections.abc import Callable, Iterable
 
 Query = Any
 Item = Any
@@ -192,7 +193,8 @@ from contextlib import suppress
 from operator import attrgetter, methodcaller
 from functools import partial
 from importlib import import_module
-from typing import Optional, Callable, Iterable, Any, Sequence, Mapping, Sized
+from typing import Optional, Any
+from collections.abc import Callable, Iterable, Sequence, Mapping, Sized
 import re
 from inspect import signature
 
@@ -204,10 +206,10 @@ not_found_sentinel = object()
 def import_and_add_if_available(
     obj_name: str,
     module_name: str,
-    as_name: Optional[str] = None,
+    as_name: str | None = None,
     scope: dict = None,
-    if_already_in_scope: Optional[Callable] = None,
-    if_not_found: Optional[Callable] = None,
+    if_already_in_scope: Callable | None = None,
+    if_not_found: Callable | None = None,
 ):
     """
     Import object named ``obj_name`` from module named ``module_name``, sticking it

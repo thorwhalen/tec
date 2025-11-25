@@ -60,7 +60,7 @@ from importlib import import_module
 
 
 def read_requirements(requirements_file):
-    with open(requirements_file, 'r') as f:
+    with open(requirements_file) as f:
         return f.read().splitlines()
 
 

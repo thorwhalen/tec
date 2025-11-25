@@ -73,7 +73,8 @@ Ave, Cambridge, MA 02139, USA.
 import os
 from collections import Counter
 from glob import iglob
-from typing import Union, Callable
+from typing import Union
+from collections.abc import Callable
 
 file_sep = os.path.sep
 
@@ -94,7 +95,7 @@ def pattern_filter(pattern):
 
 
 def recursive_file_walk_iterator_with_filepath_filter(root_folder,
-                                                      filt: Union[str, Callable] = None,
+                                                      filt: str | Callable = None,
                                                       return_full_path=True):
     if not callable(filt):
         if filt is None:
@@ -104,8 +105,7 @@ def recursive_file_walk_iterator_with_filepath_filter(root_folder,
     for name in iter_relative_files_and_folder(root_folder):
         full_path = os.path.join(root_folder, name)
         if os.path.isdir(full_path):
-            for entry in recursive_file_walk_iterator_with_filepath_filter(full_path, filt, return_full_path):
-                yield entry
+            yield from recursive_file_walk_iterator_with_filepath_filter(full_path, filt, return_full_path)
         else:
             if os.path.isfile(full_path):
                 if filt(full_path):
@@ -159,8 +159,7 @@ class ModulesColl(Collection):
         return k in self._modules
 
     def __iter__(self):
-        for module in self._modules:
-            yield module
+        yield from self._modules
 
 
 class ModuleImportsBase(KvReader, ModulesColl):
@@ -222,7 +221,7 @@ def adjust_lineno(filename, lineno, name):
     return lineno
 
 
-class ImportInfo(object):
+class ImportInfo:
     """A record of a name and the location of the import statement."""
 
     def __init__(self, name, filename, lineno, level):
@@ -232,7 +231,7 @@ class ImportInfo(object):
         self.level = level
 
     def __repr__(self):
-        return '%s(%r, %r, %r, %r)' % (
+        return '{}({!r}, {!r}, {!r}, {!r})'.format(
             self.__class__.__name__, self.name, self.filename, self.lineno,
             self.level,
         )
@@ -284,7 +283,7 @@ class ImportFinder(ast.NodeVisitor):
         for alias in node.names:
             name = alias.name
             imported_as = alias.asname
-            fullname = '%s.%s' % (node.module, name) if node.module else name
+            fullname = '{}.{}'.format(node.module, name) if node.module else name
             self.processImport(name, imported_as, fullname, node.level, node)
 
     def visitSomethingWithADocstring(self, node):
@@ -325,7 +324,7 @@ class ImportFinder(ast.NodeVisitor):
                 self.lineno_offset -= lineno + example.lineno
 
 
-class Scope(object):
+class Scope:
     """A namespace."""
 
     def __init__(self, parent=None, name=None):
@@ -431,7 +430,7 @@ class ImportFinderAndNameTracker(ImportFinder):
             name = ""
             for part in full_name:
                 if name:
-                    name = '%s.%s' % (name, part)
+                    name = '{}.{}'.format(name, part)
                 else:
                     name += part
                 self.scope.useName(name)
@@ -466,7 +465,7 @@ def find_imports_and_track_names(filename, warn_about_duplicates=False,
     return visitor.imports, visitor.unused_names
 
 
-class Module(object):
+class Module:
     """Node in a module dependency graph.
 
     Packages may also be represented as Module objects.
@@ -489,10 +488,10 @@ class Module(object):
         self.unused_names = ()
 
     def __repr__(self):
-        return '<%s: %s>' % (self.__class__.__name__, self.modname)
+        return '<{}: {}>'.format(self.__class__.__name__, self.modname)
 
 
-class ModuleCycle(object):
+class ModuleCycle:
     """Node in a condenced module dependency graph.
 
     A strongly-connected component of one or more modules/packages.
@@ -505,7 +504,7 @@ class ModuleCycle(object):
         self.imports = set()
 
 
-class ModuleGraph(object):
+class ModuleGraph:
     """Module graph."""
 
     trackUnusedNames = False
@@ -582,9 +581,9 @@ class ModuleGraph(object):
             module.imported_names = find_imports(filename)
             module.unused_names = None
         dir = os.path.dirname(filename)
-        module.imports = set(
-            [self.findModuleOfName(imp.name, imp.level, filename, dir)
-             for imp in module.imported_names])
+        module.imports = {
+            self.findModuleOfName(imp.name, imp.level, filename, dir)
+             for imp in module.imported_names}
 
     def filenameToModname(self, filename):
         """Convert a filename to a module name."""
@@ -871,7 +870,7 @@ class ModuleGraph(object):
                     if '#' in line:
                         # assume there's a comment explaining why it's not used
                         continue
-                print("%s:%s: %s not used" % (module.filename, lineno, name))
+                print("{}:{}: {} not used".format(module.filename, lineno, name))
 
     def printDot(self):
         """Produce a dependency graph in dot format."""
@@ -882,7 +881,7 @@ class ModuleGraph(object):
         for n, module in enumerate(self.listModules()):
             module._dot_name = "mod%d" % n
             nameDict[module.modname] = module._dot_name
-            print("  %s[label=\"%s\"];" % (module._dot_name,
+            print("  {}[label=\"{}\"];".format(module._dot_name,
                                            quote(module.label)))
             allNames |= module.imports
         print("  node[style=dotted];")
@@ -892,11 +891,11 @@ class ModuleGraph(object):
             extNames.sort()
             for n, name in enumerate(extNames):
                 nameDict[name] = id = "extmod%d" % n
-                print("  %s[label=\"%s\"];" % (id, name))
+                print("  {}[label=\"{}\"];".format(id, name))
         for modname, module in sorted(self.modules.items()):
             for other in sorted(module.imports):
                 if other in nameDict:
-                    print("  %s -> %s;" % (nameDict[module.modname],
+                    print("  {} -> {};".format(nameDict[module.modname],
                                            nameDict[other]))
         print("}")
 

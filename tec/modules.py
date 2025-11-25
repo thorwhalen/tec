@@ -281,7 +281,7 @@ def filepath_to_dotpath(filepath, pkg_paths=None):
 
         print(filepath)
         dotpath = ".".join(
-            (non_identifier_char_pattern.sub("_", x) for x in filepath.split(os.path.sep))
+            non_identifier_char_pattern.sub("_", x) for x in filepath.split(os.path.sep)
         )
         if dotpath.startswith("."):
             dotpath = dotpath[1:]

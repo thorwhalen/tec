@@ -16,7 +16,7 @@ from tec.util import resolve_module_contents, resolve_to_folder, resolve_module_
 from tec.stores import PyFilesReader
 
 file_sep = os.path.sep
-module_import_regex_tmpl = "(?<=from) {package_name}|(?<=[^\s]import) {package_name}"
+module_import_regex_tmpl = r"(?<=from) {package_name}|(?<=[^\s]import) {package_name}"
 
 any_module_import_regex = re.compile(
     module_import_regex_tmpl.format(package_name=r'\w+')
@@ -167,8 +167,7 @@ def imports_in_py_content(py_content: str):
                         (v for k, v in r.groupdict().items() if v is not None), None
                     )
                     if import_str is not None:
-                        for import_name in import_str.split(','):
-                            yield import_name
+                        yield from import_str.split(',')
 
 
 def modules_imported_by_module(module):
@@ -212,7 +211,7 @@ def modules_imported_under_folder(root):
         yield from modules_imported_by_module(contents)
 
 
-base_name_re = re.compile('\w+')
+base_name_re = re.compile(r'\w+')
 
 
 def base_module_name(module_name_dot_path):

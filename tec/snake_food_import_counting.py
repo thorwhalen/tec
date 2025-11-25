@@ -56,7 +56,7 @@ def base_modules_used_in_module(module):
     >>> base_modules_used_in_module(__file__)  # doctest: +SKIP
     ['StringIO', 'collections', 'inspect', 'numpy', 'os', 'pandas', 're', 'subprocess', 'ut']
     """
-    return list(unique([re.compile('\w+').findall(x)[0] for x in imports_in_module(module)]))
+    return list(unique([re.compile(r'\w+').findall(x)[0] for x in imports_in_module(module)]))
 
 
 def base_module_imports_in_module_recursive(module):
@@ -94,10 +94,10 @@ def base_module_imports_in_module_recursive(module):
                 if 'sfood-imports' in e.args[1]:
                     raise RuntimeError("You don't have sfood-imports installed (snakefood), so I can't do my job")
                 else:
-                    print(("Error with module {}: {}".format(_module, e)))
+                    print(f"Error with module {_module}: {e}")
         return c
     elif not os.path.isfile(module):
-        raise ValueError("module file not found: {}".format(module))
+        raise ValueError(f"module file not found: {module}")
 
     return Counter(base_modules_used_in_module(module))
     # with open(module) as fp:
@@ -121,13 +121,13 @@ def requirements_packages_in_module(module, requirements=None):
                 module_name = get_module_name(xx[0])
                 module_names.append(module_name)
         except Exception as e:
-            print(("Error with {}\n  {}".format(x, e)))
+            print(f"Error with {x}\n  {e}")
 
     return base_module_imports_in_module_recursive(module, module_names=requirements)
 
 
-word_or_letter_p = re.compile('\w')
-at_least_two_spaces_p = re.compile('\s{2,}')
+word_or_letter_p = re.compile(r'\w')
+at_least_two_spaces_p = re.compile(r'\s{2,}')
 
 
 def pip_licenses_df(package_names=None, include_module_name=True, on_module_search_error=None):
@@ -187,8 +187,7 @@ def recursive_file_walk_iterator_with_name_filter(root_folder, filt='', return_f
     for name in iter_relative_files_and_folder(root_folder):
         full_path = os.path.join(root_folder, name)
         if os.path.isdir(full_path):
-            for entry in recursive_file_walk_iterator_with_name_filter(full_path, filt, return_full_path):
-                yield entry
+            yield from recursive_file_walk_iterator_with_name_filter(full_path, filt, return_full_path)
         else:
             if os.path.isfile(full_path):
                 if filt(name):
@@ -204,8 +203,7 @@ def recursive_file_walk_iterator_with_filepath_filter(root_folder, filt='', retu
     for name in iter_relative_files_and_folder(root_folder):
         full_path = os.path.join(root_folder, name)
         if os.path.isdir(full_path):
-            for entry in recursive_file_walk_iterator_with_filepath_filter(full_path, filt, return_full_path):
-                yield entry
+            yield from recursive_file_walk_iterator_with_filepath_filter(full_path, filt, return_full_path)
         else:
             if os.path.isfile(full_path):
                 if filt(full_path):

@@ -2,7 +2,7 @@
 import re
 from xdol.pystores import PyFilesReader, builtins_py_files, sitepackages_py_files
 
-commented_header_re = re.compile("(\"\"\"|''')\s?.+")
+commented_header_re = re.compile("(\"\"\"|''')\\s?.+")
 triple_quotes_re = re.compile("\"\"\"|'''")
 triple_quotes_ending_re = re.compile("\"\"\"$|'''$")
 
