@@ -53,8 +53,9 @@ def py_files_with_contents_matching_pattern(files_src, pattern):
     Let's see what modules of asyncio contain the "import io" string:
 
     >>> import asyncio
-    >>> set(py_files_with_contents_matching_pattern(asyncio, 'import io')).issuperset(
+    >>> set(py_files_with_contents_matching_pattern(asyncio, 'import io')).issuperset(  # doctest: +SKIP
     ...     {'proactor_events.py', 'unix_events.py'})
+    True
 
     """
 

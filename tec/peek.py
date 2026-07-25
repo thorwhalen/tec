@@ -41,14 +41,14 @@ def print_signature(func, sep: str | None = '\n', prefix: str = '', suffix: str 
 
     >>> print_signature(print_signature)
     func
-    sep: Union[str, NoneType] = '\\n'
+    sep: str | None = '\\n'
     prefix: str = ''
     suffix: str = ''
     >>> print_signature(print_signature, None)
-    (func, sep: Union[str, NoneType] = '\\n', prefix: str = '', suffix: str = '')
+    (func, sep: str | None = '\\n', prefix: str = '', suffix: str = '')
     >>> print_signature(print_signature, '\\n * ', prefix=' * ', suffix='\\n')
      * func
-     * sep: Union[str, NoneType] = '\\n'
+     * sep: str | None = '\\n'
      * prefix: str = ''
      * suffix: str = ''
     <BLANKLINE>
