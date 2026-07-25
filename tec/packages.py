@@ -55,7 +55,7 @@ depth	count
 ```
 """
 
-from pkg_resources import get_distribution, DistributionNotFound, RequirementParseError
+import importlib.metadata
 from importlib import import_module
 
 
@@ -66,11 +66,12 @@ def read_requirements(requirements_file):
 
 def get_module_name(package, on_error='raise'):
     try:
-        t = list(get_distribution(package)._get_metadata('top_level.txt'))
-        if t:
-            return t[0]
-        else:
-            return None
+        top_level = importlib.metadata.distribution(package).read_text('top_level.txt')
+        if top_level:
+            lines = top_level.splitlines()
+            if lines:
+                return lines[0]
+        return None
     except Exception as e:
         if on_error == 'raise':
             raise
