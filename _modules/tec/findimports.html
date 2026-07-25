@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tec.findimports &mdash; tec 0.0.17 documentation</title>
+  <title>tec.findimports &mdash; tec 0.0.18 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=63b572e7"></script>
+      <script src="../../_static/documentation_options.js?v=8bafd125"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -173,7 +173,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">iter_relative_files_and_folder</span><span class="p">(</span><span class="n">root_folder</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">root_folder</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">file_sep</span><span class="p">):</span>
         <span class="n">root_folder</span> <span class="o">+=</span> <span class="n">file_sep</span>
-    <span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="n">iglob</span><span class="p">(</span><span class="n">root_folder</span> <span class="o">+</span> <span class="s1">&#39;*&#39;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">iglob</span><span class="p">(</span><span class="n">root_folder</span> <span class="o">+</span> <span class="s2">&quot;*&quot;</span><span class="p">))</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">pattern_filter</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
@@ -185,9 +185,9 @@
     <span class="k">return</span> <span class="n">_pattern_filter</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">recursive_file_walk_iterator_with_filepath_filter</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span>
-                                                      <span class="n">filt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                                                      <span class="n">return_full_path</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">recursive_file_walk_iterator_with_filepath_filter</span><span class="p">(</span>
+    <span class="n">root_folder</span><span class="p">,</span> <span class="n">filt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">return_full_path</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">filt</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">filt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">filt</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
@@ -196,7 +196,9 @@
     <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">iter_relative_files_and_folder</span><span class="p">(</span><span class="n">root_folder</span><span class="p">):</span>
         <span class="n">full_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">full_path</span><span class="p">):</span>
-            <span class="k">yield from</span> <span class="n">recursive_file_walk_iterator_with_filepath_filter</span><span class="p">(</span><span class="n">full_path</span><span class="p">,</span> <span class="n">filt</span><span class="p">,</span> <span class="n">return_full_path</span><span class="p">)</span>
+            <span class="k">yield from</span> <span class="n">recursive_file_walk_iterator_with_filepath_filter</span><span class="p">(</span>
+                <span class="n">full_path</span><span class="p">,</span> <span class="n">filt</span><span class="p">,</span> <span class="n">return_full_path</span>
+            <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">full_path</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">filt</span><span class="p">(</span><span class="n">full_path</span><span class="p">):</span>
@@ -208,7 +210,7 @@
 
 <div class="viewcode-block" id="re_find_imports">
 <a class="viewcode-back" href="../../module_docs/tec/findimports.html#tec.findimports.re_find_imports">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">re_find_imports</span><span class="p">(</span><span class="n">rootdir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pathfilt</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.py&#39;</span><span class="p">)):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">re_find_imports</span><span class="p">(</span><span class="n">rootdir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pathfilt</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">)):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generator of import objects taken from files under rootdir&quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">recursive_file_walk_iterator_with_filepath_filter</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="n">filt</span><span class="o">=</span><span class="n">pathfilt</span><span class="p">):</span>
         <span class="k">yield from</span> <span class="n">find_imports</span><span class="p">(</span><span class="n">f</span><span class="p">)</span></div>
@@ -217,9 +219,11 @@
 
 <div class="viewcode-block" id="count_imports">
 <a class="viewcode-back" href="../../module_docs/tec/findimports.html#tec.findimports.count_imports">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">count_imports</span><span class="p">(</span><span class="n">rootdir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                  <span class="n">pathfilt</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.py&#39;</span><span class="p">),</span>
-                  <span class="n">import_obj_func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">count_imports</span><span class="p">(</span>
+    <span class="n">rootdir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">pathfilt</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">),</span>
+    <span class="n">import_obj_func</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+<span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Counter of imports gathered from files under rootdir.</span>
 
 <span class="sd">    :param rootdir: Root directory</span>
@@ -284,7 +288,12 @@
 
 <div class="viewcode-block" id="ModuleImports">
 <a class="viewcode-back" href="../../module_docs/tec/findimports.html#tec.findimports.ModuleImports">[docs]</a>
-<span class="nd">@wrap_kvs</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;ModuleImports&#39;</span><span class="p">,</span> <span class="n">key_of_id</span><span class="o">=</span><span class="n">modobj_to_modname</span><span class="p">,</span> <span class="n">id_of_key</span><span class="o">=</span><span class="n">modname_to_modobj</span><span class="p">,</span> <span class="vm">__module__</span><span class="o">=</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="nd">@wrap_kvs</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ModuleImports&quot;</span><span class="p">,</span>
+    <span class="n">key_of_id</span><span class="o">=</span><span class="n">modobj_to_modname</span><span class="p">,</span>
+    <span class="n">id_of_key</span><span class="o">=</span><span class="n">modname_to_modobj</span><span class="p">,</span>
+    <span class="vm">__module__</span><span class="o">=</span><span class="vm">__name__</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ModuleImports</span><span class="p">(</span><span class="n">ModuleImportsBase</span><span class="p">):</span>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_key_to_val</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
@@ -306,10 +315,10 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">attrgetter</span>
 
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.5.3.dev0&#39;</span>
-<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Marius Gedminas &lt;marius@gedmin.as&gt;&#39;</span>
-<span class="n">__licence__</span> <span class="o">=</span> <span class="s1">&#39;GPL v2 or later&#39;</span>
-<span class="n">__url__</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/mgedmin/findimports&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;1.5.3.dev0&quot;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Marius Gedminas &lt;marius@gedmin.as&gt;&quot;</span>
+<span class="n">__licence__</span> <span class="o">=</span> <span class="s2">&quot;GPL v2 or later&quot;</span>
+<span class="n">__url__</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/mgedmin/findimports&quot;</span>
 
 
 <div class="viewcode-block" id="adjust_lineno">
@@ -322,7 +331,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">line</span> <span class="o">=</span> <span class="n">linecache</span><span class="o">.</span><span class="n">getline</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="p">)</span>
     <span class="c1"># Hack warning: might be fooled by comments</span>
-    <span class="n">rx</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\b</span><span class="si">%s</span><span class="s1">\b&#39;</span> <span class="o">%</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">if</span> <span class="n">name</span> <span class="o">!=</span> <span class="s1">&#39;*&#39;</span> <span class="k">else</span> <span class="s1">&#39;[*]&#39;</span><span class="p">)</span>
+    <span class="n">rx</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\b</span><span class="si">%s</span><span class="s2">\b&quot;</span> <span class="o">%</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">if</span> <span class="n">name</span> <span class="o">!=</span> <span class="s2">&quot;*&quot;</span> <span class="k">else</span> <span class="s2">&quot;[*]&quot;</span><span class="p">)</span>
     <span class="k">while</span> <span class="n">line</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">rx</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
         <span class="n">lineno</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">line</span> <span class="o">=</span> <span class="n">linecache</span><span class="o">.</span><span class="n">getline</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="p">)</span>
@@ -342,8 +351,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="n">level</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">(</span><span class="si">{!r}</span><span class="s1">, </span><span class="si">{!r}</span><span class="s1">, </span><span class="si">{!r}</span><span class="s1">, </span><span class="si">{!r}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lineno</span><span class="p">,</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">(</span><span class="si">{!r}</span><span class="s2">, </span><span class="si">{!r}</span><span class="s2">, </span><span class="si">{!r}</span><span class="s2">, </span><span class="si">{!r}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lineno</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="p">,</span>
         <span class="p">)</span></div>
 
@@ -379,30 +391,27 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">processImport</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">imported_as</span><span class="p">,</span> <span class="n">full_name</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
-        <span class="n">lineno</span> <span class="o">=</span> <span class="n">adjust_lineno</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
-                               <span class="bp">self</span><span class="o">.</span><span class="n">lineno_offset</span> <span class="o">+</span> <span class="n">node</span><span class="o">.</span><span class="n">lineno</span><span class="p">,</span>
-                               <span class="n">name</span><span class="p">)</span>
+        <span class="n">lineno</span> <span class="o">=</span> <span class="n">adjust_lineno</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lineno_offset</span> <span class="o">+</span> <span class="n">node</span><span class="o">.</span><span class="n">lineno</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="n">info</span> <span class="o">=</span> <span class="n">ImportInfo</span><span class="p">(</span><span class="n">full_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">imports</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">visit_Import</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">alias</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">processImport</span><span class="p">(</span><span class="n">alias</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">alias</span><span class="o">.</span><span class="n">asname</span><span class="p">,</span> <span class="n">alias</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span>
-                               <span class="n">node</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">processImport</span><span class="p">(</span><span class="n">alias</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">alias</span><span class="o">.</span><span class="n">asname</span><span class="p">,</span> <span class="n">alias</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">visit_ImportFrom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">module</span> <span class="o">==</span> <span class="s1">&#39;__future__&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">module</span> <span class="o">==</span> <span class="s2">&quot;__future__&quot;</span><span class="p">:</span>
             <span class="k">return</span>
 
         <span class="k">for</span> <span class="n">alias</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
             <span class="n">name</span> <span class="o">=</span> <span class="n">alias</span><span class="o">.</span><span class="n">name</span>
             <span class="n">imported_as</span> <span class="o">=</span> <span class="n">alias</span><span class="o">.</span><span class="n">asname</span>
-            <span class="n">fullname</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">module</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">module</span> <span class="k">else</span> <span class="n">name</span>
+            <span class="n">fullname</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">module</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">module</span> <span class="k">else</span> <span class="n">name</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">processImport</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">imported_as</span><span class="p">,</span> <span class="n">fullname</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">level</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">visitSomethingWithADocstring</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
         <span class="c1"># ClassDef and FunctionDef have a &#39;lineno&#39; attribute, Module doesn&#39;t.</span>
-        <span class="n">lineno</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="s1">&#39;lineno&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">lineno</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="s2">&quot;lineno&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">processDocstring</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">get_docstring</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">clean</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">lineno</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">generic_visit</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
 
@@ -420,18 +429,26 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">examples</span> <span class="o">=</span> <span class="n">dtparser</span><span class="o">.</span><span class="n">get_examples</span><span class="p">(</span><span class="n">docstring</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{filename}</span><span class="s2">:</span><span class="si">{lineno}</span><span class="s2">: error while parsing doctest&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">filename</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="o">=</span><span class="n">lineno</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="si">{filename}</span><span class="s2">:</span><span class="si">{lineno}</span><span class="s2">: error while parsing doctest&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">filename</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="o">=</span><span class="n">lineno</span>
+                <span class="p">),</span>
+                <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span>
+            <span class="p">)</span>
             <span class="k">raise</span>
         <span class="k">for</span> <span class="n">example</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">source</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">source</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-                    <span class="n">source</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
-                <span class="n">node</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;&lt;docstring&gt;&#39;</span><span class="p">)</span>
+                    <span class="n">source</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;&lt;docstring&gt;&quot;</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">SyntaxError</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{filename}</span><span class="s2">:</span><span class="si">{lineno}</span><span class="s2">: syntax error in doctest&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="n">filename</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="o">=</span><span class="n">lineno</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s2">&quot;</span><span class="si">{filename}</span><span class="s2">:</span><span class="si">{lineno}</span><span class="s2">: syntax error in doctest&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">filename</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="o">=</span><span class="n">lineno</span>
+                    <span class="p">),</span>
+                    <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span>
+                <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">lineno_offset</span> <span class="o">+=</span> <span class="n">lineno</span> <span class="o">+</span> <span class="n">example</span><span class="o">.</span><span class="n">lineno</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
@@ -464,7 +481,8 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">addImport</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">lineno</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">unused_names</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">imports</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImportInfo</span><span class="p">(</span>
-            <span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
+            <span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="p">,</span> <span class="n">level</span>
+        <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">useName</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">unused_names</span><span class="p">:</span>
@@ -501,37 +519,40 @@
         <span class="c1"># should be empty at this point</span>
         <span class="k">assert</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">scope_stack</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">unused_names</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scope</span><span class="o">.</span><span class="n">unused_names</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">unused_names</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">attrgetter</span><span class="p">(</span><span class="s1">&#39;lineno&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unused_names</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">attrgetter</span><span class="p">(</span><span class="s2">&quot;lineno&quot;</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">processDocstring</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">docstring</span><span class="p">,</span> <span class="n">lineno</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">newScope</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">top_level</span><span class="p">,</span> <span class="s1">&#39;docstring&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">newScope</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">top_level</span><span class="p">,</span> <span class="s2">&quot;docstring&quot;</span><span class="p">)</span>
         <span class="n">ImportFinder</span><span class="o">.</span><span class="n">processDocstring</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">docstring</span><span class="p">,</span> <span class="n">lineno</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">leaveScope</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">visit_FunctionDef</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">newScope</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scope</span><span class="p">,</span> <span class="s1">&#39;function </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">newScope</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scope</span><span class="p">,</span> <span class="s2">&quot;function </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="n">ImportFinder</span><span class="o">.</span><span class="n">visit_FunctionDef</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">leaveScope</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">processImport</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">imported_as</span><span class="p">,</span> <span class="n">full_name</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
-        <span class="n">ImportFinder</span><span class="o">.</span><span class="n">processImport</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">imported_as</span><span class="p">,</span> <span class="n">full_name</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
+        <span class="n">ImportFinder</span><span class="o">.</span><span class="n">processImport</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">imported_as</span><span class="p">,</span> <span class="n">full_name</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">imported_as</span><span class="p">:</span>
             <span class="n">imported_as</span> <span class="o">=</span> <span class="n">name</span>
         <span class="k">if</span> <span class="n">imported_as</span> <span class="o">!=</span> <span class="s2">&quot;*&quot;</span><span class="p">:</span>
             <span class="n">lineno</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lineno_offset</span> <span class="o">+</span> <span class="n">node</span><span class="o">.</span><span class="n">lineno</span>
-            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">warn_about_duplicates</span> <span class="ow">and</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">scope</span><span class="o">.</span><span class="n">haveImport</span><span class="p">(</span><span class="n">imported_as</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">warn_about_duplicates</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">scope</span><span class="o">.</span><span class="n">haveImport</span><span class="p">(</span><span class="n">imported_as</span><span class="p">):</span>
                 <span class="n">where</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scope</span><span class="o">.</span><span class="n">whereImported</span><span class="p">(</span><span class="n">imported_as</span><span class="p">)</span><span class="o">.</span><span class="n">lineno</span>
                 <span class="n">line</span> <span class="o">=</span> <span class="n">linecache</span><span class="o">.</span><span class="n">getline</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="p">)</span>
-                <span class="k">if</span> <span class="s1">&#39;#&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{filename}</span><span class="s2">:</span><span class="si">{lineno}</span><span class="s2">: </span><span class="si">{name}</span><span class="s2"> imported again&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                        <span class="n">filename</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="o">=</span><span class="n">lineno</span><span class="p">,</span>
-                        <span class="n">name</span><span class="o">=</span><span class="n">imported_as</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;#&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="s2">&quot;</span><span class="si">{filename}</span><span class="s2">:</span><span class="si">{lineno}</span><span class="s2">: </span><span class="si">{name}</span><span class="s2"> imported again&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                            <span class="n">filename</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="o">=</span><span class="n">lineno</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">imported_as</span>
+                        <span class="p">),</span>
+                        <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span>
+                    <span class="p">)</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{filename}</span><span class="s2">:</span><span class="si">{lineno}</span><span class="s2">:   (location of previous&quot;</span>
-                              <span class="s2">&quot; import)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
-                                                <span class="n">lineno</span><span class="o">=</span><span class="n">where</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span>
+                            <span class="s2">&quot;</span><span class="si">{filename}</span><span class="s2">:</span><span class="si">{lineno}</span><span class="s2">:   (location of previous&quot;</span>
+                            <span class="s2">&quot; import)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="o">=</span><span class="n">where</span><span class="p">),</span>
+                            <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span>
+                        <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">scope</span><span class="o">.</span><span class="n">addImport</span><span class="p">(</span><span class="n">imported_as</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">lineno</span><span class="p">)</span>
 
@@ -550,7 +571,7 @@
             <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
             <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">full_name</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">name</span><span class="p">:</span>
-                    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">part</span><span class="p">)</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">part</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">name</span> <span class="o">+=</span> <span class="n">part</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">scope</span><span class="o">.</span><span class="n">useName</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
@@ -575,8 +596,7 @@
 
 <div class="viewcode-block" id="find_imports_and_track_names">
 <a class="viewcode-back" href="../../module_docs/tec/findimports.html#tec.findimports.find_imports_and_track_names">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">find_imports_and_track_names</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">warn_about_duplicates</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                 <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">find_imports_and_track_names</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">warn_about_duplicates</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Find all imported names in a given file.</span>
 
 <span class="sd">    Returns ``(imports, unused)``.  Both are lists of ImportInfo objects.</span>
@@ -617,7 +637,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">unused_names</span> <span class="o">=</span> <span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;&lt;</span><span class="si">{}</span><span class="s1">: </span><span class="si">{}</span><span class="s1">&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modname</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="s2">&quot;&lt;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modname</span><span class="p">)</span></div>
 
 
 
@@ -657,13 +677,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_module_cache</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_warned_about</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_stderr</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_exts</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;.py&#39;</span><span class="p">,</span> <span class="s1">&#39;.so&#39;</span><span class="p">,</span> <span class="s1">&#39;.dll&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="s1">&#39;_multiarch&#39;</span><span class="p">):</span>  <span class="c1"># pragma: nocover</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_exts</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">,</span> <span class="s2">&quot;.so&quot;</span><span class="p">,</span> <span class="s2">&quot;.dll&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="s2">&quot;_multiarch&quot;</span><span class="p">):</span>  <span class="c1"># pragma: nocover</span>
             <span class="c1"># Ubuntu 14.04 LTS renames</span>
             <span class="c1"># /usr/lib/python2.7/lib-dynload/datetime.so to</span>
             <span class="c1"># /usr/lib/python2.7/lib-dynload/datetime.x86_64-linux-gnu.so</span>
             <span class="c1"># (https://github.com/mgedmin/findimports/issues/3)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_exts</span> <span class="o">+=</span> <span class="p">(</span><span class="s1">&#39;.</span><span class="si">%s</span><span class="s1">.so&#39;</span> <span class="o">%</span> <span class="n">sys</span><span class="o">.</span><span class="n">_multiarch</span><span class="p">,)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_exts</span> <span class="o">+=</span> <span class="p">(</span><span class="s2">&quot;.</span><span class="si">%s</span><span class="s2">.so&quot;</span> <span class="o">%</span> <span class="n">sys</span><span class="o">.</span><span class="n">_multiarch</span><span class="p">,)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">warn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">about</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">about</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_warned_about</span><span class="p">:</span>
@@ -686,9 +706,9 @@
                 <span class="n">files</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
                 <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
                     <span class="c1"># ignore emacsish junk</span>
-                    <span class="k">if</span> <span class="n">fn</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.py&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">fn</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;.#&#39;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">fn</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">fn</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;.#&quot;</span><span class="p">):</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">parseFile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">fn</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="n">pathname</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.importcache&#39;</span><span class="p">):</span>
+        <span class="k">elif</span> <span class="n">pathname</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.importcache&quot;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">readCache</span><span class="p">(</span><span class="n">pathname</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">parseFile</span><span class="p">(</span><span class="n">pathname</span><span class="p">)</span></div>
@@ -698,7 +718,7 @@
 <a class="viewcode-back" href="../../module_docs/tec/findimports.html#tec.findimports.ModuleGraph.writeCache">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">writeCache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Write the graph to a cache file.&quot;&quot;&quot;</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span></div>
 
 
@@ -706,7 +726,7 @@
 <a class="viewcode-back" href="../../module_docs/tec/findimports.html#tec.findimports.ModuleGraph.readCache">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">readCache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Load the graph from a cache file.&quot;&quot;&quot;</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">modules</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span></div>
 
 
@@ -718,10 +738,8 @@
         <span class="n">module</span> <span class="o">=</span> <span class="n">Module</span><span class="p">(</span><span class="n">modname</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">modname</span><span class="p">]</span> <span class="o">=</span> <span class="n">module</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trackUnusedNames</span><span class="p">:</span>
-            <span class="n">module</span><span class="o">.</span><span class="n">imported_names</span><span class="p">,</span> <span class="n">module</span><span class="o">.</span><span class="n">unused_names</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="n">find_imports_and_track_names</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span>
-                                             <span class="bp">self</span><span class="o">.</span><span class="n">warn_about_duplicates</span><span class="p">,</span>
-                                             <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span>
+            <span class="n">module</span><span class="o">.</span><span class="n">imported_names</span><span class="p">,</span> <span class="n">module</span><span class="o">.</span><span class="n">unused_names</span> <span class="o">=</span> <span class="n">find_imports_and_track_names</span><span class="p">(</span>
+                <span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">warn_about_duplicates</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">module</span><span class="o">.</span><span class="n">imported_names</span> <span class="o">=</span> <span class="n">find_imports</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
@@ -729,7 +747,8 @@
         <span class="nb">dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="n">module</span><span class="o">.</span><span class="n">imports</span> <span class="o">=</span> <span class="p">{</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">findModuleOfName</span><span class="p">(</span><span class="n">imp</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">imp</span><span class="o">.</span><span class="n">level</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="nb">dir</span><span class="p">)</span>
-             <span class="k">for</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">module</span><span class="o">.</span><span class="n">imported_names</span><span class="p">}</span></div>
+            <span class="k">for</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">module</span><span class="o">.</span><span class="n">imported_names</span>
+        <span class="p">}</span></div>
 
 
 <div class="viewcode-block" id="ModuleGraph.filenameToModname">
@@ -738,18 +757,16 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a filename to a module name.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exts</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">ext</span><span class="p">):</span>
-                <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="p">[:</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">ext</span><span class="p">)]</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="p">[:</span> <span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">ext</span><span class="p">)]</span>
                 <span class="k">break</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: unknown file name extension&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: unknown file name extension&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
         <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="n">elements</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
         <span class="n">modname</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">while</span> <span class="n">elements</span><span class="p">:</span>
             <span class="n">modname</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elements</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span>
-                    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">elements</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;__init__.py&#39;</span><span class="p">])</span>
-            <span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">elements</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;__init__.py&quot;</span><span class="p">])):</span>
                 <span class="k">break</span>
         <span class="n">modname</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
         <span class="n">modname</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">modname</span><span class="p">)</span>
@@ -760,7 +777,7 @@
 <a class="viewcode-back" href="../../module_docs/tec/findimports.html#tec.findimports.ModuleGraph.findModuleOfName">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">findModuleOfName</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dotted_name</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">extrapath</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Given a fully qualified name, find what module contains it.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">dotted_name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.*&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">dotted_name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.*&quot;</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">dotted_name</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
         <span class="n">name</span> <span class="o">=</span> <span class="n">dotted_name</span>
 
@@ -790,8 +807,8 @@
             <span class="n">candidate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">isPackage</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">extrapath</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">candidate</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">candidate</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">dotted_name</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: could not find </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">dotted_name</span><span class="p">)</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">dotted_name</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: could not find </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">dotted_name</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">dotted_name</span></div>
 
 
@@ -805,7 +822,7 @@
             <span class="k">pass</span>
         <span class="k">if</span> <span class="n">dotted_name</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span> <span class="ow">or</span> <span class="n">dotted_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_modules</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">dotted_name</span>
-        <span class="n">filename</span> <span class="o">=</span> <span class="n">dotted_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">dotted_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">extrapath</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exts</span><span class="p">:</span>
                 <span class="n">candidate</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">extrapath</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span> <span class="o">+</span> <span class="n">ext</span>
@@ -819,7 +836,7 @@
             <span class="k">pass</span>
         <span class="k">for</span> <span class="nb">dir</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="nb">dir</span><span class="p">):</span>
-                <span class="k">if</span> <span class="nb">dir</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.egg-info&#39;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">dir</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.egg-info&quot;</span><span class="p">):</span>
                     <span class="c1"># distribute creates a setuptools-blah-blah.egg-info</span>
                     <span class="c1"># that ends up in sys.path</span>
                     <span class="k">continue</span>
@@ -832,7 +849,7 @@
                 <span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exts</span><span class="p">:</span>
                     <span class="n">candidate</span> <span class="o">=</span> <span class="n">filename</span> <span class="o">+</span> <span class="n">ext</span>
                     <span class="k">if</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
-                        <span class="n">modname</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+                        <span class="n">modname</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">)</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">_module_cache</span><span class="p">[(</span><span class="n">dotted_name</span><span class="p">,</span> <span class="n">extrapath</span><span class="p">)]</span> <span class="o">=</span> <span class="n">modname</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">_module_cache</span><span class="p">[(</span><span class="n">dotted_name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)]</span> <span class="o">=</span> <span class="n">modname</span>
                         <span class="k">return</span> <span class="n">modname</span>
@@ -851,9 +868,9 @@
 <a class="viewcode-back" href="../../module_docs/tec/findimports.html#tec.findimports.ModuleGraph.isPackage">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">isPackage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dotted_name</span><span class="p">,</span> <span class="n">extrapath</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Is ``dotted_name`` the name of a package?&quot;&quot;&quot;</span>
-        <span class="n">candidate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">isModule</span><span class="p">(</span><span class="n">dotted_name</span> <span class="o">+</span> <span class="s1">&#39;.__init__&#39;</span><span class="p">,</span> <span class="n">extrapath</span><span class="p">)</span>
+        <span class="n">candidate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">isModule</span><span class="p">(</span><span class="n">dotted_name</span> <span class="o">+</span> <span class="s2">&quot;.__init__&quot;</span><span class="p">,</span> <span class="n">extrapath</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">candidate</span><span class="p">:</span>
-            <span class="n">candidate</span> <span class="o">=</span> <span class="n">candidate</span><span class="p">[:</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="s2">&quot;.__init__&quot;</span><span class="p">)]</span>
+            <span class="n">candidate</span> <span class="o">=</span> <span class="n">candidate</span><span class="p">[:</span> <span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="s2">&quot;.__init__&quot;</span><span class="p">)]</span>
         <span class="k">return</span> <span class="n">candidate</span></div>
 
 
@@ -861,27 +878,27 @@
 <a class="viewcode-back" href="../../module_docs/tec/findimports.html#tec.findimports.ModuleGraph.packageOf">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">packageOf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dotted_name</span><span class="p">,</span> <span class="n">packagelevel</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine the package that contains ``dotted_name``.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dotted_name</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;.&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dotted_name</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">dotted_name</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isPackage</span><span class="p">(</span><span class="n">dotted_name</span><span class="p">):</span>
-            <span class="n">dotted_name</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dotted_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">dotted_name</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dotted_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">packagelevel</span><span class="p">:</span>
-            <span class="n">dotted_name</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dotted_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[:</span><span class="n">packagelevel</span><span class="p">])</span>
+            <span class="n">dotted_name</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dotted_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[:</span><span class="n">packagelevel</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">dotted_name</span></div>
 
 
 <div class="viewcode-block" id="ModuleGraph.removeTestPackage">
 <a class="viewcode-back" href="../../module_docs/tec/findimports.html#tec.findimports.ModuleGraph.removeTestPackage">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">removeTestPackage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dotted_name</span><span class="p">,</span> <span class="n">pkgnames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;tests&#39;</span><span class="p">,</span> <span class="s1">&#39;ftests&#39;</span><span class="p">]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">removeTestPackage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dotted_name</span><span class="p">,</span> <span class="n">pkgnames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;tests&quot;</span><span class="p">,</span> <span class="s2">&quot;ftests&quot;</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove tests subpackages from dotted_name.&quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">dotted_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">dotted_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">pkgnames</span><span class="p">:</span>
                 <span class="k">break</span>
             <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>  <span class="c1"># empty names are baad</span>
             <span class="k">return</span> <span class="n">dotted_name</span>
-        <span class="k">return</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ModuleGraph.listModules">
@@ -915,7 +932,7 @@
 
 <div class="viewcode-block" id="ModuleGraph.collapseTests">
 <a class="viewcode-back" href="../../module_docs/tec/findimports.html#tec.findimports.ModuleGraph.collapseTests">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">collapseTests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pkgnames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;tests&#39;</span><span class="p">,</span> <span class="s1">&#39;ftests&#39;</span><span class="p">]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">collapseTests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pkgnames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;tests&quot;</span><span class="p">,</span> <span class="s2">&quot;ftests&quot;</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Collapse test packages with parent packages.</span>
 
 <span class="sd">        Works only with package graphs.</span>
@@ -1022,8 +1039,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Produce a report of imported names.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">module</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">listModules</span><span class="p">():</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">:&quot;</span> <span class="o">%</span> <span class="n">module</span><span class="o">.</span><span class="n">modname</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="n">imp</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">module</span><span class="o">.</span><span class="n">imported_names</span><span class="p">))</span></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">imp</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">module</span><span class="o">.</span><span class="n">imported_names</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="ModuleGraph.printImports">
@@ -1035,8 +1051,9 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">external_dependencies</span><span class="p">:</span>
                 <span class="n">imports</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">imports</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">imports</span> <span class="o">=</span> <span class="p">[</span><span class="n">modname</span> <span class="k">for</span> <span class="n">modname</span> <span class="ow">in</span> <span class="n">module</span><span class="o">.</span><span class="n">imports</span>
-                           <span class="k">if</span> <span class="n">modname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">]</span>
+                <span class="n">imports</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">modname</span> <span class="k">for</span> <span class="n">modname</span> <span class="ow">in</span> <span class="n">module</span><span class="o">.</span><span class="n">imports</span> <span class="k">if</span> <span class="n">modname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span>
+                <span class="p">]</span>
             <span class="n">imports</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">imports</span><span class="p">))</span></div>
 
@@ -1046,13 +1063,12 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">printUnusedImports</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Produce a report of unused imports.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">module</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">listModules</span><span class="p">():</span>
-            <span class="n">names</span> <span class="o">=</span> <span class="p">[(</span><span class="n">unused</span><span class="o">.</span><span class="n">lineno</span><span class="p">,</span> <span class="n">unused</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-                     <span class="k">for</span> <span class="n">unused</span> <span class="ow">in</span> <span class="n">module</span><span class="o">.</span><span class="n">unused_names</span><span class="p">]</span>
+            <span class="n">names</span> <span class="o">=</span> <span class="p">[(</span><span class="n">unused</span><span class="o">.</span><span class="n">lineno</span><span class="p">,</span> <span class="n">unused</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">unused</span> <span class="ow">in</span> <span class="n">module</span><span class="o">.</span><span class="n">unused_names</span><span class="p">]</span>
             <span class="n">names</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">lineno</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_unused</span><span class="p">:</span>
                     <span class="n">line</span> <span class="o">=</span> <span class="n">linecache</span><span class="o">.</span><span class="n">getline</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="s1">&#39;#&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="s2">&quot;#&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
                         <span class="c1"># assume there&#39;s a comment explaining why it&#39;s not used</span>
                         <span class="k">continue</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">:</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2"> not used&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span></div>
@@ -1069,8 +1085,7 @@
         <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">module</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">listModules</span><span class="p">()):</span>
             <span class="n">module</span><span class="o">.</span><span class="n">_dot_name</span> <span class="o">=</span> <span class="s2">&quot;mod</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">n</span>
             <span class="n">nameDict</span><span class="p">[</span><span class="n">module</span><span class="o">.</span><span class="n">modname</span><span class="p">]</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">_dot_name</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  </span><span class="si">{}</span><span class="s2">[label=</span><span class="se">\&quot;</span><span class="si">{}</span><span class="se">\&quot;</span><span class="s2">];&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">_dot_name</span><span class="p">,</span>
-                                           <span class="n">quote</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">label</span><span class="p">)))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  </span><span class="si">{}</span><span class="s1">[label=&quot;</span><span class="si">{}</span><span class="s1">&quot;];&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">_dot_name</span><span class="p">,</span> <span class="n">quote</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">label</span><span class="p">)))</span>
             <span class="n">allNames</span> <span class="o">|=</span> <span class="n">module</span><span class="o">.</span><span class="n">imports</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  node[style=dotted];&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">external_dependencies</span><span class="p">:</span>
@@ -1079,12 +1094,13 @@
             <span class="n">extNames</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">extNames</span><span class="p">):</span>
                 <span class="n">nameDict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">id</span> <span class="o">=</span> <span class="s2">&quot;extmod</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">n</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  </span><span class="si">{}</span><span class="s2">[label=</span><span class="se">\&quot;</span><span class="si">{}</span><span class="se">\&quot;</span><span class="s2">];&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  </span><span class="si">{}</span><span class="s1">[label=&quot;</span><span class="si">{}</span><span class="s1">&quot;];&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">modname</span><span class="p">,</span> <span class="n">module</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
             <span class="k">for</span> <span class="n">other</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">imports</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">nameDict</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  </span><span class="si">{}</span><span class="s2"> -&gt; </span><span class="si">{}</span><span class="s2">;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nameDict</span><span class="p">[</span><span class="n">module</span><span class="o">.</span><span class="n">modname</span><span class="p">],</span>
-                                           <span class="n">nameDict</span><span class="p">[</span><span class="n">other</span><span class="p">]))</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="s2">&quot;  </span><span class="si">{}</span><span class="s2"> -&gt; </span><span class="si">{}</span><span class="s2">;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nameDict</span><span class="p">[</span><span class="n">module</span><span class="o">.</span><span class="n">modname</span><span class="p">],</span> <span class="n">nameDict</span><span class="p">[</span><span class="n">other</span><span class="p">])</span>
+                    <span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;}&quot;</span><span class="p">)</span></div>
 </div>
 
@@ -1097,69 +1113,120 @@
 
 <span class="sd">    This function is probably incomplete.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\\\</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">n&#39;</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\\\</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">n&quot;</span><span class="p">)</span></div>
 
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">progname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">argv</span> <span class="k">else</span> <span class="kc">None</span>
-    <span class="n">description</span> <span class="o">=</span> <span class="vm">__doc__</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">parser</span> <span class="o">=</span> <span class="n">optparse</span><span class="o">.</span><span class="n">OptionParser</span><span class="p">(</span><span class="s1">&#39;%prog [options] [filename|dirname ...]&#39;</span><span class="p">,</span>
-                                   <span class="n">prog</span><span class="o">=</span><span class="n">progname</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">&#39;-i&#39;</span><span class="p">,</span> <span class="s1">&#39;--imports&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_const&#39;</span><span class="p">,</span>
-                      <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;action&#39;</span><span class="p">,</span> <span class="n">const</span><span class="o">=</span><span class="s1">&#39;printImports&#39;</span><span class="p">,</span>
-                      <span class="n">default</span><span class="o">=</span><span class="s1">&#39;printImports&#39;</span><span class="p">,</span>
-                      <span class="n">help</span><span class="o">=</span><span class="s1">&#39;print dependency graph (default action)&#39;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">&#39;-d&#39;</span><span class="p">,</span> <span class="s1">&#39;--dot&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_const&#39;</span><span class="p">,</span>
-                      <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;action&#39;</span><span class="p">,</span> <span class="n">const</span><span class="o">=</span><span class="s1">&#39;printDot&#39;</span><span class="p">,</span>
-                      <span class="n">help</span><span class="o">=</span><span class="s1">&#39;print dependency graph in dot (graphviz) format&#39;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">&#39;-n&#39;</span><span class="p">,</span> <span class="s1">&#39;--names&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_const&#39;</span><span class="p">,</span>
-                      <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;action&#39;</span><span class="p">,</span> <span class="n">const</span><span class="o">=</span><span class="s1">&#39;printImportedNames&#39;</span><span class="p">,</span>
-                      <span class="n">help</span><span class="o">=</span><span class="s1">&#39;print dependency graph with all imported names&#39;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">&#39;-u&#39;</span><span class="p">,</span> <span class="s1">&#39;--unused&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_const&#39;</span><span class="p">,</span>
-                      <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;action&#39;</span><span class="p">,</span> <span class="n">const</span><span class="o">=</span><span class="s1">&#39;printUnusedImports&#39;</span><span class="p">,</span>
-                      <span class="n">help</span><span class="o">=</span><span class="s1">&#39;print unused imports&#39;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">&#39;-a&#39;</span><span class="p">,</span> <span class="s1">&#39;--all&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
-                      <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;all_unused&#39;</span><span class="p">,</span>
-                      <span class="n">help</span><span class="o">=</span><span class="s2">&quot;don&#39;t ignore unused imports when there&#39;s a comment&quot;</span>
-                           <span class="s2">&quot; on the same line (only affects -u)&quot;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">&#39;--duplicate&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
-                      <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;warn_about_duplicates&#39;</span><span class="p">,</span>
-                      <span class="n">help</span><span class="o">=</span><span class="s1">&#39;warn about duplicate imports&#39;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">&#39;-v&#39;</span><span class="p">,</span> <span class="s1">&#39;--verbose&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
-                      <span class="n">help</span><span class="o">=</span><span class="s1">&#39;print more information (currently only affects&#39;</span>
-                           <span class="s1">&#39; --duplicate)&#39;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">&#39;-N&#39;</span><span class="p">,</span> <span class="s1">&#39;--noext&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
-                      <span class="n">help</span><span class="o">=</span><span class="s1">&#39;omit external dependencies&#39;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="s1">&#39;--packages&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
-                      <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;condense_to_packages&#39;</span><span class="p">,</span>
-                      <span class="n">help</span><span class="o">=</span><span class="s1">&#39;convert the module graph to a package graph&#39;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">&#39;-l&#39;</span><span class="p">,</span> <span class="s1">&#39;--level&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">,</span>
-                      <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;packagelevel&#39;</span><span class="p">,</span>
-                      <span class="n">help</span><span class="o">=</span><span class="s1">&#39;collapse subpackages to the topmost Nth levels&#39;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39;--collapse&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
-                      <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;collapse_cycles&#39;</span><span class="p">,</span>
-                      <span class="n">help</span><span class="o">=</span><span class="s1">&#39;collapse dependency cycles&#39;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">&#39;-T&#39;</span><span class="p">,</span> <span class="s1">&#39;--tests&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
-                      <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;collapse_tests&#39;</span><span class="p">,</span>
-                      <span class="n">help</span><span class="o">=</span><span class="s2">&quot;collapse packages named &#39;tests&#39; and &#39;ftests&#39;&quot;</span>
-                           <span class="s2">&quot; with parent packages&quot;</span><span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">&#39;-w&#39;</span><span class="p">,</span> <span class="s1">&#39;--write-cache&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;FILE&#39;</span><span class="p">,</span>
-                      <span class="n">help</span><span class="o">=</span><span class="s2">&quot;write a pickle cache of parsed imports; provide&quot;</span>
-                           <span class="s2">&quot; the cache filename as the only non-option&quot;</span>
-                           <span class="s2">&quot; argument to load it back&quot;</span><span class="p">)</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="vm">__doc__</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">optparse</span><span class="o">.</span><span class="n">OptionParser</span><span class="p">(</span>
+        <span class="s2">&quot;%prog [options] [filename|dirname ...]&quot;</span><span class="p">,</span> <span class="n">prog</span><span class="o">=</span><span class="n">progname</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span>
+        <span class="s2">&quot;-i&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--imports&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_const&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;action&quot;</span><span class="p">,</span>
+        <span class="n">const</span><span class="o">=</span><span class="s2">&quot;printImports&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;printImports&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;print dependency graph (default action)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span>
+        <span class="s2">&quot;-d&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--dot&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_const&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;action&quot;</span><span class="p">,</span>
+        <span class="n">const</span><span class="o">=</span><span class="s2">&quot;printDot&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;print dependency graph in dot (graphviz) format&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span>
+        <span class="s2">&quot;-n&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--names&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_const&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;action&quot;</span><span class="p">,</span>
+        <span class="n">const</span><span class="o">=</span><span class="s2">&quot;printImportedNames&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;print dependency graph with all imported names&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span>
+        <span class="s2">&quot;-u&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--unused&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_const&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;action&quot;</span><span class="p">,</span>
+        <span class="n">const</span><span class="o">=</span><span class="s2">&quot;printUnusedImports&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;print unused imports&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span>
+        <span class="s2">&quot;-a&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--all&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;all_unused&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;don&#39;t ignore unused imports when there&#39;s a comment&quot;</span>
+        <span class="s2">&quot; on the same line (only affects -u)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span>
+        <span class="s2">&quot;--duplicate&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;warn_about_duplicates&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;warn about duplicate imports&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span>
+        <span class="s2">&quot;-v&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--verbose&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;print more information (currently only affects --duplicate)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span>
+        <span class="s2">&quot;-N&quot;</span><span class="p">,</span> <span class="s2">&quot;--noext&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;omit external dependencies&quot;</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span>
+        <span class="s2">&quot;-p&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--packages&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;condense_to_packages&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;convert the module graph to a package graph&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span>
+        <span class="s2">&quot;-l&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--level&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;int&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;packagelevel&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;collapse subpackages to the topmost Nth levels&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span>
+        <span class="s2">&quot;-c&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--collapse&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;collapse_cycles&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;collapse dependency cycles&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span>
+        <span class="s2">&quot;-T&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--tests&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;collapse_tests&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;collapse packages named &#39;tests&#39; and &#39;ftests&#39; with parent packages&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span>
+        <span class="s2">&quot;-w&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--write-cache&quot;</span><span class="p">,</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FILE&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;write a pickle cache of parsed imports; provide&quot;</span>
+        <span class="s2">&quot; the cache filename as the only non-option&quot;</span>
+        <span class="s2">&quot; argument to load it back&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">opts</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="n">argv</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">SystemExit</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">e</span><span class="o">.</span><span class="n">code</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="p">:</span>
-        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;.&#39;</span><span class="p">]</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">]</span>
 
     <span class="n">g</span> <span class="o">=</span> <span class="n">ModuleGraph</span><span class="p">()</span>
     <span class="n">g</span><span class="o">.</span><span class="n">all_unused</span> <span class="o">=</span> <span class="n">opts</span><span class="o">.</span><span class="n">all_unused</span>
     <span class="n">g</span><span class="o">.</span><span class="n">warn_about_duplicates</span> <span class="o">=</span> <span class="n">opts</span><span class="o">.</span><span class="n">warn_about_duplicates</span>
     <span class="n">g</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">opts</span><span class="o">.</span><span class="n">verbose</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">trackUnusedNames</span> <span class="o">=</span> <span class="p">(</span><span class="n">opts</span><span class="o">.</span><span class="n">action</span> <span class="o">==</span> <span class="s1">&#39;printUnusedImports&#39;</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">trackUnusedNames</span> <span class="o">=</span> <span class="n">opts</span><span class="o">.</span><span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;printUnusedImports&quot;</span>
     <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
         <span class="n">g</span><span class="o">.</span><span class="n">parsePathname</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">opts</span><span class="o">.</span><span class="n">write_cache</span><span class="p">:</span>
@@ -1175,7 +1242,7 @@
     <span class="k">return</span> <span class="mi">0</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>  <span class="c1"># pragma: nocover</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>  <span class="c1"># pragma: nocover</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </pre></div>
 

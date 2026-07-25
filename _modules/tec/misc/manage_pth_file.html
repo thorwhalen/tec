@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tec.misc.manage_pth_file &mdash; tec 0.0.17 documentation</title>
+  <title>tec.misc.manage_pth_file &mdash; tec 0.0.18 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=63b572e7"></script>
+      <script src="../../../_static/documentation_options.js?v=8bafd125"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -113,7 +113,7 @@
 <span class="n">Lines</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">,</span> <span class="n">Filepath</span><span class="p">]</span>
 
 <span class="c1"># DFLT_FILENAME_FILT = methodcaller(&#39;endswith&#39;, &#39;.pth&#39;)</span>
-<span class="n">DFLT_FILENAME_FILT</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;oto.pth&#39;</span><span class="p">,</span> <span class="s1">&#39;conda.pth&#39;</span><span class="p">,</span> <span class="s1">&#39;custom.pth&#39;</span><span class="p">}</span><span class="o">.</span><span class="fm">__contains__</span>
+<span class="n">DFLT_FILENAME_FILT</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;oto.pth&quot;</span><span class="p">,</span> <span class="s2">&quot;conda.pth&quot;</span><span class="p">,</span> <span class="s2">&quot;custom.pth&quot;</span><span class="p">}</span><span class="o">.</span><span class="fm">__contains__</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">lines_of_file</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
@@ -125,16 +125,16 @@
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
             <span class="n">filepath</span> <span class="o">=</span> <span class="n">lines</span>
             <span class="k">return</span> <span class="n">lines_of_file</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="s1">&#39;;&#39;</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="s2">&quot;;&quot;</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
             <span class="n">semicolumn_seperated_content</span> <span class="o">=</span> <span class="n">lines</span>
-            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span> <span class="n">semicolumn_seperated_content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)))</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span> <span class="n">semicolumn_seperated_content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">file_content</span> <span class="o">=</span> <span class="n">lines</span>
             <span class="k">return</span> <span class="n">file_content</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
-            <span class="n">lines</span><span class="p">,</span> <span class="n">Iterable</span>
-        <span class="p">),</span> <span class="sa">f</span><span class="s1">&#39;lines should be a filepath, file content string or iterable of lines&#39;</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">),</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;lines should be a filepath, file content string or iterable of lines&quot;</span>
+        <span class="p">)</span>
         <span class="k">return</span> <span class="n">lines</span>
 
 
@@ -161,16 +161,26 @@
 <div class="viewcode-block" id="add_missing_lines">
 <a class="viewcode-back" href="../../../module_docs/tec/misc/manage_pth_file.html#tec.misc.manage_pth_file.add_missing_lines">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">add_missing_lines</span><span class="p">(</span><span class="n">target</span><span class="p">:</span> <span class="n">Filepath</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">Lines</span> <span class="o">=</span> <span class="p">()):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add source lines to target lines</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Append the ``source`` lines missing from ``target`` to the ``target`` file.</span>
 
-<span class="sd">    Note: ``target`` is a filepath the missing lines are appended to (the file</span>
-<span class="sd">    is written in place); the call below is illustrative only.</span>
+<span class="sd">    ``target`` is a filepath: the missing lines are appended to it in place, and</span>
+<span class="sd">    the list of lines that were added is returned.</span>
 
-<span class="sd">    &gt;&gt;&gt; add_missing_lines([&#39;one&#39;, &#39;two&#39;, &#39;&#39;, &#39;three&#39;], [&#39;four&#39;, &#39;&#39;, &#39;five&#39;])  # doctest: +SKIP</span>
+<span class="sd">    &gt;&gt;&gt; import os, tempfile</span>
+<span class="sd">    &gt;&gt;&gt; path = os.path.join(tempfile.mkdtemp(), &#39;lines.txt&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; _ = open(path, &#39;w&#39;).write(&#39;one\\ntwo\\n\\nthree&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; add_missing_lines(path, [&#39;four&#39;, &#39;&#39;, &#39;five&#39;])</span>
 <span class="sd">    [&#39;four&#39;, &#39;five&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; print(open(path).read())</span>
+<span class="sd">    one</span>
+<span class="sd">    two</span>
+<span class="sd">    &lt;BLANKLINE&gt;</span>
+<span class="sd">    three</span>
+<span class="sd">    four</span>
+<span class="sd">    five</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">target_lines</span><span class="p">,</span> <span class="n">missing_lines</span> <span class="o">=</span> <span class="n">target_and_missing_items</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
-    <span class="n">Path</span><span class="p">(</span><span class="n">target</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">target_lines</span> <span class="o">+</span> <span class="n">missing_lines</span><span class="p">))</span>
+    <span class="n">Path</span><span class="p">(</span><span class="n">target</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">target_lines</span> <span class="o">+</span> <span class="n">missing_lines</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">missing_lines</span></div>
 
 
@@ -225,7 +235,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">remove_trailing_slash</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;/&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">):</span>
             <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">x</span>
 
@@ -293,14 +303,14 @@
     <span class="k">if</span> <span class="n">pkg_rootdir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">:</span>
         <span class="n">pkg_rootdir</span> <span class="o">+=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">simple_run_command</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s1">&#39;git --work-tree </span><span class="si">{</span><span class="n">pkg_rootdir</span><span class="si">}</span><span class="s1"> --git-dir </span><span class="si">{</span><span class="n">pkg_rootdir</span><span class="si">}</span><span class="s1">.git remote get-url origin&#39;</span>
+        <span class="sa">f</span><span class="s2">&quot;git --work-tree </span><span class="si">{</span><span class="n">pkg_rootdir</span><span class="si">}</span><span class="s2"> --git-dir </span><span class="si">{</span><span class="n">pkg_rootdir</span><span class="si">}</span><span class="s2">.git remote get-url origin&quot;</span>
     <span class="p">)</span>
 
     <span class="k">yield</span> <span class="s1">&#39;echo &quot;----------------------------------------------------&quot;&#39;</span>
     <span class="k">yield</span> <span class="sa">f</span><span class="s1">&#39;echo &quot;</span><span class="si">{</span><span class="n">pkg_rootdir</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
     <span class="k">yield</span> <span class="sa">f</span><span class="s1">&#39;rm -rf &quot;</span><span class="si">{</span><span class="n">pkg_rootdir</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
     <span class="k">yield</span> <span class="sa">f</span><span class="s1">&#39;git clone </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s1"> &quot;</span><span class="si">{</span><span class="n">pkg_rootdir</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
-    <span class="k">yield</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">yield</span> <span class="s2">&quot;&quot;</span>
 
 
 <div class="viewcode-block" id="mk_reclone_string">
@@ -316,7 +326,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">pkg_paths</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">filt</span><span class="p">,</span> <span class="n">root_dirpaths_to_packages</span><span class="p">(</span><span class="n">rootdir</span><span class="p">)))</span>
     <span class="c1">#     return pkg_paths</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">reclone_pkg_commands</span><span class="p">,</span> <span class="n">pkg_paths</span><span class="p">)))</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">reclone_pkg_commands</span><span class="p">,</span> <span class="n">pkg_paths</span><span class="p">)))</span>
     <span class="k">if</span> <span class="n">save_in_filepath</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="n">save_in_filepath</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -324,7 +334,7 @@
 
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">suppress</span>
 
     <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">ModuleNotFoundError</span><span class="p">):</span>

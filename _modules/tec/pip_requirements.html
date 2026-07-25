@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tec.pip_requirements &mdash; tec 0.0.17 documentation</title>
+  <title>tec.pip_requirements &mdash; tec 0.0.18 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=63b572e7"></script>
+      <script src="../../_static/documentation_options.js?v=8bafd125"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -111,20 +111,22 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">requirement_file_to_df</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">file_to_string</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="n">xx</span> <span class="k">for</span> <span class="n">xx</span> <span class="ow">in</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;==&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([{</span><span class="s1">&#39;pkg&#39;</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]}</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">t</span><span class="p">])</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="n">xx</span> <span class="k">for</span> <span class="n">xx</span> <span class="ow">in</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;==&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([{</span><span class="s2">&quot;pkg&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]}</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">t</span><span class="p">])</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">requirements_comparison_df_only_when_different</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">requirements_comparison_df_only_when_different</span><span class="p">(</span>
+    <span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span>
+<span class="p">):</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">requirements_comparison_df</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">)</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;version_x&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;version_y&#39;</span><span class="p">]]</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="s2">&quot;version_x&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;version_y&quot;</span><span class="p">]]</span>
     <span class="k">return</span> <span class="n">c</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">requirements_comparison_df</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">):</span>
     <span class="n">r1</span> <span class="o">=</span> <span class="n">requirement_file_to_df</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">)</span>
     <span class="n">r2</span> <span class="o">=</span> <span class="n">requirement_file_to_df</span><span class="p">(</span><span class="n">requirements_filepath_2</span><span class="p">)</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">r1</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">r2</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;pkg&#39;</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">r1</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">r2</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;outer&quot;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;pkg&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">c</span>
 
 
@@ -135,7 +137,7 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">version_str</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">version_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">version_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)):</span>
                 <span class="n">num</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="n">str_to_num_key</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
             <span class="k">return</span> <span class="n">num</span>
         <span class="k">else</span><span class="p">:</span>
@@ -145,15 +147,17 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">requirements_comparison_objects</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">):</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">requirements_comparison_df_only_when_different</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">requirements_comparison_df_only_when_different</span><span class="p">(</span>
+        <span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span>
+    <span class="p">)</span>
 
     <span class="n">c</span><span class="p">,</span> <span class="n">missing_1</span><span class="p">,</span> <span class="n">missing_2</span> <span class="o">=</span> <span class="n">rm_empty_version_entries</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 
     <span class="n">v1_num</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
     <span class="n">v2_num</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-        <span class="n">v1</span> <span class="o">=</span> <span class="n">version_str_to_num</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;version_x&#39;</span><span class="p">])</span>
-        <span class="n">v2</span> <span class="o">=</span> <span class="n">version_str_to_num</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;version_y&#39;</span><span class="p">])</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">version_str_to_num</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;version_x&quot;</span><span class="p">])</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">version_str_to_num</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;version_y&quot;</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">v1</span> <span class="ow">and</span> <span class="n">v2</span><span class="p">:</span>
             <span class="n">v1_num</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
             <span class="n">v2_num</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
@@ -169,12 +173,12 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">rm_empty_version_entries</span><span class="p">(</span><span class="n">comp_df</span><span class="p">):</span>
-    <span class="n">lidx</span> <span class="o">=</span> <span class="n">comp_df</span><span class="p">[</span><span class="s1">&#39;version_x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
-    <span class="n">missing_1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">comp_df</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">lidx</span><span class="p">,</span> <span class="s1">&#39;pkg&#39;</span><span class="p">])</span>
+    <span class="n">lidx</span> <span class="o">=</span> <span class="n">comp_df</span><span class="p">[</span><span class="s2">&quot;version_x&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
+    <span class="n">missing_1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">comp_df</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">lidx</span><span class="p">,</span> <span class="s2">&quot;pkg&quot;</span><span class="p">])</span>
     <span class="n">comp_df</span> <span class="o">=</span> <span class="n">comp_df</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="o">~</span><span class="n">lidx</span><span class="p">]</span>
 
-    <span class="n">lidx</span> <span class="o">=</span> <span class="n">comp_df</span><span class="p">[</span><span class="s1">&#39;version_y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
-    <span class="n">missing_2</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">comp_df</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">lidx</span><span class="p">,</span> <span class="s1">&#39;pkg&#39;</span><span class="p">])</span>
+    <span class="n">lidx</span> <span class="o">=</span> <span class="n">comp_df</span><span class="p">[</span><span class="s2">&quot;version_y&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
+    <span class="n">missing_2</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">comp_df</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">lidx</span><span class="p">,</span> <span class="s2">&quot;pkg&quot;</span><span class="p">])</span>
     <span class="n">comp_df</span> <span class="o">=</span> <span class="n">comp_df</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="o">~</span><span class="n">lidx</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="n">comp_df</span><span class="p">,</span> <span class="n">missing_1</span><span class="p">,</span> <span class="n">missing_2</span>
@@ -184,14 +188,14 @@
     <span class="n">root1</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">f1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">root2</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">f2</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
-    <span class="n">cand1</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-    <span class="n">cand2</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">cand1</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">cand2</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">root1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">root2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">root1</span><span class="p">,</span> <span class="n">next1</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">root1</span><span class="p">)</span>
         <span class="n">root2</span><span class="p">,</span> <span class="n">next2</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">root2</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cand1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">cand1</span> <span class="o">=</span> <span class="n">next1</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">cand1</span>
-            <span class="n">cand2</span> <span class="o">=</span> <span class="n">next2</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">cand2</span>
+            <span class="n">cand1</span> <span class="o">=</span> <span class="n">next1</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">cand1</span>
+            <span class="n">cand2</span> <span class="o">=</span> <span class="n">next2</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">cand2</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">cand1</span> <span class="o">=</span> <span class="n">next1</span>
             <span class="n">cand2</span> <span class="o">=</span> <span class="n">next2</span>
@@ -202,10 +206,15 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">print_requirements_comparison</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">):</span>
-    <span class="n">missing_1</span><span class="p">,</span> <span class="n">missing_2</span><span class="p">,</span> <span class="n">v1_greater_than_v2_df</span><span class="p">,</span> <span class="n">v2_greater_than_v1_df</span> <span class="o">=</span> \
-        <span class="n">requirements_comparison_objects</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">)</span>
+    <span class="n">missing_1</span><span class="p">,</span> <span class="n">missing_2</span><span class="p">,</span> <span class="n">v1_greater_than_v2_df</span><span class="p">,</span> <span class="n">v2_greater_than_v1_df</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">requirements_comparison_objects</span><span class="p">(</span>
+            <span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
 
-    <span class="n">name1</span><span class="p">,</span> <span class="n">name2</span> <span class="o">=</span> <span class="n">file_unique_identifiers</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">)</span>
+    <span class="n">name1</span><span class="p">,</span> <span class="n">name2</span> <span class="o">=</span> <span class="n">file_unique_identifiers</span><span class="p">(</span>
+        <span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span>
+    <span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">-------- Missing in </span><span class="si">{</span><span class="n">name1</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">missing_1</span><span class="p">)</span>
@@ -214,37 +223,46 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">missing_2</span><span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">-------- </span><span class="si">{</span><span class="n">name1</span><span class="si">}</span><span class="s2"> in advance of </span><span class="si">{</span><span class="n">name2</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">v1_greater_than_v2_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;version_x&#39;</span><span class="p">:</span> <span class="n">name1</span><span class="p">,</span> <span class="s1">&#39;version_y&#39;</span><span class="p">:</span> <span class="n">name2</span><span class="p">}))</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="n">v1_greater_than_v2_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;version_x&quot;</span><span class="p">:</span> <span class="n">name1</span><span class="p">,</span> <span class="s2">&quot;version_y&quot;</span><span class="p">:</span> <span class="n">name2</span><span class="p">})</span>
+    <span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">-------- </span><span class="si">{</span><span class="n">name2</span><span class="si">}</span><span class="s2"> in advance of </span><span class="si">{</span><span class="n">name1</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">v2_greater_than_v1_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;version_x&#39;</span><span class="p">:</span> <span class="n">name1</span><span class="p">,</span> <span class="s1">&#39;version_y&#39;</span><span class="p">:</span> <span class="n">name2</span><span class="p">}))</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="n">v2_greater_than_v1_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;version_x&quot;</span><span class="p">:</span> <span class="n">name1</span><span class="p">,</span> <span class="s2">&quot;version_y&quot;</span><span class="p">:</span> <span class="n">name2</span><span class="p">})</span>
+    <span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_requirements_to_update_second_requirements_when_behind_first</span><span class="p">(</span>
-        <span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">):</span>
-    <span class="n">missing_1</span><span class="p">,</span> <span class="n">missing_2</span><span class="p">,</span> <span class="n">v1_greater_than_v2_df</span><span class="p">,</span> <span class="n">v2_greater_than_v1_df</span> <span class="o">=</span> \
-        <span class="n">requirements_comparison_objects</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">)</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span>
+<span class="p">):</span>
+    <span class="n">missing_1</span><span class="p">,</span> <span class="n">missing_2</span><span class="p">,</span> <span class="n">v1_greater_than_v2_df</span><span class="p">,</span> <span class="n">v2_greater_than_v1_df</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">requirements_comparison_objects</span><span class="p">(</span>
+            <span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">v1_greater_than_v2_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-        <span class="n">s</span> <span class="o">+=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;pkg&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;==&#39;</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;version_x&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;pkg&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;==&quot;</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;version_x&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
 
     <span class="k">return</span> <span class="n">s</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">updated_requirements_2_with_requirements_1_that_are_ahead</span><span class="p">(</span>
-        <span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">):</span>
-    <span class="n">r1</span> <span class="o">=</span> <span class="n">requirement_file_to_df</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;pkg&#39;</span><span class="p">)[</span><span class="s1">&#39;version&#39;</span><span class="p">]</span>
-    <span class="n">r2</span> <span class="o">=</span> <span class="n">requirement_file_to_df</span><span class="p">(</span><span class="n">requirements_filepath_2</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;pkg&#39;</span><span class="p">)[</span><span class="s1">&#39;version&#39;</span><span class="p">]</span>
+    <span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span>
+<span class="p">):</span>
+    <span class="n">r1</span> <span class="o">=</span> <span class="n">requirement_file_to_df</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;pkg&quot;</span><span class="p">)[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span>
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">requirement_file_to_df</span><span class="p">(</span><span class="n">requirements_filepath_2</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;pkg&quot;</span><span class="p">)[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span>
 
-    <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="k">for</span> <span class="n">pkg</span><span class="p">,</span> <span class="n">v2_str</span> <span class="ow">in</span> <span class="n">r2</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">v2</span> <span class="o">=</span> <span class="n">version_str_to_num</span><span class="p">(</span><span class="n">v2_str</span><span class="p">)</span>
         <span class="n">v1_str</span> <span class="o">=</span> <span class="n">r1</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pkg</span><span class="p">)</span>
         <span class="n">v1</span> <span class="o">=</span> <span class="n">version_str_to_num</span><span class="p">(</span><span class="n">v1_str</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">v1</span> <span class="ow">and</span> <span class="n">v1</span> <span class="o">&gt;</span> <span class="n">v2</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">+=</span> <span class="n">pkg</span> <span class="o">+</span> <span class="s1">&#39;==&#39;</span> <span class="o">+</span> <span class="n">v1_str</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="n">pkg</span> <span class="o">+</span> <span class="s2">&quot;==&quot;</span> <span class="o">+</span> <span class="n">v1_str</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">+=</span> <span class="n">pkg</span> <span class="o">+</span> <span class="s1">&#39;==&#39;</span> <span class="o">+</span> <span class="n">v2_str</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="n">pkg</span> <span class="o">+</span> <span class="s2">&quot;==&quot;</span> <span class="o">+</span> <span class="n">v2_str</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
     <span class="k">return</span> <span class="n">s</span>
     <span class="c1">#</span>
     <span class="c1">#</span>
