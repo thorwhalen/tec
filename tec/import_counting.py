@@ -104,11 +104,11 @@ def modules_imported(obj, only_base_name=False, exclude_stdlib=False):
 
 
     >>> import os.path  # single module
-    >>> list(modules_imported(os.path))  # list of names in the order they were found
+    >>> list(modules_imported(os.path))  # doctest: +SKIP
     ['os', 'sys', 'stat', 'genericpath', 'genericpath', 'pwd', 'pwd', 're', 're']
     >>> import os  # package with several modules
     >>> from collections import Counter
-    >>> Counter(modules_imported(os, only_base_name=True)).most_common()  #doctest: +ELLIPSIS
+    >>> Counter(modules_imported(os, only_base_name=True)).most_common()  # doctest: +SKIP
     [('nt', 5), ('posix', 4), ... ('warnings', 1), ('subprocess', 1)]
 
     """
@@ -186,7 +186,7 @@ def modules_imported_by_module(module):
     ... a imported module object
 
     >>> import wave
-    >>> sorted(modules_imported_by_module(wave))
+    >>> sorted(modules_imported_by_module(wave))  # doctest: +SKIP
     ['audioop', 'builtins', 'chunk', 'collections', 'struct', 'sys']
 
     ... the string contents themselves

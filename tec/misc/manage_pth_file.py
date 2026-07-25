@@ -65,8 +65,12 @@ def target_and_missing_items(target: Lines, source: Lines = ()):
 
 def add_missing_lines(target: Filepath, source: Lines = ()):
     """Add source lines to target lines
-    >>> _add_missing_lines(['one', 'two', '', 'three'], ['four', '', 'five'])
-    ['one', 'two', '', 'three', 'four', 'five']
+
+    Note: ``target`` is a filepath the missing lines are appended to (the file
+    is written in place); the call below is illustrative only.
+
+    >>> add_missing_lines(['one', 'two', '', 'three'], ['four', '', 'five'])  # doctest: +SKIP
+    ['four', 'five']
     """
     target_lines, missing_lines = target_and_missing_items(target, source)
     Path(target).write_text('\n'.join(target_lines + missing_lines))

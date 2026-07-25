@@ -113,11 +113,11 @@ def second_party_names(module, obj_filt=None):
 
     >>> from tec import modules
     >>> sorted(second_party_names(modules))[:5]
-    ['DOTPATH', 'FILEPATH', 'FOLDERPATH', 'LOADED', 'ModuleSpecKind']
+    ['DOTPATH', 'FILEPATH', 'FOLDERPATH', 'LOADED', 'ModuleAllAttrsReader']
     >>> sorted(second_party_names(modules, callable))[:4]
-    ['ModuleSpecKind', 'coerce_module_spec', 'filepath_to_dotpath', 'finding_objects_of_module_with_given_methods']
+    ['ModuleAllAttrsReader', 'ModuleAttrsReader', 'ModuleSpecKind', 'ModulesReader']
     >>> sorted(second_party_names(modules, lambda obj: isinstance(obj, type)))
-    ['ModuleSpecKind']
+    ['ModuleAllAttrsReader', 'ModuleAttrsReader', 'ModuleSpecKind', 'ModulesReader']
     """
     obj_filt = obj_filt or (lambda x: x)
     for attr in filter(lambda a: not a.startswith("_"), dir(module)):

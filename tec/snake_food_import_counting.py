@@ -1,3 +1,5 @@
+"""Count and analyze module imports, snakefood-style (via static analysis)."""
+
 import inspect
 import os
 import re

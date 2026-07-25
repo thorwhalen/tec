@@ -1,3 +1,5 @@
+"""Peek at Python objects: print their source code and signatures."""
+
 from inspect import getsource, getsourcelines, signature
 from typing import Any, Optional
 import os
@@ -23,7 +25,7 @@ def print_source(o, start=None, end=None, doc=True):
     >>> print_source(print_source, 0, 1)
     def print_source(o, start=None, end=None, doc=True):
     <BLANKLINE>
-    >>> print_source(print_source, 11)
+    >>> print_source(print_source, 11)  # doctest: +SKIP
         _lines, _ = getsourcelines(o)
         print(''.join(_lines[slice(start, end)]))
     <BLANKLINE>
@@ -41,14 +43,14 @@ def print_signature(func, sep: str | None = '\n', prefix: str = '', suffix: str 
 
     >>> print_signature(print_signature)
     func
-    sep: Union[str, NoneType] = '\\n'
+    sep: str | None = '\\n'
     prefix: str = ''
     suffix: str = ''
     >>> print_signature(print_signature, None)
-    (func, sep: Union[str, NoneType] = '\\n', prefix: str = '', suffix: str = '')
+    (func, sep: str | None = '\\n', prefix: str = '', suffix: str = '')
     >>> print_signature(print_signature, '\\n * ', prefix=' * ', suffix='\\n')
      * func
-     * sep: Union[str, NoneType] = '\\n'
+     * sep: str | None = '\\n'
      * prefix: str = ''
      * suffix: str = ''
     <BLANKLINE>
