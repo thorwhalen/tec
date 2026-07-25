@@ -64,13 +64,23 @@ def target_and_missing_items(target: Lines, source: Lines = ()):
 
 
 def add_missing_lines(target: Filepath, source: Lines = ()):
-    """Add source lines to target lines
+    """Append the ``source`` lines missing from ``target`` to the ``target`` file.
 
-    Note: ``target`` is a filepath the missing lines are appended to (the file
-    is written in place); the call below is illustrative only.
+    ``target`` is a filepath: the missing lines are appended to it in place, and
+    the list of lines that were added is returned.
 
-    >>> add_missing_lines(['one', 'two', '', 'three'], ['four', '', 'five'])  # doctest: +SKIP
+    >>> import os, tempfile
+    >>> path = os.path.join(tempfile.mkdtemp(), 'lines.txt')
+    >>> _ = open(path, 'w').write('one\\ntwo\\n\\nthree')
+    >>> add_missing_lines(path, ['four', '', 'five'])
     ['four', 'five']
+    >>> print(open(path).read())
+    one
+    two
+    <BLANKLINE>
+    three
+    four
+    five
     """
     target_lines, missing_lines = target_and_missing_items(target, source)
     Path(target).write_text("\n".join(target_lines + missing_lines))
