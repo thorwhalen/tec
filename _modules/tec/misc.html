@@ -1,0 +1,181 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tec.misc &mdash; tec 0.0.17 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=63b572e7"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            tec
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec.html">tec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/dependencies.html">tec.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/doctest_utils.html">tec.doctest_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/findimports.html">tec.findimports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/import_counting.html">tec.import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/misc.html">tec.misc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/misc/manage_pth_file.html">tec.misc.manage_pth_file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/modules.html">tec.modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/packages.html">tec.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/peek.html">tec.peek</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/pip_packaging.html">tec.pip_packaging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/pip_requirements.html">tec.pip_requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/pkg_code.html">tec.pkg_code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/snake_food_import_counting.html">tec.snake_food_import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/stores.html">tec.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/util.html">tec.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">tec</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tec.misc</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tec.misc</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Misc tools.</span>
+
+<span class="sd">Note: This content used to live in a ``tec/misc.py`` module, which was shadowed</span>
+<span class="sd">by (and unreachable behind) this ``tec/misc/`` package. It was moved here so the</span>
+<span class="sd">utilities are importable and so pytest can collect the package without an</span>
+<span class="sd">import-file-mismatch collision.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dol.filesys</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileStringReader</span>
+
+<span class="n">readme_path_for_setup_path</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">setup_path</span><span class="p">:</span> <span class="n">setup_path</span><span class="p">[:</span> <span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="s2">&quot;setup.cfg&quot;</span><span class="p">)]</span> <span class="o">+</span> <span class="s2">&quot;README.md&quot;</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="infos_of_packages_under_rootdir">
+<a class="viewcode-back" href="../../module_docs/tec/misc.html#tec.misc.infos_of_packages_under_rootdir">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">infos_of_packages_under_rootdir</span><span class="p">(</span><span class="n">rootdir</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Yields information about packages found recursively under rootdir</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    ```python</span>
+<span class="sd">    from collections import defaultdict</span>
+<span class="sd">    from operator import itemgetter</span>
+<span class="sd">    rootdir = &#39;PROJECTS_ROOT_DIR&#39;</span>
+
+<span class="sd">    project_info_for_group = defaultdict(list)</span>
+<span class="sd">    for group, *info in infos_of_packages_under_rootdir(rootdir):</span>
+<span class="sd">         project_info_for_group[group].append(info)</span>
+
+<span class="sd">    for group, projects in project_info_for_group.items():</span>
+<span class="sd">        print(f&quot;----- {group} ---------&quot;)</span>
+<span class="sd">        for project_name, description, readme in projects:</span>
+<span class="sd">            one_line_description = description.replace(&#39;\n&#39;, &#39; &#39;)</span>
+<span class="sd">            print(f&quot;{project_name}: {one_line_description}&quot;)</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">config2py</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigReader</span>  <span class="c1"># pip install config2py</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">rootdir</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">):</span>
+        <span class="n">rootdir</span> <span class="o">+=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span>
+    <span class="n">rootdir_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rootdir</span><span class="p">)</span>
+    <span class="n">file_reader</span> <span class="o">=</span> <span class="n">FileStringReader</span><span class="p">(</span><span class="n">rootdir</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">setup_path</span> <span class="ow">in</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;setup.cfg&quot;</span><span class="p">),</span> <span class="n">file_reader</span><span class="p">):</span>
+        <span class="n">readme_path</span> <span class="o">=</span> <span class="n">readme_path_for_setup_path</span><span class="p">(</span><span class="n">setup_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">readme_path</span> <span class="ow">in</span> <span class="n">file_reader</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">project_relpath</span> <span class="o">=</span> <span class="n">setup_path</span><span class="p">[</span><span class="n">rootdir_len</span> <span class="p">:</span> <span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="s2">&quot;setup.cfg&quot;</span><span class="p">)]</span>
+                <span class="o">*</span><span class="n">rel_path</span><span class="p">,</span> <span class="n">project_name</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">project_relpath</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
+                <span class="n">description</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">(</span><span class="n">setup_path</span><span class="p">)[</span><span class="s2">&quot;metadata&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="n">readme</span> <span class="o">=</span> <span class="n">file_reader</span><span class="p">[</span><span class="n">readme_path</span><span class="p">]</span>
+                <span class="k">yield</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rel_path</span><span class="p">),</span> <span class="n">project_name</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">readme</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Skipping </span><span class="si">{</span><span class="n">setup_path</span><span class="si">}</span><span class="s2"> because of error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

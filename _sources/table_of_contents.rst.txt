@@ -1,0 +1,20 @@
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   module_docs/tec
+   module_docs/tec/dependencies
+   module_docs/tec/doctest_utils
+   module_docs/tec/findimports
+   module_docs/tec/import_counting
+   module_docs/tec/misc
+   module_docs/tec/misc/manage_pth_file
+   module_docs/tec/modules
+   module_docs/tec/packages
+   module_docs/tec/peek
+   module_docs/tec/pip_packaging
+   module_docs/tec/pip_requirements
+   module_docs/tec/pkg_code
+   module_docs/tec/snake_food_import_counting
+   module_docs/tec/stores
+   module_docs/tec/util

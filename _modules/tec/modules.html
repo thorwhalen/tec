@@ -1,0 +1,537 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tec.modules &mdash; tec 0.0.17 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=63b572e7"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            tec
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec.html">tec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/dependencies.html">tec.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/doctest_utils.html">tec.doctest_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/findimports.html">tec.findimports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/import_counting.html">tec.import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/misc.html">tec.misc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/misc/manage_pth_file.html">tec.misc.manage_pth_file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/modules.html">tec.modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/packages.html">tec.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/peek.html">tec.peek</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/pip_packaging.html">tec.pip_packaging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/pip_requirements.html">tec.pip_requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/pkg_code.html">tec.pkg_code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/snake_food_import_counting.html">tec.snake_food_import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/stores.html">tec.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/util.html">tec.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">tec</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tec.modules</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tec.modules</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Tools to explore modules</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">importlib.util</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">importlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">import_module</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ast</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">site</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">types</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModuleType</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dol</span><span class="w"> </span><span class="kn">import</span> <span class="n">wrap_kvs</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tec.stores</span><span class="w"> </span><span class="kn">import</span> <span class="n">PyFilesReader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tec.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">resolve_to_folder</span>
+
+<span class="n">path_sep</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">py_path_to_dot_path</span><span class="p">(</span><span class="n">py_path</span><span class="p">,</span> <span class="n">root_module_str</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">py_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">root_module_str</span><span class="p">,</span> <span class="n">py_path</span><span class="p">[:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">path_sep</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">))</span>
+    <span class="p">)</span>  <span class="c1"># 3 == len(&#39;.py&#39;)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">dot_path_to_py_path</span><span class="p">(</span><span class="n">dot_path</span><span class="p">,</span> <span class="n">root_module_str</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="n">dot_path</span> <span class="o">=</span> <span class="n">dot_path</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">root_module_str</span><span class="p">)</span> <span class="p">:]</span>
+    <span class="k">if</span> <span class="n">dot_path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">):</span>
+        <span class="n">dot_path</span> <span class="o">=</span> <span class="n">dot_path</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="n">dot_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">path_sep</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.py&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_py_path_to_dot_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">py_path</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">py_path_to_dot_path</span><span class="p">(</span><span class="n">py_path</span><span class="p">,</span> <span class="n">root_module_str</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_module_str</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_dot_path_to_py_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dot_path</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">dot_path_to_py_path</span><span class="p">(</span><span class="n">dot_path</span><span class="p">,</span> <span class="n">root_module_str</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_module_str</span><span class="p">)</span>
+
+
+<span class="nd">@wrap_kvs</span><span class="p">(</span><span class="n">key_of_id</span><span class="o">=</span><span class="n">_py_path_to_dot_path</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ModulesReader</span><span class="p">(</span><span class="n">PyFilesReader</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module_src</span><span class="p">,</span> <span class="n">root_module_str</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">module_src</span> <span class="o">=</span> <span class="n">module_src</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">module_src</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">module_src</span><span class="p">):</span>
+            <span class="n">root_module_str</span> <span class="o">=</span> <span class="n">root_module_str</span> <span class="ow">or</span> <span class="n">module_src</span>
+            <span class="n">module_src</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="n">module_src</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">module_src</span><span class="p">,</span> <span class="n">ModuleType</span><span class="p">):</span>
+            <span class="n">root_module_str</span> <span class="o">=</span> <span class="n">root_module_str</span> <span class="ow">or</span> <span class="n">module_src</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="n">module_src</span> <span class="o">=</span> <span class="n">resolve_to_folder</span><span class="p">(</span><span class="n">module_src</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_module_str</span> <span class="o">=</span> <span class="n">root_module_str</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">module_src</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">import_module</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ModuleAllAttrsReader">
+<a class="viewcode-back" href="../../module_docs/tec/modules.html#tec.modules.ModuleAllAttrsReader">[docs]</a>
+<span class="nd">@wrap_kvs</span><span class="p">(</span><span class="n">obj_of_data</span><span class="o">=</span><span class="k">lambda</span> <span class="n">obj</span><span class="p">:</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">obj</span><span class="p">)})</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ModuleAllAttrsReader</span><span class="p">(</span><span class="n">ModulesReader</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Keys are module strings and values are {attr_name: attr_obj,...} dicts of the attributes of the module&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="ModuleAttrsReader">
+<a class="viewcode-back" href="../../module_docs/tec/modules.html#tec.modules.ModuleAttrsReader">[docs]</a>
+<span class="nd">@wrap_kvs</span><span class="p">(</span>
+    <span class="n">obj_of_data</span><span class="o">=</span><span class="k">lambda</span> <span class="n">obj</span><span class="p">:</span> <span class="p">{</span>
+        <span class="n">k</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ModuleAttrsReader</span><span class="p">(</span><span class="n">ModulesReader</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Like ModuleAllAttrsReader but will only give you attributes whose names don&#39;t start with an underscore.&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="ModulesReader">
+<a class="viewcode-back" href="../../module_docs/tec/modules.html#tec.modules.ModulesReader">[docs]</a>
+<span class="nd">@wrap_kvs</span><span class="p">(</span><span class="n">key_of_id</span><span class="o">=</span><span class="n">_py_path_to_dot_path</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ModulesReader</span><span class="p">(</span><span class="n">PyFilesReader</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module_src</span><span class="p">,</span> <span class="n">root_module_str</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">module_src</span> <span class="o">=</span> <span class="n">module_src</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">module_src</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">module_src</span><span class="p">):</span>
+            <span class="n">root_module_str</span> <span class="o">=</span> <span class="n">root_module_str</span> <span class="ow">or</span> <span class="n">module_src</span>
+            <span class="n">module_src</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="n">module_src</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">module_src</span><span class="p">,</span> <span class="n">ModuleType</span><span class="p">):</span>
+            <span class="n">root_module_str</span> <span class="o">=</span> <span class="n">root_module_str</span> <span class="ow">or</span> <span class="n">module_src</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="n">module_src</span> <span class="o">=</span> <span class="n">resolve_to_folder</span><span class="p">(</span><span class="n">module_src</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_module_str</span> <span class="o">=</span> <span class="n">root_module_str</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">module_src</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">import_module</span><span class="p">(</span><span class="n">k</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="is_from_module">
+<a class="viewcode-back" href="../../module_docs/tec/modules.html#tec.modules.is_from_module">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_from_module</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if an object &quot;belongs&quot; to a module.</span>
+
+<span class="sd">    &gt;&gt;&gt; import collections</span>
+<span class="sd">    &gt;&gt;&gt; is_from_module(collections.ChainMap, collections)</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; is_from_module(is_from_module, collections)</span>
+<span class="sd">    False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;__module__&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="second_party_names">
+<a class="viewcode-back" href="../../module_docs/tec/modules.html#tec.modules.second_party_names">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">second_party_names</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">obj_filt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generator of module attribute names that point to object the module actually defines.</span>
+
+<span class="sd">    :param module: Module (object)</span>
+<span class="sd">    :param obj_filt: Boolean function applied to object to filter it in</span>
+<span class="sd">    :return:</span>
+
+<span class="sd">    &gt;&gt;&gt; from tec import modules</span>
+<span class="sd">    &gt;&gt;&gt; sorted(second_party_names(modules))[:5]</span>
+<span class="sd">    [&#39;DOTPATH&#39;, &#39;FILEPATH&#39;, &#39;FOLDERPATH&#39;, &#39;LOADED&#39;, &#39;ModuleAllAttrsReader&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; sorted(second_party_names(modules, callable))[:4]</span>
+<span class="sd">    [&#39;ModuleAllAttrsReader&#39;, &#39;ModuleAttrsReader&#39;, &#39;ModuleSpecKind&#39;, &#39;ModulesReader&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; sorted(second_party_names(modules, lambda obj: isinstance(obj, type)))</span>
+<span class="sd">    [&#39;ModuleAllAttrsReader&#39;, &#39;ModuleAttrsReader&#39;, &#39;ModuleSpecKind&#39;, &#39;ModulesReader&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">obj_filt</span> <span class="o">=</span> <span class="n">obj_filt</span> <span class="ow">or</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="ow">not</span> <span class="n">a</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">),</span> <span class="nb">dir</span><span class="p">(</span><span class="n">module</span><span class="p">)):</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">is_from_module</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">module</span><span class="p">)</span> <span class="ow">and</span> <span class="n">obj_filt</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="n">attr</span></div>
+
+
+
+<div class="viewcode-block" id="ModuleSpecKind">
+<a class="viewcode-back" href="../../module_docs/tec/modules.html#tec.modules.ModuleSpecKind">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ModuleSpecKind</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">LOADED</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># a loaded import object</span>
+    <span class="n">DOTPATH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="mi">2</span>  <span class="c1"># a dot-separated string path to the module (e.g. sklearn.decomposition.pca</span>
+    <span class="p">)</span>
+    <span class="n">PATH</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># a list-like of the names of the path to the module (e.g. (&#39;sklearn&#39;, &#39;decomposition&#39;, &#39;pca&#39;)</span>
+    <span class="n">FILEPATH</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># path to the .py of the module</span>
+    <span class="n">FOLDERPATH</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># path to the folder containing the __init__.py of the module</span></div>
+
+
+
+<span class="n">LOADED</span><span class="p">,</span> <span class="n">DOTPATH</span><span class="p">,</span> <span class="n">PATH</span><span class="p">,</span> <span class="n">FILEPATH</span><span class="p">,</span> <span class="n">FOLDERPATH</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">ModuleSpecKind</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span>
+    <span class="p">[</span><span class="s2">&quot;LOADED&quot;</span><span class="p">,</span> <span class="s2">&quot;DOTPATH&quot;</span><span class="p">,</span> <span class="s2">&quot;PATH&quot;</span><span class="p">,</span> <span class="s2">&quot;FILEPATH&quot;</span><span class="p">,</span> <span class="s2">&quot;FOLDERPATH&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="is_module_dotpath">
+<a class="viewcode-back" href="../../module_docs/tec/modules.html#tec.modules.is_module_dotpath">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_module_dotpath</span><span class="p">(</span><span class="n">dotpath</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Checks if a dotpath points to a module.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">spec</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">find_spec</span><span class="p">(</span><span class="n">dotpath</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">spec</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">module_spec_kind</span><span class="p">(</span><span class="n">module_spec</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismodule</span><span class="p">(</span><span class="n">module_spec</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">LOADED</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">module_spec</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">is_module_dotpath</span><span class="p">(</span><span class="n">module_spec</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">DOTPATH</span>
+        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">module_spec</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">FILEPATH</span>
+        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">module_spec</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">module_spec</span><span class="p">,</span> <span class="s2">&quot;__init__.py&quot;</span><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="k">return</span> <span class="n">FOLDERPATH</span>
+    <span class="c1"># if you got so far and no match was found...</span>
+    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Couldn&#39;t figure out the module specification kind: </span><span class="si">{</span><span class="n">module_spec</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="n">loaded_module_from_dotpath</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span>
+
+
+<div class="viewcode-block" id="loaded_module_from_dotpath_and_filepath">
+<a class="viewcode-back" href="../../module_docs/tec/modules.html#tec.modules.loaded_module_from_dotpath_and_filepath">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">loaded_module_from_dotpath_and_filepath</span><span class="p">(</span><span class="n">dotpath</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get module object from file path and module dotpath&quot;&quot;&quot;</span>
+    <span class="n">module_spec</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">spec_from_file_location</span><span class="p">(</span><span class="n">dotpath</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">module_from_spec</span><span class="p">(</span><span class="n">module_spec</span><span class="p">)</span>
+    <span class="n">module_spec</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">exec_module</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">module</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">module_path</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_module_path</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">__path__</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">_module_path</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getfile</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">_module_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;__init__.py&quot;</span><span class="p">):</span>
+            <span class="n">_module_path</span> <span class="o">=</span> <span class="n">module_path</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="s2">&quot;__init__.py&quot;</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">_module_path</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">submodules</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">on_error</span><span class="o">=</span><span class="s2">&quot;print&quot;</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">dol.filesys</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileCollection</span>
+
+    <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="ow">or</span> <span class="n">site</span><span class="o">.</span><span class="n">getsitepackages</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">_module_path</span> <span class="o">=</span> <span class="n">module_path</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">_module_path</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Should be a directory: </span><span class="si">{</span><span class="n">module_path</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">for</span> <span class="n">filepath</span> <span class="ow">in</span> <span class="n">FileCollection</span><span class="p">(</span><span class="n">_module_path</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{f}</span><span class="s2">.py&quot;</span><span class="p">,</span> <span class="n">max_levels</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">dotpath</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">filepath</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span> <span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">))]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">dotpath</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">):</span>
+            <span class="n">dotpath</span> <span class="o">=</span> <span class="n">dotpath</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">dotpath</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;__init__&quot;</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">loaded_module_from_dotpath_and_filepath</span><span class="p">(</span><span class="n">dotpath</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">on_error</span> <span class="o">==</span> <span class="s2">&quot;print&quot;</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">dotpath</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">on_error</span> <span class="o">==</span> <span class="s2">&quot;raise&quot;</span><span class="p">:</span>
+                    <span class="k">raise</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">objects_of_module</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">max_levels</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">a</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">module_path</span><span class="p">(</span><span class="n">module</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">max_levels</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">submodule</span> <span class="ow">in</span> <span class="n">submodules</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
+                <span class="k">yield from</span> <span class="n">objects_of_module</span><span class="p">(</span><span class="n">submodule</span><span class="p">,</span> <span class="n">max_levels</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">obj_to_dotpath</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">obj</span><span class="o">.</span><span class="vm">__module__</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">obj</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">finding_objects_of_module_with_given_methods</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">method_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_levels</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">module_dotpath</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="vm">__name__</span>
+
+    <span class="n">objects</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">obj_to_dotpath</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span> <span class="n">obj</span>
+        <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="nb">filter</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">o</span><span class="p">:</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="ow">and</span> <span class="n">o</span><span class="o">.</span><span class="vm">__module__</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">module_dotpath</span><span class="p">),</span>
+            <span class="n">objects_of_module</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">max_levels</span><span class="p">),</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">method_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">objects</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">method_names</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">method_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">method_names</span><span class="p">]</span>
+        <span class="n">method_names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">method_names</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">dotpath</span><span class="p">:</span> <span class="n">obj</span>
+            <span class="k">for</span> <span class="n">dotpath</span><span class="p">,</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">objects</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">method_names</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span>
+        <span class="p">}</span>
+
+
+<span class="c1"># TODO: Can do a lot more with this (or such) a function:</span>
+<span class="c1">#  For example, try to return the dotpath that would ACTUALLY correspond to the filepath, given the sys.path</span>
+<div class="viewcode-block" id="filepath_to_dotpath">
+<a class="viewcode-back" href="../../module_docs/tec/modules.html#tec.modules.filepath_to_dotpath">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">filepath_to_dotpath</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">pkg_paths</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Figures out a module dotpath from a filepath.</span>
+<span class="sd">    Checks the sys.path, removing the first common prefix if one is found,</span>
+<span class="sd">    then changes characters of the path components to make them valid identifier strings&quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+    <span class="n">non_identifier_char_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\W|^(?=\d)&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">filepath</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">):</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">filepath</span><span class="p">[:</span> <span class="p">(</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">))]</span>
+    <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">filepath</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">):</span>
+            <span class="n">filepath</span> <span class="o">=</span> <span class="n">filepath</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;__init__.py&quot;</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;You specified a directory, but the __init__.py file wasn&#39;t found in </span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">pkg_paths</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">pkg_paths</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span>  <span class="c1"># FIXME: TODO: This actually doesn&#39;t work as expected</span>
+
+    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">pkg_paths</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">filepath</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="n">filepath</span> <span class="o">=</span> <span class="n">filepath</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="p">:]</span>
+            <span class="k">break</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+        <span class="n">dotpath</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">non_identifier_char_pattern</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">filepath</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">dotpath</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">):</span>
+            <span class="n">dotpath</span> <span class="o">=</span> <span class="n">dotpath</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="n">dotpath</span></div>
+
+
+
+<div class="viewcode-block" id="loaded_module_from_filepath">
+<a class="viewcode-back" href="../../module_docs/tec/modules.html#tec.modules.loaded_module_from_filepath">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">loaded_module_from_filepath</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">pkg_paths</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get module object from file path (resolving the dotpath automatically)&quot;&quot;&quot;</span>
+
+    <span class="n">dotpath</span> <span class="o">=</span> <span class="n">filepath_to_dotpath</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">pkg_paths</span><span class="p">)</span>
+    <span class="n">module_spec</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">spec_from_file_location</span><span class="p">(</span><span class="n">dotpath</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">module_from_spec</span><span class="p">(</span><span class="n">module_spec</span><span class="p">)</span>
+    <span class="n">module_spec</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">exec_module</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">module</span></div>
+
+
+
+<span class="c1"># FOLDERPATH-&gt;FILEPATH ?-&gt;? PATH-&gt;DOTPATH-&gt;LOADED</span>
+
+<span class="c1"># TODO: Complete list</span>
+<span class="n">coercion_func</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">FOLDERPATH</span><span class="p">:</span> <span class="p">{</span><span class="n">FILEPATH</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;__init__.py&quot;</span><span class="p">)},</span>
+    <span class="c1"># TODO: How do we do FILEPATH to PATH or DOTPATH? With sys.path?</span>
+    <span class="n">PATH</span><span class="p">:</span> <span class="p">{</span>
+        <span class="n">DOTPATH</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+    <span class="p">},</span>
+    <span class="n">DOTPATH</span><span class="p">:</span> <span class="p">{</span><span class="n">LOADED</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">x</span><span class="p">)},</span>
+<span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">coerce_module_spec</span><span class="p">(</span>
+    <span class="n">module_spec</span><span class="p">,</span>
+    <span class="n">target</span><span class="p">:</span> <span class="n">ModuleSpecKind</span> <span class="o">=</span> <span class="n">ModuleSpecKind</span><span class="o">.</span><span class="n">DOTPATH</span><span class="p">,</span>
+    <span class="n">source_kind</span><span class="p">:</span> <span class="n">ModuleSpecKind</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Not finished&quot;</span><span class="p">)</span>
+    <span class="n">source_kind</span> <span class="o">=</span> <span class="n">source_kind</span> <span class="ow">or</span> <span class="n">module_spec_kind</span><span class="p">(</span><span class="n">module_spec</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">source_kind</span> <span class="o">==</span> <span class="n">ModuleSpecKind</span><span class="o">.</span><span class="n">FOLDERPATH</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">target</span> <span class="o">==</span> <span class="n">ModuleSpecKind</span><span class="o">.</span><span class="n">FILEPATH</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">module_spec</span><span class="p">,</span> <span class="s2">&quot;__init__.py&quot;</span><span class="p">)</span>
+        <span class="n">module_spec</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">module_spec</span><span class="p">,</span> <span class="s2">&quot;__init__.py&quot;</span><span class="p">)</span>
+        <span class="n">source_kind</span> <span class="o">=</span> <span class="n">ModuleSpecKind</span><span class="o">.</span><span class="n">FILEPATH</span>
+    <span class="k">if</span> <span class="n">source_kind</span> <span class="o">==</span> <span class="n">ModuleSpecKind</span><span class="o">.</span><span class="n">FILEPATH</span><span class="p">:</span>
+        <span class="n">module_spec</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">module_spec</span><span class="p">,</span> <span class="s2">&quot;__init__.py&quot;</span><span class="p">)</span>
+        <span class="n">source_kind</span> <span class="o">=</span> <span class="n">ModuleSpecKind</span><span class="o">.</span><span class="n">FILEPATH</span>
+    <span class="k">return</span> <span class="n">module_spec</span><span class="p">,</span> <span class="n">source_kind</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_imported_module_paths</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">recursive_levels</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismodule</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
+        <span class="n">module</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="vm">__file__</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">module</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">module</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">ast</span><span class="o">.</span><span class="n">iter_child_nodes</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">ast</span><span class="o">.</span><span class="n">Import</span><span class="p">):</span>
+            <span class="n">imported_module</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">ast</span><span class="o">.</span><span class="n">ImportFrom</span><span class="p">):</span>
+            <span class="n">imported_module</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
+            <span class="n">dotpath</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">imported_module</span> <span class="o">+</span> <span class="n">n</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">is_module_dotpath</span><span class="p">(</span><span class="n">dotpath</span><span class="p">):</span>
+                <span class="k">yield</span> <span class="n">dotpath</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dotpath</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">imported_module</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">is_module_dotpath</span><span class="p">(</span><span class="n">dotpath</span><span class="p">):</span>
+                    <span class="k">yield</span> <span class="n">dotpath</span>
+
+        <span class="k">if</span> <span class="n">recursive_levels</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">yield from</span> <span class="n">get_imported_module_paths</span>
+
+
+<span class="c1">#</span>
+<span class="c1"># @dataclass</span>
+<span class="c1"># class Import:</span>
+<span class="c1">#     module_path: list</span>
+<span class="c1">#     name: list</span>
+<span class="c1">#     kind: str</span>
+<span class="c1">#     alias: str = None</span>
+<span class="c1">#</span>
+<span class="c1">#     @classmethod</span>
+<span class="c1">#     def from_ast_node(cls, node):</span>
+<span class="c1">#         if isinstance(node, ast.Import):</span>
+<span class="c1">#             module = []</span>
+<span class="c1">#         elif isinstance(node, ast.ImportFrom):</span>
+<span class="c1">#             module = node.module.split(&#39;.&#39;)</span>
+<span class="c1">#         else:</span>
+<span class="c1">#             return None</span>
+<span class="c1">#</span>
+<span class="c1">#     @property</span>
+<span class="c1">#     def module_dotpath(self):</span>
+<span class="c1">#         return &#39;.&#39;.join(self.module_path)</span>
+<span class="c1">#</span>
+<span class="c1">#     @property</span>
+<span class="c1">#     def module_obj(self):</span>
+<span class="c1">#         return importlib.import_module(self.module_dotpath)</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1"># Import = namedtuple(&quot;Import&quot;, [&quot;module&quot;, &quot;name&quot;, &quot;alias&quot;, &quot;kind&quot;])</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

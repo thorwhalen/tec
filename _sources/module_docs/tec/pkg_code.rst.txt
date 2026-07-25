@@ -1,0 +1,4 @@
+tec.pkg_code
+============
+.. automodule:: tec.pkg_code
+   :members:

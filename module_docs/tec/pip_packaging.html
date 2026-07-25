@@ -1,0 +1,244 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tec.pip_packaging &mdash; tec 0.0.17 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=63b572e7"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="tec.pip_requirements" href="pip_requirements.html" />
+    <link rel="prev" title="tec.peek" href="peek.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            tec
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tec.html">tec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependencies.html">tec.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctest_utils.html">tec.doctest_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="findimports.html">tec.findimports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="import_counting.html">tec.import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">tec.misc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc/manage_pth_file.html">tec.misc.manage_pth_file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">tec.modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">tec.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="peek.html">tec.peek</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">tec.pip_packaging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tec.pip_packaging.PartialFormatter"><code class="docutils literal notranslate"><span class="pre">PartialFormatter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.pip_packaging.create_github_repo"><code class="docutils literal notranslate"><span class="pre">create_github_repo()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.pip_packaging.format_str_vals_of_dict"><code class="docutils literal notranslate"><span class="pre">format_str_vals_of_dict()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.pip_packaging.get_last_pypi_version_number"><code class="docutils literal notranslate"><span class="pre">get_last_pypi_version_number()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.pip_packaging.ujoin"><code class="docutils literal notranslate"><span class="pre">ujoin()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pip_requirements.html">tec.pip_requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pkg_code.html">tec.pkg_code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snake_food_import_counting.html">tec.snake_food_import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stores.html">tec.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util.html">tec.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">tec</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">tec.pip_packaging</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/module_docs/tec/pip_packaging.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-tec.pip_packaging">
+<span id="tec-pip-packaging"></span><h1>tec.pip_packaging<a class="headerlink" href="#module-tec.pip_packaging" title="Link to this heading"></a></h1>
+<p>Tools for pip packaging: create GitHub repos, look up PyPI versions, and
+format packaging-related strings.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="tec.pip_packaging.PartialFormatter">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">tec.pip_packaging.</span></span><span class="sig-name descname"><span class="pre">PartialFormatter</span></span><a class="reference internal" href="../../_modules/tec/pip_packaging.html#PartialFormatter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.pip_packaging.PartialFormatter" title="Link to this definition"></a></dt>
+<dd><p>A string formatter that won’t complain if the fields are only partially formatted.
+But note that you will lose the spec part of your template (e.g. in {foo:1.2f}, you’ll loose the 1.2f
+if not foo is given – but {foo} will remain).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.pip_packaging.create_github_repo">
+<span class="sig-prename descclassname"><span class="pre">tec.pip_packaging.</span></span><span class="sig-name descname"><span class="pre">create_github_repo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">login_or_token</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/pip_packaging.html#create_github_repo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.pip_packaging.create_github_repo" title="Link to this definition"></a></dt>
+<dd><p>Create a new github repository</p>
+<p>Note: Requires github (pip install github)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.pip_packaging.format_str_vals_of_dict">
+<span class="sig-prename descclassname"><span class="pre">tec.pip_packaging.</span></span><span class="sig-name descname"><span class="pre">format_str_vals_of_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_formatting_loops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/pip_packaging.html#format_str_vals_of_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.pip_packaging.format_str_vals_of_dict" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong></p></li>
+<li><p><strong>max_formatting_loops</strong></p></li>
+<li><p><strong>kwargs</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s1">&#39;filepath&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">{root}</span><span class="s1">/</span><span class="si">{file}</span><span class="s1">.</span><span class="si">{ext}</span><span class="s1">&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;ext&#39;</span><span class="p">:</span> <span class="s1">&#39;txt&#39;</span>
+<span class="gp">... </span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">format_str_vals_of_dict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="s1">&#39;ROOT&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s1">&#39;FILE&#39;</span><span class="p">)</span>
+<span class="go">{&#39;filepath&#39;: &#39;ROOT/FILE.txt&#39;, &#39;ext&#39;: &#39;txt&#39;}</span>
+</pre></div>
+</div>
+<p>Note that if the input mapping <cite>d</cite> and the kwargs have a conflict, the mapping version is used!</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">format_str_vals_of_dict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="s1">&#39;ROOT&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s1">&#39;FILE&#39;</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s1">&#39;will_not_be_used&#39;</span><span class="p">)</span>
+<span class="go">{&#39;filepath&#39;: &#39;ROOT/FILE.txt&#39;, &#39;ext&#39;: &#39;txt&#39;}</span>
+</pre></div>
+</div>
+<p>But if you want to override an input mapping, you can – the usual way:
+&gt;&gt;&gt; format_str_vals_of_dict(dict(d, ext=’will_be_used’), root=’ROOT’, file=’FILE’)
+{‘filepath’: ‘ROOT/FILE.will_be_used’, ‘ext’: ‘will_be_used’}</p>
+<p>If you don’t provide enough fields to satisfy all the format fields in the values of <cite>d</cite>,
+you’ll be told to bugger off.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">format_str_vals_of_dict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="s1">&#39;ROOT&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">I won&#39;t be able to complete that. You&#39;ll need to provide the values for:</span>
+<span class="x">  file</span>
+</pre></div>
+</div>
+<p>And it’s recursive…
+&gt;&gt;&gt; d = {
+…     ‘filepath’: ‘{root}/{filename}’,
+…     ‘filename’: ‘{file}.{ext}’
+… }
+&gt;&gt;&gt; my_configs = {‘root’: ‘ROOT’, ‘file’: ‘FILE’, ‘ext’: ‘EXT’}
+&gt;&gt;&gt; format_str_vals_of_dict(d, <a href="#id1"><span class="problematic" id="id2">**</span></a>my_configs)
+{‘filepath’: ‘ROOT/FILE.EXT’, ‘filename’: ‘FILE.EXT’}</p>
+<p># TODO: Could make the above work if filename is give, but not file nor ext! At least as an option.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.pip_packaging.get_last_pypi_version_number">
+<span class="sig-prename descclassname"><span class="pre">tec.pip_packaging.</span></span><span class="sig-name descname"><span class="pre">get_last_pypi_version_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url_template</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'https://pypi.python.org/pypi/{package}/json'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/tec/pip_packaging.html#get_last_pypi_version_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.pip_packaging.get_last_pypi_version_number" title="Link to this definition"></a></dt>
+<dd><p>Return version of package on pypi.python.org using json.</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">&gt;</span> <span class="pre">get_version('tec')</span>
+<span class="pre">'0.0.7'</span>
+<span class="pre">`</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>package</strong> – Name of the package</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A version (string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.pip_packaging.ujoin">
+<span class="sig-prename descclassname"><span class="pre">tec.pip_packaging.</span></span><span class="sig-name descname"><span class="pre">ujoin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/pip_packaging.html#ujoin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.pip_packaging.ujoin" title="Link to this definition"></a></dt>
+<dd><p>Join strings with the url seperator (/).</p>
+<p>Note that will add a / where it’s missing (as in between ‘<a class="reference external" href="https://pypi.org">https://pypi.org</a>’ and ‘project/’),
+and only use one if two consecutive tokens use respectively end and start with a /
+(as in ‘project/’ and ‘/pipoke/’).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ujoin</span><span class="p">(</span><span class="s1">&#39;https://pypi.org&#39;</span><span class="p">,</span> <span class="s1">&#39;project/&#39;</span><span class="p">,</span> <span class="s1">&#39;/pipoke/&#39;</span><span class="p">)</span>
+<span class="go">&#39;https://pypi.org/project/pipoke/&#39;</span>
+</pre></div>
+</div>
+<p>Extremal cases
+&gt;&gt;&gt; ujoin(’<a class="reference external" href="https://pypi.org">https://pypi.org</a>’)
+‘<a class="reference external" href="https://pypi.org">https://pypi.org</a>’
+&gt;&gt;&gt; ujoin(’<a class="reference external" href="https://pypi.org/">https://pypi.org/</a>’)
+‘<a class="reference external" href="https://pypi.org/">https://pypi.org/</a>’
+&gt;&gt;&gt; ujoin(‘’)
+‘’
+&gt;&gt;&gt; ujoin()
+‘’</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="peek.html" class="btn btn-neutral float-left" title="tec.peek" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pip_requirements.html" class="btn btn-neutral float-right" title="tec.pip_requirements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

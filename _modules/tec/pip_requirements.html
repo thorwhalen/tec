@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tec.pip_requirements &mdash; tec 0.0.17 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=63b572e7"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            tec
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec.html">tec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/dependencies.html">tec.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/doctest_utils.html">tec.doctest_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/findimports.html">tec.findimports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/import_counting.html">tec.import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/misc.html">tec.misc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/misc/manage_pth_file.html">tec.misc.manage_pth_file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/modules.html">tec.modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/packages.html">tec.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/peek.html">tec.peek</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/pip_packaging.html">tec.pip_packaging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/pip_requirements.html">tec.pip_requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/pkg_code.html">tec.pkg_code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/snake_food_import_counting.html">tec.snake_food_import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/stores.html">tec.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/util.html">tec.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">tec</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tec.pip_requirements</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tec.pip_requirements</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Tools to read and analyze pip requirements files as tabular data.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">array</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">warnings</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn</span>
+
+
+<div class="viewcode-block" id="file_to_string">
+<a class="viewcode-back" href="../../module_docs/tec/pip_requirements.html#tec.pip_requirements.file_to_string">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">file_to_string</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    returns the string contents of a pfile</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span> <span class="k">as</span> <span class="n">fid</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">fid</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">s</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">requirement_file_to_df</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">file_to_string</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="n">xx</span> <span class="k">for</span> <span class="n">xx</span> <span class="ow">in</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;==&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([{</span><span class="s1">&#39;pkg&#39;</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]}</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">t</span><span class="p">])</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">requirements_comparison_df_only_when_different</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">requirements_comparison_df</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;version_x&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;version_y&#39;</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="n">c</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">requirements_comparison_df</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">):</span>
+    <span class="n">r1</span> <span class="o">=</span> <span class="n">requirement_file_to_df</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">)</span>
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">requirement_file_to_df</span><span class="p">(</span><span class="n">requirements_filepath_2</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">r1</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">r2</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;pkg&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">c</span>
+
+
+<span class="n">str_to_num_key</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mf">1e12</span><span class="p">,</span> <span class="mf">1e6</span><span class="p">,</span> <span class="mf">1e3</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">version_str_to_num</span><span class="p">(</span><span class="n">version_str</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">version_str</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">version_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)):</span>
+                <span class="n">num</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="n">str_to_num_key</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">num</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">requirements_comparison_objects</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">requirements_comparison_df_only_when_different</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">)</span>
+
+    <span class="n">c</span><span class="p">,</span> <span class="n">missing_1</span><span class="p">,</span> <span class="n">missing_2</span> <span class="o">=</span> <span class="n">rm_empty_version_entries</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+    <span class="n">v1_num</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="n">v2_num</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">version_str_to_num</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;version_x&#39;</span><span class="p">])</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">version_str_to_num</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;version_y&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">v1</span> <span class="ow">and</span> <span class="n">v2</span><span class="p">:</span>
+            <span class="n">v1_num</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
+            <span class="n">v2_num</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;!!! Couldn&#39;t get the version NUMBER for </span><span class="si">{</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">v1_num</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="n">v1_num</span><span class="p">)</span>
+    <span class="n">v2_num</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="n">v2_num</span><span class="p">)</span>
+
+    <span class="n">v1_greater_than_v2_df</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">v1_num</span> <span class="o">&gt;</span> <span class="n">v2_num</span><span class="p">]</span>
+    <span class="n">v2_greater_than_v1_df</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">v2_num</span> <span class="o">&gt;</span> <span class="n">v1_num</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">missing_1</span><span class="p">,</span> <span class="n">missing_2</span><span class="p">,</span> <span class="n">v1_greater_than_v2_df</span><span class="p">,</span> <span class="n">v2_greater_than_v1_df</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rm_empty_version_entries</span><span class="p">(</span><span class="n">comp_df</span><span class="p">):</span>
+    <span class="n">lidx</span> <span class="o">=</span> <span class="n">comp_df</span><span class="p">[</span><span class="s1">&#39;version_x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
+    <span class="n">missing_1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">comp_df</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">lidx</span><span class="p">,</span> <span class="s1">&#39;pkg&#39;</span><span class="p">])</span>
+    <span class="n">comp_df</span> <span class="o">=</span> <span class="n">comp_df</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="o">~</span><span class="n">lidx</span><span class="p">]</span>
+
+    <span class="n">lidx</span> <span class="o">=</span> <span class="n">comp_df</span><span class="p">[</span><span class="s1">&#39;version_y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
+    <span class="n">missing_2</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">comp_df</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">lidx</span><span class="p">,</span> <span class="s1">&#39;pkg&#39;</span><span class="p">])</span>
+    <span class="n">comp_df</span> <span class="o">=</span> <span class="n">comp_df</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="o">~</span><span class="n">lidx</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">comp_df</span><span class="p">,</span> <span class="n">missing_1</span><span class="p">,</span> <span class="n">missing_2</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">file_unique_identifiers</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">):</span>
+    <span class="n">root1</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">f1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">root2</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">f2</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">cand1</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">cand2</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">root1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">root2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">root1</span><span class="p">,</span> <span class="n">next1</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">root1</span><span class="p">)</span>
+        <span class="n">root2</span><span class="p">,</span> <span class="n">next2</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">root2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cand1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">cand1</span> <span class="o">=</span> <span class="n">next1</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">cand1</span>
+            <span class="n">cand2</span> <span class="o">=</span> <span class="n">next2</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">cand2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cand1</span> <span class="o">=</span> <span class="n">next1</span>
+            <span class="n">cand2</span> <span class="o">=</span> <span class="n">next2</span>
+        <span class="k">if</span> <span class="n">cand1</span> <span class="o">!=</span> <span class="n">cand2</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">cand1</span><span class="p">,</span> <span class="n">cand2</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">print_requirements_comparison</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">):</span>
+    <span class="n">missing_1</span><span class="p">,</span> <span class="n">missing_2</span><span class="p">,</span> <span class="n">v1_greater_than_v2_df</span><span class="p">,</span> <span class="n">v2_greater_than_v1_df</span> <span class="o">=</span> \
+        <span class="n">requirements_comparison_objects</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">)</span>
+
+    <span class="n">name1</span><span class="p">,</span> <span class="n">name2</span> <span class="o">=</span> <span class="n">file_unique_identifiers</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">-------- Missing in </span><span class="si">{</span><span class="n">name1</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">missing_1</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">-------- Missing in </span><span class="si">{</span><span class="n">name2</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">missing_2</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">-------- </span><span class="si">{</span><span class="n">name1</span><span class="si">}</span><span class="s2"> in advance of </span><span class="si">{</span><span class="n">name2</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">v1_greater_than_v2_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;version_x&#39;</span><span class="p">:</span> <span class="n">name1</span><span class="p">,</span> <span class="s1">&#39;version_y&#39;</span><span class="p">:</span> <span class="n">name2</span><span class="p">}))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">-------- </span><span class="si">{</span><span class="n">name2</span><span class="si">}</span><span class="s2"> in advance of </span><span class="si">{</span><span class="n">name1</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">v2_greater_than_v1_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;version_x&#39;</span><span class="p">:</span> <span class="n">name1</span><span class="p">,</span> <span class="s1">&#39;version_y&#39;</span><span class="p">:</span> <span class="n">name2</span><span class="p">}))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_requirements_to_update_second_requirements_when_behind_first</span><span class="p">(</span>
+        <span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">):</span>
+    <span class="n">missing_1</span><span class="p">,</span> <span class="n">missing_2</span><span class="p">,</span> <span class="n">v1_greater_than_v2_df</span><span class="p">,</span> <span class="n">v2_greater_than_v1_df</span> <span class="o">=</span> \
+        <span class="n">requirements_comparison_objects</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">v1_greater_than_v2_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;pkg&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;==&#39;</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;version_x&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+    <span class="k">return</span> <span class="n">s</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">updated_requirements_2_with_requirements_1_that_are_ahead</span><span class="p">(</span>
+        <span class="n">requirements_filepath_1</span><span class="p">,</span> <span class="n">requirements_filepath_2</span><span class="p">):</span>
+    <span class="n">r1</span> <span class="o">=</span> <span class="n">requirement_file_to_df</span><span class="p">(</span><span class="n">requirements_filepath_1</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;pkg&#39;</span><span class="p">)[</span><span class="s1">&#39;version&#39;</span><span class="p">]</span>
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">requirement_file_to_df</span><span class="p">(</span><span class="n">requirements_filepath_2</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;pkg&#39;</span><span class="p">)[</span><span class="s1">&#39;version&#39;</span><span class="p">]</span>
+
+    <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">pkg</span><span class="p">,</span> <span class="n">v2_str</span> <span class="ow">in</span> <span class="n">r2</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">version_str_to_num</span><span class="p">(</span><span class="n">v2_str</span><span class="p">)</span>
+        <span class="n">v1_str</span> <span class="o">=</span> <span class="n">r1</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pkg</span><span class="p">)</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">version_str_to_num</span><span class="p">(</span><span class="n">v1_str</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">v1</span> <span class="ow">and</span> <span class="n">v1</span> <span class="o">&gt;</span> <span class="n">v2</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="n">pkg</span> <span class="o">+</span> <span class="s1">&#39;==&#39;</span> <span class="o">+</span> <span class="n">v1_str</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="n">pkg</span> <span class="o">+</span> <span class="s1">&#39;==&#39;</span> <span class="o">+</span> <span class="n">v2_str</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="n">s</span>
+    <span class="c1">#</span>
+    <span class="c1">#</span>
+    <span class="c1"># comp_df = requirements_comparison_df(requirements_filepath_1, requirements_filepath_2)</span>
+    <span class="c1">#</span>
+    <span class="c1"># lidx = comp_df[&#39;version_y&#39;].isnull()</span>
+    <span class="c1"># comp_df = comp_df.ix[~lidx]</span>
+    <span class="c1">#</span>
+    <span class="c1"># s = &#39;&#39;</span>
+    <span class="c1"># for _, row in comp_df.iterrows():</span>
+    <span class="c1">#     v1 = version_str_to_num(row[&#39;version_x&#39;])</span>
+    <span class="c1">#     v2 = version_str_to_num(row[&#39;version_y&#39;])</span>
+    <span class="c1">#</span>
+    <span class="c1">#     if v2:</span>
+    <span class="c1">#         if v1 &gt; v2:</span>
+    <span class="c1">#             s += row[&#39;pkg&#39;] + &#39;==&#39; + row[&#39;version_x&#39;] + &quot;\n&quot;</span>
+    <span class="c1">#         else:</span>
+    <span class="c1">#             s += row[&#39;pkg&#39;] + &#39;==&#39; + row[&#39;version_y&#39;] + &quot;\n&quot;</span>
+    <span class="c1"># return s</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

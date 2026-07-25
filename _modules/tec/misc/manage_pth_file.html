@@ -1,0 +1,373 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tec.misc.manage_pth_file &mdash; tec 0.0.17 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=63b572e7"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            tec
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec.html">tec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/dependencies.html">tec.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/doctest_utils.html">tec.doctest_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/findimports.html">tec.findimports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/import_counting.html">tec.import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/misc.html">tec.misc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/misc/manage_pth_file.html">tec.misc.manage_pth_file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/modules.html">tec.modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/packages.html">tec.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/peek.html">tec.peek</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/pip_packaging.html">tec.pip_packaging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/pip_requirements.html">tec.pip_requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/pkg_code.html">tec.pkg_code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/snake_food_import_counting.html">tec.snake_food_import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/stores.html">tec.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/util.html">tec.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">tec</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../misc.html">tec.misc</a></li>
+      <li class="breadcrumb-item active">tec.misc.manage_pth_file</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tec.misc.manage_pth_file</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Utils to manage .pth file, which is read by environment to add paths to the python path.</span>
+
+<span class="sd">At the time of writing this, the module is self-contained, only with python builtins and dol.</span>
+
+<span class="sd">Works with 3.8+ (and perhaps lower).</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">methodcaller</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Iterable</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">site</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span><span class="p">,</span> <span class="n">lru_cache</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">chain</span>
+
+<span class="c1"># Pattern: mesh</span>
+
+<span class="n">Filepath</span> <span class="o">=</span> <span class="nb">str</span>  <span class="c1"># + os.path.isfile</span>
+<span class="n">Lines</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">,</span> <span class="n">Filepath</span><span class="p">]</span>
+
+<span class="c1"># DFLT_FILENAME_FILT = methodcaller(&#39;endswith&#39;, &#39;.pth&#39;)</span>
+<span class="n">DFLT_FILENAME_FILT</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;oto.pth&#39;</span><span class="p">,</span> <span class="s1">&#39;conda.pth&#39;</span><span class="p">,</span> <span class="s1">&#39;custom.pth&#39;</span><span class="p">}</span><span class="o">.</span><span class="fm">__contains__</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">lines_of_file</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_lines</span><span class="p">(</span><span class="n">lines</span><span class="p">:</span> <span class="n">Lines</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+            <span class="n">filepath</span> <span class="o">=</span> <span class="n">lines</span>
+            <span class="k">return</span> <span class="n">lines_of_file</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s1">&#39;;&#39;</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+            <span class="n">semicolumn_seperated_content</span> <span class="o">=</span> <span class="n">lines</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span> <span class="n">semicolumn_seperated_content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">file_content</span> <span class="o">=</span> <span class="n">lines</span>
+            <span class="k">return</span> <span class="n">file_content</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
+            <span class="n">lines</span><span class="p">,</span> <span class="n">Iterable</span>
+        <span class="p">),</span> <span class="sa">f</span><span class="s1">&#39;lines should be a filepath, file content string or iterable of lines&#39;</span>
+        <span class="k">return</span> <span class="n">lines</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">missing_items</span><span class="p">(</span><span class="n">target</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">source</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">target</span><span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">add_missing_items</span><span class="p">(</span><span class="n">target</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="o">+</span> <span class="n">missing_items</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="target_and_missing_items">
+<a class="viewcode-back" href="../../../module_docs/tec/misc/manage_pth_file.html#tec.misc.manage_pth_file.target_and_missing_items">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">target_and_missing_items</span><span class="p">(</span><span class="n">target</span><span class="p">:</span> <span class="n">Lines</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">Lines</span> <span class="o">=</span> <span class="p">()):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add source lines to target lines</span>
+<span class="sd">    &gt;&gt;&gt; target_and_missing_items([&#39;one&#39;, &#39;two&#39;, &#39;&#39;, &#39;three&#39;], [&#39;four&#39;, &#39;&#39;, &#39;five&#39;])</span>
+<span class="sd">    ([&#39;one&#39;, &#39;two&#39;, &#39;&#39;, &#39;three&#39;], [&#39;four&#39;, &#39;five&#39;])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">target</span><span class="p">,</span> <span class="n">source</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">get_lines</span><span class="p">,</span> <span class="p">[</span><span class="n">target</span><span class="p">,</span> <span class="n">source</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">target</span><span class="p">,</span> <span class="n">missing_items</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="add_missing_lines">
+<a class="viewcode-back" href="../../../module_docs/tec/misc/manage_pth_file.html#tec.misc.manage_pth_file.add_missing_lines">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_missing_lines</span><span class="p">(</span><span class="n">target</span><span class="p">:</span> <span class="n">Filepath</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">Lines</span> <span class="o">=</span> <span class="p">()):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add source lines to target lines</span>
+
+<span class="sd">    Note: ``target`` is a filepath the missing lines are appended to (the file</span>
+<span class="sd">    is written in place); the call below is illustrative only.</span>
+
+<span class="sd">    &gt;&gt;&gt; add_missing_lines([&#39;one&#39;, &#39;two&#39;, &#39;&#39;, &#39;three&#39;], [&#39;four&#39;, &#39;&#39;, &#39;five&#39;])  # doctest: +SKIP</span>
+<span class="sd">    [&#39;four&#39;, &#39;five&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">target_lines</span><span class="p">,</span> <span class="n">missing_lines</span> <span class="o">=</span> <span class="n">target_and_missing_items</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
+    <span class="n">Path</span><span class="p">(</span><span class="n">target</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">target_lines</span> <span class="o">+</span> <span class="n">missing_lines</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">missing_lines</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">first_site_packages_folder_found</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">site</span><span class="o">.</span><span class="n">getsitepackages</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_site_packages_folder</span><span class="p">(</span><span class="n">site_packages_folder</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">site_packages_folder</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">first_site_packages_folder_found</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">all_pth_file_names</span><span class="p">(</span><span class="n">site_packages_folder</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">site_packages_folder</span> <span class="o">=</span> <span class="n">site_packages_folder</span> <span class="ow">or</span> <span class="n">get_site_packages_folder</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">site_packages_folder</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">filtered_pth_file_names</span><span class="p">(</span>
+    <span class="n">site_packages_folder</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filename_filt</span><span class="o">=</span><span class="n">DFLT_FILENAME_FILT</span>
+<span class="p">):</span>
+    <span class="n">site_packages_folder</span> <span class="o">=</span> <span class="n">site_packages_folder</span> <span class="ow">or</span> <span class="n">get_site_packages_folder</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">filename_filt</span><span class="p">,</span> <span class="n">all_pth_file_names</span><span class="p">(</span><span class="n">site_packages_folder</span><span class="p">)))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">first_pth_file_found</span><span class="p">(</span><span class="n">site_packages_folder</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filename_filt</span><span class="o">=</span><span class="n">DFLT_FILENAME_FILT</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">filtered_pth_file_names</span><span class="p">(</span><span class="n">site_packages_folder</span><span class="p">,</span> <span class="n">filename_filt</span><span class="p">)))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_pth_filepath</span><span class="p">(</span>
+    <span class="n">pth_filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">site_packages_folder</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filename_filt</span><span class="o">=</span><span class="n">DFLT_FILENAME_FILT</span>
+<span class="p">):</span>
+    <span class="n">site_packages_folder</span> <span class="o">=</span> <span class="n">get_site_packages_folder</span><span class="p">(</span><span class="n">site_packages_folder</span><span class="p">)</span>
+    <span class="n">pth_filename</span> <span class="o">=</span> <span class="n">pth_filename</span> <span class="ow">or</span> <span class="n">first_pth_file_found</span><span class="p">(</span>
+        <span class="n">site_packages_folder</span><span class="p">,</span> <span class="n">filename_filt</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">site_packages_folder</span><span class="p">,</span> <span class="n">pth_filename</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">print_pth_file_contents</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">get_pth_filepath</span><span class="p">())</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span>
+
+
+<div class="viewcode-block" id="add_to_pth_file">
+<a class="viewcode-back" href="../../../module_docs/tec/misc/manage_pth_file.html#tec.misc.manage_pth_file.add_to_pth_file">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_to_pth_file</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">pth_filepath</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add some paths to the pth file (if they&#39;re not there already)</span>
+
+<span class="sd">    :param lines: A ; or newline separated string of paths, or a filepath to a file containing these (one per line).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">remove_trailing_slash</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;/&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+    <span class="n">lines</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">remove_trailing_slash</span><span class="p">,</span> <span class="n">get_lines</span><span class="p">(</span><span class="n">lines</span><span class="p">)))</span>
+    <span class="n">pth_filepath</span> <span class="o">=</span> <span class="n">pth_filepath</span> <span class="ow">or</span> <span class="n">get_pth_filepath</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">add_missing_lines</span><span class="p">(</span><span class="n">pth_filepath</span><span class="p">,</span> <span class="n">lines</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------</span>
+<span class="c1"># Look at local files</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dol</span><span class="w"> </span><span class="kn">import</span> <span class="n">filt_iter</span><span class="p">,</span> <span class="n">wrap_kvs</span><span class="p">,</span> <span class="n">Pipe</span><span class="p">,</span> <span class="n">cache_iter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dol.filesys</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileCollection</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dol.filesys</span><span class="w"> </span><span class="kn">import</span> <span class="n">DirCollection</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">tec.pkg_code</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">dir_whose_parent_has_same_name</span><span class="p">,</span>
+    <span class="n">package_root_dirs</span><span class="p">,</span>
+    <span class="n">root_dirpaths_to_packages</span><span class="p">,</span>
+    <span class="n">init_root</span><span class="p">,</span>
+    <span class="n">pkg_root</span><span class="p">,</span>
+    <span class="n">init_file_of_pkg_root</span><span class="p">,</span>
+    <span class="n">is_package_init</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># This one is slower than the one given by package_root_dirs</span>
+<span class="c1">#  since here we look through all files to only filter for the name/name/__init__.py</span>
+<span class="n">_OldPackages</span> <span class="o">=</span> <span class="n">Pipe</span><span class="p">(</span>
+    <span class="n">filt_iter</span><span class="p">(</span><span class="n">FileCollection</span><span class="p">,</span> <span class="n">filt</span><span class="o">=</span><span class="n">is_package_init</span><span class="p">),</span>
+    <span class="n">wrap_kvs</span><span class="p">(</span><span class="n">key_of_id</span><span class="o">=</span><span class="n">pkg_root</span><span class="p">,</span> <span class="n">id_of_key</span><span class="o">=</span><span class="n">init_file_of_pkg_root</span><span class="p">),</span>
+    <span class="n">cache_iter</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">add_paths_of_packages_under_rootdir</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="n">pth_filepath</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">pkg_paths</span> <span class="o">=</span> <span class="n">root_dirpaths_to_packages</span><span class="p">(</span><span class="n">rootdir</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">add_to_pth_file</span><span class="p">(</span><span class="n">pkg_paths</span><span class="p">,</span> <span class="n">pth_filepath</span><span class="p">)</span>
+
+
+<span class="c1">## TODO. Repair. Didn&#39;t work: Last git clone gave me errors (only through ps, not through terminal)</span>
+<span class="c1"># def reclone_pkg(pkg_rootdir):</span>
+<span class="c1">#     import ps</span>
+<span class="c1">#     if pkg_rootdir[-1] != os.path.sep:</span>
+<span class="c1">#         pkg_rootdir += os.path.sep</span>
+<span class="c1">#     c = f&quot;--work-tree {pkg_rootdir} --git-dir {pkg_rootdir}.git remote get-url origin&quot;</span>
+<span class="c1">#     url = ps.git(c).decode()</span>
+<span class="c1">#     print(url)</span>
+<span class="c1">#     ps.rm(f&quot;-rf {pkg_rootdir}&quot;)</span>
+<span class="c1">#     ps.git(f&quot;clone {url} {pkg_rootdir}&quot;)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">simple_run_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">strip_output</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">os</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">strip_output</span><span class="p">:</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">output</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">reclone_pkg_commands</span><span class="p">(</span><span class="n">pkg_rootdir</span><span class="p">):</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">ps</span>
+
+    <span class="k">if</span> <span class="n">pkg_rootdir</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">:</span>
+        <span class="n">pkg_rootdir</span> <span class="o">+=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">simple_run_command</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;git --work-tree </span><span class="si">{</span><span class="n">pkg_rootdir</span><span class="si">}</span><span class="s1"> --git-dir </span><span class="si">{</span><span class="n">pkg_rootdir</span><span class="si">}</span><span class="s1">.git remote get-url origin&#39;</span>
+    <span class="p">)</span>
+
+    <span class="k">yield</span> <span class="s1">&#39;echo &quot;----------------------------------------------------&quot;&#39;</span>
+    <span class="k">yield</span> <span class="sa">f</span><span class="s1">&#39;echo &quot;</span><span class="si">{</span><span class="n">pkg_rootdir</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+    <span class="k">yield</span> <span class="sa">f</span><span class="s1">&#39;rm -rf &quot;</span><span class="si">{</span><span class="n">pkg_rootdir</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+    <span class="k">yield</span> <span class="sa">f</span><span class="s1">&#39;git clone </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s1"> &quot;</span><span class="si">{</span><span class="n">pkg_rootdir</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+    <span class="k">yield</span> <span class="s1">&#39;&#39;</span>
+
+
+<div class="viewcode-block" id="mk_reclone_string">
+<a class="viewcode-back" href="../../../module_docs/tec/misc/manage_pth_file.html#tec.misc.manage_pth_file.mk_reclone_string">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">mk_reclone_string</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="n">save_in_filepath</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Makes a file with a bunch of reclone instructions.</span>
+<span class="sd">    If ``save_in_filepath`` is given, it will save to that file.</span>
+<span class="sd">    You are to then chmod 744 the file and run it.</span>
+
+<span class="sd">    :param rootdir: Directory within which to look for package folders</span>
+<span class="sd">    :param save_in_filepath: Save to this file</span>
+<span class="sd">    :param filt: Function to filter in package folder paths found in rootdir</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pkg_paths</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">filt</span><span class="p">,</span> <span class="n">root_dirpaths_to_packages</span><span class="p">(</span><span class="n">rootdir</span><span class="p">)))</span>
+    <span class="c1">#     return pkg_paths</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">reclone_pkg_commands</span><span class="p">,</span> <span class="n">pkg_paths</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="n">save_in_filepath</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="n">save_in_filepath</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">s</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">suppress</span>
+
+    <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">ModuleNotFoundError</span><span class="p">):</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">argh</span>
+
+        <span class="n">argh</span><span class="o">.</span><span class="n">dispatch_commands</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">add_to_pth_file</span><span class="p">,</span>
+                <span class="n">print_pth_file_contents</span><span class="p">,</span>
+                <span class="n">get_site_packages_folder</span><span class="p">,</span>
+                <span class="n">get_pth_filepath</span><span class="p">,</span>
+                <span class="n">root_dirpaths_to_packages</span><span class="p">,</span>
+                <span class="n">add_paths_of_packages_under_rootdir</span><span class="p">,</span>
+                <span class="n">mk_reclone_string</span><span class="p">,</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

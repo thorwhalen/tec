@@ -1,0 +1,356 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tec.util &mdash; tec 0.0.17 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=63b572e7"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="tec.stores" href="stores.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            tec
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tec.html">tec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependencies.html">tec.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctest_utils.html">tec.doctest_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="findimports.html">tec.findimports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="import_counting.html">tec.import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">tec.misc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc/manage_pth_file.html">tec.misc.manage_pth_file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">tec.modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">tec.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="peek.html">tec.peek</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pip_packaging.html">tec.pip_packaging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pip_requirements.html">tec.pip_requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pkg_code.html">tec.pkg_code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snake_food_import_counting.html">tec.snake_food_import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stores.html">tec.stores</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">tec.util</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tec.util.bitmap_selection"><code class="docutils literal notranslate"><span class="pre">bitmap_selection()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.util.find"><code class="docutils literal notranslate"><span class="pre">find()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.util.find_objects"><code class="docutils literal notranslate"><span class="pre">find_objects()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.util.func_fanout"><code class="docutils literal notranslate"><span class="pre">func_fanout()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.util.import_and_add_if_available"><code class="docutils literal notranslate"><span class="pre">import_and_add_if_available()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.util.name_and_object_pairs"><code class="docutils literal notranslate"><span class="pre">name_and_object_pairs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.util.print_signatures"><code class="docutils literal notranslate"><span class="pre">print_signatures()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.util.signature_strings"><code class="docutils literal notranslate"><span class="pre">signature_strings()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">tec</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">tec.util</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/module_docs/tec/util.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-tec.util">
+<span id="tec-util"></span><h1>tec.util<a class="headerlink" href="#module-tec.util" title="Link to this heading"></a></h1>
+<p>Builtin tec utils</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.util.bitmap_selection">
+<span class="sig-prename descclassname"><span class="pre">tec.util.</span></span><span class="sig-name descname"><span class="pre">bitmap_selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/util.html#bitmap_selection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.util.bitmap_selection" title="Link to this definition"></a></dt>
+<dd><p>Select items of an iterable with items of a selector sequence of the same size.
+The selector items should be, or resolve to, a <code class="docutils literal notranslate"><span class="pre">bool</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">bitmap_selection</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]))</span>
+<span class="go">[2, 6]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">tuple</span><span class="p">(</span><span class="n">bitmap_selection</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;blah&#39;</span><span class="p">]))</span>
+<span class="go">(0, 4)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.util.find">
+<span class="sig-prename descclassname"><span class="pre">tec.util.</span></span><span class="sig-name descname"><span class="pre">find</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">query:</span> <span class="pre">~typing.Any,</span> <span class="pre">items:</span> <span class="pre">~collections.abc.Iterable[~typing.Any],</span> <span class="pre">query_matches_item:</span> <span class="pre">~collections.abc.Callable[[~typing.Any,</span> <span class="pre">~typing.Any],</span> <span class="pre">bool]</span> <span class="pre">=</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">eq&gt;,</span> <span class="pre">query_key:</span> <span class="pre">~collections.abc.Callable[[~typing.Any],</span> <span class="pre">~typing.Any]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">identity&gt;,</span> <span class="pre">item_key:</span> <span class="pre">~collections.abc.Callable[[~typing.Any],</span> <span class="pre">~typing.Any]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">identity&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/util.html#find"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.util.find" title="Link to this definition"></a></dt>
+<dd><p>Find anything in an iterable of items, based on your query language of choice.</p>
+<p>Is limited to no query or items type. All you need to do is define what a match
+of a query and item is, through the <cite>query_matches_item</cite> function.</p>
+<p>Example use:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">items</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="s1">&#39;www.google.com&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;www.yahoo.com&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;www.harvard.edu&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;web.mit.edu&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;www.harvard.edu&#39;</span><span class="p">,</span> <span class="n">items</span><span class="p">))</span>
+<span class="go">[&#39;www.harvard.edu&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;oo&#39;</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">query_matches_item</span><span class="o">=</span><span class="k">lambda</span> <span class="n">q</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">i</span><span class="p">))</span>
+<span class="go">[&#39;www.google.com&#39;, &#39;www.yahoo.com&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;edu&#39;</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">item_key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+<span class="go">[&#39;www.harvard.edu&#39;, &#39;web.mit.edu&#39;]</span>
+</pre></div>
+</div>
+<p>Often you may want to use functools.partials to make a searcher you can reuse
+without having to specify the particulars of the search (including or not the
+items you want to search).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">finder</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">find</span><span class="p">,</span> <span class="n">items</span><span class="o">=</span><span class="n">items</span><span class="p">,</span> <span class="n">query_matches_item</span><span class="o">=</span><span class="k">lambda</span> <span class="n">q</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">i</span><span class="p">,</span>
+<span class="gp">... </span>                   <span class="n">query_key</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">item_key</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">lower</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">finder</span><span class="p">(</span><span class="s1">&#39;GOOGLE&#39;</span><span class="p">))</span>
+<span class="go">[&#39;www.google.com&#39;]</span>
+</pre></div>
+</div>
+<p>Note that the <cite>query_matches_item</cite> is sufficient.
+For example, in the above we could have done it like this:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;GOOGLE&#39;</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">q</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">q</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span>
+<span class="go">[&#39;www.google.com&#39;]</span>
+</pre></div>
+</div>
+<p>There’s never any actual need for the key functions, but they’re provided for
+convenience and reuse of general <cite>query_matches_item</cite> functions.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.util.find_objects">
+<span class="sig-prename descclassname"><span class="pre">tec.util.</span></span><span class="sig-name descname"><span class="pre">find_objects</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">pattern:</span> <span class="pre">str,</span> <span class="pre">objects:</span> <span class="pre">~typing.Any,</span> <span class="pre">objects_to_strings:</span> <span class="pre">~collections.abc.Callable[[~typing.Any],</span> <span class="pre">~collections.abc.Iterable[str]]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">_if_not_iterable_get_attributes&gt;,</span> <span class="pre">*,</span> <span class="pre">key=None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/util.html#find_objects"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.util.find_objects" title="Link to this definition"></a></dt>
+<dd><p>Find strings matching a given pattern, possibly sorting them in a specific way.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pattern</strong> – The pattern to search (string representing a regular expression).</p></li>
+<li><p><strong>objects</strong> – An iterable of strings or an object that will resolve in one.</p></li>
+<li><p><strong>objects_to_strings</strong> – The function that resolves the <code class="docutils literal notranslate"><span class="pre">objects</span></code> input
+(which is not even necessarily an iterable) into an iterable of strings.</p></li>
+<li><p><strong>key</strong> – If not None, will be used to sort matched objects.
+<code class="docutils literal notranslate"><span class="pre">key</span></code> will be applied to objects of type <code class="docutils literal notranslate"><span class="pre">re.Match</span></code>;
+see <a class="reference external" href="https://docs.python.org/3/library/re.html#match-objects">https://docs.python.org/3/library/re.html#match-objects</a> to get an idea of
+how to define the right key function.
+If <code class="docutils literal notranslate"><span class="pre">key</span></code> is an iterable (“of callables”, assumed), make an
+aggregate of these functions that will return a tuple of the sort keys.
+This is akin to sorting by one columns primarly, a second secondarily, etc.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A generator of matched strings.</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;li&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">objects</span><span class="o">=</span><span class="s1">&#39;bob and lilabet like to play with alice&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">objects_to_strings</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">split</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">find_objects</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+<span class="go">[&#39;lilabet&#39;, &#39;like&#39;, &#39;alice&#39;]</span>
+</pre></div>
+</div>
+<p>Sort the results in reverse length of string:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">find_objects</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">string</span><span class="p">)))</span>
+<span class="go">[&#39;lilabet&#39;, &#39;alice&#39;, &#39;like&#39;]</span>
+</pre></div>
+</div>
+<p>Sort the results according to how early in the string the match happens:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">methodcaller</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">find_objects</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">methodcaller</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">)))</span>
+<span class="go">[&#39;lilabet&#39;, &#39;like&#39;, &#39;alice&#39;]</span>
+</pre></div>
+</div>
+<p>The same as above, but with secondary “length” sorting:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">tuple</span><span class="p">(</span>  <span class="c1"># for a change!</span>
+<span class="gp">... </span>    <span class="n">find_objects</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="p">[</span><span class="n">methodcaller</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">string</span><span class="p">)])</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="go">(&#39;like&#39;, &#39;lilabet&#39;, &#39;alice&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.util.func_fanout">
+<span class="sig-prename descclassname"><span class="pre">tec.util.</span></span><span class="sig-name descname"><span class="pre">func_fanout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">funcs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/util.html#func_fanout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.util.func_fanout" title="Link to this definition"></a></dt>
+<dd><p>Util to make a function that applies multiple functions to a single input.
+Note that the function returns a generator that needs to be “consumed” to actually
+get the outputs of the function.</p>
+<p><code class="docutils literal notranslate"><span class="pre">func_fanout</span></code> is meant to be used with <code class="docutils literal notranslate"><span class="pre">functools.partial</span></code> to “make” the
+desired function, such as:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">func_fanout</span><span class="p">,</span> <span class="n">funcs</span><span class="o">=</span><span class="p">[</span>
+<span class="gp">... </span>    <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="go">[5, 6]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">tuple</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+<span class="go">(7, 12)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.util.import_and_add_if_available">
+<span class="sig-prename descclassname"><span class="pre">tec.util.</span></span><span class="sig-name descname"><span class="pre">import_and_add_if_available</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">if_already_in_scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">if_not_found</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/util.html#import_and_add_if_available"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.util.import_and_add_if_available" title="Link to this definition"></a></dt>
+<dd><p>Import object named <code class="docutils literal notranslate"><span class="pre">obj_name</span></code> from module named <code class="docutils literal notranslate"><span class="pre">module_name</span></code>, sticking it
+in scope (a dict, usually locals()).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scope</strong> – A dict where the object will be stored (if found). Usually locals().</p></li>
+<li><p><strong>obj_name</strong> – The name of the object to import</p></li>
+<li><p><strong>module_name</strong> – The name of the module to import the object from</p></li>
+<li><p><strong>as_name</strong> – The name to use in the scope. Defaults to <code class="docutils literal notranslate"><span class="pre">obj_name</span></code></p></li>
+<li><p><strong>if_already_in_scope</strong> – If not None, should be a <code class="docutils literal notranslate"><span class="pre">(scope,</span> <span class="pre">as_name,</span> <span class="pre">obj)</span></code>
+callable that will provide the return value if <code class="docutils literal notranslate"><span class="pre">as_name</span></code> is already in the
+scope.
+This is to be able to overwrite the default of simply doing a
+<code class="docutils literal notranslate"><span class="pre">scope[as_name]</span> <span class="pre">=</span> <span class="pre">obj</span></code> (having the net effect of resolving name conflicts
+by a “last one seen wins” strategy.</p></li>
+<li><p><strong>if_not_found</strong> – If not None, should be a <code class="docutils literal notranslate"><span class="pre">(obj_name,</span> <span class="pre">module_name)</span></code> callable
+that will provide the return value if <code class="docutils literal notranslate"><span class="pre">obj_name</span></code> is not found in
+<code class="docutils literal notranslate"><span class="pre">module_name</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>  <span class="c1"># not necessary, but represents use case</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scope</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>  <span class="c1"># you&#39;d usually put locals() here</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acquire</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">import_and_add_if_available</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acquire</span><span class="p">(</span><span class="s1">&#39;join&#39;</span><span class="p">,</span> <span class="s1">&#39;os.path&#39;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acquire</span><span class="p">(</span><span class="s1">&#39;isfile&#39;</span><span class="p">,</span> <span class="s1">&#39;os.path&#39;</span><span class="p">,</span> <span class="n">as_name</span><span class="o">=</span><span class="s1">&#39;check_if_file_exists&#39;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acquire</span><span class="p">(</span><span class="s1">&#39;not_in_os_path&#39;</span><span class="p">,</span> <span class="s1">&#39;os.path&#39;</span><span class="p">)</span>  <span class="c1"># returns False: not found in os.path</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acquire</span><span class="p">(</span><span class="s1">&#39;object&#39;</span><span class="p">,</span> <span class="s1">&#39;does.not.exist&#39;</span><span class="p">)</span>  <span class="c1"># returns None: the module_name not found</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="p">(</span><span class="n">scope</span> <span class="o">==</span>
+<span class="gp">... </span>    <span class="p">{</span><span class="s1">&#39;join&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">,</span> <span class="s1">&#39;check_if_file_exists&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">}</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<p>See in the above that neither <code class="docutils literal notranslate"><span class="pre">'not_in_os_path'</span></code> nor <code class="docutils literal notranslate"><span class="pre">'object'</span></code> are in
+<code class="docutils literal notranslate"><span class="pre">scope</span></code>. They were simply skipped.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.util.name_and_object_pairs">
+<span class="sig-prename descclassname"><span class="pre">tec.util.</span></span><span class="sig-name descname"><span class="pre">name_and_object_pairs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">objects:</span> <span class="pre">~typing.Any,</span> <span class="pre">objects_to_iterable:</span> <span class="pre">~collections.abc.Callable[[...],</span> <span class="pre">~collections.abc.Iterable]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">_attribute_name_object_pairs&gt;,</span> <span class="pre">*,</span> <span class="pre">name_filt:</span> <span class="pre">~collections.abc.Callable[[...],</span> <span class="pre">bool]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">_not_prefixed_by_underscore&gt;,</span> <span class="pre">obj_filt:</span> <span class="pre">~collections.abc.Callable[[...],</span> <span class="pre">bool]</span> <span class="pre">=</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">callable&gt;,</span> <span class="pre">name_of_obj:</span> <span class="pre">~collections.abc.Callable[[~typing.Any],</span> <span class="pre">str]</span> <span class="pre">=</span> <span class="pre">operator.attrgetter('__name__')</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/util.html#name_and_object_pairs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.util.name_and_object_pairs" title="Link to this definition"></a></dt>
+<dd><p>Get (name, object) pairs from source of objects</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>objects</strong> – The source we want to extract name and object pairs from.
+Could be an explicit list of pairs, or a single object (like a module)
+from which we’ll generate these (using <code class="docutils literal notranslate"><span class="pre">objects_to_iterable</span></code>)</p></li>
+<li><p><strong>objects_to_iterable</strong> – If the input <code class="docutils literal notranslate"><span class="pre">objects</span></code> isn’t already an iterable,
+the function to make it so</p></li>
+<li><p><strong>name_filt</strong> – A condition on the name</p></li>
+<li><p><strong>obj_filt</strong> – A condition on the object</p></li>
+<li><p><strong>name_of_obj</strong> – when an element of the iterable isn’t a (name, obj) pair,
+the function to get the name of a the object.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Get method names of the dict class:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">name_and_object_pairs</span><span class="p">(</span><span class="nb">dict</span><span class="p">)))</span>
+<span class="go">(&#39;clear&#39;, &#39;copy&#39;, &#39;fromkeys&#39;, &#39;get&#39;, &#39;items&#39;, &#39;keys&#39;, &#39;pop&#39;, &#39;popitem&#39;, &#39;setdefault&#39;, &#39;update&#39;, &#39;values&#39;)</span>
+</pre></div>
+</div>
+<p>Get only those names of dict methods that contain the string ‘keys’:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">name_and_object_pairs</span><span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="n">name_filt</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39;keys&#39;</span> <span class="ow">in</span> <span class="n">x</span><span class="p">)))</span>
+<span class="go">(&#39;fromkeys&#39;, &#39;keys&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.util.print_signatures">
+<span class="sig-prename descclassname"><span class="pre">tec.util.</span></span><span class="sig-name descname"><span class="pre">print_signatures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">obj,</span> <span class="pre">object_to_strings:</span> <span class="pre">~collections.abc.Callable[[~typing.Any],</span> <span class="pre">~collections.abc.Iterable[str]]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;,</span> <span class="pre">sep='\n</span> <span class="pre">*</span> <span class="pre">'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/util.html#print_signatures"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.util.print_signatures" title="Link to this definition"></a></dt>
+<dd><p>Prints information on callable attributes of obj (module, class, …)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.util.signature_strings">
+<span class="sig-prename descclassname"><span class="pre">tec.util.</span></span><span class="sig-name descname"><span class="pre">signature_strings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">objects,</span> <span class="pre">object_to_strings:</span> <span class="pre">~collections.abc.Callable[[~typing.Any],</span> <span class="pre">~collections.abc.Iterable[str]]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/util.html#signature_strings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.util.signature_strings" title="Link to this definition"></a></dt>
+<dd><p>A generator of strings describing the callables in obj (module, class, …)</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="stores.html" class="btn btn-neutral float-left" title="tec.stores" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

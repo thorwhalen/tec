@@ -1,0 +1,377 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tec.import_counting &mdash; tec 0.0.17 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=63b572e7"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            tec
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec.html">tec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/dependencies.html">tec.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/doctest_utils.html">tec.doctest_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/findimports.html">tec.findimports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/import_counting.html">tec.import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/misc.html">tec.misc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/misc/manage_pth_file.html">tec.misc.manage_pth_file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/modules.html">tec.modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/packages.html">tec.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/peek.html">tec.peek</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/pip_packaging.html">tec.pip_packaging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/pip_requirements.html">tec.pip_requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/pkg_code.html">tec.pkg_code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/snake_food_import_counting.html">tec.snake_food_import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/stores.html">tec.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/util.html">tec.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">tec</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tec.import_counting</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tec.import_counting</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Counting dependencies.</span>
+
+<span class="sd">Note: Several of the import_counting module&#39;s functions require</span>
+<span class="sd">having snakefood installed. See: http://furius.ca/snakefood/doc/snakefood-doc.html#installation</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">StringIO</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">sysconfig</span><span class="o">,</span><span class="w"> </span><span class="nn">importlib.util</span><span class="o">,</span><span class="w"> </span><span class="nn">pathlib</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">tec.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">resolve_module_contents</span><span class="p">,</span> <span class="n">resolve_to_folder</span><span class="p">,</span> <span class="n">resolve_module_filepath</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tec.stores</span><span class="w"> </span><span class="kn">import</span> <span class="n">PyFilesReader</span>
+
+<span class="n">file_sep</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span>
+<span class="n">module_import_regex_tmpl</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;(?&lt;=from) </span><span class="si">{package_name}</span><span class="s2">|(?&lt;=[^\s]import) </span><span class="si">{package_name}</span><span class="s2">&quot;</span>
+
+<span class="n">any_module_import_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="n">module_import_regex_tmpl</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">package_name</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\w+&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">spaced_comma_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s*,\s*&quot;</span><span class="p">)</span>
+<span class="n">another_import_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="sa">r</span><span class="s2">&quot;^\s*from\s+(?P&lt;from_import&gt;[\w\.]+)\s+import&quot;</span>
+    <span class="sa">r</span><span class="s2">&quot;|^\s*import (?P&lt;multiple&gt;[\w\.,]+)&quot;</span>
+<span class="p">)</span>
+<span class="n">commented_line_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\s*#&#39;</span><span class="p">)</span>
+<span class="n">token_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[\w\.]+&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="mk_single_package_import_regex">
+<a class="viewcode-back" href="../../module_docs/tec/import_counting.html#tec.import_counting.mk_single_package_import_regex">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">mk_single_package_import_regex</span><span class="p">(</span><span class="n">module_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a regular expression to parse out a specific module name in the context of an import.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">module_import_regex_tmpl</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">package_name</span><span class="o">=</span><span class="n">module_name</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="mk_multiple_package_import_regex">
+<a class="viewcode-back" href="../../module_docs/tec/import_counting.html#tec.import_counting.mk_multiple_package_import_regex">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">mk_multiple_package_import_regex</span><span class="p">(</span><span class="n">module_names</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a regular expression to parse out a specific modules names in the context of an import.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">module_names</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">module_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">module_names</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+        <span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">mk_single_package_import_regex</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">pattern</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">module_names</span><span class="p">])</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="n">_STDLIB</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">sysconfig</span><span class="o">.</span><span class="n">get_paths</span><span class="p">()[</span><span class="s2">&quot;stdlib&quot;</span><span class="p">])</span>
+<span class="n">_PLATSTDLIB</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">sysconfig</span><span class="o">.</span><span class="n">get_paths</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;platstdlib&quot;</span><span class="p">,</span> <span class="n">_STDLIB</span><span class="p">))</span>
+<span class="c1"># Windows sometimes ships stdlib extensions in DLLs/</span>
+<span class="n">_WIN_DLLS</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">base_prefix</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;DLLs&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_is_in_stdlib_path</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="c1"># Exclude site-packages explicitly</span>
+    <span class="k">if</span> <span class="s2">&quot;site-packages&quot;</span> <span class="ow">in</span> <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">parts</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">base</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">parents</span> <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="p">(</span><span class="n">_STDLIB</span><span class="p">,</span> <span class="n">_PLATSTDLIB</span><span class="p">,</span> <span class="n">_WIN_DLLS</span><span class="p">))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">is_stdlib_module</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="c1"># 1) True built-ins</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">builtin_module_names</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="c1"># 2) Resolve spec</span>
+    <span class="n">spec</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">find_spec</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">spec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># 3) Built-in/frozen markers</span>
+    <span class="n">origin</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="s2">&quot;origin&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">origin</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;built-in&quot;</span><span class="p">,</span> <span class="s2">&quot;frozen&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="c1"># 4) Namespace packages (no origin, but have search locations)</span>
+    <span class="n">locations</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="s2">&quot;submodule_search_locations&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">locations</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">_is_in_stdlib_path</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">loc</span><span class="p">))</span> <span class="k">for</span> <span class="n">loc</span> <span class="ow">in</span> <span class="n">locations</span><span class="p">)</span>
+
+    <span class="c1"># 5) File-backed modules</span>
+    <span class="k">if</span> <span class="n">origin</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_is_in_stdlib_path</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">origin</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="kc">False</span>
+
+
+<div class="viewcode-block" id="modules_imported">
+<a class="viewcode-back" href="../../module_docs/tec/import_counting.html#tec.import_counting.modules_imported">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">modules_imported</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">only_base_name</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">exclude_stdlib</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generator of module names from obj.</span>
+
+<span class="sd">    Note: The process uses regular expressions to parse out imported names from string contents.</span>
+<span class="sd">    The process in by no means accurate in all cases.</span>
+<span class="sd">    It may have false positives (strings that have import patterns, but are not actual code imports).</span>
+<span class="sd">    It may have false negatives (relative imports (as in ``..name``) and &quot;dynamically&quot; imported, etc.</span>
+
+<span class="sd">    If you need something more precise, look into other tools (snakefood or findimports for example).</span>
+
+<span class="sd">    :param obj: module object, file or folder path, or anything that can resolve to that</span>
+<span class="sd">    :param only_base_name: If True, will only return the first part of the dot names</span>
+<span class="sd">    :return: Generator of module (dot path) names</span>
+
+
+<span class="sd">    &gt;&gt;&gt; import os.path  # single module</span>
+<span class="sd">    &gt;&gt;&gt; list(modules_imported(os.path))  # doctest: +SKIP</span>
+<span class="sd">    [&#39;os&#39;, &#39;sys&#39;, &#39;stat&#39;, &#39;genericpath&#39;, &#39;genericpath&#39;, &#39;pwd&#39;, &#39;pwd&#39;, &#39;re&#39;, &#39;re&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; import os  # package with several modules</span>
+<span class="sd">    &gt;&gt;&gt; from collections import Counter</span>
+<span class="sd">    &gt;&gt;&gt; Counter(modules_imported(os, only_base_name=True)).most_common()  # doctest: +SKIP</span>
+<span class="sd">    [(&#39;nt&#39;, 5), (&#39;posix&#39;, 4), ... (&#39;warnings&#39;, 1), (&#39;subprocess&#39;, 1)]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">exclude_stdlib</span><span class="p">:</span>
+        <span class="n">filt</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="ow">not</span> <span class="n">is_stdlib_module</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">filt</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">name</span><span class="p">:</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="c1"># if the string is a valid python identifier, then try to import it as a module</span>
+        <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">isidentifier</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">obj</span> <span class="o">=</span> <span class="nb">__import__</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                <span class="k">pass</span>
+    <span class="k">if</span> <span class="n">only_base_name</span><span class="p">:</span>
+        <span class="k">yield from</span> <span class="nb">filter</span><span class="p">(</span><span class="n">filt</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span><span class="n">base_module_name</span><span class="p">,</span> <span class="n">modules_imported</span><span class="p">(</span><span class="n">obj</span><span class="p">)))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">resolve_module_filepath</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">assert_output_is_existing_filepath</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;__init__.py&#39;</span><span class="p">):</span>
+            <span class="n">folder</span> <span class="o">=</span> <span class="n">resolve_to_folder</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+            <span class="k">yield from</span> <span class="nb">filter</span><span class="p">(</span><span class="n">filt</span><span class="p">,</span> <span class="n">modules_imported_under_folder</span><span class="p">(</span><span class="n">folder</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># so obj is a filepath or the code string to be analyzed</span>
+            <span class="k">yield from</span> <span class="nb">filter</span><span class="p">(</span><span class="n">filt</span><span class="p">,</span> <span class="n">modules_imported_by_module</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="modules_imported_count">
+<a class="viewcode-back" href="../../module_docs/tec/import_counting.html#tec.import_counting.modules_imported_count">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">modules_imported_count</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">only_base_name</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">exclude_stdlib</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A dict containing the imported names and their counts, sorted from most frequent to least.&quot;&quot;&quot;</span>
+    <span class="n">_modules_imported</span> <span class="o">=</span> <span class="n">modules_imported</span><span class="p">(</span>
+        <span class="n">obj</span><span class="p">,</span> <span class="n">only_base_name</span><span class="o">=</span><span class="n">only_base_name</span><span class="p">,</span> <span class="n">exclude_stdlib</span><span class="o">=</span><span class="n">exclude_stdlib</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">_modules_imported</span><span class="p">)))</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_normalize_line</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compress any comma separated items so that no space appears before or after the commas</span>
+<span class="sd">    &gt;&gt;&gt; _normalize_line(&quot;here, is  ,   a stronge ,csv   line&quot;)</span>
+<span class="sd">    &#39;here,is,a stronge,csv   line&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">spaced_comma_re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="imports_in_py_content">
+<a class="viewcode-back" href="../../module_docs/tec/import_counting.html#tec.import_counting.imports_in_py_content">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">imports_in_py_content</span><span class="p">(</span><span class="n">py_content</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Generator of imported names parsed out (with regex) of input code (string)</span>
+
+<span class="sd">    &gt;&gt;&gt; list(imports_in_py_content(&quot;import inspect ,  sys ;  import os.path\n  from collections.abc import Mapping&quot;))</span>
+<span class="sd">    [&#39;inspect&#39;, &#39;sys&#39;, &#39;os.path&#39;, &#39;collections.abc&#39;]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">StringIO</span><span class="p">(</span><span class="n">py_content</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">commented_line_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">subline</span> <span class="ow">in</span> <span class="n">_normalize_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">):</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">another_import_regex</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">subline</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">import_str</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
+                        <span class="p">(</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">groupdict</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">),</span> <span class="kc">None</span>
+                    <span class="p">)</span>
+                    <span class="k">if</span> <span class="n">import_str</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="k">yield from</span> <span class="n">import_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="modules_imported_by_module">
+<a class="viewcode-back" href="../../module_docs/tec/import_counting.html#tec.import_counting.modules_imported_by_module">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">modules_imported_by_module</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generator of module names that are imported in a module.</span>
+
+<span class="sd">    :param module: The module specification, which could be a filepath, the actual code (string) of the module,</span>
+<span class="sd">        or any python object (module or object therein -- that can be resolved by inspect.getfile(module))</span>
+<span class="sd">    :return: A generator of strings showing the imported module names (dot paths)</span>
+
+<span class="sd">    The input can be a filepath</span>
+
+<span class="sd">    &gt;&gt;&gt; sorted(modules_imported_by_module(__file__))</span>
+<span class="sd">    [&#39;collections&#39;, &#39;importlib.util&#39;, &#39;io&#39;, &#39;os&#39;, &#39;os.path&#39;, &#39;pathlib&#39;, &#39;re&#39;, &#39;sys&#39;, &#39;sysconfig&#39;, &#39;tec.stores&#39;, &#39;tec.util&#39;]</span>
+
+<span class="sd">    ... a imported module object</span>
+
+<span class="sd">    &gt;&gt;&gt; import wave</span>
+<span class="sd">    &gt;&gt;&gt; sorted(modules_imported_by_module(wave))  # doctest: +SKIP</span>
+<span class="sd">    [&#39;audioop&#39;, &#39;builtins&#39;, &#39;chunk&#39;, &#39;collections&#39;, &#39;struct&#39;, &#39;sys&#39;]</span>
+
+<span class="sd">    ... the string contents themselves</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">module_contents</span> <span class="o">=</span> <span class="n">resolve_module_contents</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">imports_in_py_content</span><span class="p">(</span><span class="n">module_contents</span><span class="p">)</span></div>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># t = subprocess.check_output([&#39;sfood-imports&#39;, &#39;-u&#39;, module])</span>
+    <span class="c1"># return [x for x in t.split(&#39;\n&#39;) if len(x) &gt; 0]</span>
+
+
+<div class="viewcode-block" id="modules_imported_under_folder">
+<a class="viewcode-back" href="../../module_docs/tec/import_counting.html#tec.import_counting.modules_imported_under_folder">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">modules_imported_under_folder</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generator of imported module (dot path) names</span>
+
+<span class="sd">    :param root:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">resolve_to_folder</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">filename</span><span class="p">,</span> <span class="n">contents</span> <span class="ow">in</span> <span class="n">PyFilesReader</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">yield from</span> <span class="n">modules_imported_by_module</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span></div>
+
+
+
+<span class="n">base_name_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\w+&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="base_module_name">
+<a class="viewcode-back" href="../../module_docs/tec/import_counting.html#tec.import_counting.base_module_name">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">base_module_name</span><span class="p">(</span><span class="n">module_name_dot_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base name of dot path module name</span>
+<span class="sd">    &gt;&gt;&gt; base_module_name(&#39;os.path.join&#39;)</span>
+<span class="sd">    &#39;os&#39;</span>
+
+<span class="sd">    Note that relative import names will resolve to an empty string.</span>
+
+<span class="sd">    &gt;&gt;&gt; base_module_name(&quot;..relatively_imported&quot;)</span>
+<span class="sd">    &#39;&#39;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">base_name_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">module_name_dot_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">r</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,4 @@
+tec.pip_packaging
+=================
+.. automodule:: tec.pip_packaging
+   :members:

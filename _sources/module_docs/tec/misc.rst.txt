@@ -1,0 +1,4 @@
+tec.misc
+========
+.. automodule:: tec.misc
+   :members:

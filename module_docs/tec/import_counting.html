@@ -1,0 +1,255 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tec.import_counting &mdash; tec 0.0.17 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=63b572e7"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="tec.misc" href="misc.html" />
+    <link rel="prev" title="tec.findimports" href="findimports.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            tec
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tec.html">tec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependencies.html">tec.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doctest_utils.html">tec.doctest_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="findimports.html">tec.findimports</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">tec.import_counting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tec.import_counting.base_module_name"><code class="docutils literal notranslate"><span class="pre">base_module_name()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.import_counting.imports_in_py_content"><code class="docutils literal notranslate"><span class="pre">imports_in_py_content()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.import_counting.mk_multiple_package_import_regex"><code class="docutils literal notranslate"><span class="pre">mk_multiple_package_import_regex()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.import_counting.mk_single_package_import_regex"><code class="docutils literal notranslate"><span class="pre">mk_single_package_import_regex()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.import_counting.modules_imported"><code class="docutils literal notranslate"><span class="pre">modules_imported()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.import_counting.modules_imported_by_module"><code class="docutils literal notranslate"><span class="pre">modules_imported_by_module()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.import_counting.modules_imported_count"><code class="docutils literal notranslate"><span class="pre">modules_imported_count()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.import_counting.modules_imported_under_folder"><code class="docutils literal notranslate"><span class="pre">modules_imported_under_folder()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">tec.misc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="misc/manage_pth_file.html">tec.misc.manage_pth_file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">tec.modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">tec.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="peek.html">tec.peek</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pip_packaging.html">tec.pip_packaging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pip_requirements.html">tec.pip_requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pkg_code.html">tec.pkg_code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snake_food_import_counting.html">tec.snake_food_import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stores.html">tec.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util.html">tec.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">tec</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">tec.import_counting</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/module_docs/tec/import_counting.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-tec.import_counting">
+<span id="tec-import-counting"></span><h1>tec.import_counting<a class="headerlink" href="#module-tec.import_counting" title="Link to this heading"></a></h1>
+<p>Counting dependencies.</p>
+<p>Note: Several of the import_counting module’s functions require
+having snakefood installed. See: <a class="reference external" href="http://furius.ca/snakefood/doc/snakefood-doc.html#installation">http://furius.ca/snakefood/doc/snakefood-doc.html#installation</a></p>
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.import_counting.base_module_name">
+<span class="sig-prename descclassname"><span class="pre">tec.import_counting.</span></span><span class="sig-name descname"><span class="pre">base_module_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_name_dot_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/import_counting.html#base_module_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.import_counting.base_module_name" title="Link to this definition"></a></dt>
+<dd><p>Base name of dot path module name
+&gt;&gt;&gt; base_module_name(‘os.path.join’)
+‘os’</p>
+<p>Note that relative import names will resolve to an empty string.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">base_module_name</span><span class="p">(</span><span class="s2">&quot;..relatively_imported&quot;</span><span class="p">)</span>
+<span class="go">&#39;&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.import_counting.imports_in_py_content">
+<span class="sig-prename descclassname"><span class="pre">tec.import_counting.</span></span><span class="sig-name descname"><span class="pre">imports_in_py_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">py_content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/import_counting.html#imports_in_py_content"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.import_counting.imports_in_py_content" title="Link to this definition"></a></dt>
+<dd><p>Generator of imported names parsed out (with regex) of input code (string)</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">imports_in_py_content</span><span class="p">(</span><span class="s2">&quot;import inspect ,  sys ;  import os.path</span><span class="se">\n</span><span class="s2">  from collections.abc import Mapping&quot;</span><span class="p">))</span>
+<span class="go">[&#39;inspect&#39;, &#39;sys&#39;, &#39;os.path&#39;, &#39;collections.abc&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.import_counting.mk_multiple_package_import_regex">
+<span class="sig-prename descclassname"><span class="pre">tec.import_counting.</span></span><span class="sig-name descname"><span class="pre">mk_multiple_package_import_regex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/import_counting.html#mk_multiple_package_import_regex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.import_counting.mk_multiple_package_import_regex" title="Link to this definition"></a></dt>
+<dd><p>Make a regular expression to parse out a specific modules names in the context of an import.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.import_counting.mk_single_package_import_regex">
+<span class="sig-prename descclassname"><span class="pre">tec.import_counting.</span></span><span class="sig-name descname"><span class="pre">mk_single_package_import_regex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/import_counting.html#mk_single_package_import_regex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.import_counting.mk_single_package_import_regex" title="Link to this definition"></a></dt>
+<dd><p>Make a regular expression to parse out a specific module name in the context of an import.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.import_counting.modules_imported">
+<span class="sig-prename descclassname"><span class="pre">tec.import_counting.</span></span><span class="sig-name descname"><span class="pre">modules_imported</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_base_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_stdlib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/import_counting.html#modules_imported"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.import_counting.modules_imported" title="Link to this definition"></a></dt>
+<dd><p>Generator of module names from obj.</p>
+<p>Note: The process uses regular expressions to parse out imported names from string contents.
+The process in by no means accurate in all cases.
+It may have false positives (strings that have import patterns, but are not actual code imports).
+It may have false negatives (relative imports (as in <code class="docutils literal notranslate"><span class="pre">..name</span></code>) and “dynamically” imported, etc.</p>
+<p>If you need something more precise, look into other tools (snakefood or findimports for example).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> – module object, file or folder path, or anything that can resolve to that</p></li>
+<li><p><strong>only_base_name</strong> – If True, will only return the first part of the dot names</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Generator of module (dot path) names</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">os.path</span>  <span class="c1"># single module</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">modules_imported</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="p">))</span>
+<span class="go">[&#39;os&#39;, &#39;sys&#39;, &#39;stat&#39;, &#39;genericpath&#39;, &#39;genericpath&#39;, &#39;pwd&#39;, &#39;pwd&#39;, &#39;re&#39;, &#39;re&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>  <span class="c1"># package with several modules</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Counter</span><span class="p">(</span><span class="n">modules_imported</span><span class="p">(</span><span class="n">os</span><span class="p">,</span> <span class="n">only_base_name</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span><span class="o">.</span><span class="n">most_common</span><span class="p">()</span>
+<span class="go">[(&#39;nt&#39;, 5), (&#39;posix&#39;, 4), ... (&#39;warnings&#39;, 1), (&#39;subprocess&#39;, 1)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.import_counting.modules_imported_by_module">
+<span class="sig-prename descclassname"><span class="pre">tec.import_counting.</span></span><span class="sig-name descname"><span class="pre">modules_imported_by_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/import_counting.html#modules_imported_by_module"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.import_counting.modules_imported_by_module" title="Link to this definition"></a></dt>
+<dd><p>Generator of module names that are imported in a module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>module</strong> – The module specification, which could be a filepath, the actual code (string) of the module,
+or any python object (module or object therein – that can be resolved by inspect.getfile(module))</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A generator of strings showing the imported module names (dot paths)</p>
+</dd>
+</dl>
+<p>The input can be a filepath</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">modules_imported_by_module</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+<span class="go">[&#39;collections&#39;, &#39;importlib.util&#39;, &#39;io&#39;, &#39;os&#39;, &#39;os.path&#39;, &#39;pathlib&#39;, &#39;re&#39;, &#39;sys&#39;, &#39;sysconfig&#39;, &#39;tec.stores&#39;, &#39;tec.util&#39;]</span>
+</pre></div>
+</div>
+<p>… a imported module object</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">wave</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">modules_imported_by_module</span><span class="p">(</span><span class="n">wave</span><span class="p">))</span>
+<span class="go">[&#39;audioop&#39;, &#39;builtins&#39;, &#39;chunk&#39;, &#39;collections&#39;, &#39;struct&#39;, &#39;sys&#39;]</span>
+</pre></div>
+</div>
+<p>… the string contents themselves</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.import_counting.modules_imported_count">
+<span class="sig-prename descclassname"><span class="pre">tec.import_counting.</span></span><span class="sig-name descname"><span class="pre">modules_imported_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_base_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_stdlib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/import_counting.html#modules_imported_count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.import_counting.modules_imported_count" title="Link to this definition"></a></dt>
+<dd><p>A dict containing the imported names and their counts, sorted from most frequent to least.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.import_counting.modules_imported_under_folder">
+<span class="sig-prename descclassname"><span class="pre">tec.import_counting.</span></span><span class="sig-name descname"><span class="pre">modules_imported_under_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/import_counting.html#modules_imported_under_folder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.import_counting.modules_imported_under_folder" title="Link to this definition"></a></dt>
+<dd><p>Generator of imported module (dot path) names</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>root</strong></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="findimports.html" class="btn btn-neutral float-left" title="tec.findimports" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="misc.html" class="btn btn-neutral float-right" title="tec.misc" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

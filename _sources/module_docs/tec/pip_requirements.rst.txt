@@ -1,0 +1,4 @@
+tec.pip_requirements
+====================
+.. automodule:: tec.pip_requirements
+   :members:

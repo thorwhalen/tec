@@ -1,0 +1,4 @@
+tec.findimports
+===============
+.. automodule:: tec.findimports
+   :members:
