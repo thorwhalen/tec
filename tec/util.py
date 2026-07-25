@@ -233,7 +233,6 @@ def import_and_add_if_available(
 
     :return:
 
-    >>> from qo.qo_utils import import_and_add_if_available
     >>> from functools import partial  # not necessary, but represents use case
     >>> scope = dict()  # you'd usually put locals() here
     >>> acquire = partial(import_and_add_if_available, scope=scope)
