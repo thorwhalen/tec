@@ -40,10 +40,10 @@ def imports_in_module(module):
     """
     if not isinstance(module, str):
         module = inspect.getfile(module)
-        if module.endswith('c'):
+        if module.endswith("c"):
             module = module[:-1]  # remove the 'c' of '.pyc'
-    t = subprocess.check_output(['sfood-imports', '-u', module])
-    return [x for x in t.split('\n') if len(x) > 0]
+    t = subprocess.check_output(["sfood-imports", "-u", module])
+    return [x for x in t.split("\n") if len(x) > 0]
 
 
 def base_modules_used_in_module(module):
@@ -58,7 +58,9 @@ def base_modules_used_in_module(module):
     >>> base_modules_used_in_module(__file__)  # doctest: +SKIP
     ['StringIO', 'collections', 'inspect', 'numpy', 'os', 'pandas', 're', 'subprocess', 'ut']
     """
-    return list(unique([re.compile(r'\w+').findall(x)[0] for x in imports_in_module(module)]))
+    return list(
+        unique([re.compile(r"\w+").findall(x)[0] for x in imports_in_module(module)])
+    )
 
 
 def base_module_imports_in_module_recursive(module):
@@ -82,19 +84,21 @@ def base_module_imports_in_module_recursive(module):
 
     if inspect.ismodule(module):
         module = inspect.getsourcefile(module)
-    if module.endswith('__init__.py'):
+    if module.endswith("__init__.py"):
         module = os.path.dirname(module)
 
     if os.path.isdir(module):
         c = Counter()
-        it = get_filepath_iterator(module, pattern='.py$')
+        it = get_filepath_iterator(module, pattern=".py$")
         next(it)  # to skip the seed module itself, and not get into an infinite loop
         for _module in it:
             try:
                 c.update(base_module_imports_in_module_recursive(_module))
             except Exception as e:
-                if 'sfood-imports' in e.args[1]:
-                    raise RuntimeError("You don't have sfood-imports installed (snakefood), so I can't do my job")
+                if "sfood-imports" in e.args[1]:
+                    raise RuntimeError(
+                        "You don't have sfood-imports installed (snakefood), so I can't do my job"
+                    )
                 else:
                     print(f"Error with module {_module}: {e}")
         return c
@@ -109,12 +113,12 @@ def base_module_imports_in_module_recursive(module):
 
 def requirements_packages_in_module(module, requirements=None):
     if requirements is None:
-        requirements = list(pip_licenses_df(include_module_name=False)['package_name'])
+        requirements = list(pip_licenses_df(include_module_name=False)["package_name"])
     elif isinstance(requirements, str) and os.path.isfile(requirements):
         with open(requirements) as fp:
             requirements = fp.read().splitlines()
 
-    p = re.compile('^[^=]+')
+    p = re.compile("^[^=]+")
     module_names = list()
     for x in requirements:
         try:
@@ -128,48 +132,62 @@ def requirements_packages_in_module(module, requirements=None):
     return base_module_imports_in_module_recursive(module, module_names=requirements)
 
 
-word_or_letter_p = re.compile(r'\w')
-at_least_two_spaces_p = re.compile(r'\s{2,}')
+word_or_letter_p = re.compile(r"\w")
+at_least_two_spaces_p = re.compile(r"\s{2,}")
 
 
-def pip_licenses_df(package_names=None, include_module_name=True, on_module_search_error=None):
+def pip_licenses_df(
+    package_names=None, include_module_name=True, on_module_search_error=None
+):
     """
     Get a dataframe of pip packages and licences
     :return:
     """
-    pip_licenses_output = subprocess.check_output(['pip-licenses'])
+    pip_licenses_output = subprocess.check_output(["pip-licenses"])
 
-    t = list(map(str.strip,
-                 list(filter(word_or_letter_p.search,
-                             pip_licenses_output.split('\n')))))
-    t = [at_least_two_spaces_p.sub('\t', x) for x in t]
-    t = '\n'.join(t)
+    t = list(
+        map(
+            str.strip,
+            list(filter(word_or_letter_p.search, pip_licenses_output.split("\n"))),
+        )
+    )
+    t = [at_least_two_spaces_p.sub("\t", x) for x in t]
+    t = "\n".join(t)
 
-    df = pd.read_csv(StringIO(t), sep='\t')
-    df = df.rename(columns={'Name': 'package_name', 'Version': 'version', 'License': 'license'})
+    df = pd.read_csv(StringIO(t), sep="\t")
+    df = df.rename(
+        columns={"Name": "package_name", "Version": "version", "License": "license"}
+    )
     if include_module_name:
-        df['module'] = [get_module_name(x, on_error=on_module_search_error) for x in df['package_name']]
-        df = df[['module', 'package_name', 'version', 'license']]  # reorder
+        df["module"] = [
+            get_module_name(x, on_error=on_module_search_error)
+            for x in df["package_name"]
+        ]
+        df = df[["module", "package_name", "version", "license"]]  # reorder
     if package_names is not None:
-        df = df[df['package_name'].isin(package_names)]
+        df = df[df["package_name"].isin(package_names)]
     return df
 
 
-def get_filepath_iterator(root_folder,
-                          pattern='',
-                          return_full_path=True,
-                          apply_pattern_to_full_path=False):
+def get_filepath_iterator(
+    root_folder, pattern="", return_full_path=True, apply_pattern_to_full_path=False
+):
     if apply_pattern_to_full_path:
-        return recursive_file_walk_iterator_with_name_filter(root_folder, pattern, return_full_path)
+        return recursive_file_walk_iterator_with_name_filter(
+            root_folder, pattern, return_full_path
+        )
     else:
-        return recursive_file_walk_iterator_with_filepath_filter(root_folder, pattern, return_full_path)
+        return recursive_file_walk_iterator_with_filepath_filter(
+            root_folder, pattern, return_full_path
+        )
 
 
 def iter_relative_files_and_folder(root_folder):
     from glob import iglob
+
     if not root_folder.endswith(file_sep):
         root_folder += file_sep
-    return map(lambda x: x.replace(root_folder, ''), iglob(root_folder + '*'))
+    return map(lambda x: x.replace(root_folder, ""), iglob(root_folder + "*"))
 
 
 def pattern_filter(pattern):
@@ -181,7 +199,9 @@ def pattern_filter(pattern):
     return _pattern_filter
 
 
-def recursive_file_walk_iterator_with_name_filter(root_folder, filt='', return_full_path=True):
+def recursive_file_walk_iterator_with_name_filter(
+    root_folder, filt="", return_full_path=True
+):
     if isinstance(filt, str):
         filt = pattern_filter(filt)
     # if isinstance(pattern, basestring):
@@ -189,7 +209,9 @@ def recursive_file_walk_iterator_with_name_filter(root_folder, filt='', return_f
     for name in iter_relative_files_and_folder(root_folder):
         full_path = os.path.join(root_folder, name)
         if os.path.isdir(full_path):
-            yield from recursive_file_walk_iterator_with_name_filter(full_path, filt, return_full_path)
+            yield from recursive_file_walk_iterator_with_name_filter(
+                full_path, filt, return_full_path
+            )
         else:
             if os.path.isfile(full_path):
                 if filt(name):
@@ -199,13 +221,17 @@ def recursive_file_walk_iterator_with_name_filter(root_folder, filt='', return_f
                         yield name
 
 
-def recursive_file_walk_iterator_with_filepath_filter(root_folder, filt='', return_full_path=True):
+def recursive_file_walk_iterator_with_filepath_filter(
+    root_folder, filt="", return_full_path=True
+):
     if isinstance(filt, str):
         filt = pattern_filter(filt)
     for name in iter_relative_files_and_folder(root_folder):
         full_path = os.path.join(root_folder, name)
         if os.path.isdir(full_path):
-            yield from recursive_file_walk_iterator_with_filepath_filter(full_path, filt, return_full_path)
+            yield from recursive_file_walk_iterator_with_filepath_filter(
+                full_path, filt, return_full_path
+            )
         else:
             if os.path.isfile(full_path):
                 if filt(full_path):

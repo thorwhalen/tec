@@ -21,7 +21,7 @@ Filepath = str  # + os.path.isfile
 Lines = Union[Iterable[str], str, Filepath]
 
 # DFLT_FILENAME_FILT = methodcaller('endswith', '.pth')
-DFLT_FILENAME_FILT = {'oto.pth', 'conda.pth', 'custom.pth'}.__contains__
+DFLT_FILENAME_FILT = {"oto.pth", "conda.pth", "custom.pth"}.__contains__
 
 
 def lines_of_file(filepath):
@@ -33,16 +33,16 @@ def get_lines(lines: Lines):
         if os.path.isfile(lines):
             filepath = lines
             return lines_of_file(lines)
-        elif ';' in lines:
+        elif ";" in lines:
             semicolumn_seperated_content = lines
-            return list(map(str.strip, semicolumn_seperated_content.split(';')))
+            return list(map(str.strip, semicolumn_seperated_content.split(";")))
         else:
             file_content = lines
             return file_content.splitlines()
     else:
-        assert isinstance(
-            lines, Iterable
-        ), f'lines should be a filepath, file content string or iterable of lines'
+        assert isinstance(lines, Iterable), (
+            f"lines should be a filepath, file content string or iterable of lines"
+        )
         return lines
 
 
@@ -73,7 +73,7 @@ def add_missing_lines(target: Filepath, source: Lines = ()):
     ['four', 'five']
     """
     target_lines, missing_lines = target_and_missing_items(target, source)
-    Path(target).write_text('\n'.join(target_lines + missing_lines))
+    Path(target).write_text("\n".join(target_lines + missing_lines))
     return missing_lines
 
 
@@ -125,7 +125,7 @@ def add_to_pth_file(lines, pth_filepath=None):
     """
 
     def remove_trailing_slash(x):
-        if (x[-1] == '/') or (x[-1] == '\\'):
+        if (x[-1] == "/") or (x[-1] == "\\"):
             x = x[:-1]
         return x
 
@@ -192,14 +192,14 @@ def reclone_pkg_commands(pkg_rootdir):
     if pkg_rootdir[-1] != os.path.sep:
         pkg_rootdir += os.path.sep
     url = simple_run_command(
-        f'git --work-tree {pkg_rootdir} --git-dir {pkg_rootdir}.git remote get-url origin'
+        f"git --work-tree {pkg_rootdir} --git-dir {pkg_rootdir}.git remote get-url origin"
     )
 
     yield 'echo "----------------------------------------------------"'
     yield f'echo "{pkg_rootdir}"'
     yield f'rm -rf "{pkg_rootdir}"'
     yield f'git clone {url} "{pkg_rootdir}"'
-    yield ''
+    yield ""
 
 
 def mk_reclone_string(rootdir, save_in_filepath=None, filt=None):
@@ -213,14 +213,14 @@ def mk_reclone_string(rootdir, save_in_filepath=None, filt=None):
     """
     pkg_paths = list(filter(filt, root_dirpaths_to_packages(rootdir)))
     #     return pkg_paths
-    s = '\n'.join(chain.from_iterable(map(reclone_pkg_commands, pkg_paths)))
+    s = "\n".join(chain.from_iterable(map(reclone_pkg_commands, pkg_paths)))
     if save_in_filepath:
         return Path(save_in_filepath).write_text(s)
     else:
         return s
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     from contextlib import suppress
 
     with suppress(ModuleNotFoundError):

@@ -26,7 +26,7 @@ def dir_whose_parent_has_same_name(k):
 
 
 def folder_has_init(path):
-    return (Path(path) / '__init__.py').is_file()
+    return (Path(path) / "__init__.py").is_file()
 
 
 def package_directory_of_project_root(path):
@@ -37,7 +37,7 @@ def package_directory_of_project_root(path):
 def is_project_root(path):
     path = Path(path)
     code_root = package_directory_of_project_root(path)
-    return folder_has_init(code_root) and (path / 'setup.cfg').is_file()
+    return folder_has_init(code_root) and (path / "setup.cfg").is_file()
 
 
 def is_package_directory(path):
@@ -49,7 +49,7 @@ def is_package_directory(path):
 #  is_package_directory and is_project_root, so refactor might be in order
 def package_root_dirs(rootdir, max_levels=None, only_if_has_init=False):
     if only_if_has_init:
-        init_filt = filt_iter(filt=lambda p: (Path(p) / '__init__.py').is_file())
+        init_filt = filt_iter(filt=lambda p: (Path(p) / "__init__.py").is_file())
     else:
         init_filt = lambda x: x
     S = Pipe(
@@ -84,13 +84,13 @@ def pkg_root(init_filepath):
 
 def init_file_of_pkg_root(root):
     p = Path(root)
-    return str(p / p.name / '__init__.py')
+    return str(p / p.name / "__init__.py")
 
 
 def is_package_init(k):
-    if not k.endswith('__init__.py'):
+    if not k.endswith("__init__.py"):
         return False
     path = Path(k)
     parent = path.parent
     grandparent = parent.parent
-    return parent.name == grandparent.name and (grandparent / 'setup.py').is_file()
+    return parent.name == grandparent.name and (grandparent / "setup.py").is_file()

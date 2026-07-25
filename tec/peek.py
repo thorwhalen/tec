@@ -8,7 +8,7 @@ path_sep = os.path.sep
 
 
 def not_dunder(a):
-    return not a.startswith('__')
+    return not a.startswith("__")
 
 
 def aval_gen(o, filt=not_dunder):
@@ -17,7 +17,7 @@ def aval_gen(o, filt=not_dunder):
 
 
 def show_attrs(o, filt=not_dunder):
-    print(*(f"{a}:\t{v}" for a, v in aval_gen(o, filt)), sep='\n')
+    print(*(f"{a}:\t{v}" for a, v in aval_gen(o, filt)), sep="\n")
 
 
 def print_source(o, start=None, end=None, doc=True):
@@ -32,10 +32,10 @@ def print_source(o, start=None, end=None, doc=True):
     """
     # TODO: Make doc=False work
     _lines, _ = getsourcelines(o)
-    print(''.join(_lines[slice(start, end)]))
+    print("".join(_lines[slice(start, end)]))
 
 
-def print_signature(func, sep: str | None = '\n', prefix: str = '', suffix: str = ''):
+def print_signature(func, sep: str | None = "\n", prefix: str = "", suffix: str = ""):
     """Print the signature of a callable
     :param func: Callable to print the signature of
     :param sep: If None, will print the signature as inspect.signature would.
@@ -67,7 +67,12 @@ def submodule_path_strings(module):
 
     root_name = os.path.dirname(module.__file__)
     root_name_length = len(root_name) + 1
-    for pyfile in filter(lambda x: x.endswith('.py'), FileCollection(root_name)):
-        t = pyfile[root_name_length:-3].replace(path_sep, '.').replace('.__init__', '').replace('__init__', '')
+    for pyfile in filter(lambda x: x.endswith(".py"), FileCollection(root_name)):
+        t = (
+            pyfile[root_name_length:-3]
+            .replace(path_sep, ".")
+            .replace(".__init__", "")
+            .replace("__init__", "")
+        )
         if t:
             yield t

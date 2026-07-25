@@ -64,18 +64,18 @@ def read_requirements(requirements_file):
         return f.read().splitlines()
 
 
-def get_module_name(package, on_error='raise'):
+def get_module_name(package, on_error="raise"):
     try:
-        top_level = importlib.metadata.distribution(package).read_text('top_level.txt')
+        top_level = importlib.metadata.distribution(package).read_text("top_level.txt")
         if top_level:
             lines = top_level.splitlines()
             if lines:
                 return lines[0]
         return None
     except Exception as e:
-        if on_error == 'raise':
+        if on_error == "raise":
             raise
-        elif on_error == 'error_class':
+        elif on_error == "error_class":
             return e.__class__.__name__
         else:
             return on_error  # just the value specified by on_error
@@ -87,7 +87,7 @@ take_everything = lambda x: True
 
 
 def top_level_objs(module, obj_filt=take_everything):
-    top_level_imports = [x for x in dir(module) if not x.startswith('_')]
+    top_level_imports = [x for x in dir(module) if not x.startswith("_")]
     for a in top_level_imports:
         obj = getattr(module, a)
         if obj_filt(obj):
@@ -96,13 +96,16 @@ def top_level_objs(module, obj_filt=take_everything):
 
 def obj_module_depth_counts(module, obj_filt=take_everything):
     from collections import Counter
+
     def depth(obj):
-        if not hasattr(obj, '__module__'):
+        if not hasattr(obj, "__module__"):
             return 0
         else:
-            return len(obj.__module__.split('.'))
+            return len(obj.__module__.split("."))
 
-    return sorted(Counter(depth(obj) for obj in top_level_objs(module, obj_filt)).items())
+    return sorted(
+        Counter(depth(obj) for obj in top_level_objs(module, obj_filt)).items()
+    )
 
 
 def print_top_level_diagnosis(module, obj_filt=take_everything):
@@ -163,11 +166,15 @@ def print_top_level_diagnosis(module, obj_filt=take_everything):
     if isinstance(module, str):
         module = import_module(module)
     print(f"\n--------- {module.__name__} ---------")
-    print(f"{len(list(top_level_objs(module)))} objects can be imported from top level {module.__name__}:")
+    print(
+        f"{len(list(top_level_objs(module)))} objects can be imported from top level {module.__name__}:"
+    )
     for kind in [ModuleType, FunctionType, type]:
-        print(f"  {len(list(top_level_objs(module, lambda x: isinstance(x, kind))))} {kind.__name__}s")
+        print(
+            f"  {len(list(top_level_objs(module, lambda x: isinstance(x, kind))))} {kind.__name__}s"
+        )
     print("")
     print(f"depth\tcount")
     for depth, count in obj_module_depth_counts(module, obj_filt):
-        print(f'{depth}\t{count}')
+        print(f"{depth}\t{count}")
     print("")

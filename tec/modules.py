@@ -1,6 +1,7 @@
 """
 Tools to explore modules
 """
+
 import os
 import sys
 import inspect
@@ -226,7 +227,9 @@ def obj_to_dotpath(obj):
     return f"{obj.__module__}.{obj.__name__}"
 
 
-def finding_objects_of_module_with_given_methods(module, method_names=None, max_levels=1):
+def finding_objects_of_module_with_given_methods(
+    module, method_names=None, max_levels=1
+):
     module_dotpath = module.__name__
 
     objects = {

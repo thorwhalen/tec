@@ -10,8 +10,8 @@ import os
 
 from dol.filesys import FileStringReader
 
-readme_path_for_setup_path = (
-    lambda setup_path: setup_path[: -len("setup.cfg")] + "README.md"
+readme_path_for_setup_path = lambda setup_path: (
+    setup_path[: -len("setup.cfg")] + "README.md"
 )
 
 
@@ -50,7 +50,9 @@ def infos_of_packages_under_rootdir(rootdir):
             try:
                 project_relpath = setup_path[rootdir_len : -len("setup.cfg")]
                 *rel_path, project_name, _ = project_relpath.split(os.path.sep)
-                description = ConfigReader(setup_path)["metadata"].get("description", "")
+                description = ConfigReader(setup_path)["metadata"].get(
+                    "description", ""
+                )
                 readme = file_reader[readme_path]
                 yield os.path.sep.join(rel_path), project_name, description, readme
             except Exception as e:

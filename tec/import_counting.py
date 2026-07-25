@@ -19,7 +19,7 @@ file_sep = os.path.sep
 module_import_regex_tmpl = r"(?<=from) {package_name}|(?<=[^\s]import) {package_name}"
 
 any_module_import_regex = re.compile(
-    module_import_regex_tmpl.format(package_name=r'\w+')
+    module_import_regex_tmpl.format(package_name=r"\w+")
 )
 
 spaced_comma_re = re.compile(r"\s*,\s*")
@@ -27,8 +27,8 @@ another_import_regex = re.compile(
     r"^\s*from\s+(?P<from_import>[\w\.]+)\s+import"
     r"|^\s*import (?P<multiple>[\w\.,]+)"
 )
-commented_line_re = re.compile(r'\s*#')
-token_re = re.compile(r'[\w\.]+')
+commented_line_re = re.compile(r"\s*#")
+token_re = re.compile(r"[\w\.]+")
 
 
 def mk_single_package_import_regex(module_name):
@@ -41,7 +41,7 @@ def mk_multiple_package_import_regex(module_names):
     if isinstance(module_names, str):
         module_names = [module_names]
     return re.compile(
-        '|'.join([mk_single_package_import_regex(x).pattern for x in module_names])
+        "|".join([mk_single_package_import_regex(x).pattern for x in module_names])
     )
 
 
@@ -127,7 +127,7 @@ def modules_imported(obj, only_base_name=False, exclude_stdlib=False):
         yield from filter(filt, map(base_module_name, modules_imported(obj)))
     else:
         obj = resolve_module_filepath(obj, assert_output_is_existing_filepath=False)
-        if obj.endswith('__init__.py'):
+        if obj.endswith("__init__.py"):
             folder = resolve_to_folder(obj)
             yield from filter(filt, modules_imported_under_folder(folder))
         else:  # so obj is a filepath or the code string to be analyzed
@@ -147,7 +147,7 @@ def _normalize_line(line):
     >>> _normalize_line("here, is  ,   a stronge ,csv   line")
     'here,is,a stronge,csv   line'
     """
-    return spaced_comma_re.sub(',', line)
+    return spaced_comma_re.sub(",", line)
 
 
 def imports_in_py_content(py_content: str):
@@ -158,16 +158,16 @@ def imports_in_py_content(py_content: str):
 
     """
 
-    for line in StringIO(py_content + '\n'):
+    for line in StringIO(py_content + "\n"):
         if not commented_line_re.match(line):
-            for subline in _normalize_line(line).split(';'):
+            for subline in _normalize_line(line).split(";"):
                 r = another_import_regex.search(subline)
                 if r is not None:
                     import_str = next(
                         (v for k, v in r.groupdict().items() if v is not None), None
                     )
                     if import_str is not None:
-                        yield from import_str.split(',')
+                        yield from import_str.split(",")
 
 
 def modules_imported_by_module(module):
@@ -211,7 +211,7 @@ def modules_imported_under_folder(root):
         yield from modules_imported_by_module(contents)
 
 
-base_name_re = re.compile(r'\w+')
+base_name_re = re.compile(r"\w+")
 
 
 def base_module_name(module_name_dot_path):

@@ -180,9 +180,9 @@ def resolve_module_contents(module_spec, dflt=None, assert_output_is_str=True):
             module_bytes = fp.read()
         return decode_or_default(module_bytes, dflt=dflt)
     if assert_output_is_str:
-        assert isinstance(
-            module_spec, str
-        ), f"module_spec should be a string at this point, but was a {type(module_spec)}"
+        assert isinstance(module_spec, str), (
+            f"module_spec should be a string at this point, but was a {type(module_spec)}"
+        )
     return module_spec
 
 

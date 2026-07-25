@@ -7,41 +7,41 @@ import json
 dflt_formatter = Formatter()
 
 dflt_specs = {
-    'license_template': 'apache-2.0',
-    'gitignore_template': 'Python',
-    'auto_init': True
+    "license_template": "apache-2.0",
+    "gitignore_template": "Python",
+    "auto_init": True,
 }
 
 
-def create_github_repo(name, description='', login_or_token=None, password=None):
+def create_github_repo(name, description="", login_or_token=None, password=None):
     """Create a new github repository
 
     Note: Requires github (pip install github)
     """
     from github import Github
+
     gg = Github(login_or_token=login_or_token, password=password)
 
-    my_specs = {
-        'name': name,
-        'description': description
-    }
+    my_specs = {"name": name, "description": description}
     specs = dict(dflt_specs, **my_specs)
     user = gg.get_user()
     return user.create_repo(**specs)
 
 
 def increment_version(version_str):
-    version_nums = list(map(int, version_str.split('.')))
+    version_nums = list(map(int, version_str.split(".")))
     version_nums[-1] += 1
-    return '.'.join(map(str, version_nums))
+    return ".".join(map(str, version_nums))
 
 
 import urllib.request
 
-DLFT_PYPI_PACKAGE_JSON_URL_TEMPLATE = 'https://pypi.python.org/pypi/{package}/json'
+DLFT_PYPI_PACKAGE_JSON_URL_TEMPLATE = "https://pypi.python.org/pypi/{package}/json"
 
 
-def get_last_pypi_version_number(package: str, url_template=DLFT_PYPI_PACKAGE_JSON_URL_TEMPLATE) -> str:
+def get_last_pypi_version_number(
+    package: str, url_template=DLFT_PYPI_PACKAGE_JSON_URL_TEMPLATE
+) -> str:
     """
     Return version of package on pypi.python.org using json.
 
@@ -57,12 +57,14 @@ def get_last_pypi_version_number(package: str, url_template=DLFT_PYPI_PACKAGE_JS
     r = urllib.request.urlopen(req)
     if r.code == 200:
         t = json.loads(r.read())
-        releases = t.get('releases', [])
+        releases = t.get("releases", [])
         if releases:
             return sorted(releases)[-1]
 
 
-def next_version_for_package(package: str, url_template=DLFT_PYPI_PACKAGE_JSON_URL_TEMPLATE) -> str:
+def next_version_for_package(
+    package: str, url_template=DLFT_PYPI_PACKAGE_JSON_URL_TEMPLATE
+) -> str:
     current_version = get_last_pypi_version_number(package, url_template)
     if current_version is not None:
         return increment_version(current_version)
@@ -74,6 +76,7 @@ def next_version_for_package(package: str, url_template=DLFT_PYPI_PACKAGE_JSON_U
 def my_setup(**setup_kwargs):
     from setuptools import setup
     import json
+
     print("Setup params -------------------------------------------------------")
     print(json.dumps(setup_kwargs, indent=2))
     print("--------------------------------------------------------------------")
@@ -101,10 +104,12 @@ def ujoin(*args):
     ''
     """
     if len(args) == 0 or len(args[0]) == 0:
-        return ''
-    return ((args[0][0] == '/') * '/'  # prepend slash if first arg starts with it
-            + '/'.join(x[(x[0] == '/'):(len(x) - (x[-1] == '/'))] for x in args)
-            + (args[-1][-1] == '/') * '/')  # append slash if last arg ends with it
+        return ""
+    return (
+        (args[0][0] == "/") * "/"  # prepend slash if first arg starts with it
+        + "/".join(x[(x[0] == "/") : (len(x) - (x[-1] == "/"))] for x in args)
+        + (args[-1][-1] == "/") * "/"
+    )  # append slash if last arg ends with it
 
 
 ########### Partial and incremental formatting #########################################################################
@@ -118,7 +123,7 @@ class PartialFormatter(Formatter):
         try:
             return super().get_value(key, args, kwargs)
         except KeyError:
-            return '{' + key + '}'
+            return "{" + key + "}"
 
     def format_fields_set(self, s):
         return {x[1] for x in self.parse(s) if x[1]}
@@ -128,6 +133,7 @@ partial_formatter = PartialFormatter()
 
 
 # TODO: For those who love algorithmic optimization, there's some wasted to cut out here below.
+
 
 def _unformatted(d):
     for k, v in d.items():
@@ -194,8 +200,10 @@ def format_str_vals_of_dict(d, *, max_formatting_loops=10, **kwargs):
     missing_fields = set(_fields_to_format(d)) - provided_fields
 
     if missing_fields:
-        raise ValueError("I won't be able to complete that. You'll need to provide the values for:\n" +
-                         f"  {', '.join(missing_fields)}")
+        raise ValueError(
+            "I won't be able to complete that. You'll need to provide the values for:\n"
+            + f"  {', '.join(missing_fields)}"
+        )
 
     for i in range(max_formatting_loops):
         unformatted = set(_unformatted(d))
@@ -206,8 +214,10 @@ def format_str_vals_of_dict(d, *, max_formatting_loops=10, **kwargs):
         else:
             break
     else:
-        raise ValueError(f"There are still some unformatted fields, "
-                         f"but I reached my max {max_formatting_loops} allowed loops. " +
-                         f"Those fields are: {set(_fields_to_format(d)) - (set(d) | set(kwargs))}")
+        raise ValueError(
+            f"There are still some unformatted fields, "
+            f"but I reached my max {max_formatting_loops} allowed loops. "
+            + f"Those fields are: {set(_fields_to_format(d)) - (set(d) | set(kwargs))}"
+        )
 
     return d
