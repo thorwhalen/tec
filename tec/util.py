@@ -7,7 +7,9 @@ import os
 DFLT_USE_CCHARDET = True
 
 try:
-    import cchardet as chardet
+    # charset_normalizer replaces the abandoned/unbuildable cchardet; its
+    # top-level ``detect`` is chardet-compatible (returns {"encoding": ...}).
+    import charset_normalizer as chardet
 except (ModuleNotFoundError, ImportError):
     try:
         import chardet
@@ -323,10 +325,12 @@ def name_and_object_pairs(
     Get method names of the dict class:
 
     >>> next(zip(*name_and_object_pairs(dict)))
+    ('clear', 'copy', 'fromkeys', 'get', 'items', 'keys', 'pop', 'popitem', 'setdefault', 'update', 'values')
 
     Get only those names of dict methods that contain the string 'keys':
 
     >>> next(zip(*name_and_object_pairs(dict, name_filt=lambda x: 'keys' in x)))
+    ('fromkeys', 'keys')
 
     """
     if not isinstance(objects, Iterable):
