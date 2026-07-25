@@ -1,3 +1,6 @@
+"""Tools for pip packaging: create GitHub repos, look up PyPI versions, and
+format packaging-related strings."""
+
 from string import Formatter
 import json
 

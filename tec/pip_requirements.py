@@ -1,3 +1,5 @@
+"""Tools to read and analyze pip requirements files as tabular data."""
+
 import pandas as pd
 from numpy import array
 import os

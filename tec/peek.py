@@ -1,3 +1,5 @@
+"""Peek at Python objects: print their source code and signatures."""
+
 from inspect import getsource, getsourcelines, signature
 from typing import Any, Optional
 import os
