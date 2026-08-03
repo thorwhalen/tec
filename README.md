@@ -10,6 +10,8 @@ To install:	```pip install tec```
 
 ## Counting imported names
 
+### Quickly (``tec.import_counting``)
+
 ``modules_imported`` is a generator of module names from obj. 
 It uses string parsing, so is not as accurate as some other methods, but is fast and flexible, 
 and doesn't require actually running any of the code analyzed.
@@ -24,6 +26,31 @@ and doesn't require actually running any of the code analyzed.
 >>> Counter(modules_imported(os, only_base_name=True)).most_common()  #doctest: +ELLIPSIS
 [('nt', 5), ('posix', 4), ... ('warnings', 1), ('subprocess', 1)]
 ```
+
+### Accurately (``tec.imports``)
+
+When accuracy matters more than speed, ``tec.imports`` parses the code with the
+standard library's ``ast``, so import-looking strings, comments and line
+continuations can't fool it. Each import comes back as an ``ImportInfo``
+(``name``, ``filename``, ``lineno``, ``level``).
+
+```python
+>>> from tec import imports_in_code, count_imports
+>>> [imp.name for imp in imports_in_code("import os\nfrom json import dumps")]
+['os', 'json.dumps']
+>>> count_imports(some_package_or_folder).most_common(3)  # doctest: +SKIP
+[('os', 12), ('dol', 7), ('re', 5)]
+```
+
+``count_imports`` (and ``imports_under_folder``) take a folder path, a module
+object, a package, or an ``__init__.py`` path; what gets counted is decided by the
+``import_key`` argument, which defaults to the top-level package name.
+
+> **Note.** ``tec.imports`` replaces ``tec.findimports``, which held a vendored copy
+> of the GPL-2.0-or-later ``findimports`` project -- incompatible with ``tec``'s own
+> Apache-2.0 licence, and therefore removed. ``tec.findimports`` remains as a
+> deprecated forwarding layer. The module-*graph* part of that old API has no ``tec``
+> equivalent; install the upstream project yourself if you need it.
 
 ## Modules
 
