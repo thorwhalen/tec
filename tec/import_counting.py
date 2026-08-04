@@ -96,7 +96,8 @@ def modules_imported(obj, only_base_name=False, exclude_stdlib=False):
     It may have false positives (strings that have import patterns, but are not actual code imports).
     It may have false negatives (relative imports (as in ``..name``) and "dynamically" imported, etc.
 
-    If you need something more precise, look into other tools (snakefood or findimports for example).
+    If you need something more precise, use ``tec.imports`` (which parses the code with
+    ``ast`` instead of matching patterns), or look into other tools (snakefood, for example).
 
     :param obj: module object, file or folder path, or anything that can resolve to that
     :param only_base_name: If True, will only return the first part of the dot names

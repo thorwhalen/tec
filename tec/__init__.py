@@ -30,10 +30,20 @@ from tec.stores import (  # lots of this moved to xdol/pystores
 
 from xdol import PkgReader  # because used to be defined in tec
 
-from tec.import_counting import (
+from tec.import_counting import (  # regex-based (fast, approximate)
     modules_imported,
     modules_imported_count,
     base_module_name,
+)
+
+from tec.imports import (  # ast-based (accurate)
+    ImportInfo,
+    ModuleImports,
+    base_package_of,
+    count_imports,
+    find_imports,
+    imports_in_code,
+    imports_under_folder,
 )
 
 from tec.util import (
