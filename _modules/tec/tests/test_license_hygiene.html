@@ -1,0 +1,217 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tec.tests.test_license_hygiene &mdash; tec 0.0.19 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=2fd7553c"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            tec
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec.html">tec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/dependencies.html">tec.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/doctest_utils.html">tec.doctest_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/findimports.html">tec.findimports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/import_counting.html">tec.import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/imports.html">tec.imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/misc.html">tec.misc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/misc/manage_pth_file.html">tec.misc.manage_pth_file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/modules.html">tec.modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/packages.html">tec.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/peek.html">tec.peek</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/pip_packaging.html">tec.pip_packaging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/pip_requirements.html">tec.pip_requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/pkg_code.html">tec.pkg_code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/snake_food_import_counting.html">tec.snake_food_import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/stores.html">tec.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/tests.html">tec.tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/tests/test_imports.html">tec.tests.test_imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/tests/test_license_hygiene.html">tec.tests.test_license_hygiene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../module_docs/tec/util.html">tec.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">tec</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tec.tests.test_license_hygiene</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tec.tests.test_license_hygiene</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Guard against foreign (licence-incompatible) source being vendored into ``tec``.</span>
+
+<span class="sd">``tec`` is distributed under Apache-2.0. It once shipped a vendored copy of a</span>
+<span class="sd">GPL-2.0-or-later project, which quietly made every ``tec`` release -- and every</span>
+<span class="sd">package depending on it -- carry incompatible terms.</span>
+
+<span class="sd">The test here is deliberately blunt: no file of the package may contain a foreign</span>
+<span class="sd">licence grant or a copyright notice. If a future change legitimately needs one,</span>
+<span class="sd">that is a decision to be made explicitly (by editing the package&#39;s declared</span>
+<span class="sd">licence), not by silently pasting a file in.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">tec</span>
+
+<span class="c1">#: Root of the installed/importable ``tec`` package.</span>
+<span class="n">PKG_ROOT</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">tec</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span>
+
+<span class="c1">#: This test module -- excluded from the scan, since it necessarily spells out the</span>
+<span class="c1">#: very markers it is looking for.</span>
+<span class="n">THIS_FILE</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+
+<span class="c1">#: Directory names never scanned (build/cache artifacts, not source).</span>
+<span class="n">EXCLUDED_DIR_NAMES</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">({</span><span class="s2">&quot;__pycache__&quot;</span><span class="p">,</span> <span class="s2">&quot;.ipynb_checkpoints&quot;</span><span class="p">})</span>
+
+<span class="c1">#: Substrings whose presence in a source file signals a foreign licence grant.</span>
+<span class="n">FOREIGN_LICENSE_MARKERS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;GNU General Public License&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GNU Lesser General Public License&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Mozilla Public License&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;This program is free software&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;redistribute it and/or modify&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;__licence__&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;__license__&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1">#: A copyright notice line. Third party code almost always carries one; ``tec``&#39;s</span>
+<span class="c1">#: own modules carry none (the package&#39;s LICENSE file is the single place for it).</span>
+<span class="n">COPYRIGHT_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\s*(?:#\s*)?Copyright\b&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="py_files_of_package">
+<a class="viewcode-back" href="../../../module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.py_files_of_package">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">py_files_of_package</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate the ``.py`` files of the ``tec`` package that should be scanned.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">PKG_ROOT</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">&quot;*.py&quot;</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">EXCLUDED_DIR_NAMES</span><span class="o">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">parts</span><span class="p">)</span> <span class="ow">and</span> <span class="n">path</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span> <span class="o">!=</span> <span class="n">THIS_FILE</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">path</span></div>
+
+
+
+<div class="viewcode-block" id="test_there_are_files_to_scan">
+<a class="viewcode-back" href="../../../module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.test_there_are_files_to_scan">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_there_are_files_to_scan</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sanity check: a scan that finds nothing to scan would vacuously pass.&quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">py_files_of_package</span><span class="p">()))</span> <span class="o">&gt;</span> <span class="mi">5</span></div>
+
+
+
+<div class="viewcode-block" id="test_no_foreign_license_grant_in_package_source">
+<a class="viewcode-back" href="../../../module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.test_no_foreign_license_grant_in_package_source">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_no_foreign_license_grant_in_package_source</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;No module of the package embeds a foreign licence grant.&quot;&quot;&quot;</span>
+    <span class="n">offenders</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">py_files_of_package</span><span class="p">():</span>
+        <span class="n">contents</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;replace&quot;</span><span class="p">)</span>
+        <span class="n">found</span> <span class="o">=</span> <span class="p">[</span><span class="n">marker</span> <span class="k">for</span> <span class="n">marker</span> <span class="ow">in</span> <span class="n">FOREIGN_LICENSE_MARKERS</span> <span class="k">if</span> <span class="n">marker</span> <span class="ow">in</span> <span class="n">contents</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">found</span><span class="p">:</span>
+            <span class="n">offenders</span><span class="p">[</span><span class="n">path</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">PKG_ROOT</span><span class="p">)</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()]</span> <span class="o">=</span> <span class="n">found</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">offenders</span><span class="p">,</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Foreign licence text found in tec source, but tec is Apache-2.0: </span><span class="si">{</span><span class="n">offenders</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="test_no_foreign_copyright_notice_in_package_source">
+<a class="viewcode-back" href="../../../module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.test_no_foreign_copyright_notice_in_package_source">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_no_foreign_copyright_notice_in_package_source</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;No module of the package carries a copyright notice of its own.&quot;&quot;&quot;</span>
+    <span class="n">offenders</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">PKG_ROOT</span><span class="p">)</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">py_files_of_package</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">COPYRIGHT_RE</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;replace&quot;</span><span class="p">))</span>
+    <span class="p">]</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">offenders</span><span class="p">,</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Copyright notice(s) found in tec source, but tec is Apache-2.0 and its &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;only copyright statement belongs in LICENSE: </span><span class="si">{</span><span class="n">offenders</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

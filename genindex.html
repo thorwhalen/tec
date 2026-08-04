@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; tec 0.0.18 documentation</title>
+  <title>Index &mdash; tec 0.0.19 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=8bafd125"></script>
+      <script src="_static/documentation_options.js?v=2fd7553c"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -51,6 +51,7 @@
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/doctest_utils.html">tec.doctest_utils</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/findimports.html">tec.findimports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/import_counting.html">tec.import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/imports.html">tec.imports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/misc.html">tec.misc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/misc/manage_pth_file.html">tec.misc.manage_pth_file</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/modules.html">tec.modules</a></li>
@@ -61,6 +62,9 @@
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/pkg_code.html">tec.pkg_code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/snake_food_import_counting.html">tec.snake_food_import_counting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/stores.html">tec.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/tests.html">tec.tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/tests/test_imports.html">tec.tests.test_imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html">tec.tests.test_license_hygiene</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/util.html">tec.util</a></li>
 </ul>
 
@@ -95,6 +99,7 @@
  | <a href="#B"><strong>B</strong></a>
  | <a href="#C"><strong>C</strong></a>
  | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
  | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
  | <a href="#I"><strong>I</strong></a>
@@ -102,7 +107,6 @@
  | <a href="#M"><strong>M</strong></a>
  | <a href="#N"><strong>N</strong></a>
  | <a href="#P"><strong>P</strong></a>
- | <a href="#Q"><strong>Q</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
@@ -113,13 +117,13 @@
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="module_docs/tec/misc/manage_pth_file.html#tec.misc.manage_pth_file.add_missing_lines">add_missing_lines() (in module tec.misc.manage_pth_file)</a>
+      <li><a href="module_docs/tec/imports.html#tec.imports.ABSOLUTE_IMPORT_LEVEL">ABSOLUTE_IMPORT_LEVEL (in module tec.imports)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="module_docs/tec/misc/manage_pth_file.html#tec.misc.manage_pth_file.add_to_pth_file">add_to_pth_file() (in module tec.misc.manage_pth_file)</a>
+      <li><a href="module_docs/tec/misc/manage_pth_file.html#tec.misc.manage_pth_file.add_missing_lines">add_missing_lines() (in module tec.misc.manage_pth_file)</a>
 </li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.adjust_lineno">adjust_lineno() (in module tec.findimports)</a>
+      <li><a href="module_docs/tec/misc/manage_pth_file.html#tec.misc.manage_pth_file.add_to_pth_file">add_to_pth_file() (in module tec.misc.manage_pth_file)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -135,6 +139,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/tec/snake_food_import_counting.html#tec.snake_food_import_counting.base_modules_used_in_module">base_modules_used_in_module() (in module tec.snake_food_import_counting)</a>
 </li>
+      <li><a href="module_docs/tec/imports.html#tec.imports.base_package_of">base_package_of() (in module tec.imports)</a>
+</li>
       <li><a href="module_docs/tec/util.html#tec.util.bitmap_selection">bitmap_selection() (in module tec.util)</a>
 </li>
   </ul></td>
@@ -143,14 +149,18 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleGraph.collapseCycles">collapseCycles() (tec.findimports.ModuleGraph method)</a>
+      <li><a href="module_docs/tec/imports.html#tec.imports.CODE_STRING_FILENAME">CODE_STRING_FILENAME (in module tec.imports)</a>
 </li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleGraph.collapseTests">collapseTests() (tec.findimports.ModuleGraph method)</a>
+      <li><a href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.COPYRIGHT_RE">COPYRIGHT_RE (in module tec.tests.test_license_hygiene)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/tec/findimports.html#tec.findimports.count_imports">count_imports() (in module tec.findimports)</a>
+
+      <ul>
+        <li><a href="module_docs/tec/imports.html#tec.imports.count_imports">(in module tec.imports)</a>
 </li>
+      </ul></li>
       <li><a href="module_docs/tec/pip_packaging.html#tec.pip_packaging.create_github_repo">create_github_repo() (in module tec.pip_packaging)</a>
 </li>
   </ul></td>
@@ -161,9 +171,25 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/tec/dependencies.html#tec.dependencies.dependency_graph_for">dependency_graph_for() (in module tec.dependencies)</a>
 </li>
+      <li><a href="module_docs/tec/findimports.html#tec.findimports.DEPRECATION_MESSAGE">DEPRECATION_MESSAGE (in module tec.findimports)</a>
+</li>
+      <li><a href="module_docs/tec/misc/manage_pth_file.html#tec.misc.manage_pth_file.DFLT_FILENAME_FILT">DFLT_FILENAME_FILT() (in module tec.misc.manage_pth_file)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="module_docs/tec/misc/manage_pth_file.html#tec.misc.manage_pth_file.DFLT_FILENAME_FILT">DFLT_FILENAME_FILT() (in module tec.misc.manage_pth_file)</a>
+      <li><a href="module_docs/tec/imports.html#tec.imports.DFLT_IMPORT_KEY">DFLT_IMPORT_KEY() (in module tec.imports)</a>
+</li>
+      <li><a href="module_docs/tec/imports.html#tec.imports.DFLT_ON_PARSE_ERROR">DFLT_ON_PARSE_ERROR() (in module tec.imports)</a>
+</li>
+      <li><a href="module_docs/tec/imports.html#tec.imports.DFLT_PATH_FILT">DFLT_PATH_FILT (in module tec.imports)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.EXCLUDED_DIR_NAMES">EXCLUDED_DIR_NAMES (in module tec.tests.test_license_hygiene)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -173,23 +199,23 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/tec/pip_requirements.html#tec.pip_requirements.file_to_string">file_to_string() (in module tec.pip_requirements)</a>
 </li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleGraph.filenameToModname">filenameToModname() (tec.findimports.ModuleGraph method)</a>
+      <li><a href="module_docs/tec/imports.html#tec.imports.ImportInfo.filename">filename (tec.imports.ImportInfo attribute)</a>
 </li>
       <li><a href="module_docs/tec/modules.html#tec.modules.filepath_to_dotpath">filepath_to_dotpath() (in module tec.modules)</a>
 </li>
       <li><a href="module_docs/tec/util.html#tec.util.find">find() (in module tec.util)</a>
 </li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.find_imports">find_imports() (in module tec.findimports)</a>
+      <li><a href="module_docs/tec/imports.html#tec.imports.find_imports">find_imports() (in module tec.imports)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.find_imports_and_track_names">find_imports_and_track_names() (in module tec.findimports)</a>
-</li>
       <li><a href="module_docs/tec/util.html#tec.util.find_objects">find_objects() (in module tec.util)</a>
 </li>
       <li><a href="module_docs/tec/stores.html#tec.stores.find_short_description_for_pkg">find_short_description_for_pkg() (in module tec.stores)</a>
 </li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleGraph.findModuleOfName">findModuleOfName() (tec.findimports.ModuleGraph method)</a>
+      <li><a href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.FOREIGN_LICENSE_MARKERS">FOREIGN_LICENSE_MARKERS (in module tec.tests.test_license_hygiene)</a>
+</li>
+      <li><a href="module_docs/tec/imports.html#tec.imports.FOREIGN_PATH_SEP">FOREIGN_PATH_SEP (in module tec.imports)</a>
 </li>
       <li><a href="module_docs/tec/pip_packaging.html#tec.pip_packaging.format_str_vals_of_dict">format_str_vals_of_dict() (in module tec.pip_packaging)</a>
 </li>
@@ -209,13 +235,13 @@
 <h2 id="I">I</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/tec/imports.html#tec.imports.ignore_parse_error">ignore_parse_error() (in module tec.imports)</a>
+</li>
       <li><a href="module_docs/tec/util.html#tec.util.import_and_add_if_available">import_and_add_if_available() (in module tec.util)</a>
 </li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ImportFinder">ImportFinder (class in tec.findimports)</a>
+      <li><a href="module_docs/tec/imports.html#tec.imports.ImportInfo">ImportInfo (class in tec.imports)</a>
 </li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ImportFinderAndNameTracker">ImportFinderAndNameTracker (class in tec.findimports)</a>
-</li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ImportInfo">ImportInfo (class in tec.findimports)</a>
+      <li><a href="module_docs/tec/imports.html#tec.imports.imports_in_code">imports_in_code() (in module tec.imports)</a>
 </li>
       <li><a href="module_docs/tec/snake_food_import_counting.html#tec.snake_food_import_counting.imports_in_module">imports_in_module() (in module tec.snake_food_import_counting)</a>
 </li>
@@ -223,15 +249,15 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/tec/import_counting.html#tec.import_counting.imports_in_py_content">imports_in_py_content() (in module tec.import_counting)</a>
 </li>
+      <li><a href="module_docs/tec/imports.html#tec.imports.imports_under_folder">imports_under_folder() (in module tec.imports)</a>
+</li>
       <li><a href="module_docs/tec/misc.html#tec.misc.infos_of_packages_under_rootdir">infos_of_packages_under_rootdir() (in module tec.misc)</a>
 </li>
       <li><a href="module_docs/tec/modules.html#tec.modules.is_from_module">is_from_module() (in module tec.modules)</a>
 </li>
       <li><a href="module_docs/tec/modules.html#tec.modules.is_module_dotpath">is_module_dotpath() (in module tec.modules)</a>
 </li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleGraph.isModule">isModule() (tec.findimports.ModuleGraph method)</a>
-</li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleGraph.isPackage">isPackage() (tec.findimports.ModuleGraph method)</a>
+      <li><a href="module_docs/tec/imports.html#tec.imports.ImportInfo.is_relative">is_relative (tec.imports.ImportInfo property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -239,7 +265,9 @@
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleGraph.listModules">listModules() (tec.findimports.ModuleGraph method)</a>
+      <li><a href="module_docs/tec/imports.html#tec.imports.ImportInfo.level">level (tec.imports.ImportInfo attribute)</a>
+</li>
+      <li><a href="module_docs/tec/imports.html#tec.imports.ImportInfo.lineno">lineno (tec.imports.ImportInfo attribute)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -273,6 +301,8 @@
 </li>
         <li><a href="module_docs/tec/import_counting.html#module-tec.import_counting">tec.import_counting</a>
 </li>
+        <li><a href="module_docs/tec/imports.html#module-tec.imports">tec.imports</a>
+</li>
         <li><a href="module_docs/tec/misc.html#module-tec.misc">tec.misc</a>
 </li>
         <li><a href="module_docs/tec/misc/manage_pth_file.html#module-tec.misc.manage_pth_file">tec.misc.manage_pth_file</a>
@@ -293,24 +323,20 @@
 </li>
         <li><a href="module_docs/tec/stores.html#module-tec.stores">tec.stores</a>
 </li>
+        <li><a href="module_docs/tec/tests.html#module-tec.tests">tec.tests</a>
+</li>
+        <li><a href="module_docs/tec/tests/test_license_hygiene.html#module-tec.tests.test_license_hygiene">tec.tests.test_license_hygiene</a>
+</li>
         <li><a href="module_docs/tec/util.html#module-tec.util">tec.util</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.Module">Module (class in tec.findimports)</a>
-</li>
       <li><a href="module_docs/tec/modules.html#tec.modules.ModuleAllAttrsReader">ModuleAllAttrsReader (class in tec.modules)</a>
 </li>
       <li><a href="module_docs/tec/modules.html#tec.modules.ModuleAttrsReader">ModuleAttrsReader (class in tec.modules)</a>
 </li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleCycle">ModuleCycle (class in tec.findimports)</a>
-</li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleGraph">ModuleGraph (class in tec.findimports)</a>
-</li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleImports">ModuleImports (class in tec.findimports)</a>
-</li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleImportsBase">ModuleImportsBase (class in tec.findimports)</a>
+      <li><a href="module_docs/tec/imports.html#tec.imports.ModuleImports">ModuleImports (class in tec.imports)</a>
 </li>
       <li><a href="module_docs/tec/import_counting.html#tec.import_counting.modules_imported">modules_imported() (in module tec.import_counting)</a>
 </li>
@@ -319,8 +345,6 @@
       <li><a href="module_docs/tec/import_counting.html#tec.import_counting.modules_imported_count">modules_imported_count() (in module tec.import_counting)</a>
 </li>
       <li><a href="module_docs/tec/import_counting.html#tec.import_counting.modules_imported_under_folder">modules_imported_under_folder() (in module tec.import_counting)</a>
-</li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModulesColl">ModulesColl (class in tec.findimports)</a>
 </li>
       <li><a href="module_docs/tec/modules.html#tec.modules.ModuleSpecKind">ModuleSpecKind (class in tec.modules)</a>
 </li>
@@ -332,6 +356,10 @@
 <h2 id="N">N</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/tec/imports.html#tec.imports.ImportInfo.name">name (tec.imports.ImportInfo attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="module_docs/tec/util.html#tec.util.name_and_object_pairs">name_and_object_pairs() (in module tec.util)</a>
 </li>
   </ul></td>
@@ -340,17 +368,11 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleGraph.packageGraph">packageGraph() (tec.findimports.ModuleGraph method)</a>
-</li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleGraph.packageOf">packageOf() (tec.findimports.ModuleGraph method)</a>
-</li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleGraph.parseFile">parseFile() (tec.findimports.ModuleGraph method)</a>
-</li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleGraph.parsePathname">parsePathname() (tec.findimports.ModuleGraph method)</a>
-</li>
       <li><a href="module_docs/tec/pip_packaging.html#tec.pip_packaging.PartialFormatter">PartialFormatter (class in tec.pip_packaging)</a>
 </li>
       <li><a href="module_docs/tec/snake_food_import_counting.html#tec.snake_food_import_counting.pip_licenses_df">pip_licenses_df() (in module tec.snake_food_import_counting)</a>
+</li>
+      <li><a href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.PKG_ROOT">PKG_ROOT (in module tec.tests.test_license_hygiene)</a>
 </li>
       <li><a href="module_docs/tec/peek.html#tec.peek.print_signature">print_signature() (in module tec.peek)</a>
 </li>
@@ -362,23 +384,9 @@
 </li>
       <li><a href="module_docs/tec/packages.html#tec.packages.print_top_level_diagnosis">print_top_level_diagnosis() (in module tec.packages)</a>
 </li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleGraph.printDot">printDot() (tec.findimports.ModuleGraph method)</a>
-</li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleGraph.printImportedNames">printImportedNames() (tec.findimports.ModuleGraph method)</a>
-</li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleGraph.printImports">printImports() (tec.findimports.ModuleGraph method)</a>
-</li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleGraph.printUnusedImports">printUnusedImports() (tec.findimports.ModuleGraph method)</a>
+      <li><a href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.py_files_of_package">py_files_of_package() (in module tec.tests.test_license_hygiene)</a>
 </li>
       <li><a href="module_docs/tec/stores.html#tec.stores.py_files_with_contents_matching_pattern">py_files_with_contents_matching_pattern() (in module tec.stores)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="Q">Q</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.quote">quote() (in module tec.findimports)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -386,13 +394,17 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/tec/imports.html#tec.imports.raise_parse_error">raise_parse_error() (in module tec.imports)</a>
+</li>
       <li><a href="module_docs/tec/findimports.html#tec.findimports.re_find_imports">re_find_imports() (in module tec.findimports)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleGraph.readCache">readCache() (tec.findimports.ModuleGraph method)</a>
+      <li><a href="module_docs/tec/findimports.html#tec.findimports.REMOVED_NAME_ERROR_TEMPLATE">REMOVED_NAME_ERROR_TEMPLATE (in module tec.findimports)</a>
 </li>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleGraph.removeTestPackage">removeTestPackage() (tec.findimports.ModuleGraph method)</a>
+      <li><a href="module_docs/tec/findimports.html#tec.findimports.REMOVED_NAMES">REMOVED_NAMES (in module tec.findimports)</a>
+</li>
+      <li><a href="module_docs/tec/findimports.html#tec.findimports.REPLACEMENT_MODULE">REPLACEMENT_MODULE (in module tec.findimports)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -400,12 +412,10 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.Scope">Scope (class in tec.findimports)</a>
+      <li><a href="module_docs/tec/modules.html#tec.modules.second_party_names">second_party_names() (in module tec.modules)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="module_docs/tec/modules.html#tec.modules.second_party_names">second_party_names() (in module tec.modules)</a>
-</li>
       <li><a href="module_docs/tec/util.html#tec.util.signature_strings">signature_strings() (in module tec.util)</a>
 </li>
   </ul></td>
@@ -452,6 +462,13 @@
 </li>
       </ul></li>
       <li>
+    tec.imports
+
+      <ul>
+        <li><a href="module_docs/tec/imports.html#module-tec.imports">module</a>
+</li>
+      </ul></li>
+      <li>
     tec.misc
 
       <ul>
@@ -472,8 +489,6 @@
         <li><a href="module_docs/tec/modules.html#module-tec.modules">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     tec.packages
 
@@ -481,6 +496,8 @@
         <li><a href="module_docs/tec/packages.html#module-tec.packages">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     tec.peek
 
@@ -524,12 +541,34 @@
 </li>
       </ul></li>
       <li>
+    tec.tests
+
+      <ul>
+        <li><a href="module_docs/tec/tests.html#module-tec.tests">module</a>
+</li>
+      </ul></li>
+      <li>
+    tec.tests.test_license_hygiene
+
+      <ul>
+        <li><a href="module_docs/tec/tests/test_license_hygiene.html#module-tec.tests.test_license_hygiene">module</a>
+</li>
+      </ul></li>
+      <li>
     tec.util
 
       <ul>
         <li><a href="module_docs/tec/util.html#module-tec.util">module</a>
 </li>
       </ul></li>
+      <li><a href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.test_no_foreign_copyright_notice_in_package_source">test_no_foreign_copyright_notice_in_package_source() (in module tec.tests.test_license_hygiene)</a>
+</li>
+      <li><a href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.test_no_foreign_license_grant_in_package_source">test_no_foreign_license_grant_in_package_source() (in module tec.tests.test_license_hygiene)</a>
+</li>
+      <li><a href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.test_there_are_files_to_scan">test_there_are_files_to_scan() (in module tec.tests.test_license_hygiene)</a>
+</li>
+      <li><a href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.THIS_FILE">THIS_FILE (in module tec.tests.test_license_hygiene)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -539,12 +578,16 @@
       <li><a href="module_docs/tec/pip_packaging.html#tec.pip_packaging.ujoin">ujoin() (in module tec.pip_packaging)</a>
 </li>
   </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="module_docs/tec/findimports.html#tec.findimports.UPSTREAM_ONLY_ADVICE">UPSTREAM_ONLY_ADVICE (in module tec.findimports)</a>
+</li>
+  </ul></td>
 </tr></table>
 
 <h2 id="W">W</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="module_docs/tec/findimports.html#tec.findimports.ModuleGraph.writeCache">writeCache() (tec.findimports.ModuleGraph method)</a>
+      <li><a href="module_docs/tec/imports.html#tec.imports.warn_of_parse_error">warn_of_parse_error() (in module tec.imports)</a>
 </li>
   </ul></td>
 </tr></table>

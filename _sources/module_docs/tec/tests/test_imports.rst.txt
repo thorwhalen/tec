@@ -1,0 +1,4 @@
+tec.tests.test_imports
+======================
+.. automodule:: tec.tests.test_imports
+   :members:

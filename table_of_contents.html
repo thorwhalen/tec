@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>&lt;no title&gt; &mdash; tec 0.0.18 documentation</title>
+  <title>&lt;no title&gt; &mdash; tec 0.0.19 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=8bafd125"></script>
+      <script src="_static/documentation_options.js?v=2fd7553c"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -52,6 +52,7 @@
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/doctest_utils.html">tec.doctest_utils</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/findimports.html">tec.findimports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/import_counting.html">tec.import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/imports.html">tec.imports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/misc.html">tec.misc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/misc/manage_pth_file.html">tec.misc.manage_pth_file</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/modules.html">tec.modules</a></li>
@@ -62,6 +63,9 @@
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/pkg_code.html">tec.pkg_code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/snake_food_import_counting.html">tec.snake_food_import_counting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/stores.html">tec.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/tests.html">tec.tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/tests/test_imports.html">tec.tests.test_imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html">tec.tests.test_license_hygiene</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/util.html">tec.util</a></li>
 </ul>
 
@@ -99,21 +103,12 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/doctest_utils.html">tec.doctest_utils</a></li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/findimports.html">tec.findimports</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.ImportFinder"><code class="docutils literal notranslate"><span class="pre">ImportFinder</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.ImportFinderAndNameTracker"><code class="docutils literal notranslate"><span class="pre">ImportFinderAndNameTracker</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.ImportInfo"><code class="docutils literal notranslate"><span class="pre">ImportInfo</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.Module"><code class="docutils literal notranslate"><span class="pre">Module</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.ModuleCycle"><code class="docutils literal notranslate"><span class="pre">ModuleCycle</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.ModuleGraph"><code class="docutils literal notranslate"><span class="pre">ModuleGraph</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.ModuleImports"><code class="docutils literal notranslate"><span class="pre">ModuleImports</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.ModuleImportsBase"><code class="docutils literal notranslate"><span class="pre">ModuleImportsBase</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.ModulesColl"><code class="docutils literal notranslate"><span class="pre">ModulesColl</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.Scope"><code class="docutils literal notranslate"><span class="pre">Scope</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.adjust_lineno"><code class="docutils literal notranslate"><span class="pre">adjust_lineno()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.DEPRECATION_MESSAGE"><code class="docutils literal notranslate"><span class="pre">DEPRECATION_MESSAGE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.REMOVED_NAMES"><code class="docutils literal notranslate"><span class="pre">REMOVED_NAMES</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.REMOVED_NAME_ERROR_TEMPLATE"><code class="docutils literal notranslate"><span class="pre">REMOVED_NAME_ERROR_TEMPLATE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.REPLACEMENT_MODULE"><code class="docutils literal notranslate"><span class="pre">REPLACEMENT_MODULE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.UPSTREAM_ONLY_ADVICE"><code class="docutils literal notranslate"><span class="pre">UPSTREAM_ONLY_ADVICE</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.count_imports"><code class="docutils literal notranslate"><span class="pre">count_imports()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.find_imports"><code class="docutils literal notranslate"><span class="pre">find_imports()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.find_imports_and_track_names"><code class="docutils literal notranslate"><span class="pre">find_imports_and_track_names()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.quote"><code class="docutils literal notranslate"><span class="pre">quote()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.re_find_imports"><code class="docutils literal notranslate"><span class="pre">re_find_imports()</span></code></a></li>
 </ul>
 </li>
@@ -126,6 +121,25 @@
 <li class="toctree-l2"><a class="reference internal" href="module_docs/tec/import_counting.html#tec.import_counting.modules_imported_by_module"><code class="docutils literal notranslate"><span class="pre">modules_imported_by_module()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/tec/import_counting.html#tec.import_counting.modules_imported_count"><code class="docutils literal notranslate"><span class="pre">modules_imported_count()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/tec/import_counting.html#tec.import_counting.modules_imported_under_folder"><code class="docutils literal notranslate"><span class="pre">modules_imported_under_folder()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/imports.html">tec.imports</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.ABSOLUTE_IMPORT_LEVEL"><code class="docutils literal notranslate"><span class="pre">ABSOLUTE_IMPORT_LEVEL</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.CODE_STRING_FILENAME"><code class="docutils literal notranslate"><span class="pre">CODE_STRING_FILENAME</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.DFLT_IMPORT_KEY"><code class="docutils literal notranslate"><span class="pre">DFLT_IMPORT_KEY()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.DFLT_ON_PARSE_ERROR"><code class="docutils literal notranslate"><span class="pre">DFLT_ON_PARSE_ERROR()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.DFLT_PATH_FILT"><code class="docutils literal notranslate"><span class="pre">DFLT_PATH_FILT</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.FOREIGN_PATH_SEP"><code class="docutils literal notranslate"><span class="pre">FOREIGN_PATH_SEP</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.ImportInfo"><code class="docutils literal notranslate"><span class="pre">ImportInfo</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.ModuleImports"><code class="docutils literal notranslate"><span class="pre">ModuleImports</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.base_package_of"><code class="docutils literal notranslate"><span class="pre">base_package_of()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.count_imports"><code class="docutils literal notranslate"><span class="pre">count_imports()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.find_imports"><code class="docutils literal notranslate"><span class="pre">find_imports()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.ignore_parse_error"><code class="docutils literal notranslate"><span class="pre">ignore_parse_error()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.imports_in_code"><code class="docutils literal notranslate"><span class="pre">imports_in_code()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.imports_under_folder"><code class="docutils literal notranslate"><span class="pre">imports_under_folder()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.raise_parse_error"><code class="docutils literal notranslate"><span class="pre">raise_parse_error()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.warn_of_parse_error"><code class="docutils literal notranslate"><span class="pre">warn_of_parse_error()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/misc.html">tec.misc</a><ul>
@@ -185,6 +199,20 @@
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/stores.html">tec.stores</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/tec/stores.html#tec.stores.find_short_description_for_pkg"><code class="docutils literal notranslate"><span class="pre">find_short_description_for_pkg()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="module_docs/tec/stores.html#tec.stores.py_files_with_contents_matching_pattern"><code class="docutils literal notranslate"><span class="pre">py_files_with_contents_matching_pattern()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/tests.html">tec.tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/tests/test_imports.html">tec.tests.test_imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html">tec.tests.test_license_hygiene</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.COPYRIGHT_RE"><code class="docutils literal notranslate"><span class="pre">COPYRIGHT_RE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.EXCLUDED_DIR_NAMES"><code class="docutils literal notranslate"><span class="pre">EXCLUDED_DIR_NAMES</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.FOREIGN_LICENSE_MARKERS"><code class="docutils literal notranslate"><span class="pre">FOREIGN_LICENSE_MARKERS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.PKG_ROOT"><code class="docutils literal notranslate"><span class="pre">PKG_ROOT</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.THIS_FILE"><code class="docutils literal notranslate"><span class="pre">THIS_FILE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.py_files_of_package"><code class="docutils literal notranslate"><span class="pre">py_files_of_package()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.test_no_foreign_copyright_notice_in_package_source"><code class="docutils literal notranslate"><span class="pre">test_no_foreign_copyright_notice_in_package_source()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.test_no_foreign_license_grant_in_package_source"><code class="docutils literal notranslate"><span class="pre">test_no_foreign_license_grant_in_package_source()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.test_there_are_files_to_scan"><code class="docutils literal notranslate"><span class="pre">test_there_are_files_to_scan()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="module_docs/tec/util.html">tec.util</a><ul>

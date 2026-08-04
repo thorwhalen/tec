@@ -1,0 +1,4 @@
+tec.tests.test_license_hygiene
+==============================
+.. automodule:: tec.tests.test_license_hygiene
+   :members:

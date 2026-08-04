@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tec.findimports &mdash; tec 0.0.18 documentation</title>
+  <title>tec.findimports &mdash; tec 0.0.19 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=8bafd125"></script>
+      <script src="../../_static/documentation_options.js?v=2fd7553c"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -53,45 +53,17 @@
 <li class="toctree-l1"><a class="reference internal" href="dependencies.html">tec.dependencies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="doctest_utils.html">tec.doctest_utils</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">tec.findimports</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#tec.findimports.ImportFinder"><code class="docutils literal notranslate"><span class="pre">ImportFinder</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tec.findimports.ImportFinderAndNameTracker"><code class="docutils literal notranslate"><span class="pre">ImportFinderAndNameTracker</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tec.findimports.ImportInfo"><code class="docutils literal notranslate"><span class="pre">ImportInfo</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tec.findimports.Module"><code class="docutils literal notranslate"><span class="pre">Module</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tec.findimports.ModuleCycle"><code class="docutils literal notranslate"><span class="pre">ModuleCycle</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tec.findimports.ModuleGraph"><code class="docutils literal notranslate"><span class="pre">ModuleGraph</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#tec.findimports.ModuleGraph.collapseCycles"><code class="docutils literal notranslate"><span class="pre">ModuleGraph.collapseCycles()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tec.findimports.ModuleGraph.collapseTests"><code class="docutils literal notranslate"><span class="pre">ModuleGraph.collapseTests()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tec.findimports.ModuleGraph.filenameToModname"><code class="docutils literal notranslate"><span class="pre">ModuleGraph.filenameToModname()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tec.findimports.ModuleGraph.findModuleOfName"><code class="docutils literal notranslate"><span class="pre">ModuleGraph.findModuleOfName()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tec.findimports.ModuleGraph.isModule"><code class="docutils literal notranslate"><span class="pre">ModuleGraph.isModule()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tec.findimports.ModuleGraph.isPackage"><code class="docutils literal notranslate"><span class="pre">ModuleGraph.isPackage()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tec.findimports.ModuleGraph.listModules"><code class="docutils literal notranslate"><span class="pre">ModuleGraph.listModules()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tec.findimports.ModuleGraph.packageGraph"><code class="docutils literal notranslate"><span class="pre">ModuleGraph.packageGraph()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tec.findimports.ModuleGraph.packageOf"><code class="docutils literal notranslate"><span class="pre">ModuleGraph.packageOf()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tec.findimports.ModuleGraph.parseFile"><code class="docutils literal notranslate"><span class="pre">ModuleGraph.parseFile()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tec.findimports.ModuleGraph.parsePathname"><code class="docutils literal notranslate"><span class="pre">ModuleGraph.parsePathname()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tec.findimports.ModuleGraph.printDot"><code class="docutils literal notranslate"><span class="pre">ModuleGraph.printDot()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tec.findimports.ModuleGraph.printImportedNames"><code class="docutils literal notranslate"><span class="pre">ModuleGraph.printImportedNames()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tec.findimports.ModuleGraph.printImports"><code class="docutils literal notranslate"><span class="pre">ModuleGraph.printImports()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tec.findimports.ModuleGraph.printUnusedImports"><code class="docutils literal notranslate"><span class="pre">ModuleGraph.printUnusedImports()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tec.findimports.ModuleGraph.readCache"><code class="docutils literal notranslate"><span class="pre">ModuleGraph.readCache()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tec.findimports.ModuleGraph.removeTestPackage"><code class="docutils literal notranslate"><span class="pre">ModuleGraph.removeTestPackage()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tec.findimports.ModuleGraph.writeCache"><code class="docutils literal notranslate"><span class="pre">ModuleGraph.writeCache()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#tec.findimports.ModuleImports"><code class="docutils literal notranslate"><span class="pre">ModuleImports</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tec.findimports.ModuleImportsBase"><code class="docutils literal notranslate"><span class="pre">ModuleImportsBase</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tec.findimports.ModulesColl"><code class="docutils literal notranslate"><span class="pre">ModulesColl</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tec.findimports.Scope"><code class="docutils literal notranslate"><span class="pre">Scope</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tec.findimports.adjust_lineno"><code class="docutils literal notranslate"><span class="pre">adjust_lineno()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.findimports.DEPRECATION_MESSAGE"><code class="docutils literal notranslate"><span class="pre">DEPRECATION_MESSAGE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.findimports.REMOVED_NAMES"><code class="docutils literal notranslate"><span class="pre">REMOVED_NAMES</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.findimports.REMOVED_NAME_ERROR_TEMPLATE"><code class="docutils literal notranslate"><span class="pre">REMOVED_NAME_ERROR_TEMPLATE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.findimports.REPLACEMENT_MODULE"><code class="docutils literal notranslate"><span class="pre">REPLACEMENT_MODULE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.findimports.UPSTREAM_ONLY_ADVICE"><code class="docutils literal notranslate"><span class="pre">UPSTREAM_ONLY_ADVICE</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tec.findimports.count_imports"><code class="docutils literal notranslate"><span class="pre">count_imports()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tec.findimports.find_imports"><code class="docutils literal notranslate"><span class="pre">find_imports()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tec.findimports.find_imports_and_track_names"><code class="docutils literal notranslate"><span class="pre">find_imports_and_track_names()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tec.findimports.quote"><code class="docutils literal notranslate"><span class="pre">quote()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tec.findimports.re_find_imports"><code class="docutils literal notranslate"><span class="pre">re_find_imports()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="import_counting.html">tec.import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imports.html">tec.imports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="misc.html">tec.misc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="misc/manage_pth_file.html">tec.misc.manage_pth_file</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">tec.modules</a></li>
@@ -102,6 +74,9 @@
 <li class="toctree-l1"><a class="reference internal" href="pkg_code.html">tec.pkg_code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="snake_food_import_counting.html">tec.snake_food_import_counting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stores.html">tec.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">tec.tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/test_imports.html">tec.tests.test_imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/test_license_hygiene.html">tec.tests.test_license_hygiene</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util.html">tec.util</a></li>
 </ul>
 
@@ -131,431 +106,93 @@
              
   <section id="module-tec.findimports">
 <span id="tec-findimports"></span><h1>tec.findimports<a class="headerlink" href="#module-tec.findimports" title="Link to this heading"></a></h1>
-<p>Note: Copied from <a class="reference external" href="https://github.com/mgedmin/findimports">https://github.com/mgedmin/findimports</a> and edited.</p>
-<p>FindImports is a script that processes Python module dependencies.  Currently
-it can be used for finding unused imports and graphing module dependencies
-(with graphviz).</p>
-<p>Syntax: findimports.py [options] [filename|dirname …]</p>
-<dl>
-<dt>Options:</dt><dd><dl class="option-list">
-<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
-<dd><p>This help message</p>
-</dd>
-<dt><kbd><span class="option">-i</span>, <span class="option">--imports</span></kbd></dt>
-<dd><p>Print dependency graph (default action).</p>
-</dd>
-<dt><kbd><span class="option">-d</span>, <span class="option">--dot</span></kbd></dt>
-<dd><p>Print dependency graph in dot (graphviz) format.</p>
-</dd>
-<dt><kbd><span class="option">-n</span>, <span class="option">--names</span></kbd></dt>
-<dd><p>Print dependency graph with all imported names.</p>
-</dd>
-<dt><kbd><span class="option">-u</span>, <span class="option">--unused</span></kbd></dt>
-<dd><p>Print unused imports.</p>
-</dd>
-<dt><kbd><span class="option">-a</span>, <span class="option">--all</span></kbd></dt>
-<dd><p>Print unused imports even if there’s a comment.</p>
-</dd>
-<dt><kbd><span class="option">--duplicate</span></kbd></dt>
-<dd><p>Print duplicate imports.</p>
-</dd>
-<dt><kbd><span class="option">-v</span></kbd></dt>
-<dd><p>Print more information (only affects –duplicate).</p>
-</dd>
-<dt><kbd><span class="option">-N</span>, <span class="option">--noext</span></kbd></dt>
-<dd><p>Omit external dependencies.</p>
-</dd>
-<dt><kbd><span class="option">-p</span>, <span class="option">--packages</span></kbd></dt>
-<dd><p>Convert the module graph to a package graph.</p>
-</dd>
-<dt><kbd><span class="option">-l <var>N</var></span>, <span class="option">--level <var>N</var></span></kbd></dt>
-<dd><p>Collapse subpackages deeper than the Nth level.</p>
-</dd>
-<dt><kbd><span class="option">-c</span>, <span class="option">--collapse</span></kbd></dt>
-<dd><p>Collapse dependency cycles.</p>
-</dd>
-<dt><kbd><span class="option">-T</span>, <span class="option">--tests</span></kbd></dt>
-<dd><p>Collapse packages named ‘tests’ and ‘ftests’ with parent
-packages.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p>FindImports requires Python 2.7 or later.</p>
-<p class="rubric">Notes</p>
-<p>findimports processes doctest blocks inside docstrings.</p>
-<p>findimports.py -u will not complain about import statements that have
-a comment on the same line, e.g.:</p>
-<blockquote>
-<div><p>from somewhereelse import somename # reexport</p>
-</div></blockquote>
-<p>findimports.py -u -a will ignore comments and print these statements also.</p>
-<p>Caching:</p>
-<blockquote>
-<div><p>If you want to produce several different reports from the same dataset,
-you can do it as follows:</p>
-<blockquote>
-<div><p>findimports.py –write-cache foo.importcache dirname
-findimports.py foo.importcache -d -T &gt; graph1.dot
-findimports.py foo.importcache -d -N -c -p -l 2 &gt; graph2.dot</p>
-</div></blockquote>
-</div></blockquote>
-<p>Copyright (c) 2003–2019 Marius Gedminas &lt;<a class="reference external" href="mailto:marius&#37;&#52;&#48;pov&#46;lt">marius<span>&#64;</span>pov<span>&#46;</span>lt</a>&gt;</p>
-<p>This program is free software; you can redistribute it and/or modify it under
-the terms of the GNU General Public License as published by the Free Software
-Foundation; either version 2 of the License, or (at your option) any later
-version.</p>
-<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY
-WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
-PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p>
-<p>You should have received a copy of the GNU General Public License along with
-this program; if not, write to the Free Software Foundation, Inc., 675 Mass
-Ave, Cambridge, MA 02139, USA.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="tec.findimports.ImportFinder">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">ImportFinder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ImportFinder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ImportFinder" title="Link to this definition"></a></dt>
-<dd><p>AST visitor that collects all imported names in its imports attribute.</p>
-<p>For example, the following import statements in the AST tree</p>
-<blockquote>
-<div><p>import a, b.c, d as e
-from q.w.e import x, y as foo, z
-from woof import *</p>
-</div></blockquote>
-<p>will cause <code class="docutils literal notranslate"><span class="pre">imports</span></code> to contain</p>
-<blockquote>
-<div><p>a
-b.c
-d
-q.w.e.x
-q.w.e.y
-q.w.e.z
-woof.*</p>
-</div></blockquote>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="tec.findimports.ImportFinderAndNameTracker">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">ImportFinderAndNameTracker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ImportFinderAndNameTracker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ImportFinderAndNameTracker" title="Link to this definition"></a></dt>
-<dd><p>ImportFinder that also keeps track on used names.</p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="tec.findimports.ImportInfo">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">ImportInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ImportInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ImportInfo" title="Link to this definition"></a></dt>
-<dd><p>A record of a name and the location of the import statement.</p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="tec.findimports.Module">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">Module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#Module"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.Module" title="Link to this definition"></a></dt>
-<dd><p>Node in a module dependency graph.</p>
-<p>Packages may also be represented as Module objects.</p>
-<p><code class="docutils literal notranslate"><span class="pre">imports</span></code> is a set of module names this module depends on.</p>
-<p><code class="docutils literal notranslate"><span class="pre">imported_names</span></code> is a list of all names that were imported from other
-modules (actually, ImportInfo objects).</p>
-<p><code class="docutils literal notranslate"><span class="pre">unused_names</span></code> is a list of names that were imported, but are not used
-(actually, ImportInfo objects).</p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="tec.findimports.ModuleCycle">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">ModuleCycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modnames</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleCycle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleCycle" title="Link to this definition"></a></dt>
-<dd><p>Node in a condenced module dependency graph.</p>
-<p>A strongly-connected component of one or more modules/packages.</p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="tec.findimports.ModuleGraph">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">ModuleGraph</span></span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleGraph" title="Link to this definition"></a></dt>
-<dd><p>Module graph.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="tec.findimports.ModuleGraph.collapseCycles">
-<span class="sig-name descname"><span class="pre">collapseCycles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleGraph.collapseCycles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleGraph.collapseCycles" title="Link to this definition"></a></dt>
-<dd><p>Create a graph with cycles collapsed.</p>
-<p>Collapse modules participating in a cycle to a single node.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tec.findimports.ModuleGraph.collapseTests">
-<span class="sig-name descname"><span class="pre">collapseTests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pkgnames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['tests',</span> <span class="pre">'ftests']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleGraph.collapseTests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleGraph.collapseTests" title="Link to this definition"></a></dt>
-<dd><p>Collapse test packages with parent packages.</p>
-<p>Works only with package graphs.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tec.findimports.ModuleGraph.filenameToModname">
-<span class="sig-name descname"><span class="pre">filenameToModname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleGraph.filenameToModname"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleGraph.filenameToModname" title="Link to this definition"></a></dt>
-<dd><p>Convert a filename to a module name.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tec.findimports.ModuleGraph.findModuleOfName">
-<span class="sig-name descname"><span class="pre">findModuleOfName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dotted_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extrapath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleGraph.findModuleOfName"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleGraph.findModuleOfName" title="Link to this definition"></a></dt>
-<dd><p>Given a fully qualified name, find what module contains it.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tec.findimports.ModuleGraph.isModule">
-<span class="sig-name descname"><span class="pre">isModule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dotted_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extrapath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleGraph.isModule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleGraph.isModule" title="Link to this definition"></a></dt>
-<dd><p>Is <code class="docutils literal notranslate"><span class="pre">dotted_name</span></code> the name of a module?</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tec.findimports.ModuleGraph.isPackage">
-<span class="sig-name descname"><span class="pre">isPackage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dotted_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extrapath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleGraph.isPackage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleGraph.isPackage" title="Link to this definition"></a></dt>
-<dd><p>Is <code class="docutils literal notranslate"><span class="pre">dotted_name</span></code> the name of a package?</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tec.findimports.ModuleGraph.listModules">
-<span class="sig-name descname"><span class="pre">listModules</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleGraph.listModules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleGraph.listModules" title="Link to this definition"></a></dt>
-<dd><p>Return an alphabetical list of all modules.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tec.findimports.ModuleGraph.packageGraph">
-<span class="sig-name descname"><span class="pre">packageGraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">packagelevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleGraph.packageGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleGraph.packageGraph" title="Link to this definition"></a></dt>
-<dd><p>Convert a module graph to a package graph.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tec.findimports.ModuleGraph.packageOf">
-<span class="sig-name descname"><span class="pre">packageOf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dotted_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">packagelevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleGraph.packageOf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleGraph.packageOf" title="Link to this definition"></a></dt>
-<dd><p>Determine the package that contains <code class="docutils literal notranslate"><span class="pre">dotted_name</span></code>.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tec.findimports.ModuleGraph.parseFile">
-<span class="sig-name descname"><span class="pre">parseFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleGraph.parseFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleGraph.parseFile" title="Link to this definition"></a></dt>
-<dd><p>Parse a single file.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tec.findimports.ModuleGraph.parsePathname">
-<span class="sig-name descname"><span class="pre">parsePathname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pathname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleGraph.parsePathname"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleGraph.parsePathname" title="Link to this definition"></a></dt>
-<dd><p>Parse one or more source files.</p>
-<p><code class="docutils literal notranslate"><span class="pre">pathname</span></code> may be a file name or a directory name.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tec.findimports.ModuleGraph.printDot">
-<span class="sig-name descname"><span class="pre">printDot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleGraph.printDot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleGraph.printDot" title="Link to this definition"></a></dt>
-<dd><p>Produce a dependency graph in dot format.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tec.findimports.ModuleGraph.printImportedNames">
-<span class="sig-name descname"><span class="pre">printImportedNames</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleGraph.printImportedNames"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleGraph.printImportedNames" title="Link to this definition"></a></dt>
-<dd><p>Produce a report of imported names.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tec.findimports.ModuleGraph.printImports">
-<span class="sig-name descname"><span class="pre">printImports</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleGraph.printImports"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleGraph.printImports" title="Link to this definition"></a></dt>
-<dd><p>Produce a report of dependencies.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tec.findimports.ModuleGraph.printUnusedImports">
-<span class="sig-name descname"><span class="pre">printUnusedImports</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleGraph.printUnusedImports"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleGraph.printUnusedImports" title="Link to this definition"></a></dt>
-<dd><p>Produce a report of unused imports.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tec.findimports.ModuleGraph.readCache">
-<span class="sig-name descname"><span class="pre">readCache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleGraph.readCache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleGraph.readCache" title="Link to this definition"></a></dt>
-<dd><p>Load the graph from a cache file.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tec.findimports.ModuleGraph.removeTestPackage">
-<span class="sig-name descname"><span class="pre">removeTestPackage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dotted_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pkgnames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['tests',</span> <span class="pre">'ftests']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleGraph.removeTestPackage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleGraph.removeTestPackage" title="Link to this definition"></a></dt>
-<dd><p>Remove tests subpackages from dotted_name.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tec.findimports.ModuleGraph.writeCache">
-<span class="sig-name descname"><span class="pre">writeCache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleGraph.writeCache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleGraph.writeCache" title="Link to this definition"></a></dt>
-<dd><p>Write the graph to a cache file.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="tec.findimports.ModuleImports">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">ModuleImports</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rootpath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleImports"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleImports" title="Link to this definition"></a></dt>
-<dd><p>By store we mean key-value store. This could be files in a filesystem, objects in s3, or a database. Where and
-how the content is stored should be specified, but StoreInterface offers a dict-like interface to this.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="fm">__getitem__</span> <span class="n">calls</span><span class="p">:</span> <span class="n">_id_of_key</span>                                       <span class="n">_obj_of_data</span>
-<span class="fm">__setitem__</span> <span class="n">calls</span><span class="p">:</span> <span class="n">_id_of_key</span>                   <span class="n">_data_of_obj</span>
-<span class="fm">__delitem__</span> <span class="n">calls</span><span class="p">:</span> <span class="n">_id_of_key</span>
-<span class="fm">__iter__</span>    <span class="n">calls</span><span class="p">:</span>                  <span class="n">_key_of_id</span>
+<p>Deprecated compatibility layer – use <a class="reference internal" href="imports.html#module-tec.imports" title="tec.imports"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tec.imports</span></code></a> instead.</p>
+<p><code class="docutils literal notranslate"><span class="pre">tec</span></code> used to ship, under this module name, a vendored (lightly edited) copy of
+the third party <code class="docutils literal notranslate"><span class="pre">findimports</span></code> project. That copy was distributed under the
+GPL-2.0-or-later, which is incompatible with <code class="docutils literal notranslate"><span class="pre">tec</span></code>’s own Apache-2.0 terms, so it
+has been removed.</p>
+<p>What replaces it:</p>
+<ul class="simple">
+<li><p>Import finding is now done by <a class="reference internal" href="imports.html#module-tec.imports" title="tec.imports"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tec.imports</span></code></a>, an independent implementation
+written against the standard library’s <code class="docutils literal notranslate"><span class="pre">ast</span></code>. The functions of this module
+simply forward to it.</p></li>
+<li><p>The names that had no <code class="docutils literal notranslate"><span class="pre">tec</span></code> equivalent – essentially the module <em>graph</em>
+machinery (<code class="docutils literal notranslate"><span class="pre">ModuleGraph</span></code>, <code class="docutils literal notranslate"><span class="pre">ImportFinder</span></code>, <code class="docutils literal notranslate"><span class="pre">Module</span></code>, …) – are gone. If
+you need them, install the upstream project yourself
+(<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">findimports</span></code>), keeping in mind that doing so subjects your work
+to <em>its</em> licence rather than <code class="docutils literal notranslate"><span class="pre">tec</span></code>’s.</p></li>
+</ul>
+<p>Importing this module emits a <code class="docutils literal notranslate"><span class="pre">DeprecationWarning</span></code>. Asking it for one of the
+removed names raises an <code class="docutils literal notranslate"><span class="pre">AttributeError</span></code> that says what to do instead:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">tec.findimports</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fi</span><span class="o">.</span><span class="n">ModuleGraph</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="w">  </span><span class="c">...</span>
+<span class="gr">AttributeError</span>: <span class="n">...</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Default store: no key or value conversion #####################################</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">dol</span><span class="w"> </span><span class="kn">import</span> <span class="n">Store</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">Store</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">33</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;bar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">items</span><span class="p">())</span> <span class="o">==</span> <span class="p">[(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="mi">33</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="mi">65</span><span class="p">)]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">items</span><span class="p">())</span> <span class="o">==</span> <span class="p">[(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="mi">33</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="mi">65</span><span class="p">)]</span>  <span class="c1"># see that the store contains the same thing</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1">#################################################################################</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Now let&#39;s make stores that have a key and value conversion layer ##############</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># input keys will be upper cased, and output keys lower cased ###################</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># input values (assumed int) will be converted to ascii string, and visa versa ##</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1">#################################################################################</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">test_store</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">s</span><span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">33</span>  <span class="c1"># write 33 to &#39;foo&#39;</span>
-<span class="gp">... </span>    <span class="k">assert</span> <span class="s1">&#39;foo&#39;</span> <span class="ow">in</span> <span class="n">s</span>  <span class="c1"># __contains__ works</span>
-<span class="gp">... </span>    <span class="k">assert</span> <span class="s1">&#39;no_such_key&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">s</span>  <span class="c1"># __nin__ works</span>
-<span class="gp">... </span>    <span class="n">s</span><span class="p">[</span><span class="s1">&#39;bar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">65</span>  <span class="c1"># write 65 to &#39;bar&#39;</span>
-<span class="gp">... </span>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>  <span class="c1"># there are indeed two elements</span>
-<span class="gp">... </span>    <span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">]</span>  <span class="c1"># these are the keys</span>
-<span class="gp">... </span>    <span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">]</span>  <span class="c1"># the keys() method works!</span>
-<span class="gp">... </span>    <span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">==</span> <span class="p">[</span><span class="mi">33</span><span class="p">,</span> <span class="mi">65</span><span class="p">]</span>  <span class="c1"># the values() method works!</span>
-<span class="gp">... </span>    <span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">items</span><span class="p">())</span> <span class="o">==</span> <span class="p">[(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="mi">33</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="mi">65</span><span class="p">)]</span>  <span class="c1"># these are the items</span>
-<span class="gp">... </span>    <span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">items</span><span class="p">())</span> <span class="o">==</span> <span class="p">[(</span><span class="s1">&#39;FOO&#39;</span><span class="p">,</span> <span class="s1">&#39;!&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;BAR&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)]</span>  <span class="c1"># but note the internal representation</span>
-<span class="gp">... </span>    <span class="k">assert</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">33</span>  <span class="c1"># the get method works</span>
-<span class="gp">... </span>    <span class="k">assert</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;no_such_key&#39;</span><span class="p">,</span> <span class="s1">&#39;something&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;something&#39;</span>  <span class="c1"># return a default value</span>
-<span class="gp">... </span>    <span class="k">del</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">])</span>  <span class="c1"># you can delete an item given its key</span>
-<span class="gp">... </span>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>  <span class="c1"># see, only one item left!</span>
-<span class="gp">... </span>    <span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">items</span><span class="p">())</span> <span class="o">==</span> <span class="p">[(</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="mi">65</span><span class="p">)]</span>  <span class="c1"># here it is</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># We can introduce this conversion layer in several ways. Here&#39;s a few... ######################</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># by subclassing ###############################################################################</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">MyStore</span><span class="p">(</span><span class="n">Store</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">_id_of_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="n">k</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">_key_of_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_id</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="n">_id</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">_data_of_obj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="nb">chr</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">_obj_of_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="nb">ord</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">MyStore</span><span class="p">(</span><span class="n">store</span><span class="o">=</span><span class="nb">dict</span><span class="p">())</span>  <span class="c1"># note that you don&#39;t need to specify dict(), since it&#39;s the default</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">test_store</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># by assigning functions to converters ##########################################################</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">MyStore</span><span class="p">(</span><span class="n">Store</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">store</span><span class="p">,</span> <span class="n">_id_of_key</span><span class="p">,</span> <span class="n">_key_of_id</span><span class="p">,</span> <span class="n">_data_of_obj</span><span class="p">,</span> <span class="n">_obj_of_data</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">store</span><span class="p">)</span>
-<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">_id_of_key</span> <span class="o">=</span> <span class="n">_id_of_key</span>
-<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">_key_of_id</span> <span class="o">=</span> <span class="n">_key_of_id</span>
-<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">_data_of_obj</span> <span class="o">=</span> <span class="n">_data_of_obj</span>
-<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">_obj_of_data</span> <span class="o">=</span> <span class="n">_obj_of_data</span>
-<span class="gp">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">MyStore</span><span class="p">(</span><span class="nb">dict</span><span class="p">(),</span>
-<span class="gp">... </span>            <span class="n">_id_of_key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">k</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span>
-<span class="gp">... </span>            <span class="n">_key_of_id</span><span class="o">=</span><span class="k">lambda</span> <span class="n">_id</span><span class="p">:</span> <span class="n">_id</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span>
-<span class="gp">... </span>            <span class="n">_data_of_obj</span><span class="o">=</span><span class="k">lambda</span> <span class="n">obj</span><span class="p">:</span> <span class="nb">chr</span><span class="p">(</span><span class="n">obj</span><span class="p">),</span>
-<span class="gp">... </span>            <span class="n">_obj_of_data</span><span class="o">=</span><span class="k">lambda</span> <span class="n">data</span><span class="p">:</span> <span class="nb">ord</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">test_store</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># using a Mixin class #############################################################################</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">Mixin</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">_id_of_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="n">k</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">_key_of_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_id</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="n">_id</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">_data_of_obj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="nb">chr</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">_obj_of_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-<span class="gp">... </span>        <span class="k">return</span> <span class="nb">ord</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="gp">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">MyStore</span><span class="p">(</span><span class="n">Mixin</span><span class="p">,</span> <span class="n">Store</span><span class="p">):</span>  <span class="c1"># note that the Mixin must come before Store in the mro</span>
-<span class="gp">... </span>    <span class="k">pass</span>
-<span class="gp">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">MyStore</span><span class="p">()</span>  <span class="c1"># no dict()? No, because default anyway</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">test_store</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># adding wrapper methods to an already made Store instance #########################################</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">Store</span><span class="p">(</span><span class="nb">dict</span><span class="p">())</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">_id_of_key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">k</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">_key_of_id</span><span class="o">=</span><span class="k">lambda</span> <span class="n">_id</span><span class="p">:</span> <span class="n">_id</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">_data_of_obj</span><span class="o">=</span><span class="k">lambda</span> <span class="n">obj</span><span class="p">:</span> <span class="nb">chr</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">_obj_of_data</span><span class="o">=</span><span class="k">lambda</span> <span class="n">data</span><span class="p">:</span> <span class="nb">ord</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">test_store</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Note on defining your own “Mapping Views”.</p>
-<p>When you do a <cite>.keys()</cite>, a <cite>.values()</cite> or <cite>.items()</cite> you’re getting a <cite>MappingView</cite>
-instance; an iterable and sized container that provides some methods to access
-particular aspects of the wrapped mapping.</p>
-<p>If you need to customize the behavior of these instances, you should avoid
-overriding the <cite>keys</cite>, <cite>values</cite> or <cite>items</cite> methods directly, but instead
-override the <cite>KeysView</cite>, <cite>ValuesView</cite> or <cite>ItemsView</cite> classes that they use.</p>
-<p>For more, see: <a class="reference external" href="https://github.com/i2mint/dol/wiki/Mapping-Views">https://github.com/i2mint/dol/wiki/Mapping-Views</a></p>
+<dl class="py data">
+<dt class="sig sig-object py" id="tec.findimports.DEPRECATION_MESSAGE">
+<span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">DEPRECATION_MESSAGE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tec.findimports</span> <span class="pre">is</span> <span class="pre">deprecated:</span> <span class="pre">use</span> <span class="pre">tec.imports</span> <span class="pre">instead.</span> <span class="pre">The</span> <span class="pre">vendored</span> <span class="pre">GPL-2.0-or-later</span> <span class="pre">implementation</span> <span class="pre">this</span> <span class="pre">module</span> <span class="pre">used</span> <span class="pre">to</span> <span class="pre">hold</span> <span class="pre">was</span> <span class="pre">removed</span> <span class="pre">(licence</span> <span class="pre">incompatibility);</span> <span class="pre">what</span> <span class="pre">is</span> <span class="pre">left</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">thin</span> <span class="pre">forwarding</span> <span class="pre">layer.'</span></span><a class="headerlink" href="#tec.findimports.DEPRECATION_MESSAGE" title="Link to this definition"></a></dt>
+<dd><p>Message of the <code class="docutils literal notranslate"><span class="pre">DeprecationWarning</span></code> emitted when this module is imported.</p>
 </dd></dl>
 
-<dl class="py class">
-<dt class="sig sig-object py" id="tec.findimports.ModuleImportsBase">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">ModuleImportsBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rootpath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModuleImportsBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModuleImportsBase" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="tec.findimports.ModulesColl">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">ModulesColl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rootpath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#ModulesColl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.ModulesColl" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="tec.findimports.Scope">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">Scope</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#Scope"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.Scope" title="Link to this definition"></a></dt>
-<dd><p>A namespace.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="tec.findimports.REMOVED_NAMES">
+<span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">REMOVED_NAMES</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'ImportFinder':</span> <span class="pre">'use</span> <span class="pre">tec.imports.imports_in_code',</span> <span class="pre">'ImportFinderAndNameTracker':</span> <span class="pre">'use</span> <span class="pre">tec.imports.imports_in_code',</span> <span class="pre">'Module':</span> <span class="pre">'there</span> <span class="pre">is</span> <span class="pre">no</span> <span class="pre">tec</span> <span class="pre">equivalent;</span> <span class="pre">install</span> <span class="pre">the</span> <span class="pre">upstream</span> <span class="pre">(GPL-2.0-or-later)</span> <span class="pre">project</span> <span class="pre">with</span> <span class="pre">`pip</span> <span class="pre">install</span> <span class="pre">findimports`</span> <span class="pre">if</span> <span class="pre">you</span> <span class="pre">need</span> <span class="pre">it',</span> <span class="pre">'ModuleCycle':</span> <span class="pre">'there</span> <span class="pre">is</span> <span class="pre">no</span> <span class="pre">tec</span> <span class="pre">equivalent;</span> <span class="pre">install</span> <span class="pre">the</span> <span class="pre">upstream</span> <span class="pre">(GPL-2.0-or-later)</span> <span class="pre">project</span> <span class="pre">with</span> <span class="pre">`pip</span> <span class="pre">install</span> <span class="pre">findimports`</span> <span class="pre">if</span> <span class="pre">you</span> <span class="pre">need</span> <span class="pre">it',</span> <span class="pre">'ModuleGraph':</span> <span class="pre">'there</span> <span class="pre">is</span> <span class="pre">no</span> <span class="pre">tec</span> <span class="pre">equivalent;</span> <span class="pre">install</span> <span class="pre">the</span> <span class="pre">upstream</span> <span class="pre">(GPL-2.0-or-later)</span> <span class="pre">project</span> <span class="pre">with</span> <span class="pre">`pip</span> <span class="pre">install</span> <span class="pre">findimports`</span> <span class="pre">if</span> <span class="pre">you</span> <span class="pre">need</span> <span class="pre">it',</span> <span class="pre">'ModuleImportsBase':</span> <span class="pre">'use</span> <span class="pre">tec.imports.ModuleImports',</span> <span class="pre">'ModulesColl':</span> <span class="pre">'use</span> <span class="pre">tec.imports.ModuleImports</span> <span class="pre">(or</span> <span class="pre">tec.modules.ModulesReader)',</span> <span class="pre">'Scope':</span> <span class="pre">'there</span> <span class="pre">is</span> <span class="pre">no</span> <span class="pre">tec</span> <span class="pre">equivalent',</span> <span class="pre">'adjust_lineno':</span> <span class="pre">'there</span> <span class="pre">is</span> <span class="pre">no</span> <span class="pre">tec</span> <span class="pre">equivalent;</span> <span class="pre">ast</span> <span class="pre">node</span> <span class="pre">line</span> <span class="pre">numbers</span> <span class="pre">are</span> <span class="pre">used</span> <span class="pre">as</span> <span class="pre">is',</span> <span class="pre">'file_sep':</span> <span class="pre">'use</span> <span class="pre">os.path.sep',</span> <span class="pre">'find_imports_and_track_names':</span> <span class="pre">'use</span> <span class="pre">tec.imports.find_imports',</span> <span class="pre">'iter_relative_files_and_folder':</span> <span class="pre">'use</span> <span class="pre">tec.stores.PyFilesReader',</span> <span class="pre">'main':</span> <span class="pre">'there</span> <span class="pre">is</span> <span class="pre">no</span> <span class="pre">tec</span> <span class="pre">equivalent;</span> <span class="pre">this</span> <span class="pre">module</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">command</span> <span class="pre">line</span> <span class="pre">interface',</span> <span class="pre">'modname_to_modobj':</span> <span class="pre">'use</span> <span class="pre">tec.imports.ModuleImports',</span> <span class="pre">'modobj_to_modname':</span> <span class="pre">'use</span> <span class="pre">tec.imports.ModuleImports',</span> <span class="pre">'pattern_filter':</span> <span class="pre">'use</span> <span class="pre">tec.stores.PyFilesReader</span> <span class="pre">(or</span> <span class="pre">a</span> <span class="pre">plain</span> <span class="pre">re.compile(...).match)',</span> <span class="pre">'quote':</span> <span class="pre">'there</span> <span class="pre">is</span> <span class="pre">no</span> <span class="pre">tec</span> <span class="pre">equivalent;</span> <span class="pre">it</span> <span class="pre">was</span> <span class="pre">a</span> <span class="pre">graphviz-output</span> <span class="pre">helper',</span> <span class="pre">'recursive_file_walk_iterator_with_filepath_filter':</span> <span class="pre">'use</span> <span class="pre">tec.stores.PyFilesReader'}</span></span><a class="headerlink" href="#tec.findimports.REMOVED_NAMES" title="Link to this definition"></a></dt>
+<dd><p>Names the removed vendored implementation used to provide, mapped to what to do
+instead. Kept as data (rather than in the error-raising code) so that the
+“what happened to X?” answers are a single, extensible source of truth.</p>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="tec.findimports.adjust_lineno">
-<span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">adjust_lineno</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#adjust_lineno"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.adjust_lineno" title="Link to this definition"></a></dt>
-<dd><p>Adjust the line number of an import.</p>
-<p>Needed because import statements can span multiple lines, and our lineno
-is always the first line number.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="tec.findimports.REMOVED_NAME_ERROR_TEMPLATE">
+<span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">REMOVED_NAME_ERROR_TEMPLATE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&quot;{module}.{name}</span> <span class="pre">was</span> <span class="pre">removed:</span> <span class="pre">it</span> <span class="pre">came</span> <span class="pre">from</span> <span class="pre">a</span> <span class="pre">vendored</span> <span class="pre">GPL-2.0-or-later</span> <span class="pre">copy</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">third</span> <span class="pre">party</span> <span class="pre">`findimports`</span> <span class="pre">project,</span> <span class="pre">which</span> <span class="pre">was</span> <span class="pre">incompatible</span> <span class="pre">with</span> <span class="pre">tec's</span> <span class="pre">Apache-2.0</span> <span class="pre">licence.</span> <span class="pre">Instead,</span> <span class="pre">{advice}.&quot;</span></span><a class="headerlink" href="#tec.findimports.REMOVED_NAME_ERROR_TEMPLATE" title="Link to this definition"></a></dt>
+<dd><p>Template of the error raised when a removed name is requested.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="tec.findimports.REPLACEMENT_MODULE">
+<span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">REPLACEMENT_MODULE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tec.imports'</span></span><a class="headerlink" href="#tec.findimports.REPLACEMENT_MODULE" title="Link to this definition"></a></dt>
+<dd><p>Module that supersedes this one.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="tec.findimports.UPSTREAM_ONLY_ADVICE">
+<span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">UPSTREAM_ONLY_ADVICE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'there</span> <span class="pre">is</span> <span class="pre">no</span> <span class="pre">tec</span> <span class="pre">equivalent;</span> <span class="pre">install</span> <span class="pre">the</span> <span class="pre">upstream</span> <span class="pre">(GPL-2.0-or-later)</span> <span class="pre">project</span> <span class="pre">with</span> <span class="pre">`pip</span> <span class="pre">install</span> <span class="pre">findimports`</span> <span class="pre">if</span> <span class="pre">you</span> <span class="pre">need</span> <span class="pre">it'</span></span><a class="headerlink" href="#tec.findimports.UPSTREAM_ONLY_ADVICE" title="Link to this definition"></a></dt>
+<dd><p>Advice for the names that only the (GPL) upstream project provides.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tec.findimports.count_imports">
-<span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">count_imports</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rootdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pathfilt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">import_obj_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#count_imports"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.count_imports" title="Link to this definition"></a></dt>
-<dd><p>Counter of imports gathered from files under rootdir.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>rootdir</strong> – Root directory</p></li>
-<li><p><strong>pathfilt</strong> – Path filter function (applies to paths and returns True iff the path should be included)</p></li>
-<li><p><strong>import_obj_func</strong> – Is applied to import object to extract the actual data item that should be counted.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A collections.Counter instance</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="tec.findimports.find_imports">
-<span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">find_imports</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#find_imports"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.find_imports" title="Link to this definition"></a></dt>
-<dd><p>Find all imported names in a given file.</p>
-<p>Returns a list of ImportInfo objects.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="tec.findimports.find_imports_and_track_names">
-<span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">find_imports_and_track_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warn_about_duplicates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#find_imports_and_track_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.find_imports_and_track_names" title="Link to this definition"></a></dt>
-<dd><p>Find all imported names in a given file.</p>
-<p>Returns <code class="docutils literal notranslate"><span class="pre">(imports,</span> <span class="pre">unused)</span></code>.  Both are lists of ImportInfo objects.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="tec.findimports.quote">
-<span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">quote</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#quote"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.quote" title="Link to this definition"></a></dt>
-<dd><p>Quote a string for graphviz.</p>
-<p>This function is probably incomplete.</p>
+<span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">count_imports</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">rootdir:</span> <span class="pre">~typing.Any,</span> <span class="pre">pathfilt:</span> <span class="pre">~typing.Callable[[str],</span> <span class="pre">bool]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">_is_py_path&gt;,</span> <span class="pre">import_obj_func:</span> <span class="pre">~typing.Callable[[~tec.imports.ImportInfo],</span> <span class="pre">~typing.Any]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">base_package_of&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#count_imports"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.count_imports" title="Link to this definition"></a></dt>
+<dd><p>Deprecated alias of <a class="reference internal" href="imports.html#tec.imports.count_imports" title="tec.imports.count_imports"><code class="xref py py-func docutils literal notranslate"><span class="pre">tec.imports.count_imports()</span></code></a>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">root</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;a.py&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s1">&#39;import os.path</span><span class="se">\n</span><span class="s1">import json</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">counts</span> <span class="o">=</span> <span class="n">count_imports</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="go">[(&#39;json&#39;, 1), (&#39;os&#39;, 1)]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tec.findimports.re_find_imports">
-<span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">re_find_imports</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rootdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pathfilt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#re_find_imports"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.re_find_imports" title="Link to this definition"></a></dt>
-<dd><p>Generator of import objects taken from files under rootdir</p>
+<span class="sig-prename descclassname"><span class="pre">tec.findimports.</span></span><span class="sig-name descname"><span class="pre">re_find_imports</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">rootdir:</span> <span class="pre">~typing.Any,</span> <span class="pre">pathfilt:</span> <span class="pre">~typing.Callable[[str],</span> <span class="pre">bool]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">_is_py_path&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/findimports.html#re_find_imports"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.findimports.re_find_imports" title="Link to this definition"></a></dt>
+<dd><p>Deprecated alias of <a class="reference internal" href="imports.html#tec.imports.imports_under_folder" title="tec.imports.imports_under_folder"><code class="xref py py-func docutils literal notranslate"><span class="pre">tec.imports.imports_under_folder()</span></code></a>.</p>
+<p>Note the (harmless for the default) semantic difference: <code class="docutils literal notranslate"><span class="pre">pathfilt</span></code> is now
+applied to store-relative paths, not to absolute ones.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">root</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;a.py&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s1">&#39;import os</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">imp</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">re_find_imports</span><span class="p">(</span><span class="n">root</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">names</span>
+<span class="go">[&#39;os&#39;]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>

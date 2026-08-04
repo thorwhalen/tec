@@ -7,6 +7,7 @@
    module_docs/tec/doctest_utils
    module_docs/tec/findimports
    module_docs/tec/import_counting
+   module_docs/tec/imports
    module_docs/tec/misc
    module_docs/tec/misc/manage_pth_file
    module_docs/tec/modules
@@ -17,4 +18,7 @@
    module_docs/tec/pkg_code
    module_docs/tec/snake_food_import_counting
    module_docs/tec/stores
+   module_docs/tec/tests
+   module_docs/tec/tests/test_imports
+   module_docs/tec/tests/test_license_hygiene
    module_docs/tec/util

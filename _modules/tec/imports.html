@@ -1,0 +1,531 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tec.imports &mdash; tec 0.0.19 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=2fd7553c"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            tec
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec.html">tec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/dependencies.html">tec.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/doctest_utils.html">tec.doctest_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/findimports.html">tec.findimports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/import_counting.html">tec.import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/imports.html">tec.imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/misc.html">tec.misc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/misc/manage_pth_file.html">tec.misc.manage_pth_file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/modules.html">tec.modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/packages.html">tec.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/peek.html">tec.peek</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/pip_packaging.html">tec.pip_packaging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/pip_requirements.html">tec.pip_requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/pkg_code.html">tec.pkg_code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/snake_food_import_counting.html">tec.snake_food_import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/stores.html">tec.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/tests.html">tec.tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/tests/test_imports.html">tec.tests.test_imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/tests/test_license_hygiene.html">tec.tests.test_license_hygiene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/tec/util.html">tec.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">tec</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tec.imports</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tec.imports</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Find the imports of python code, using the standard library&#39;s ``ast``.</span>
+
+<span class="sd">This module answers the question *&quot;what does this code import?&quot;* by parsing the</span>
+<span class="sd">code into an abstract syntax tree and walking it -- so, unlike the regex-based</span>
+<span class="sd">:mod:`tec.import_counting`, it is not fooled by import-looking strings, comments,</span>
+<span class="sd">or line continuations.</span>
+
+<span class="sd">The simple thing is simple:</span>
+
+<span class="sd">&gt;&gt;&gt; [imp.name for imp in imports_in_code(&quot;import os\\nfrom json import dumps&quot;)]</span>
+<span class="sd">[&#39;os&#39;, &#39;json.dumps&#39;]</span>
+
+<span class="sd">The interface has three levels, from most to least specific:</span>
+
+<span class="sd">- :func:`imports_in_code`: imports of a string of python code</span>
+<span class="sd">- :func:`find_imports`: imports of a single ``.py`` file</span>
+<span class="sd">- :func:`imports_under_folder` / :func:`count_imports`: imports of every ``.py``</span>
+<span class="sd">  file under a folder -- reached through the :class:`~tec.stores.PyFilesReader`</span>
+<span class="sd">  store, so a &quot;folder&quot; can also be a module object, a package, or the path of an</span>
+<span class="sd">  ``__init__.py`` file</span>
+
+<span class="sd">:class:`ModuleImports` offers the same information as a ``Mapping`` from module</span>
+<span class="sd">dotpath to the imports of that module.</span>
+
+<span class="sd">Note: this module replaces the vendored copy of the (GPL-2.0-or-later) third</span>
+<span class="sd">party ``findimports`` project that ``tec`` used to ship as ``tec.findimports``.</span>
+<span class="sd">It is an independent implementation, written against the standard library, so</span>
+<span class="sd">that ``tec`` can be distributed under its own Apache-2.0 terms.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">ast</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">cached_property</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dol</span><span class="w"> </span><span class="kn">import</span> <span class="n">KvReader</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">tec.modules</span><span class="w"> </span><span class="kn">import</span> <span class="n">py_path_to_dot_path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tec.stores</span><span class="w"> </span><span class="kn">import</span> <span class="n">PyFilesReader</span>
+
+<span class="c1">#: Placeholder used as the ``filename`` of imports parsed from a code string.</span>
+<span class="n">CODE_STRING_FILENAME</span> <span class="o">=</span> <span class="s2">&quot;&lt;string&gt;&quot;</span>
+
+<span class="c1">#: Value of :attr:`ImportInfo.level` for an absolute (non-relative) import.</span>
+<span class="n">ABSOLUTE_IMPORT_LEVEL</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+<div class="viewcode-block" id="ImportInfo">
+<a class="viewcode-back" href="../../module_docs/tec/imports.html#tec.imports.ImportInfo">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ImportInfo</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A single imported name, along with where it was found.</span>
+
+<span class="sd">    &gt;&gt;&gt; imp = ImportInfo(&quot;os.path&quot;, &quot;a.py&quot;, 3)</span>
+<span class="sd">    &gt;&gt;&gt; imp.name, imp.lineno, imp.is_relative</span>
+<span class="sd">    (&#39;os.path&#39;, 3, False)</span>
+
+<span class="sd">    Relative imports carry the number of leading dots in ``level``:</span>
+
+<span class="sd">    &gt;&gt;&gt; ImportInfo(&quot;sibling&quot;, &quot;a.py&quot;, 1, level=1).is_relative</span>
+<span class="sd">    True</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#: Dotted name of what is imported (e.g. ``&#39;os.path&#39;``, ``&#39;json.dumps&#39;``).</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="c1">#: File the import was found in (:data:`CODE_STRING_FILENAME` if unknown).</span>
+    <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">CODE_STRING_FILENAME</span>
+    <span class="c1">#: 1-based line number of the ``import``/``from`` statement.</span>
+    <span class="n">lineno</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1">#: Number of leading dots of a relative import (``0`` if absolute).</span>
+    <span class="n">level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">ABSOLUTE_IMPORT_LEVEL</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_relative</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;True if, and only if, this is a relative (``from .x import y``) import.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">&gt;</span> <span class="n">ABSOLUTE_IMPORT_LEVEL</span></div>
+
+
+
+<div class="viewcode-block" id="base_package_of">
+<a class="viewcode-back" href="../../module_docs/tec/imports.html#tec.imports.base_package_of">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">base_package_of</span><span class="p">(</span><span class="n">imp</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ImportInfo</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The top-level package name of an import (``&#39;&#39;`` for relative imports).</span>
+
+<span class="sd">    &gt;&gt;&gt; base_package_of(&quot;collections.abc&quot;)</span>
+<span class="sd">    &#39;collections&#39;</span>
+<span class="sd">    &gt;&gt;&gt; base_package_of(ImportInfo(&quot;os.path&quot;))</span>
+<span class="sd">    &#39;os&#39;</span>
+
+<span class="sd">    A relative import has no resolvable top-level package, so it maps to ``&#39;&#39;``:</span>
+
+<span class="sd">    &gt;&gt;&gt; base_package_of(ImportInfo(&quot;sibling&quot;, level=1))</span>
+<span class="sd">    &#39;&#39;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">imp</span><span class="p">,</span> <span class="n">ImportInfo</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">imp</span><span class="o">.</span><span class="n">is_relative</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">imp</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">name</span>
+    <span class="k">return</span> <span class="n">imp</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="raise_parse_error">
+<a class="viewcode-back" href="../../module_docs/tec/imports.html#tec.imports.raise_parse_error">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">raise_parse_error</span><span class="p">(</span><span class="n">error</span><span class="p">:</span> <span class="ne">SyntaxError</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;``on_parse_error`` strategy: let the ``SyntaxError`` propagate.&quot;&quot;&quot;</span>
+    <span class="k">raise</span> <span class="n">error</span></div>
+
+
+
+<div class="viewcode-block" id="warn_of_parse_error">
+<a class="viewcode-back" href="../../module_docs/tec/imports.html#tec.imports.warn_of_parse_error">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">warn_of_parse_error</span><span class="p">(</span><span class="n">error</span><span class="p">:</span> <span class="ne">SyntaxError</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;``on_parse_error`` strategy: warn about the file, then skip it.&quot;&quot;&quot;</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Skipping </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">: couldn&#39;t parse it: </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="ignore_parse_error">
+<a class="viewcode-back" href="../../module_docs/tec/imports.html#tec.imports.ignore_parse_error">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">ignore_parse_error</span><span class="p">(</span><span class="n">error</span><span class="p">:</span> <span class="ne">SyntaxError</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;``on_parse_error`` strategy: silently skip the file.&quot;&quot;&quot;</span></div>
+
+
+
+<span class="c1">#: Default aggregation key of :func:`count_imports`: the top-level package name.</span>
+<span class="n">DFLT_IMPORT_KEY</span> <span class="o">=</span> <span class="n">base_package_of</span>
+
+<span class="c1">#: Default file-path predicate: ``None``, i.e. no filtering beyond the store&#39;s own</span>
+<span class="c1">#: restriction to ``.py`` files.</span>
+<span class="n">DFLT_PATH_FILT</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1">#: Default reaction to a file that can&#39;t be parsed while walking a folder. Folders</span>
+<span class="c1">#: of real-world code routinely contain a stray py2 (or templated) file, so the</span>
+<span class="c1">#: default is to warn and move on instead of aborting the whole walk.</span>
+<span class="n">DFLT_ON_PARSE_ERROR</span> <span class="o">=</span> <span class="n">warn_of_parse_error</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_import_infos_of_node</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">ast</span><span class="o">.</span><span class="n">AST</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">ImportInfo</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Yield the :class:`ImportInfo` of a single ast node (nothing if not an import).&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">ast</span><span class="o">.</span><span class="n">Import</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">alias</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">ImportInfo</span><span class="p">(</span><span class="n">alias</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">lineno</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">ast</span><span class="o">.</span><span class="n">ImportFrom</span><span class="p">):</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">module</span><span class="si">}</span><span class="s2">.&quot;</span> <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">module</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">alias</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">ImportInfo</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}{</span><span class="n">alias</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="n">filename</span><span class="p">,</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">lineno</span><span class="p">,</span>
+                <span class="n">level</span><span class="o">=</span><span class="n">node</span><span class="o">.</span><span class="n">level</span> <span class="ow">or</span> <span class="n">ABSOLUTE_IMPORT_LEVEL</span><span class="p">,</span>
+            <span class="p">)</span>
+
+
+<div class="viewcode-block" id="imports_in_code">
+<a class="viewcode-back" href="../../module_docs/tec/imports.html#tec.imports.imports_in_code">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">imports_in_code</span><span class="p">(</span>
+    <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">CODE_STRING_FILENAME</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">ImportInfo</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate the :class:`ImportInfo` of every import found in ``code``.</span>
+
+<span class="sd">    :param code: The python source to parse.</span>
+<span class="sd">    :param filename: What to record as the origin of the imports found.</span>
+<span class="sd">    :return: A generator of :class:`ImportInfo`.</span>
+
+<span class="sd">    &gt;&gt;&gt; code = &#39;&#39;&#39;</span>
+<span class="sd">    ... import os, sys</span>
+<span class="sd">    ... import os.path as osp</span>
+<span class="sd">    ... from collections.abc import Mapping</span>
+<span class="sd">    ... from . import sibling</span>
+<span class="sd">    ... from ..pkg import thing</span>
+<span class="sd">    ... &#39;&#39;&#39;</span>
+<span class="sd">    &gt;&gt;&gt; [imp.name for imp in imports_in_code(code)]</span>
+<span class="sd">    [&#39;os&#39;, &#39;sys&#39;, &#39;os.path&#39;, &#39;collections.abc.Mapping&#39;, &#39;sibling&#39;, &#39;pkg.thing&#39;]</span>
+
+<span class="sd">    Unlike a regex-based scan, text that merely *looks* like an import is ignored:</span>
+
+<span class="sd">    &gt;&gt;&gt; list(imports_in_code(&#39;x = &quot;import antigravity&quot;  # import antigravity&#39;))</span>
+<span class="sd">    []</span>
+
+<span class="sd">    Imports nested in functions, classes, ``try`` blocks etc. are included:</span>
+
+<span class="sd">    &gt;&gt;&gt; [imp.name for imp in imports_in_code(&quot;def f():\\n    import lazily\\n&quot;)]</span>
+<span class="sd">    [&#39;lazily&#39;]</span>
+
+<span class="sd">    Code that doesn&#39;t parse raises a ``SyntaxError`` naming the offending file:</span>
+
+<span class="sd">    &gt;&gt;&gt; list(imports_in_code(&quot;import ;&quot;, filename=&quot;broken.py&quot;)</span>
+<span class="sd">    ... )  # doctest: +IGNORE_EXCEPTION_DETAIL</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">      ...</span>
+<span class="sd">    SyntaxError: invalid syntax (broken.py, line 1)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">ast</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">tree</span><span class="p">):</span>
+        <span class="k">yield from</span> <span class="n">_import_infos_of_node</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="find_imports">
+<a class="viewcode-back" href="../../module_docs/tec/imports.html#tec.imports.find_imports">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">find_imports</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">ImportInfo</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate the :class:`ImportInfo` of every import of the ``.py`` file ``filename``.</span>
+
+<span class="sd">    :param filename: Path of the python file to parse.</span>
+<span class="sd">    :return: A generator of :class:`ImportInfo`.</span>
+
+<span class="sd">    &gt;&gt;&gt; imports = list(find_imports(__file__))</span>
+<span class="sd">    &gt;&gt;&gt; &quot;ast&quot; in {imp.name for imp in imports}</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; {imp.filename for imp in imports} == {__file__}</span>
+<span class="sd">    True</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+        <span class="n">code</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">yield from</span> <span class="n">imports_in_code</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="imports_under_folder">
+<a class="viewcode-back" href="../../module_docs/tec/imports.html#tec.imports.imports_under_folder">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">imports_under_folder</span><span class="p">(</span>
+    <span class="n">src</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">path_filt</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]]</span> <span class="o">=</span> <span class="n">DFLT_PATH_FILT</span><span class="p">,</span>
+    <span class="n">on_parse_error</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="ne">SyntaxError</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="n">DFLT_ON_PARSE_ERROR</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">ImportInfo</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate the :class:`ImportInfo` of every ``.py`` file under ``src``.</span>
+
+<span class="sd">    :param src: Anything :class:`~tec.stores.PyFilesReader` accepts: a folder path,</span>
+<span class="sd">        a module or package object, or the path of an ``__init__.py`` file.</span>
+<span class="sd">    :param path_filt: Optional predicate on the store&#39;s (relative) file paths, to</span>
+<span class="sd">        narrow down the files that are parsed. ``None`` means &quot;all ``.py`` files&quot;.</span>
+<span class="sd">    :param on_parse_error: What to do with a file that doesn&#39;t parse. Called with</span>
+<span class="sd">        the ``SyntaxError`` and the path. See :func:`raise_parse_error`,</span>
+<span class="sd">        :func:`warn_of_parse_error` (the default) and :func:`ignore_parse_error`.</span>
+<span class="sd">    :return: A generator of :class:`ImportInfo`.</span>
+
+<span class="sd">    &gt;&gt;&gt; import tempfile</span>
+<span class="sd">    &gt;&gt;&gt; from pathlib import Path</span>
+<span class="sd">    &gt;&gt;&gt; with tempfile.TemporaryDirectory() as root:</span>
+<span class="sd">    ...     _ = Path(root, &#39;a.py&#39;).write_text(&#39;import os\\n&#39;)</span>
+<span class="sd">    ...     _ = Path(root, &#39;b_test.py&#39;).write_text(&#39;import json\\n&#39;)</span>
+<span class="sd">    ...     all_names = sorted(imp.name for imp in imports_under_folder(root))</span>
+<span class="sd">    ...     kept = sorted(</span>
+<span class="sd">    ...         imp.name</span>
+<span class="sd">    ...         for imp in imports_under_folder(</span>
+<span class="sd">    ...             root, path_filt=lambda p: not p.endswith(&#39;_test.py&#39;)</span>
+<span class="sd">    ...         )</span>
+<span class="sd">    ...     )</span>
+<span class="sd">    &gt;&gt;&gt; all_names</span>
+<span class="sd">    [&#39;json&#39;, &#39;os&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; kept</span>
+<span class="sd">    [&#39;os&#39;]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">store</span> <span class="o">=</span> <span class="n">PyFilesReader</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">path</span><span class="p">,</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">store</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">path_filt</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">path_filt</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">imports</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">imports_in_code</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">path</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">SyntaxError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="n">on_parse_error</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">yield from</span> <span class="n">imports</span></div>
+
+
+
+<div class="viewcode-block" id="count_imports">
+<a class="viewcode-back" href="../../module_docs/tec/imports.html#tec.imports.count_imports">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">count_imports</span><span class="p">(</span>
+    <span class="n">src</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">path_filt</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]]</span> <span class="o">=</span> <span class="n">DFLT_PATH_FILT</span><span class="p">,</span>
+    <span class="n">import_key</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">ImportInfo</span><span class="p">],</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">DFLT_IMPORT_KEY</span><span class="p">,</span>
+    <span class="n">on_parse_error</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="ne">SyntaxError</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="n">DFLT_ON_PARSE_ERROR</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Counter</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Count the imports of every ``.py`` file under ``src``.</span>
+
+<span class="sd">    :param src: Anything :class:`~tec.stores.PyFilesReader` accepts (see</span>
+<span class="sd">        :func:`imports_under_folder`).</span>
+<span class="sd">    :param path_filt: Optional predicate on the store&#39;s (relative) file paths.</span>
+<span class="sd">    :param import_key: What to count: applied to each :class:`ImportInfo`, it</span>
+<span class="sd">        returns the value that is tallied. Defaults to :func:`base_package_of`,</span>
+<span class="sd">        i.e. the top-level package name.</span>
+<span class="sd">    :param on_parse_error: See :func:`imports_under_folder`.</span>
+<span class="sd">    :return: A :class:`collections.Counter`.</span>
+
+<span class="sd">    &gt;&gt;&gt; import tempfile</span>
+<span class="sd">    &gt;&gt;&gt; from pathlib import Path</span>
+<span class="sd">    &gt;&gt;&gt; with tempfile.TemporaryDirectory() as root:</span>
+<span class="sd">    ...     _ = Path(root, &#39;a.py&#39;).write_text(&#39;import os\\nfrom os import path\\n&#39;)</span>
+<span class="sd">    ...     _ = Path(root, &#39;b.py&#39;).write_text(&#39;import os.path\\nimport json\\n&#39;)</span>
+<span class="sd">    ...     counts = count_imports(root)</span>
+<span class="sd">    ...     full = count_imports(root, import_key=lambda imp: imp.name)</span>
+<span class="sd">    &gt;&gt;&gt; sorted(counts.items())</span>
+<span class="sd">    [(&#39;json&#39;, 1), (&#39;os&#39;, 3)]</span>
+<span class="sd">    &gt;&gt;&gt; sorted(full.items())</span>
+<span class="sd">    [(&#39;json&#39;, 1), (&#39;os&#39;, 1), (&#39;os.path&#39;, 2)]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">Counter</span><span class="p">(</span>
+        <span class="n">import_key</span><span class="p">(</span><span class="n">imp</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">imports_under_folder</span><span class="p">(</span>
+            <span class="n">src</span><span class="p">,</span> <span class="n">path_filt</span><span class="o">=</span><span class="n">path_filt</span><span class="p">,</span> <span class="n">on_parse_error</span><span class="o">=</span><span class="n">on_parse_error</span>
+        <span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="c1">#: Path separator that is legal but not native on this platform (``&#39;/&#39;`` on Windows,</span>
+<span class="c1">#: ``None`` elsewhere). File stores are not required to use the native one.</span>
+<span class="n">FOREIGN_PATH_SEP</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">altsep</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_dotpath_of_py_path</span><span class="p">(</span><span class="n">py_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">root_module_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Module dotpath of a relative ``.py`` path (no leading dot when unrooted).</span>
+
+<span class="sd">    &gt;&gt;&gt; import os</span>
+<span class="sd">    &gt;&gt;&gt; _dotpath_of_py_path(os.path.join(&#39;a&#39;, &#39;b.py&#39;))</span>
+<span class="sd">    &#39;a.b&#39;</span>
+<span class="sd">    &gt;&gt;&gt; _dotpath_of_py_path(os.path.join(&#39;a&#39;, &#39;b.py&#39;), &#39;pkg&#39;)</span>
+<span class="sd">    &#39;pkg.a.b&#39;</span>
+
+<span class="sd">    Both separators are understood, so the store&#39;s path convention doesn&#39;t matter:</span>
+
+<span class="sd">    &gt;&gt;&gt; _dotpath_of_py_path(&#39;a/b.py&#39;)</span>
+<span class="sd">    &#39;a.b&#39;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">FOREIGN_PATH_SEP</span><span class="p">:</span>
+        <span class="n">py_path</span> <span class="o">=</span> <span class="n">py_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">FOREIGN_PATH_SEP</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">py_path_to_dot_path</span><span class="p">(</span><span class="n">py_path</span><span class="p">,</span> <span class="n">root_module_str</span><span class="p">)</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ModuleImports">
+<a class="viewcode-back" href="../../module_docs/tec/imports.html#tec.imports.ModuleImports">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ModuleImports</span><span class="p">(</span><span class="n">KvReader</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;``Mapping`` from module dotpath to the tuple of imports of that module.</span>
+
+<span class="sd">    :param src: Anything :class:`~tec.stores.PyFilesReader` accepts: a folder path,</span>
+<span class="sd">        a module or package object, or the path of an ``__init__.py`` file.</span>
+<span class="sd">    :param root_module_str: Prefix to give the module dotpaths (the keys).</span>
+
+<span class="sd">    Note: the dotpath-to-file index is computed once, lazily, on first use -- files</span>
+<span class="sd">    added to the folder afterwards will not show up in an existing instance.</span>
+
+<span class="sd">    &gt;&gt;&gt; import tempfile</span>
+<span class="sd">    &gt;&gt;&gt; from pathlib import Path</span>
+<span class="sd">    &gt;&gt;&gt; with tempfile.TemporaryDirectory() as root:</span>
+<span class="sd">    ...     _ = Path(root, &#39;__init__.py&#39;).write_text(&#39;&#39;)</span>
+<span class="sd">    ...     _ = Path(root, &#39;a.py&#39;).write_text(&#39;import os\\nfrom json import dumps\\n&#39;)</span>
+<span class="sd">    ...     s = ModuleImports(root, root_module_str=&#39;pkg&#39;)</span>
+<span class="sd">    ...     keys, n = sorted(s), len(s)</span>
+<span class="sd">    ...     names = [imp.name for imp in s[&#39;pkg.a&#39;]]</span>
+<span class="sd">    &gt;&gt;&gt; keys</span>
+<span class="sd">    [&#39;pkg.__init__&#39;, &#39;pkg.a&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; n</span>
+<span class="sd">    2</span>
+<span class="sd">    &gt;&gt;&gt; names</span>
+<span class="sd">    [&#39;os&#39;, &#39;json.dumps&#39;]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">root_module_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">store</span> <span class="o">=</span> <span class="n">PyFilesReader</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_module_str</span> <span class="o">=</span> <span class="n">root_module_str</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_path_of_dotpath</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;``{module_dotpath: store_key}`` index of the files of :attr:`store`.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">_dotpath_of_py_path</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_module_str</span><span class="p">):</span> <span class="n">path</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">store</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path_of_dotpath</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path_of_dotpath</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_path_of_dotpath</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_path_of_dotpath</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;No module found for dotpath </span><span class="si">{</span><span class="n">k</span><span class="si">!r}</span><span class="s2"> under </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">rootdir</span><span class="si">!r}</span><span class="s2">. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Note that the dotpaths are prefixed with root_module_str=&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">root_module_str</span><span class="si">!r}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">imports_in_code</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">[</span><span class="n">path</span><span class="p">],</span> <span class="n">filename</span><span class="o">=</span><span class="n">path</span><span class="p">))</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tec.import_counting &mdash; tec 0.0.18 documentation</title>
+  <title>tec.import_counting &mdash; tec 0.0.19 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=8bafd125"></script>
+      <script src="../../_static/documentation_options.js?v=2fd7553c"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -24,7 +24,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="tec.misc" href="misc.html" />
+    <link rel="next" title="tec.imports" href="imports.html" />
     <link rel="prev" title="tec.findimports" href="findimports.html" /> 
 </head>
 
@@ -64,6 +64,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#tec.import_counting.modules_imported_under_folder"><code class="docutils literal notranslate"><span class="pre">modules_imported_under_folder()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="imports.html">tec.imports</a></li>
 <li class="toctree-l1"><a class="reference internal" href="misc.html">tec.misc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="misc/manage_pth_file.html">tec.misc.manage_pth_file</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">tec.modules</a></li>
@@ -74,6 +75,9 @@
 <li class="toctree-l1"><a class="reference internal" href="pkg_code.html">tec.pkg_code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="snake_food_import_counting.html">tec.snake_food_import_counting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stores.html">tec.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">tec.tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/test_imports.html">tec.tests.test_imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests/test_license_hygiene.html">tec.tests.test_license_hygiene</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util.html">tec.util</a></li>
 </ul>
 
@@ -149,7 +153,8 @@ having snakefood installed. See: <a class="reference external" href="http://furi
 The process in by no means accurate in all cases.
 It may have false positives (strings that have import patterns, but are not actual code imports).
 It may have false negatives (relative imports (as in <code class="docutils literal notranslate"><span class="pre">..name</span></code>) and “dynamically” imported, etc.</p>
-<p>If you need something more precise, look into other tools (snakefood or findimports for example).</p>
+<p>If you need something more precise, use <code class="docutils literal notranslate"><span class="pre">tec.imports</span></code> (which parses the code with
+<code class="docutils literal notranslate"><span class="pre">ast</span></code> instead of matching patterns), or look into other tools (snakefood, for example).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -226,7 +231,7 @@ or any python object (module or object therein – that can be resolved by inspe
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="findimports.html" class="btn btn-neutral float-left" title="tec.findimports" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="misc.html" class="btn btn-neutral float-right" title="tec.misc" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="imports.html" class="btn btn-neutral float-right" title="tec.imports" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

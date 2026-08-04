@@ -1,0 +1,208 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tec.tests.test_license_hygiene &mdash; tec 0.0.19 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=2fd7553c"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="tec.util" href="../util.html" />
+    <link rel="prev" title="tec.tests.test_imports" href="test_imports.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            tec
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tec.html">tec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dependencies.html">tec.dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doctest_utils.html">tec.doctest_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../findimports.html">tec.findimports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../import_counting.html">tec.import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../imports.html">tec.imports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc.html">tec.misc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misc/manage_pth_file.html">tec.misc.manage_pth_file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">tec.modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">tec.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../peek.html">tec.peek</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pip_packaging.html">tec.pip_packaging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pip_requirements.html">tec.pip_requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pkg_code.html">tec.pkg_code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../snake_food_import_counting.html">tec.snake_food_import_counting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stores.html">tec.stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tests.html">tec.tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_imports.html">tec.tests.test_imports</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">tec.tests.test_license_hygiene</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tec.tests.test_license_hygiene.COPYRIGHT_RE"><code class="docutils literal notranslate"><span class="pre">COPYRIGHT_RE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.tests.test_license_hygiene.EXCLUDED_DIR_NAMES"><code class="docutils literal notranslate"><span class="pre">EXCLUDED_DIR_NAMES</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.tests.test_license_hygiene.FOREIGN_LICENSE_MARKERS"><code class="docutils literal notranslate"><span class="pre">FOREIGN_LICENSE_MARKERS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.tests.test_license_hygiene.PKG_ROOT"><code class="docutils literal notranslate"><span class="pre">PKG_ROOT</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.tests.test_license_hygiene.THIS_FILE"><code class="docutils literal notranslate"><span class="pre">THIS_FILE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.tests.test_license_hygiene.py_files_of_package"><code class="docutils literal notranslate"><span class="pre">py_files_of_package()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.tests.test_license_hygiene.test_no_foreign_copyright_notice_in_package_source"><code class="docutils literal notranslate"><span class="pre">test_no_foreign_copyright_notice_in_package_source()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.tests.test_license_hygiene.test_no_foreign_license_grant_in_package_source"><code class="docutils literal notranslate"><span class="pre">test_no_foreign_license_grant_in_package_source()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tec.tests.test_license_hygiene.test_there_are_files_to_scan"><code class="docutils literal notranslate"><span class="pre">test_there_are_files_to_scan()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../util.html">tec.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">tec</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">tec.tests.test_license_hygiene</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/module_docs/tec/tests/test_license_hygiene.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-tec.tests.test_license_hygiene">
+<span id="tec-tests-test-license-hygiene"></span><h1>tec.tests.test_license_hygiene<a class="headerlink" href="#module-tec.tests.test_license_hygiene" title="Link to this heading"></a></h1>
+<p>Guard against foreign (licence-incompatible) source being vendored into <code class="docutils literal notranslate"><span class="pre">tec</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">tec</span></code> is distributed under Apache-2.0. It once shipped a vendored copy of a
+GPL-2.0-or-later project, which quietly made every <code class="docutils literal notranslate"><span class="pre">tec</span></code> release – and every
+package depending on it – carry incompatible terms.</p>
+<p>The test here is deliberately blunt: no file of the package may contain a foreign
+licence grant or a copyright notice. If a future change legitimately needs one,
+that is a decision to be made explicitly (by editing the package’s declared
+licence), not by silently pasting a file in.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="tec.tests.test_license_hygiene.COPYRIGHT_RE">
+<span class="sig-prename descclassname"><span class="pre">tec.tests.test_license_hygiene.</span></span><span class="sig-name descname"><span class="pre">COPYRIGHT_RE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">re.compile('^\\s*(?:#\\s*)?Copyright\\b',</span> <span class="pre">re.IGNORECASE|re.MULTILINE)</span></span><a class="headerlink" href="#tec.tests.test_license_hygiene.COPYRIGHT_RE" title="Link to this definition"></a></dt>
+<dd><p>A copyright notice line. Third party code almost always carries one; <code class="docutils literal notranslate"><span class="pre">tec</span></code>’s
+own modules carry none (the package’s LICENSE file is the single place for it).</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="tec.tests.test_license_hygiene.EXCLUDED_DIR_NAMES">
+<span class="sig-prename descclassname"><span class="pre">tec.tests.test_license_hygiene.</span></span><span class="sig-name descname"><span class="pre">EXCLUDED_DIR_NAMES</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">frozenset({'.ipynb_checkpoints',</span> <span class="pre">'__pycache__'})</span></span><a class="headerlink" href="#tec.tests.test_license_hygiene.EXCLUDED_DIR_NAMES" title="Link to this definition"></a></dt>
+<dd><p>Directory names never scanned (build/cache artifacts, not source).</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="tec.tests.test_license_hygiene.FOREIGN_LICENSE_MARKERS">
+<span class="sig-prename descclassname"><span class="pre">tec.tests.test_license_hygiene.</span></span><span class="sig-name descname"><span class="pre">FOREIGN_LICENSE_MARKERS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('GNU</span> <span class="pre">General</span> <span class="pre">Public</span> <span class="pre">License',</span> <span class="pre">'GNU</span> <span class="pre">Lesser</span> <span class="pre">General</span> <span class="pre">Public</span> <span class="pre">License',</span> <span class="pre">'Mozilla</span> <span class="pre">Public</span> <span class="pre">License',</span> <span class="pre">'This</span> <span class="pre">program</span> <span class="pre">is</span> <span class="pre">free</span> <span class="pre">software',</span> <span class="pre">'redistribute</span> <span class="pre">it</span> <span class="pre">and/or</span> <span class="pre">modify',</span> <span class="pre">'__licence__',</span> <span class="pre">'__license__')</span></span><a class="headerlink" href="#tec.tests.test_license_hygiene.FOREIGN_LICENSE_MARKERS" title="Link to this definition"></a></dt>
+<dd><p>Substrings whose presence in a source file signals a foreign licence grant.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="tec.tests.test_license_hygiene.PKG_ROOT">
+<span class="sig-prename descclassname"><span class="pre">tec.tests.test_license_hygiene.</span></span><span class="sig-name descname"><span class="pre">PKG_ROOT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">PosixPath('/home/runner/work/tec/tec/tec')</span></span><a class="headerlink" href="#tec.tests.test_license_hygiene.PKG_ROOT" title="Link to this definition"></a></dt>
+<dd><p>Root of the installed/importable <code class="docutils literal notranslate"><span class="pre">tec</span></code> package.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="tec.tests.test_license_hygiene.THIS_FILE">
+<span class="sig-prename descclassname"><span class="pre">tec.tests.test_license_hygiene.</span></span><span class="sig-name descname"><span class="pre">THIS_FILE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">PosixPath('/home/runner/work/tec/tec/tec/tests/test_license_hygiene.py')</span></span><a class="headerlink" href="#tec.tests.test_license_hygiene.THIS_FILE" title="Link to this definition"></a></dt>
+<dd><p>This test module – excluded from the scan, since it necessarily spells out the
+very markers it is looking for.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.tests.test_license_hygiene.py_files_of_package">
+<span class="sig-prename descclassname"><span class="pre">tec.tests.test_license_hygiene.</span></span><span class="sig-name descname"><span class="pre">py_files_of_package</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/tec/tests/test_license_hygiene.html#py_files_of_package"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.tests.test_license_hygiene.py_files_of_package" title="Link to this definition"></a></dt>
+<dd><p>Generate the <code class="docutils literal notranslate"><span class="pre">.py</span></code> files of the <code class="docutils literal notranslate"><span class="pre">tec</span></code> package that should be scanned.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.tests.test_license_hygiene.test_no_foreign_copyright_notice_in_package_source">
+<span class="sig-prename descclassname"><span class="pre">tec.tests.test_license_hygiene.</span></span><span class="sig-name descname"><span class="pre">test_no_foreign_copyright_notice_in_package_source</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/tec/tests/test_license_hygiene.html#test_no_foreign_copyright_notice_in_package_source"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.tests.test_license_hygiene.test_no_foreign_copyright_notice_in_package_source" title="Link to this definition"></a></dt>
+<dd><p>No module of the package carries a copyright notice of its own.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.tests.test_license_hygiene.test_no_foreign_license_grant_in_package_source">
+<span class="sig-prename descclassname"><span class="pre">tec.tests.test_license_hygiene.</span></span><span class="sig-name descname"><span class="pre">test_no_foreign_license_grant_in_package_source</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/tec/tests/test_license_hygiene.html#test_no_foreign_license_grant_in_package_source"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.tests.test_license_hygiene.test_no_foreign_license_grant_in_package_source" title="Link to this definition"></a></dt>
+<dd><p>No module of the package embeds a foreign licence grant.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tec.tests.test_license_hygiene.test_there_are_files_to_scan">
+<span class="sig-prename descclassname"><span class="pre">tec.tests.test_license_hygiene.</span></span><span class="sig-name descname"><span class="pre">test_there_are_files_to_scan</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/tec/tests/test_license_hygiene.html#test_there_are_files_to_scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.tests.test_license_hygiene.test_there_are_files_to_scan" title="Link to this definition"></a></dt>
+<dd><p>Sanity check: a scan that finds nothing to scan would vacuously pass.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="test_imports.html" class="btn btn-neutral float-left" title="tec.tests.test_imports" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../util.html" class="btn btn-neutral float-right" title="tec.util" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
