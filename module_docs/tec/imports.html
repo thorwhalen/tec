@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tec.imports &mdash; tec 0.0.19 documentation</title>
+  <title>tec.imports &mdash; tec 0.0.20 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=2fd7553c"></script>
+      <script src="../../_static/documentation_options.js?v=056c92e6"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -128,8 +128,8 @@ code into an abstract syntax tree and walking it – so, unlike the regex-based
 <a class="reference internal" href="import_counting.html#module-tec.import_counting" title="tec.import_counting"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tec.import_counting</span></code></a>, it is not fooled by import-looking strings, comments,
 or line continuations.</p>
 <p>The simple thing is simple:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">imp</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">imports_in_code</span><span class="p">(</span><span class="s2">&quot;import os</span><span class="se">\n</span><span class="s2">from json import dumps&quot;</span><span class="p">)]</span>
-<span class="go">[&#39;os&#39;, &#39;json.dumps&#39;]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">imp</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">imports_in_code</span><span class="p">(</span><span class="s2">"import os</span><span class="se">\n</span><span class="s2">from json import dumps"</span><span class="p">)]</span>
+<span class="go">['os', 'json.dumps']</span>
 </pre></div>
 </div>
 <p>The interface has three levels, from most to least specific:</p>
@@ -196,13 +196,13 @@ restriction to <code class="docutils literal notranslate"><span class="pre">.py<
 <dt class="sig sig-object py" id="tec.imports.ImportInfo">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">tec.imports.</span></span><span class="sig-name descname"><span class="pre">ImportInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'&lt;string&gt;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/imports.html#ImportInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.imports.ImportInfo" title="Link to this definition"></a></dt>
 <dd><p>A single imported name, along with where it was found.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">imp</span> <span class="o">=</span> <span class="n">ImportInfo</span><span class="p">(</span><span class="s2">&quot;os.path&quot;</span><span class="p">,</span> <span class="s2">&quot;a.py&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">imp</span> <span class="o">=</span> <span class="n">ImportInfo</span><span class="p">(</span><span class="s2">"os.path"</span><span class="p">,</span> <span class="s2">"a.py"</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">imp</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">imp</span><span class="o">.</span><span class="n">lineno</span><span class="p">,</span> <span class="n">imp</span><span class="o">.</span><span class="n">is_relative</span>
-<span class="go">(&#39;os.path&#39;, 3, False)</span>
+<span class="go">('os.path', 3, False)</span>
 </pre></div>
 </div>
 <p>Relative imports carry the number of leading dots in <code class="docutils literal notranslate"><span class="pre">level</span></code>:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ImportInfo</span><span class="p">(</span><span class="s2">&quot;sibling&quot;</span><span class="p">,</span> <span class="s2">&quot;a.py&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">is_relative</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ImportInfo</span><span class="p">(</span><span class="s2">"sibling"</span><span class="p">,</span> <span class="s2">"a.py"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">is_relative</span>
 <span class="go">True</span>
 </pre></div>
 </div>
@@ -256,17 +256,17 @@ added to the folder afterwards will not show up in an existing instance.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">root</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;__init__.py&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;a.py&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s1">&#39;import os</span><span class="se">\n</span><span class="s1">from json import dumps</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="n">s</span> <span class="o">=</span> <span class="n">ModuleImports</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">root_module_str</span><span class="o">=</span><span class="s1">&#39;pkg&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">'__init__.py'</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">'a.py'</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s1">'import os</span><span class="se">\n</span><span class="s1">from json import dumps</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">s</span> <span class="o">=</span> <span class="n">ModuleImports</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">root_module_str</span><span class="o">=</span><span class="s1">'pkg'</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="n">keys</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">imp</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;pkg.a&#39;</span><span class="p">]]</span>
+<span class="gp">... </span>    <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">imp</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">s</span><span class="p">[</span><span class="s1">'pkg.a'</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">keys</span>
-<span class="go">[&#39;pkg.__init__&#39;, &#39;pkg.a&#39;]</span>
+<span class="go">['pkg.__init__', 'pkg.a']</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n</span>
 <span class="go">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">names</span>
-<span class="go">[&#39;os&#39;, &#39;json.dumps&#39;]</span>
+<span class="go">['os', 'json.dumps']</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -275,15 +275,15 @@ added to the folder afterwards will not show up in an existing instance.</p>
 <dt class="sig sig-object py" id="tec.imports.base_package_of">
 <span class="sig-prename descclassname"><span class="pre">tec.imports.</span></span><span class="sig-name descname"><span class="pre">base_package_of</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#tec.imports.ImportInfo" title="tec.imports.ImportInfo"><span class="pre">ImportInfo</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/tec/imports.html#base_package_of"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.imports.base_package_of" title="Link to this definition"></a></dt>
 <dd><p>The top-level package name of an import (<code class="docutils literal notranslate"><span class="pre">''</span></code> for relative imports).</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">base_package_of</span><span class="p">(</span><span class="s2">&quot;collections.abc&quot;</span><span class="p">)</span>
-<span class="go">&#39;collections&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">base_package_of</span><span class="p">(</span><span class="n">ImportInfo</span><span class="p">(</span><span class="s2">&quot;os.path&quot;</span><span class="p">))</span>
-<span class="go">&#39;os&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">base_package_of</span><span class="p">(</span><span class="s2">"collections.abc"</span><span class="p">)</span>
+<span class="go">'collections'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">base_package_of</span><span class="p">(</span><span class="n">ImportInfo</span><span class="p">(</span><span class="s2">"os.path"</span><span class="p">))</span>
+<span class="go">'os'</span>
 </pre></div>
 </div>
 <p>A relative import has no resolvable top-level package, so it maps to <code class="docutils literal notranslate"><span class="pre">''</span></code>:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">base_package_of</span><span class="p">(</span><span class="n">ImportInfo</span><span class="p">(</span><span class="s2">&quot;sibling&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-<span class="go">&#39;&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">base_package_of</span><span class="p">(</span><span class="n">ImportInfo</span><span class="p">(</span><span class="s2">"sibling"</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="go">''</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -311,14 +311,14 @@ i.e. the top-level package name.</p></li>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">root</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;a.py&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s1">&#39;import os</span><span class="se">\n</span><span class="s1">from os import path</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;b.py&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s1">&#39;import os.path</span><span class="se">\n</span><span class="s1">import json</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">'a.py'</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s1">'import os</span><span class="se">\n</span><span class="s1">from os import path</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">'b.py'</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s1">'import os.path</span><span class="se">\n</span><span class="s1">import json</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="n">counts</span> <span class="o">=</span> <span class="n">count_imports</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="n">full</span> <span class="o">=</span> <span class="n">count_imports</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">import_key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">imp</span><span class="p">:</span> <span class="n">imp</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
-<span class="go">[(&#39;json&#39;, 1), (&#39;os&#39;, 3)]</span>
+<span class="go">[('json', 1), ('os', 3)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">full</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
-<span class="go">[(&#39;json&#39;, 1), (&#39;os&#39;, 1), (&#39;os.path&#39;, 2)]</span>
+<span class="go">[('json', 1), ('os', 1), ('os.path', 2)]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -336,7 +336,7 @@ i.e. the top-level package name.</p></li>
 </dd>
 </dl>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">imports</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">find_imports</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;ast&quot;</span> <span class="ow">in</span> <span class="p">{</span><span class="n">imp</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">imports</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">"ast"</span> <span class="ow">in</span> <span class="p">{</span><span class="n">imp</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">imports</span><span class="p">}</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="n">imp</span><span class="o">.</span><span class="n">filename</span> <span class="k">for</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">imports</span><span class="p">}</span> <span class="o">==</span> <span class="p">{</span><span class="vm">__file__</span><span class="p">}</span>
 <span class="go">True</span>
@@ -365,29 +365,29 @@ i.e. the top-level package name.</p></li>
 <dd class="field-even"><p>A generator of <a class="reference internal" href="#tec.imports.ImportInfo" title="tec.imports.ImportInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImportInfo</span></code></a>.</p>
 </dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">code</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">code</span> <span class="o">=</span> <span class="s1">'''</span>
 <span class="gp">... </span><span class="s1">import os, sys</span>
 <span class="gp">... </span><span class="s1">import os.path as osp</span>
 <span class="gp">... </span><span class="s1">from collections.abc import Mapping</span>
 <span class="gp">... </span><span class="s1">from . import sibling</span>
 <span class="gp">... </span><span class="s1">from ..pkg import thing</span>
-<span class="gp">... </span><span class="s1">&#39;&#39;&#39;</span>
+<span class="gp">... </span><span class="s1">'''</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">imp</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">imports_in_code</span><span class="p">(</span><span class="n">code</span><span class="p">)]</span>
-<span class="go">[&#39;os&#39;, &#39;sys&#39;, &#39;os.path&#39;, &#39;collections.abc.Mapping&#39;, &#39;sibling&#39;, &#39;pkg.thing&#39;]</span>
+<span class="go">['os', 'sys', 'os.path', 'collections.abc.Mapping', 'sibling', 'pkg.thing']</span>
 </pre></div>
 </div>
 <p>Unlike a regex-based scan, text that merely <em>looks</em> like an import is ignored:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">imports_in_code</span><span class="p">(</span><span class="s1">&#39;x = &quot;import antigravity&quot;  # import antigravity&#39;</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">imports_in_code</span><span class="p">(</span><span class="s1">'x = "import antigravity"  # import antigravity'</span><span class="p">))</span>
 <span class="go">[]</span>
 </pre></div>
 </div>
 <p>Imports nested in functions, classes, <code class="docutils literal notranslate"><span class="pre">try</span></code> blocks etc. are included:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">imp</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">imports_in_code</span><span class="p">(</span><span class="s2">&quot;def f():</span><span class="se">\n</span><span class="s2">    import lazily</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)]</span>
-<span class="go">[&#39;lazily&#39;]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">imp</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">imports_in_code</span><span class="p">(</span><span class="s2">"def f():</span><span class="se">\n</span><span class="s2">    import lazily</span><span class="se">\n</span><span class="s2">"</span><span class="p">)]</span>
+<span class="go">['lazily']</span>
 </pre></div>
 </div>
 <p>Code that doesn’t parse raises a <code class="docutils literal notranslate"><span class="pre">SyntaxError</span></code> naming the offending file:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">imports_in_code</span><span class="p">(</span><span class="s2">&quot;import ;&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;broken.py&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">imports_in_code</span><span class="p">(</span><span class="s2">"import ;"</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">"broken.py"</span><span class="p">)</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
 <span class="w">  </span><span class="c">...</span>
@@ -419,19 +419,19 @@ the <code class="docutils literal notranslate"><span class="pre">SyntaxError</sp
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">root</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;a.py&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s1">&#39;import os</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;b_test.py&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s1">&#39;import json</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">'a.py'</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s1">'import os</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">'b_test.py'</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s1">'import json</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="n">all_names</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">imp</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">imports_under_folder</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
 <span class="gp">... </span>    <span class="n">kept</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
 <span class="gp">... </span>        <span class="n">imp</span><span class="o">.</span><span class="n">name</span>
 <span class="gp">... </span>        <span class="k">for</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">imports_under_folder</span><span class="p">(</span>
-<span class="gp">... </span>            <span class="n">root</span><span class="p">,</span> <span class="n">path_filt</span><span class="o">=</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="ow">not</span> <span class="n">p</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;_test.py&#39;</span><span class="p">)</span>
+<span class="gp">... </span>            <span class="n">root</span><span class="p">,</span> <span class="n">path_filt</span><span class="o">=</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="ow">not</span> <span class="n">p</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'_test.py'</span><span class="p">)</span>
 <span class="gp">... </span>        <span class="p">)</span>
 <span class="gp">... </span>    <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">all_names</span>
-<span class="go">[&#39;json&#39;, &#39;os&#39;]</span>
+<span class="go">['json', 'os']</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">kept</span>
-<span class="go">[&#39;os&#39;]</span>
+<span class="go">['os']</span>
 </pre></div>
 </div>
 </dd></dl>

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tec.stores &mdash; tec 0.0.19 documentation</title>
+  <title>tec.stores &mdash; tec 0.0.20 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=2fd7553c"></script>
+      <script src="../../_static/documentation_options.js?v=056c92e6"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -93,22 +93,22 @@
            <div itemprop="articleBody">
              
   <h1>Source code for tec.stores</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;(dol) stores (i.e. mapping interfaces) to access python files&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""(dol) stores (i.e. mapping interfaces) to access python files"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">xdol.pystores</span><span class="w"> </span><span class="kn">import</span> <span class="n">PyFilesReader</span><span class="p">,</span> <span class="n">builtins_py_files</span><span class="p">,</span> <span class="n">sitepackages_py_files</span>
 
-<span class="n">commented_header_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;(</span><span class="se">\&quot;\&quot;\&quot;</span><span class="s2">|&#39;&#39;&#39;)</span><span class="se">\\</span><span class="s2">s?.+&quot;</span><span class="p">)</span>
-<span class="n">triple_quotes_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;\&quot;\&quot;</span><span class="s2">|&#39;&#39;&#39;&quot;</span><span class="p">)</span>
-<span class="n">triple_quotes_ending_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;\&quot;\&quot;</span><span class="s2">$|&#39;&#39;&#39;$&quot;</span><span class="p">)</span>
+<span class="n">commented_header_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"(</span><span class="se">\"\"\"</span><span class="s2">|''')</span><span class="se">\\</span><span class="s2">s?.+"</span><span class="p">)</span>
+<span class="n">triple_quotes_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"</span><span class="se">\"\"\"</span><span class="s2">|'''"</span><span class="p">)</span>
+<span class="n">triple_quotes_ending_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"</span><span class="se">\"\"\"</span><span class="s2">$|'''$"</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_clean_str</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">triple_quotes_re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">string</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">triple_quotes_re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">string</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">file_contents_to_short_description</span><span class="p">(</span><span class="n">file_contents</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dflt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_lines</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
-    <span class="n">lines</span> <span class="o">=</span> <span class="n">file_contents</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">file_contents</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
     <span class="n">quotes_line_idx</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
         <span class="p">(</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lines</span><span class="p">[:</span><span class="n">max_lines</span><span class="p">])</span> <span class="k">if</span> <span class="n">triple_quotes_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">)),</span>
         <span class="kc">None</span><span class="p">,</span>
@@ -126,7 +126,7 @@
     <span class="c1"># m = commented_header_re.match(file_contents)</span>
     <span class="c1"># if m:</span>
     <span class="c1">#     t = m.group(0)[3:].strip()</span>
-    <span class="c1">#     t = triple_quotes_ending_re.sub(&#39;&#39;, t)</span>
+    <span class="c1">#     t = triple_quotes_ending_re.sub('', t)</span>
     <span class="c1">#     return t</span>
     <span class="c1"># else:</span>
     <span class="c1">#     return dflt</span>
@@ -135,10 +135,10 @@
 <div class="viewcode-block" id="find_short_description_for_pkg">
 <a class="viewcode-back" href="../../module_docs/tec/stores.html#tec.stores.find_short_description_for_pkg">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">find_short_description_for_pkg</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generator of (pkg_name, short_description) pairs (using the header comments of init files as description)&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Generator of (pkg_name, short_description) pairs (using the header comments of init files as description)"""</span>
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;__init__.py&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;&quot;&quot;&quot;&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">v</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;&#39;&#39;&#39;&quot;</span><span class="p">)):</span>
-            <span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="p">[:</span> <span class="o">-</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="s2">&quot;__init__.py&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">"__init__.py"</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'"""'</span><span class="p">)</span> <span class="ow">or</span> <span class="n">v</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"'''"</span><span class="p">)):</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="p">[:</span> <span class="o">-</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="s2">"__init__.py"</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
             <span class="k">yield</span> <span class="n">k</span><span class="p">,</span> <span class="n">file_contents_to_short_description</span><span class="p">(</span><span class="n">v</span><span class="p">)</span></div>
 
 
@@ -146,19 +146,19 @@
 <div class="viewcode-block" id="py_files_with_contents_matching_pattern">
 <a class="viewcode-back" href="../../module_docs/tec/stores.html#tec.stores.py_files_with_contents_matching_pattern">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">py_files_with_contents_matching_pattern</span><span class="p">(</span><span class="n">files_src</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Yields (relative) file paths of .py files whose contents match pattern.</span>
+<span class="w">    </span><span class="sd">"""Yields (relative) file paths of .py files whose contents match pattern.</span>
 
 <span class="sd">    :param files_src: Source of files. Module, package, folder, or __init__.py file.</span>
 <span class="sd">    :param pattern: regular expression (string or re.Pattern object)</span>
 
-<span class="sd">    Let&#39;s see what modules of asyncio contain the &quot;import io&quot; string:</span>
+<span class="sd">    Let's see what modules of asyncio contain the "import io" string:</span>
 
 <span class="sd">    &gt;&gt;&gt; import asyncio</span>
-<span class="sd">    &gt;&gt;&gt; set(py_files_with_contents_matching_pattern(asyncio, &#39;import io&#39;)).issuperset(  # doctest: +SKIP</span>
-<span class="sd">    ...     {&#39;proactor_events.py&#39;, &#39;unix_events.py&#39;})</span>
+<span class="sd">    &gt;&gt;&gt; set(py_files_with_contents_matching_pattern(asyncio, 'import io')).issuperset(  # doctest: +SKIP</span>
+<span class="sd">    ...     {'proactor_events.py', 'unix_events.py'})</span>
 <span class="sd">    True</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">PyFilesReader</span><span class="p">(</span><span class="n">files_src</span><span class="p">)</span>

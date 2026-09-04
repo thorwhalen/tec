@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tec.pip_packaging &mdash; tec 0.0.19 documentation</title>
+  <title>tec.pip_packaging &mdash; tec 0.0.20 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=2fd7553c"></script>
+      <script src="../../_static/documentation_options.js?v=056c92e6"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -93,8 +93,8 @@
            <div itemprop="articleBody">
              
   <h1>Source code for tec.pip_packaging</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Tools for pip packaging: create GitHub repos, look up PyPI versions, and</span>
-<span class="sd">format packaging-related strings.&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""Tools for pip packaging: create GitHub repos, look up PyPI versions, and</span>
+<span class="sd">format packaging-related strings."""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">string</span><span class="w"> </span><span class="kn">import</span> <span class="n">Formatter</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
@@ -102,24 +102,24 @@
 <span class="n">dflt_formatter</span> <span class="o">=</span> <span class="n">Formatter</span><span class="p">()</span>
 
 <span class="n">dflt_specs</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;license_template&quot;</span><span class="p">:</span> <span class="s2">&quot;apache-2.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;gitignore_template&quot;</span><span class="p">:</span> <span class="s2">&quot;Python&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;auto_init&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"license_template"</span><span class="p">:</span> <span class="s2">"apache-2.0"</span><span class="p">,</span>
+    <span class="s2">"gitignore_template"</span><span class="p">:</span> <span class="s2">"Python"</span><span class="p">,</span>
+    <span class="s2">"auto_init"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">}</span>
 
 
 <div class="viewcode-block" id="create_github_repo">
 <a class="viewcode-back" href="../../module_docs/tec/pip_packaging.html#tec.pip_packaging.create_github_repo">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">create_github_repo</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">login_or_token</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a new github repository</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_github_repo</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">login_or_token</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Create a new github repository</span>
 
 <span class="sd">    Note: Requires github (pip install github)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">github</span><span class="w"> </span><span class="kn">import</span> <span class="n">Github</span>
 
     <span class="n">gg</span> <span class="o">=</span> <span class="n">Github</span><span class="p">(</span><span class="n">login_or_token</span><span class="o">=</span><span class="n">login_or_token</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">)</span>
 
-    <span class="n">my_specs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">}</span>
+    <span class="n">my_specs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">"description"</span><span class="p">:</span> <span class="n">description</span><span class="p">}</span>
     <span class="n">specs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">dflt_specs</span><span class="p">,</span> <span class="o">**</span><span class="n">my_specs</span><span class="p">)</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">gg</span><span class="o">.</span><span class="n">get_user</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">user</span><span class="o">.</span><span class="n">create_repo</span><span class="p">(</span><span class="o">**</span><span class="n">specs</span><span class="p">)</span></div>
@@ -127,14 +127,14 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">increment_version</span><span class="p">(</span><span class="n">version_str</span><span class="p">):</span>
-    <span class="n">version_nums</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">version_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)))</span>
+    <span class="n">version_nums</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">version_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)))</span>
     <span class="n">version_nums</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">version_nums</span><span class="p">))</span>
+    <span class="k">return</span> <span class="s2">"."</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">version_nums</span><span class="p">))</span>
 
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
 
-<span class="n">DLFT_PYPI_PACKAGE_JSON_URL_TEMPLATE</span> <span class="o">=</span> <span class="s2">&quot;https://pypi.python.org/pypi/</span><span class="si">{package}</span><span class="s2">/json&quot;</span>
+<span class="n">DLFT_PYPI_PACKAGE_JSON_URL_TEMPLATE</span> <span class="o">=</span> <span class="s2">"https://pypi.python.org/pypi/</span><span class="si">{package}</span><span class="s2">/json"</span>
 
 
 <div class="viewcode-block" id="get_last_pypi_version_number">
@@ -142,22 +142,22 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">get_last_pypi_version_number</span><span class="p">(</span>
     <span class="n">package</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">url_template</span><span class="o">=</span><span class="n">DLFT_PYPI_PACKAGE_JSON_URL_TEMPLATE</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Return version of package on pypi.python.org using json.</span>
 
 <span class="sd">    ```</span>
-<span class="sd">    &gt; get_version(&#39;tec&#39;)</span>
-<span class="sd">    &#39;0.0.7&#39;</span>
+<span class="sd">    &gt; get_version('tec')</span>
+<span class="sd">    '0.0.7'</span>
 <span class="sd">    ```</span>
 
 <span class="sd">    :param package: Name of the package</span>
 <span class="sd">    :return: A version (string</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">req</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">url_template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">package</span><span class="o">=</span><span class="n">package</span><span class="p">))</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-        <span class="n">releases</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;releases&quot;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="n">releases</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"releases"</span><span class="p">,</span> <span class="p">[])</span>
         <span class="k">if</span> <span class="n">releases</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">releases</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
 
@@ -171,47 +171,47 @@
         <span class="k">return</span> <span class="n">increment_version</span><span class="p">(</span><span class="n">current_version</span><span class="p">)</span>
 
 
-<span class="c1"># get_last_pypi_version_number(&#39;dol&#39;)</span>
+<span class="c1"># get_last_pypi_version_number('dol')</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">my_setup</span><span class="p">(</span><span class="o">**</span><span class="n">setup_kwargs</span><span class="p">):</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">setuptools</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Setup params -------------------------------------------------------&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Setup params -------------------------------------------------------"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">setup_kwargs</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--------------------------------------------------------------------&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"--------------------------------------------------------------------"</span><span class="p">)</span>
     <span class="n">setup</span><span class="p">(</span><span class="o">**</span><span class="n">setup_kwargs</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="ujoin">
 <a class="viewcode-back" href="../../module_docs/tec/pip_packaging.html#tec.pip_packaging.ujoin">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">ujoin</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Join strings with the url seperator (/).</span>
+<span class="w">    </span><span class="sd">"""Join strings with the url seperator (/).</span>
 
-<span class="sd">    Note that will add a / where it&#39;s missing (as in between &#39;https://pypi.org&#39; and &#39;project/&#39;),</span>
+<span class="sd">    Note that will add a / where it's missing (as in between 'https://pypi.org' and 'project/'),</span>
 <span class="sd">    and only use one if two consecutive tokens use respectively end and start with a /</span>
-<span class="sd">    (as in &#39;project/&#39; and &#39;/pipoke/&#39;).</span>
+<span class="sd">    (as in 'project/' and '/pipoke/').</span>
 
-<span class="sd">    &gt;&gt;&gt; ujoin(&#39;https://pypi.org&#39;, &#39;project/&#39;, &#39;/pipoke/&#39;)</span>
-<span class="sd">    &#39;https://pypi.org/project/pipoke/&#39;</span>
+<span class="sd">    &gt;&gt;&gt; ujoin('https://pypi.org', 'project/', '/pipoke/')</span>
+<span class="sd">    'https://pypi.org/project/pipoke/'</span>
 
 <span class="sd">    Extremal cases</span>
-<span class="sd">    &gt;&gt;&gt; ujoin(&#39;https://pypi.org&#39;)</span>
-<span class="sd">    &#39;https://pypi.org&#39;</span>
-<span class="sd">    &gt;&gt;&gt; ujoin(&#39;https://pypi.org/&#39;)</span>
-<span class="sd">    &#39;https://pypi.org/&#39;</span>
-<span class="sd">    &gt;&gt;&gt; ujoin(&#39;&#39;)</span>
-<span class="sd">    &#39;&#39;</span>
+<span class="sd">    &gt;&gt;&gt; ujoin('https://pypi.org')</span>
+<span class="sd">    'https://pypi.org'</span>
+<span class="sd">    &gt;&gt;&gt; ujoin('https://pypi.org/')</span>
+<span class="sd">    'https://pypi.org/'</span>
+<span class="sd">    &gt;&gt;&gt; ujoin('')</span>
+<span class="sd">    ''</span>
 <span class="sd">    &gt;&gt;&gt; ujoin()</span>
-<span class="sd">    &#39;&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    ''</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">""</span>
     <span class="k">return</span> <span class="p">(</span>
-        <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="s2">&quot;/&quot;</span>  <span class="c1"># prepend slash if first arg starts with it</span>
-        <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">[(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="p">:</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;/&quot;</span><span class="p">))]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">args</span><span class="p">)</span>
-        <span class="o">+</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="s2">&quot;/&quot;</span>
+        <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"/"</span><span class="p">)</span> <span class="o">*</span> <span class="s2">"/"</span>  <span class="c1"># prepend slash if first arg starts with it</span>
+        <span class="o">+</span> <span class="s2">"/"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">[(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"/"</span><span class="p">)</span> <span class="p">:</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"/"</span><span class="p">))]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">args</span><span class="p">)</span>
+        <span class="o">+</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"/"</span><span class="p">)</span> <span class="o">*</span> <span class="s2">"/"</span>
     <span class="p">)</span>  <span class="c1"># append slash if last arg ends with it</span></div>
 
 
@@ -220,16 +220,16 @@
 <div class="viewcode-block" id="PartialFormatter">
 <a class="viewcode-back" href="../../module_docs/tec/pip_packaging.html#tec.pip_packaging.PartialFormatter">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PartialFormatter</span><span class="p">(</span><span class="n">Formatter</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A string formatter that won&#39;t complain if the fields are only partially formatted.</span>
-<span class="sd">    But note that you will lose the spec part of your template (e.g. in {foo:1.2f}, you&#39;ll loose the 1.2f</span>
+<span class="w">    </span><span class="sd">"""A string formatter that won't complain if the fields are only partially formatted.</span>
+<span class="sd">    But note that you will lose the spec part of your template (e.g. in {foo:1.2f}, you'll loose the 1.2f</span>
 <span class="sd">    if not foo is given -- but {foo} will remain).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;{&quot;</span> <span class="o">+</span> <span class="n">key</span> <span class="o">+</span> <span class="s2">&quot;}&quot;</span>
+            <span class="k">return</span> <span class="s2">"{"</span> <span class="o">+</span> <span class="n">key</span> <span class="o">+</span> <span class="s2">"}"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">format_fields_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]}</span></div>
@@ -239,7 +239,7 @@
 <span class="n">partial_formatter</span> <span class="o">=</span> <span class="n">PartialFormatter</span><span class="p">()</span>
 
 
-<span class="c1"># TODO: For those who love algorithmic optimization, there&#39;s some wasted to cut out here below.</span>
+<span class="c1"># TODO: For those who love algorithmic optimization, there's some wasted to cut out here below.</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_unformatted</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
@@ -257,7 +257,7 @@
 <div class="viewcode-block" id="format_str_vals_of_dict">
 <a class="viewcode-back" href="../../module_docs/tec/pip_packaging.html#tec.pip_packaging.format_str_vals_of_dict">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">format_str_vals_of_dict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">max_formatting_loops</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 
 <span class="sd">    :param d:</span>
 <span class="sd">    :param max_formatting_loops:</span>
@@ -265,42 +265,42 @@
 <span class="sd">    :return:</span>
 
 <span class="sd">    &gt;&gt;&gt; d = {</span>
-<span class="sd">    ...     &#39;filepath&#39;: &#39;{root}/{file}.{ext}&#39;,</span>
-<span class="sd">    ...     &#39;ext&#39;: &#39;txt&#39;</span>
+<span class="sd">    ...     'filepath': '{root}/{file}.{ext}',</span>
+<span class="sd">    ...     'ext': 'txt'</span>
 <span class="sd">    ... }</span>
-<span class="sd">    &gt;&gt;&gt; format_str_vals_of_dict(d, root=&#39;ROOT&#39;, file=&#39;FILE&#39;)</span>
-<span class="sd">    {&#39;filepath&#39;: &#39;ROOT/FILE.txt&#39;, &#39;ext&#39;: &#39;txt&#39;}</span>
+<span class="sd">    &gt;&gt;&gt; format_str_vals_of_dict(d, root='ROOT', file='FILE')</span>
+<span class="sd">    {'filepath': 'ROOT/FILE.txt', 'ext': 'txt'}</span>
 
 <span class="sd">    Note that if the input mapping `d` and the kwargs have a conflict, the mapping version is used!</span>
 
-<span class="sd">    &gt;&gt;&gt; format_str_vals_of_dict(d, root=&#39;ROOT&#39;, file=&#39;FILE&#39;, ext=&#39;will_not_be_used&#39;)</span>
-<span class="sd">    {&#39;filepath&#39;: &#39;ROOT/FILE.txt&#39;, &#39;ext&#39;: &#39;txt&#39;}</span>
+<span class="sd">    &gt;&gt;&gt; format_str_vals_of_dict(d, root='ROOT', file='FILE', ext='will_not_be_used')</span>
+<span class="sd">    {'filepath': 'ROOT/FILE.txt', 'ext': 'txt'}</span>
 
 <span class="sd">    But if you want to override an input mapping, you can -- the usual way:</span>
-<span class="sd">    &gt;&gt;&gt; format_str_vals_of_dict(dict(d, ext=&#39;will_be_used&#39;), root=&#39;ROOT&#39;, file=&#39;FILE&#39;)</span>
-<span class="sd">    {&#39;filepath&#39;: &#39;ROOT/FILE.will_be_used&#39;, &#39;ext&#39;: &#39;will_be_used&#39;}</span>
+<span class="sd">    &gt;&gt;&gt; format_str_vals_of_dict(dict(d, ext='will_be_used'), root='ROOT', file='FILE')</span>
+<span class="sd">    {'filepath': 'ROOT/FILE.will_be_used', 'ext': 'will_be_used'}</span>
 
-<span class="sd">    If you don&#39;t provide enough fields to satisfy all the format fields in the values of `d`,</span>
-<span class="sd">    you&#39;ll be told to bugger off.</span>
+<span class="sd">    If you don't provide enough fields to satisfy all the format fields in the values of `d`,</span>
+<span class="sd">    you'll be told to bugger off.</span>
 
-<span class="sd">    &gt;&gt;&gt; format_str_vals_of_dict(d, root=&#39;ROOT&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; format_str_vals_of_dict(d, root='ROOT')</span>
 <span class="sd">    Traceback (most recent call last):</span>
 <span class="sd">    ...</span>
-<span class="sd">    ValueError: I won&#39;t be able to complete that. You&#39;ll need to provide the values for:</span>
+<span class="sd">    ValueError: I won't be able to complete that. You'll need to provide the values for:</span>
 <span class="sd">      file</span>
 
-<span class="sd">    And it&#39;s recursive...</span>
+<span class="sd">    And it's recursive...</span>
 <span class="sd">    &gt;&gt;&gt; d = {</span>
-<span class="sd">    ...     &#39;filepath&#39;: &#39;{root}/{filename}&#39;,</span>
-<span class="sd">    ...     &#39;filename&#39;: &#39;{file}.{ext}&#39;</span>
+<span class="sd">    ...     'filepath': '{root}/{filename}',</span>
+<span class="sd">    ...     'filename': '{file}.{ext}'</span>
 <span class="sd">    ... }</span>
-<span class="sd">    &gt;&gt;&gt; my_configs = {&#39;root&#39;: &#39;ROOT&#39;, &#39;file&#39;: &#39;FILE&#39;, &#39;ext&#39;: &#39;EXT&#39;}</span>
+<span class="sd">    &gt;&gt;&gt; my_configs = {'root': 'ROOT', 'file': 'FILE', 'ext': 'EXT'}</span>
 <span class="sd">    &gt;&gt;&gt; format_str_vals_of_dict(d, **my_configs)</span>
-<span class="sd">    {&#39;filepath&#39;: &#39;ROOT/FILE.EXT&#39;, &#39;filename&#39;: &#39;FILE.EXT&#39;}</span>
+<span class="sd">    {'filepath': 'ROOT/FILE.EXT', 'filename': 'FILE.EXT'}</span>
 
 <span class="sd">    # TODO: Could make the above work if filename is give, but not file nor ext! At least as an option.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="o">**</span><span class="n">d</span><span class="p">)</span>  <span class="c1"># make a shallow copy</span>
     <span class="c1"># The defaults (kwargs) cannot overlap with any keys of d, so:</span>
     <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">d</span><span class="p">)}</span>
@@ -310,8 +310,8 @@
 
     <span class="k">if</span> <span class="n">missing_fields</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;I won&#39;t be able to complete that. You&#39;ll need to provide the values for:</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing_fields</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="s2">"I won't be able to complete that. You'll need to provide the values for:</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="o">+</span> <span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing_fields</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
         <span class="p">)</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_formatting_loops</span><span class="p">):</span>
@@ -324,9 +324,9 @@
             <span class="k">break</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;There are still some unformatted fields, &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;but I reached my max </span><span class="si">{</span><span class="n">max_formatting_loops</span><span class="si">}</span><span class="s2"> allowed loops. &quot;</span>
-            <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;Those fields are: </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="n">_fields_to_format</span><span class="p">(</span><span class="n">d</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="n">kwargs</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">"There are still some unformatted fields, "</span>
+            <span class="sa">f</span><span class="s2">"but I reached my max </span><span class="si">{</span><span class="n">max_formatting_loops</span><span class="si">}</span><span class="s2"> allowed loops. "</span>
+            <span class="o">+</span> <span class="sa">f</span><span class="s2">"Those fields are: </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="n">_fields_to_format</span><span class="p">(</span><span class="n">d</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="n">kwargs</span><span class="p">))</span><span class="si">}</span><span class="s2">"</span>
         <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">d</span></div>

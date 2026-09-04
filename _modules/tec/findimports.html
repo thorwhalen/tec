@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tec.findimports &mdash; tec 0.0.19 documentation</title>
+  <title>tec.findimports &mdash; tec 0.0.20 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=2fd7553c"></script>
+      <script src="../../_static/documentation_options.js?v=056c92e6"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -93,23 +93,23 @@
            <div itemprop="articleBody">
              
   <h1>Source code for tec.findimports</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Deprecated compatibility layer -- use :mod:`tec.imports` instead.</span>
+<span></span><span class="sd">"""Deprecated compatibility layer -- use :mod:`tec.imports` instead.</span>
 
 <span class="sd">``tec`` used to ship, under this module name, a vendored (lightly edited) copy of</span>
 <span class="sd">the third party ``findimports`` project. That copy was distributed under the</span>
-<span class="sd">GPL-2.0-or-later, which is incompatible with ``tec``&#39;s own Apache-2.0 terms, so it</span>
+<span class="sd">GPL-2.0-or-later, which is incompatible with ``tec``'s own Apache-2.0 terms, so it</span>
 <span class="sd">has been removed.</span>
 
 <span class="sd">What replaces it:</span>
 
 <span class="sd">- Import finding is now done by :mod:`tec.imports`, an independent implementation</span>
-<span class="sd">  written against the standard library&#39;s ``ast``. The functions of this module</span>
+<span class="sd">  written against the standard library's ``ast``. The functions of this module</span>
 <span class="sd">  simply forward to it.</span>
 <span class="sd">- The names that had no ``tec`` equivalent -- essentially the module *graph*</span>
 <span class="sd">  machinery (``ModuleGraph``, ``ImportFinder``, ``Module``, ...) -- are gone. If</span>
 <span class="sd">  you need them, install the upstream project yourself</span>
 <span class="sd">  (``pip install findimports``), keeping in mind that doing so subjects your work</span>
-<span class="sd">  to *its* licence rather than ``tec``&#39;s.</span>
+<span class="sd">  to *its* licence rather than ``tec``'s.</span>
 
 <span class="sd">Importing this module emits a ``DeprecationWarning``. Asking it for one of the</span>
 <span class="sd">removed names raises an ``AttributeError`` that says what to do instead:</span>
@@ -120,7 +120,7 @@
 <span class="sd">  ...</span>
 <span class="sd">AttributeError: ...</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">warnings</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn</span>
@@ -137,62 +137,62 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">tec.imports</span><span class="w"> </span><span class="kn">import</span> <span class="n">count_imports</span> <span class="k">as</span> <span class="n">_count_imports</span>
 
 <span class="c1">#: Module that supersedes this one.</span>
-<span class="n">REPLACEMENT_MODULE</span> <span class="o">=</span> <span class="s2">&quot;tec.imports&quot;</span>
+<span class="n">REPLACEMENT_MODULE</span> <span class="o">=</span> <span class="s2">"tec.imports"</span>
 
 <span class="c1">#: Advice for the names that only the (GPL) upstream project provides.</span>
 <span class="n">UPSTREAM_ONLY_ADVICE</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s2">&quot;there is no tec equivalent; install the upstream (GPL-2.0-or-later) project &quot;</span>
-    <span class="s2">&quot;with `pip install findimports` if you need it&quot;</span>
+    <span class="s2">"there is no tec equivalent; install the upstream (GPL-2.0-or-later) project "</span>
+    <span class="s2">"with `pip install findimports` if you need it"</span>
 <span class="p">)</span>
 
 <span class="c1">#: Names the removed vendored implementation used to provide, mapped to what to do</span>
 <span class="c1">#: instead. Kept as data (rather than in the error-raising code) so that the</span>
-<span class="c1">#: &quot;what happened to X?&quot; answers are a single, extensible source of truth.</span>
+<span class="c1">#: "what happened to X?" answers are a single, extensible source of truth.</span>
 <span class="n">REMOVED_NAMES</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;ModuleGraph&quot;</span><span class="p">:</span> <span class="n">UPSTREAM_ONLY_ADVICE</span><span class="p">,</span>
-    <span class="s2">&quot;ImportFinder&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;use </span><span class="si">{</span><span class="n">REPLACEMENT_MODULE</span><span class="si">}</span><span class="s2">.imports_in_code&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ImportFinderAndNameTracker&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;use </span><span class="si">{</span><span class="n">REPLACEMENT_MODULE</span><span class="si">}</span><span class="s2">.imports_in_code&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;find_imports_and_track_names&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;use </span><span class="si">{</span><span class="n">REPLACEMENT_MODULE</span><span class="si">}</span><span class="s2">.find_imports&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;adjust_lineno&quot;</span><span class="p">:</span> <span class="s2">&quot;there is no tec equivalent; ast node line numbers are used as is&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Module&quot;</span><span class="p">:</span> <span class="n">UPSTREAM_ONLY_ADVICE</span><span class="p">,</span>
-    <span class="s2">&quot;ModuleCycle&quot;</span><span class="p">:</span> <span class="n">UPSTREAM_ONLY_ADVICE</span><span class="p">,</span>
-    <span class="s2">&quot;Scope&quot;</span><span class="p">:</span> <span class="s2">&quot;there is no tec equivalent&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;main&quot;</span><span class="p">:</span> <span class="s2">&quot;there is no tec equivalent; this module has no command line interface&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;quote&quot;</span><span class="p">:</span> <span class="s2">&quot;there is no tec equivalent; it was a graphviz-output helper&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ModulesColl&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;use </span><span class="si">{</span><span class="n">REPLACEMENT_MODULE</span><span class="si">}</span><span class="s2">.ModuleImports (or tec.modules.ModulesReader)&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ModuleImportsBase&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;use </span><span class="si">{</span><span class="n">REPLACEMENT_MODULE</span><span class="si">}</span><span class="s2">.ModuleImports&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;modobj_to_modname&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;use </span><span class="si">{</span><span class="n">REPLACEMENT_MODULE</span><span class="si">}</span><span class="s2">.ModuleImports&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;modname_to_modobj&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;use </span><span class="si">{</span><span class="n">REPLACEMENT_MODULE</span><span class="si">}</span><span class="s2">.ModuleImports&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;iter_relative_files_and_folder&quot;</span><span class="p">:</span> <span class="s2">&quot;use tec.stores.PyFilesReader&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;pattern_filter&quot;</span><span class="p">:</span> <span class="s2">&quot;use tec.stores.PyFilesReader (or a plain re.compile(...).match)&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;recursive_file_walk_iterator_with_filepath_filter&quot;</span><span class="p">:</span> <span class="s2">&quot;use tec.stores.PyFilesReader&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;file_sep&quot;</span><span class="p">:</span> <span class="s2">&quot;use os.path.sep&quot;</span><span class="p">,</span>
+    <span class="s2">"ModuleGraph"</span><span class="p">:</span> <span class="n">UPSTREAM_ONLY_ADVICE</span><span class="p">,</span>
+    <span class="s2">"ImportFinder"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"use </span><span class="si">{</span><span class="n">REPLACEMENT_MODULE</span><span class="si">}</span><span class="s2">.imports_in_code"</span><span class="p">,</span>
+    <span class="s2">"ImportFinderAndNameTracker"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"use </span><span class="si">{</span><span class="n">REPLACEMENT_MODULE</span><span class="si">}</span><span class="s2">.imports_in_code"</span><span class="p">,</span>
+    <span class="s2">"find_imports_and_track_names"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"use </span><span class="si">{</span><span class="n">REPLACEMENT_MODULE</span><span class="si">}</span><span class="s2">.find_imports"</span><span class="p">,</span>
+    <span class="s2">"adjust_lineno"</span><span class="p">:</span> <span class="s2">"there is no tec equivalent; ast node line numbers are used as is"</span><span class="p">,</span>
+    <span class="s2">"Module"</span><span class="p">:</span> <span class="n">UPSTREAM_ONLY_ADVICE</span><span class="p">,</span>
+    <span class="s2">"ModuleCycle"</span><span class="p">:</span> <span class="n">UPSTREAM_ONLY_ADVICE</span><span class="p">,</span>
+    <span class="s2">"Scope"</span><span class="p">:</span> <span class="s2">"there is no tec equivalent"</span><span class="p">,</span>
+    <span class="s2">"main"</span><span class="p">:</span> <span class="s2">"there is no tec equivalent; this module has no command line interface"</span><span class="p">,</span>
+    <span class="s2">"quote"</span><span class="p">:</span> <span class="s2">"there is no tec equivalent; it was a graphviz-output helper"</span><span class="p">,</span>
+    <span class="s2">"ModulesColl"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"use </span><span class="si">{</span><span class="n">REPLACEMENT_MODULE</span><span class="si">}</span><span class="s2">.ModuleImports (or tec.modules.ModulesReader)"</span><span class="p">,</span>
+    <span class="s2">"ModuleImportsBase"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"use </span><span class="si">{</span><span class="n">REPLACEMENT_MODULE</span><span class="si">}</span><span class="s2">.ModuleImports"</span><span class="p">,</span>
+    <span class="s2">"modobj_to_modname"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"use </span><span class="si">{</span><span class="n">REPLACEMENT_MODULE</span><span class="si">}</span><span class="s2">.ModuleImports"</span><span class="p">,</span>
+    <span class="s2">"modname_to_modobj"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"use </span><span class="si">{</span><span class="n">REPLACEMENT_MODULE</span><span class="si">}</span><span class="s2">.ModuleImports"</span><span class="p">,</span>
+    <span class="s2">"iter_relative_files_and_folder"</span><span class="p">:</span> <span class="s2">"use tec.stores.PyFilesReader"</span><span class="p">,</span>
+    <span class="s2">"pattern_filter"</span><span class="p">:</span> <span class="s2">"use tec.stores.PyFilesReader (or a plain re.compile(...).match)"</span><span class="p">,</span>
+    <span class="s2">"recursive_file_walk_iterator_with_filepath_filter"</span><span class="p">:</span> <span class="s2">"use tec.stores.PyFilesReader"</span><span class="p">,</span>
+    <span class="s2">"file_sep"</span><span class="p">:</span> <span class="s2">"use os.path.sep"</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="c1">#: Template of the error raised when a removed name is requested.</span>
 <span class="n">REMOVED_NAME_ERROR_TEMPLATE</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s2">&quot;</span><span class="si">{module}</span><span class="s2">.</span><span class="si">{name}</span><span class="s2"> was removed: it came from a vendored GPL-2.0-or-later copy of &quot;</span>
-    <span class="s2">&quot;the third party `findimports` project, which was incompatible with tec&#39;s &quot;</span>
-    <span class="s2">&quot;Apache-2.0 licence. Instead, </span><span class="si">{advice}</span><span class="s2">.&quot;</span>
+    <span class="s2">"</span><span class="si">{module}</span><span class="s2">.</span><span class="si">{name}</span><span class="s2"> was removed: it came from a vendored GPL-2.0-or-later copy of "</span>
+    <span class="s2">"the third party `findimports` project, which was incompatible with tec's "</span>
+    <span class="s2">"Apache-2.0 licence. Instead, </span><span class="si">{advice}</span><span class="s2">."</span>
 <span class="p">)</span>
 
 <span class="c1">#: Message of the ``DeprecationWarning`` emitted when this module is imported.</span>
 <span class="n">DEPRECATION_MESSAGE</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="sa">f</span><span class="s2">&quot;tec.findimports is deprecated: use </span><span class="si">{</span><span class="n">REPLACEMENT_MODULE</span><span class="si">}</span><span class="s2"> instead. &quot;</span>
-    <span class="s2">&quot;The vendored GPL-2.0-or-later implementation this module used to hold was &quot;</span>
-    <span class="s2">&quot;removed (licence incompatibility); what is left is a thin forwarding layer.&quot;</span>
+    <span class="sa">f</span><span class="s2">"tec.findimports is deprecated: use </span><span class="si">{</span><span class="n">REPLACEMENT_MODULE</span><span class="si">}</span><span class="s2"> instead. "</span>
+    <span class="s2">"The vendored GPL-2.0-or-later implementation this module used to hold was "</span>
+    <span class="s2">"removed (licence incompatibility); what is left is a thin forwarding layer."</span>
 <span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_is_py_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;True if, and only if, ``path`` looks like a python file path.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">"""True if, and only if, ``path`` looks like a python file path."""</span>
+    <span class="k">return</span> <span class="n">path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">".py"</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="re_find_imports">
 <a class="viewcode-back" href="../../module_docs/tec/findimports.html#tec.findimports.re_find_imports">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">re_find_imports</span><span class="p">(</span><span class="n">rootdir</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">pathfilt</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">_is_py_path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Deprecated alias of :func:`tec.imports.imports_under_folder`.</span>
+<span class="w">    </span><span class="sd">"""Deprecated alias of :func:`tec.imports.imports_under_folder`.</span>
 
 <span class="sd">    Note the (harmless for the default) semantic difference: ``pathfilt`` is now</span>
 <span class="sd">    applied to store-relative paths, not to absolute ones.</span>
@@ -200,12 +200,12 @@
 <span class="sd">    &gt;&gt;&gt; import tempfile</span>
 <span class="sd">    &gt;&gt;&gt; from pathlib import Path</span>
 <span class="sd">    &gt;&gt;&gt; with tempfile.TemporaryDirectory() as root:</span>
-<span class="sd">    ...     _ = Path(root, &#39;a.py&#39;).write_text(&#39;import os\\n&#39;)</span>
+<span class="sd">    ...     _ = Path(root, 'a.py').write_text('import os\\n')</span>
 <span class="sd">    ...     names = [imp.name for imp in re_find_imports(root)]</span>
 <span class="sd">    &gt;&gt;&gt; names</span>
-<span class="sd">    [&#39;os&#39;]</span>
+<span class="sd">    ['os']</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">imports_under_folder</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="n">path_filt</span><span class="o">=</span><span class="n">pathfilt</span><span class="p">)</span></div>
 
 
@@ -217,23 +217,23 @@
     <span class="n">pathfilt</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">_is_py_path</span><span class="p">,</span>
     <span class="n">import_obj_func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">ImportInfo</span><span class="p">],</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">base_package_of</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Deprecated alias of :func:`tec.imports.count_imports`.</span>
+<span class="w">    </span><span class="sd">"""Deprecated alias of :func:`tec.imports.count_imports`.</span>
 
 <span class="sd">    &gt;&gt;&gt; import tempfile</span>
 <span class="sd">    &gt;&gt;&gt; from pathlib import Path</span>
 <span class="sd">    &gt;&gt;&gt; with tempfile.TemporaryDirectory() as root:</span>
-<span class="sd">    ...     _ = Path(root, &#39;a.py&#39;).write_text(&#39;import os.path\\nimport json\\n&#39;)</span>
+<span class="sd">    ...     _ = Path(root, 'a.py').write_text('import os.path\\nimport json\\n')</span>
 <span class="sd">    ...     counts = count_imports(root)</span>
 <span class="sd">    &gt;&gt;&gt; sorted(counts.items())</span>
-<span class="sd">    [(&#39;json&#39;, 1), (&#39;os&#39;, 1)]</span>
+<span class="sd">    [('json', 1), ('os', 1)]</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">_count_imports</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="n">path_filt</span><span class="o">=</span><span class="n">pathfilt</span><span class="p">,</span> <span class="n">import_key</span><span class="o">=</span><span class="n">import_obj_func</span><span class="p">)</span></div>
 
 
 
 <span class="k">def</span><span class="w"> </span><span class="fm">__getattr__</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Give an informative error for names the licence cleanup removed (PEP 562).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Give an informative error for names the licence cleanup removed (PEP 562)."""</span>
     <span class="n">advice</span> <span class="o">=</span> <span class="n">REMOVED_NAMES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">advice</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
@@ -241,7 +241,7 @@
                 <span class="n">module</span><span class="o">=</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">advice</span><span class="o">=</span><span class="n">advice</span>
             <span class="p">)</span>
         <span class="p">)</span>
-    <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;module </span><span class="si">{</span><span class="vm">__name__</span><span class="si">!r}</span><span class="s2"> has no attribute </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"module </span><span class="si">{</span><span class="vm">__name__</span><span class="si">!r}</span><span class="s2"> has no attribute </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
 
 
 <span class="n">warn</span><span class="p">(</span><span class="n">DEPRECATION_MESSAGE</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>

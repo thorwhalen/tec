@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tec.util &mdash; tec 0.0.19 documentation</title>
+  <title>tec.util &mdash; tec 0.0.20 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=2fd7553c"></script>
+      <script src="../../_static/documentation_options.js?v=056c92e6"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -93,7 +93,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for tec.util</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Builtin tec utils&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""Builtin tec utils"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
@@ -103,7 +103,7 @@
 
 <span class="k">try</span><span class="p">:</span>
     <span class="c1"># charset_normalizer replaces the abandoned/unbuildable cchardet; its</span>
-    <span class="c1"># top-level ``detect`` is chardet-compatible (returns {&quot;encoding&quot;: ...}).</span>
+    <span class="c1"># top-level ``detect`` is chardet-compatible (returns {"encoding": ...}).</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">charset_normalizer</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">chardet</span>
 <span class="k">except</span> <span class="p">(</span><span class="ne">ModuleNotFoundError</span><span class="p">,</span> <span class="ne">ImportError</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
@@ -111,7 +111,7 @@
     <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
         <span class="n">DFLT_USE_CCHARDET</span> <span class="o">=</span> <span class="kc">False</span>
 
-<span class="n">encoding_spec_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;-*- coding: (.+) -*-&quot;</span><span class="p">)</span>
+<span class="n">encoding_spec_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">b</span><span class="s2">"-*- coding: (.+) -*-"</span><span class="p">)</span>
 
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">operator</span>
@@ -135,7 +135,7 @@
     <span class="n">query_key</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Query</span><span class="p">],</span> <span class="n">Query</span><span class="p">]</span> <span class="o">=</span> <span class="n">identity</span><span class="p">,</span>
     <span class="n">item_key</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Item</span><span class="p">],</span> <span class="n">Item</span><span class="p">]</span> <span class="o">=</span> <span class="n">identity</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find anything in an iterable of items, based on your query language of choice.</span>
+<span class="w">    </span><span class="sd">"""Find anything in an iterable of items, based on your query language of choice.</span>
 
 <span class="sd">    Is limited to no query or items type. All you need to do is define what a match</span>
 <span class="sd">    of a query and item is, through the `query_matches_item` function.</span>
@@ -143,17 +143,17 @@
 <span class="sd">    Example use:</span>
 
 <span class="sd">    &gt;&gt;&gt; items = [</span>
-<span class="sd">    ...     &#39;www.google.com&#39;,</span>
-<span class="sd">    ...     &#39;www.yahoo.com&#39;,</span>
-<span class="sd">    ...     &#39;www.harvard.edu&#39;,</span>
-<span class="sd">    ...     &#39;web.mit.edu&#39;,</span>
+<span class="sd">    ...     'www.google.com',</span>
+<span class="sd">    ...     'www.yahoo.com',</span>
+<span class="sd">    ...     'www.harvard.edu',</span>
+<span class="sd">    ...     'web.mit.edu',</span>
 <span class="sd">    ... ]</span>
-<span class="sd">    &gt;&gt;&gt; list(find(&#39;www.harvard.edu&#39;, items))</span>
-<span class="sd">    [&#39;www.harvard.edu&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; list(find(&#39;oo&#39;, items, query_matches_item=lambda q, i: q in i))</span>
-<span class="sd">    [&#39;www.google.com&#39;, &#39;www.yahoo.com&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; list(find(&#39;edu&#39;, items, item_key=lambda item: item.split(&#39;.&#39;)[-1]))</span>
-<span class="sd">    [&#39;www.harvard.edu&#39;, &#39;web.mit.edu&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; list(find('www.harvard.edu', items))</span>
+<span class="sd">    ['www.harvard.edu']</span>
+<span class="sd">    &gt;&gt;&gt; list(find('oo', items, query_matches_item=lambda q, i: q in i))</span>
+<span class="sd">    ['www.google.com', 'www.yahoo.com']</span>
+<span class="sd">    &gt;&gt;&gt; list(find('edu', items, item_key=lambda item: item.split('.')[-1]))</span>
+<span class="sd">    ['www.harvard.edu', 'web.mit.edu']</span>
 
 <span class="sd">    Often you may want to use functools.partials to make a searcher you can reuse</span>
 <span class="sd">    without having to specify the particulars of the search (including or not the</span>
@@ -162,19 +162,19 @@
 <span class="sd">    &gt;&gt;&gt; from functools import partial</span>
 <span class="sd">    &gt;&gt;&gt; finder = partial(find, items=items, query_matches_item=lambda q, i: q in i,</span>
 <span class="sd">    ...                    query_key=str.lower, item_key=str.lower)</span>
-<span class="sd">    &gt;&gt;&gt; list(finder(&#39;GOOGLE&#39;))</span>
-<span class="sd">    [&#39;www.google.com&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; list(finder('GOOGLE'))</span>
+<span class="sd">    ['www.google.com']</span>
 
 <span class="sd">    Note that the `query_matches_item` is sufficient.</span>
 <span class="sd">    For example, in the above we could have done it like this:</span>
 
-<span class="sd">    &gt;&gt;&gt; list(find(&#39;GOOGLE&#39;, items, lambda q, i: q.lower() in i.lower()))</span>
-<span class="sd">    [&#39;www.google.com&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; list(find('GOOGLE', items, lambda q, i: q.lower() in i.lower()))</span>
+<span class="sd">    ['www.google.com']</span>
 
-<span class="sd">    There&#39;s never any actual need for the key functions, but they&#39;re provided for</span>
+<span class="sd">    There's never any actual need for the key functions, but they're provided for</span>
 <span class="sd">    convenience and reuse of general `query_matches_item` functions.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">_query</span> <span class="o">=</span> <span class="n">query_key</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">filt</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
@@ -185,43 +185,43 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_old_find_left_for_educational_purposes</span><span class="p">(</span>
-    <span class="n">strings</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;subset&quot;</span><span class="p">,</span> <span class="n">content_func</span><span class="o">=</span><span class="s2">&quot;everywhere&quot;</span>
+    <span class="n">strings</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"subset"</span><span class="p">,</span> <span class="n">content_func</span><span class="o">=</span><span class="s2">"everywhere"</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Example use:</span>
 
 <span class="sd">    &gt;&gt;&gt; items = [</span>
-<span class="sd">    ...     &#39;www.google.com&#39;,</span>
-<span class="sd">    ...     &#39;www.yahoo.com&#39;,</span>
-<span class="sd">    ...     &#39;www.harvard.edu&#39;,</span>
-<span class="sd">    ...     &#39;web.mit.edu&#39;,</span>
+<span class="sd">    ...     'www.google.com',</span>
+<span class="sd">    ...     'www.yahoo.com',</span>
+<span class="sd">    ...     'www.harvard.edu',</span>
+<span class="sd">    ...     'web.mit.edu',</span>
 <span class="sd">    ... ]</span>
-<span class="sd">    &gt;&gt;&gt; _old_find_left_for_educational_purposes(items, &#39;oo&#39;, how=&#39;subset&#39;)</span>
-<span class="sd">    [&#39;www.google.com&#39;, &#39;www.yahoo.com&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; _old_find_left_for_educational_purposes(items, &#39;edu&#39;, how=&#39;exact&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; _old_find_left_for_educational_purposes(items, 'oo', how='subset')</span>
+<span class="sd">    ['www.google.com', 'www.yahoo.com']</span>
+<span class="sd">    &gt;&gt;&gt; _old_find_left_for_educational_purposes(items, 'edu', how='exact')</span>
 <span class="sd">    []</span>
 <span class="sd">    &gt;&gt;&gt; _old_find_left_for_educational_purposes(</span>
-<span class="sd">    ...     items, &#39;edu&#39;, how=&#39;exact&#39;, content_func=&#39;leafs&#39;)</span>
-<span class="sd">    [&#39;www.harvard.edu&#39;, &#39;web.mit.edu&#39;]</span>
+<span class="sd">    ...     items, 'edu', how='exact', content_func='leafs')</span>
+<span class="sd">    ['www.harvard.edu', 'web.mit.edu']</span>
 
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">content_func</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">content_func</span> <span class="o">==</span> <span class="s2">&quot;leafs&quot;</span><span class="p">:</span>
-            <span class="n">content_func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">elif</span> <span class="n">content_func</span> <span class="o">==</span> <span class="s2">&quot;everywhere&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">content_func</span> <span class="o">==</span> <span class="s2">"leafs"</span><span class="p">:</span>
+            <span class="n">content_func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">content_func</span> <span class="o">==</span> <span class="s2">"everywhere"</span><span class="p">:</span>
             <span class="n">content_func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Not a recognised value for content_func argument: </span><span class="si">{</span><span class="n">content_func</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">"Not a recognised value for content_func argument: </span><span class="si">{</span><span class="n">content_func</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">how</span> <span class="o">==</span> <span class="s2">&quot;exact&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">how</span> <span class="o">==</span> <span class="s2">"exact"</span><span class="p">:</span>
         <span class="n">filt</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">query</span> <span class="o">==</span> <span class="n">content_func</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">how</span> <span class="o">==</span> <span class="s2">&quot;subset&quot;</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">how</span> <span class="o">==</span> <span class="s2">"subset"</span><span class="p">:</span>
         <span class="n">filt</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">content_func</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Not a recognised value for how argument: </span><span class="si">{</span><span class="n">how</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Not a recognised value for how argument: </span><span class="si">{</span><span class="n">how</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">filt</span><span class="p">,</span> <span class="n">strings</span><span class="p">))</span>
 
@@ -242,11 +242,11 @@
         <span class="k">if</span> <span class="n">use_cchardet</span><span class="p">:</span>
             <span class="n">r</span> <span class="o">=</span> <span class="n">chardet</span><span class="o">.</span><span class="n">detect</span><span class="p">(</span><span class="n">content_bytes</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">r</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;encoding&quot;</span><span class="p">]</span>
+                <span class="k">return</span> <span class="n">r</span><span class="p">[</span><span class="s2">"encoding"</span><span class="p">]</span>
     <span class="k">return</span> <span class="kc">None</span>  <span class="c1"># if all else fails</span>
 
 
-<span class="n">decoding_problem_sentinel</span> <span class="o">=</span> <span class="s2">&quot;# --- did not manage to decode .py file bytes --- #&quot;</span>
+<span class="n">decoding_problem_sentinel</span> <span class="o">=</span> <span class="s2">"# --- did not manage to decode .py file bytes --- #"</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">decode_or_default</span><span class="p">(</span>
@@ -274,19 +274,19 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">module_spec</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">module_spec</span><span class="p">):</span>
         <span class="n">module_spec</span> <span class="o">=</span> <span class="n">resolve_module_filepath</span><span class="p">(</span><span class="n">module_spec</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">module_spec</span><span class="p">):</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">module_spec</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">module_spec</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
             <span class="n">module_bytes</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">decode_or_default</span><span class="p">(</span><span class="n">module_bytes</span><span class="p">,</span> <span class="n">dflt</span><span class="o">=</span><span class="n">dflt</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">assert_output_is_str</span><span class="p">:</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">module_spec</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span> <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;module_spec should be a string at this point, but was a </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">module_spec</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">"module_spec should be a string at this point, but was a </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">module_spec</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
         <span class="p">)</span>
     <span class="k">return</span> <span class="n">module_spec</span>
 
 
 <span class="c1"># ---------------------------------------------------------------------------------------</span>
 <span class="c1"># TODO: Compare and merge</span>
-<span class="c1"># What&#39;s below was developed independently but has strong ties with what&#39;s above, so</span>
+<span class="c1"># What's below was developed independently but has strong ties with what's above, so</span>
 <span class="c1"># should probably be merged, or at least synched to reduce unnecessary entropy</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">suppress</span>
@@ -313,7 +313,7 @@
     <span class="n">if_already_in_scope</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">if_not_found</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Import object named ``obj_name`` from module named ``module_name``, sticking it</span>
 <span class="sd">    in scope (a dict, usually locals()).</span>
 
@@ -326,7 +326,7 @@
 <span class="sd">        scope.</span>
 <span class="sd">        This is to be able to overwrite the default of simply doing a</span>
 <span class="sd">        ``scope[as_name] = obj`` (having the net effect of resolving name conflicts</span>
-<span class="sd">        by a &quot;last one seen wins&quot; strategy.</span>
+<span class="sd">        by a "last one seen wins" strategy.</span>
 <span class="sd">    :param if_not_found: If not None, should be a ``(obj_name, module_name)`` callable</span>
 <span class="sd">        that will provide the return value if ``obj_name`` is not found in</span>
 <span class="sd">        ``module_name``.</span>
@@ -334,26 +334,26 @@
 <span class="sd">    :return:</span>
 
 <span class="sd">    &gt;&gt;&gt; from functools import partial  # not necessary, but represents use case</span>
-<span class="sd">    &gt;&gt;&gt; scope = dict()  # you&#39;d usually put locals() here</span>
+<span class="sd">    &gt;&gt;&gt; scope = dict()  # you'd usually put locals() here</span>
 <span class="sd">    &gt;&gt;&gt; acquire = partial(import_and_add_if_available, scope=scope)</span>
-<span class="sd">    &gt;&gt;&gt; acquire(&#39;join&#39;, &#39;os.path&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; acquire('join', 'os.path')</span>
 <span class="sd">    True</span>
-<span class="sd">    &gt;&gt;&gt; acquire(&#39;isfile&#39;, &#39;os.path&#39;, as_name=&#39;check_if_file_exists&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; acquire('isfile', 'os.path', as_name='check_if_file_exists')</span>
 <span class="sd">    True</span>
-<span class="sd">    &gt;&gt;&gt; acquire(&#39;not_in_os_path&#39;, &#39;os.path&#39;)  # returns False: not found in os.path</span>
+<span class="sd">    &gt;&gt;&gt; acquire('not_in_os_path', 'os.path')  # returns False: not found in os.path</span>
 <span class="sd">    False</span>
-<span class="sd">    &gt;&gt;&gt; acquire(&#39;object&#39;, &#39;does.not.exist&#39;)  # returns None: the module_name not found</span>
+<span class="sd">    &gt;&gt;&gt; acquire('object', 'does.not.exist')  # returns None: the module_name not found</span>
 <span class="sd">    &gt;&gt;&gt; import os</span>
 <span class="sd">    &gt;&gt;&gt; assert (scope ==</span>
-<span class="sd">    ...     {&#39;join&#39;: os.path.join, &#39;check_if_file_exists&#39;: os.path.isfile}</span>
+<span class="sd">    ...     {'join': os.path.join, 'check_if_file_exists': os.path.isfile}</span>
 <span class="sd">    ... )</span>
 
-<span class="sd">    See in the above that neither ``&#39;not_in_os_path&#39;`` nor ``&#39;object&#39;`` are in</span>
+<span class="sd">    See in the above that neither ``'not_in_os_path'`` nor ``'object'`` are in</span>
 <span class="sd">    ``scope``. They were simply skipped.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">as_name</span> <span class="o">=</span> <span class="n">as_name</span> <span class="ow">or</span> <span class="n">obj_name</span>
-    <span class="k">assert</span> <span class="n">scope</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;You need to specify a scope. Usually, scope=locals()&quot;</span>
+    <span class="k">assert</span> <span class="n">scope</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"You need to specify a scope. Usually, scope=locals()"</span>
     <span class="k">with</span> <span class="n">module_not_found_ignore</span><span class="p">:</span>
         <span class="n">module_obj</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
         <span class="n">obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module_obj</span><span class="p">,</span> <span class="n">obj_name</span><span class="p">,</span> <span class="n">not_found_sentinel</span><span class="p">)</span>
@@ -370,11 +370,11 @@
                 <span class="k">return</span> <span class="n">if_not_found</span><span class="p">(</span><span class="n">obj_name</span><span class="p">,</span> <span class="n">module_name</span><span class="p">)</span>
     <span class="k">return</span> <span class="kc">None</span></div>
 
-    <span class="c1"># returns None if module couldn&#39;t be imported!</span>
+    <span class="c1"># returns None if module couldn't be imported!</span>
 
 
 <span class="c1"># ---------------------------------------------------------------------------------------</span>
-<span class="n">ddir</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">o</span><span class="p">:</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">),</span> <span class="nb">dir</span><span class="p">(</span><span class="n">o</span><span class="p">))</span>
+<span class="n">ddir</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">o</span><span class="p">:</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"_"</span><span class="p">),</span> <span class="nb">dir</span><span class="p">(</span><span class="n">o</span><span class="p">))</span>
 
 <span class="n">StringIterableFactory</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
 <span class="n">ObjectToString</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span>
@@ -394,7 +394,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_not_prefixed_by_underscore</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="k">return</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"_"</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_is_pair</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
@@ -410,31 +410,31 @@
     <span class="o">*</span><span class="p">,</span>
     <span class="n">name_filt</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">_not_prefixed_by_underscore</span><span class="p">,</span>
     <span class="n">obj_filt</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="nb">callable</span><span class="p">,</span>
-    <span class="n">name_of_obj</span><span class="p">:</span> <span class="n">ObjectToString</span> <span class="o">=</span> <span class="n">attrgetter</span><span class="p">(</span><span class="s2">&quot;__name__&quot;</span><span class="p">),</span>
+    <span class="n">name_of_obj</span><span class="p">:</span> <span class="n">ObjectToString</span> <span class="o">=</span> <span class="n">attrgetter</span><span class="p">(</span><span class="s2">"__name__"</span><span class="p">),</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get (name, object) pairs from source of objects</span>
+<span class="w">    </span><span class="sd">"""Get (name, object) pairs from source of objects</span>
 
 <span class="sd">    :param objects: The source we want to extract name and object pairs from.</span>
 <span class="sd">        Could be an explicit list of pairs, or a single object (like a module)</span>
-<span class="sd">        from which we&#39;ll generate these (using ``objects_to_iterable``)</span>
-<span class="sd">    :param objects_to_iterable: If the input ``objects`` isn&#39;t already an iterable,</span>
+<span class="sd">        from which we'll generate these (using ``objects_to_iterable``)</span>
+<span class="sd">    :param objects_to_iterable: If the input ``objects`` isn't already an iterable,</span>
 <span class="sd">        the function to make it so</span>
 <span class="sd">    :param name_filt: A condition on the name</span>
 <span class="sd">    :param obj_filt: A condition on the object</span>
-<span class="sd">    :param name_of_obj: when an element of the iterable isn&#39;t a (name, obj) pair,</span>
+<span class="sd">    :param name_of_obj: when an element of the iterable isn't a (name, obj) pair,</span>
 <span class="sd">        the function to get the name of a the object.</span>
 
 <span class="sd">    Get method names of the dict class:</span>
 
 <span class="sd">    &gt;&gt;&gt; next(zip(*name_and_object_pairs(dict)))</span>
-<span class="sd">    (&#39;clear&#39;, &#39;copy&#39;, &#39;fromkeys&#39;, &#39;get&#39;, &#39;items&#39;, &#39;keys&#39;, &#39;pop&#39;, &#39;popitem&#39;, &#39;setdefault&#39;, &#39;update&#39;, &#39;values&#39;)</span>
+<span class="sd">    ('clear', 'copy', 'fromkeys', 'get', 'items', 'keys', 'pop', 'popitem', 'setdefault', 'update', 'values')</span>
 
-<span class="sd">    Get only those names of dict methods that contain the string &#39;keys&#39;:</span>
+<span class="sd">    Get only those names of dict methods that contain the string 'keys':</span>
 
-<span class="sd">    &gt;&gt;&gt; next(zip(*name_and_object_pairs(dict, name_filt=lambda x: &#39;keys&#39; in x)))</span>
-<span class="sd">    (&#39;fromkeys&#39;, &#39;keys&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; next(zip(*name_and_object_pairs(dict, name_filt=lambda x: 'keys' in x)))</span>
+<span class="sd">    ('fromkeys', 'keys')</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">objects</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
         <span class="n">objects</span> <span class="o">=</span> <span class="n">objects_to_iterable</span><span class="p">(</span><span class="n">objects</span><span class="p">)</span>
 
@@ -448,8 +448,8 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">ensure_pair</span><span class="p">(</span><span class="n">pair</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">_is_pair</span><span class="p">(</span><span class="n">pair</span><span class="p">):</span>
-            <span class="c1"># unpack pair (assuming it&#39;s a (name, obj) pair already)</span>
-            <span class="k">return</span> <span class="n">pair</span>  <span class="c1"># assume it&#39;s a (name, obj) pair already</span>
+            <span class="c1"># unpack pair (assuming it's a (name, obj) pair already)</span>
+            <span class="k">return</span> <span class="n">pair</span>  <span class="c1"># assume it's a (name, obj) pair already</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">obj</span> <span class="o">=</span> <span class="n">pair</span>
             <span class="k">return</span> <span class="n">name_of_obj</span><span class="p">(</span><span class="n">obj</span><span class="p">),</span> <span class="n">obj</span>
@@ -464,18 +464,18 @@
 <div class="viewcode-block" id="signature_strings">
 <a class="viewcode-back" href="../../module_docs/tec/util.html#tec.util.signature_strings">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">signature_strings</span><span class="p">(</span><span class="n">objects</span><span class="p">,</span> <span class="n">object_to_strings</span><span class="p">:</span> <span class="n">StringIterableFactory</span> <span class="o">=</span> <span class="n">ddir</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A generator of strings describing the callables in obj (module, class, ...)&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""A generator of strings describing the callables in obj (module, class, ...)"""</span>
     <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">name_and_object_pairs</span><span class="p">(</span><span class="n">objects</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-            <span class="k">yield</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}{</span><span class="n">signature</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span></div>
+            <span class="k">yield</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}{</span><span class="n">signature</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span></div>
 
 
 
 <div class="viewcode-block" id="print_signatures">
 <a class="viewcode-back" href="../../module_docs/tec/util.html#tec.util.print_signatures">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">print_signatures</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">object_to_strings</span><span class="p">:</span> <span class="n">StringIterableFactory</span> <span class="o">=</span> <span class="n">ddir</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> * &quot;</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Prints information on callable attributes of obj (module, class, ...)&quot;&quot;&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">signature_strings</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">object_to_strings</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="n">sep</span><span class="p">)</span></div>
+<span class="k">def</span><span class="w"> </span><span class="nf">print_signatures</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">object_to_strings</span><span class="p">:</span> <span class="n">StringIterableFactory</span> <span class="o">=</span> <span class="n">ddir</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\n</span><span class="s2"> * "</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Prints information on callable attributes of obj (module, class, ...)"""</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="o">*</span><span class="n">signature_strings</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">object_to_strings</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="n">sep</span><span class="p">)</span></div>
 
 
 
@@ -488,7 +488,7 @@
     <span class="o">*</span><span class="p">,</span>
     <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find strings matching a given pattern, possibly sorting them in a specific way.</span>
+<span class="w">    </span><span class="sd">"""Find strings matching a given pattern, possibly sorting them in a specific way.</span>
 
 <span class="sd">    :param pattern: The pattern to search (string representing a regular expression).</span>
 <span class="sd">    :param objects: An iterable of strings or an object that will resolve in one.</span>
@@ -498,68 +498,68 @@
 <span class="sd">        ``key`` will be applied to objects of type ``re.Match``;</span>
 <span class="sd">        see https://docs.python.org/3/library/re.html#match-objects to get an idea of</span>
 <span class="sd">        how to define the right key function.</span>
-<span class="sd">        If ``key`` is an iterable (&quot;of callables&quot;, assumed), make an</span>
+<span class="sd">        If ``key`` is an iterable ("of callables", assumed), make an</span>
 <span class="sd">        aggregate of these functions that will return a tuple of the sort keys.</span>
 <span class="sd">        This is akin to sorting by one columns primarly, a second secondarily, etc.</span>
 <span class="sd">    :return: A generator of matched strings.</span>
 
 <span class="sd">    &gt;&gt;&gt; kwargs = dict(</span>
-<span class="sd">    ...     pattern=&#39;li&#39;,</span>
-<span class="sd">    ...     objects=&#39;bob and lilabet like to play with alice&#39;,</span>
+<span class="sd">    ...     pattern='li',</span>
+<span class="sd">    ...     objects='bob and lilabet like to play with alice',</span>
 <span class="sd">    ...     objects_to_strings=str.split,</span>
 <span class="sd">    ... )</span>
 <span class="sd">    &gt;&gt;&gt; list(find_objects(**kwargs))</span>
-<span class="sd">    [&#39;lilabet&#39;, &#39;like&#39;, &#39;alice&#39;]</span>
+<span class="sd">    ['lilabet', 'like', 'alice']</span>
 
 <span class="sd">    Sort the results in reverse length of string:</span>
 
 <span class="sd">    &gt;&gt;&gt; list(find_objects(**kwargs, key=lambda x: -len(x.string)))</span>
-<span class="sd">    [&#39;lilabet&#39;, &#39;alice&#39;, &#39;like&#39;]</span>
+<span class="sd">    ['lilabet', 'alice', 'like']</span>
 
 <span class="sd">    Sort the results according to how early in the string the match happens:</span>
 
 <span class="sd">    &gt;&gt;&gt; from operator import methodcaller</span>
-<span class="sd">    &gt;&gt;&gt; list(find_objects(**kwargs, key=methodcaller(&#39;span&#39;)))</span>
-<span class="sd">    [&#39;lilabet&#39;, &#39;like&#39;, &#39;alice&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; list(find_objects(**kwargs, key=methodcaller('span')))</span>
+<span class="sd">    ['lilabet', 'like', 'alice']</span>
 
-<span class="sd">    The same as above, but with secondary &quot;length&quot; sorting:</span>
+<span class="sd">    The same as above, but with secondary "length" sorting:</span>
 
 <span class="sd">    &gt;&gt;&gt; tuple(  # for a change!</span>
-<span class="sd">    ...     find_objects(**kwargs, key=[methodcaller(&#39;span&#39;), lambda x: len(x.string)])</span>
+<span class="sd">    ...     find_objects(**kwargs, key=[methodcaller('span'), lambda x: len(x.string)])</span>
 <span class="sd">    ... )</span>
-<span class="sd">    (&#39;like&#39;, &#39;lilabet&#39;, &#39;alice&#39;)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    ('like', 'lilabet', 'alice')</span>
+<span class="sd">    """</span>
     <span class="n">strings</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">objects_to_strings</span><span class="p">(</span><span class="n">objects</span><span class="p">))</span>
     <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
     <span class="n">match_objects</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">pattern</span><span class="o">.</span><span class="n">search</span><span class="p">,</span> <span class="n">strings</span><span class="p">))</span>
 
-    <span class="c1"># The match_objects are re.Match instances that resolve to True when there&#39;s a match,</span>
+    <span class="c1"># The match_objects are re.Match instances that resolve to True when there's a match,</span>
     <span class="c1"># and can therefore be used as selectors</span>
     <span class="n">match_objects</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">bitmap_selection</span><span class="p">(</span><span class="n">match_objects</span><span class="p">,</span> <span class="n">selector</span><span class="o">=</span><span class="n">match_objects</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
-            <span class="c1"># If match_sort_key is an iterable (&quot;of callables&quot;, assumed), make an</span>
+            <span class="c1"># If match_sort_key is an iterable ("of callables", assumed), make an</span>
             <span class="c1"># aggregate of these functions that will return a tuple of the sort keys.</span>
             <span class="c1"># This is akin to sorting by one columns primarly, a second secondarily, etc.</span>
             <span class="n">_key</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">func_fanout</span><span class="p">,</span> <span class="n">funcs</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
             <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">_key</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
         <span class="n">match_objects</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">match_objects</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
 
-    <span class="c1"># instead of getting the strings from strings, we get them from the re.Match objects&#39;</span>
-    <span class="c1"># &#39;string&#39; attribute, because these contain more information to be able to sort with</span>
-    <span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="n">attrgetter</span><span class="p">(</span><span class="s2">&quot;string&quot;</span><span class="p">),</span> <span class="n">match_objects</span><span class="p">)</span></div>
+    <span class="c1"># instead of getting the strings from strings, we get them from the re.Match objects'</span>
+    <span class="c1"># 'string' attribute, because these contain more information to be able to sort with</span>
+    <span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="n">attrgetter</span><span class="p">(</span><span class="s2">"string"</span><span class="p">),</span> <span class="n">match_objects</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="func_fanout">
 <a class="viewcode-back" href="../../module_docs/tec/util.html#tec.util.func_fanout">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">func_fanout</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">funcs</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Util to make a function that applies multiple functions to a single input.</span>
-<span class="sd">    Note that the function returns a generator that needs to be &quot;consumed&quot; to actually</span>
+<span class="w">    </span><span class="sd">"""Util to make a function that applies multiple functions to a single input.</span>
+<span class="sd">    Note that the function returns a generator that needs to be "consumed" to actually</span>
 <span class="sd">    get the outputs of the function.</span>
 
-<span class="sd">    ``func_fanout`` is meant to be used with ``functools.partial`` to &quot;make&quot; the</span>
+<span class="sd">    ``func_fanout`` is meant to be used with ``functools.partial`` to "make" the</span>
 <span class="sd">    desired function, such as:</span>
 
 <span class="sd">    &gt;&gt;&gt; from functools import partial</span>
@@ -574,7 +574,7 @@
 
 <span class="sd">    .. seealso: ``i2.multi_object.FuncFanout`` for a more involved version of this.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">)</span></div>
 
 
@@ -582,15 +582,15 @@
 <div class="viewcode-block" id="bitmap_selection">
 <a class="viewcode-back" href="../../module_docs/tec/util.html#tec.util.bitmap_selection">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">bitmap_selection</span><span class="p">(</span><span class="n">iterable</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Select items of an iterable with items of a selector sequence of the same size.</span>
+<span class="w">    </span><span class="sd">"""Select items of an iterable with items of a selector sequence of the same size.</span>
 <span class="sd">    The selector items should be, or resolve to, a ``bool``.</span>
 
 <span class="sd">    &gt;&gt;&gt; list(bitmap_selection([2, 4, 6, 8], [True, False, True, False]))</span>
 <span class="sd">    [2, 6]</span>
-<span class="sd">    &gt;&gt;&gt; tuple(bitmap_selection(range(5), [1, 0, None, &#39;&#39;, &#39;blah&#39;]))</span>
+<span class="sd">    &gt;&gt;&gt; tuple(bitmap_selection(range(5), [1, 0, None, '', 'blah']))</span>
 <span class="sd">    (0, 4)</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">obj</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">obj</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span> <span class="k">if</span> <span class="n">selector</span><span class="p">[</span><span class="n">i</span><span class="p">])</span></div>
 
 </pre></div>

@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tec.import_counting &mdash; tec 0.0.19 documentation</title>
+  <title>tec.import_counting &mdash; tec 0.0.20 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=2fd7553c"></script>
+      <script src="../../_static/documentation_options.js?v=056c92e6"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -117,8 +117,8 @@ having snakefood installed. See: <a class="reference external" href="http://furi
 &gt;&gt;&gt; base_module_name(‘os.path.join’)
 ‘os’</p>
 <p>Note that relative import names will resolve to an empty string.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">base_module_name</span><span class="p">(</span><span class="s2">&quot;..relatively_imported&quot;</span><span class="p">)</span>
-<span class="go">&#39;&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">base_module_name</span><span class="p">(</span><span class="s2">"..relatively_imported"</span><span class="p">)</span>
+<span class="go">''</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -127,8 +127,8 @@ having snakefood installed. See: <a class="reference external" href="http://furi
 <dt class="sig sig-object py" id="tec.import_counting.imports_in_py_content">
 <span class="sig-prename descclassname"><span class="pre">tec.import_counting.</span></span><span class="sig-name descname"><span class="pre">imports_in_py_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">py_content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tec/import_counting.html#imports_in_py_content"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tec.import_counting.imports_in_py_content" title="Link to this definition"></a></dt>
 <dd><p>Generator of imported names parsed out (with regex) of input code (string)</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">imports_in_py_content</span><span class="p">(</span><span class="s2">&quot;import inspect ,  sys ;  import os.path</span><span class="se">\n</span><span class="s2">  from collections.abc import Mapping&quot;</span><span class="p">))</span>
-<span class="go">[&#39;inspect&#39;, &#39;sys&#39;, &#39;os.path&#39;, &#39;collections.abc&#39;]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">imports_in_py_content</span><span class="p">(</span><span class="s2">"import inspect ,  sys ;  import os.path</span><span class="se">\n</span><span class="s2">  from collections.abc import Mapping"</span><span class="p">))</span>
+<span class="go">['inspect', 'sys', 'os.path', 'collections.abc']</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -168,11 +168,11 @@ It may have false negatives (relative imports (as in <code class="docutils liter
 </dl>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">os.path</span>  <span class="c1"># single module</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">modules_imported</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="p">))</span>
-<span class="go">[&#39;os&#39;, &#39;sys&#39;, &#39;stat&#39;, &#39;genericpath&#39;, &#39;genericpath&#39;, &#39;pwd&#39;, &#39;pwd&#39;, &#39;re&#39;, &#39;re&#39;]</span>
+<span class="go">['os', 'sys', 'stat', 'genericpath', 'genericpath', 'pwd', 'pwd', 're', 're']</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>  <span class="c1"># package with several modules</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Counter</span><span class="p">(</span><span class="n">modules_imported</span><span class="p">(</span><span class="n">os</span><span class="p">,</span> <span class="n">only_base_name</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span><span class="o">.</span><span class="n">most_common</span><span class="p">()</span>
-<span class="go">[(&#39;nt&#39;, 5), (&#39;posix&#39;, 4), ... (&#39;warnings&#39;, 1), (&#39;subprocess&#39;, 1)]</span>
+<span class="go">[('nt', 5), ('posix', 4), ... ('warnings', 1), ('subprocess', 1)]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -192,13 +192,13 @@ or any python object (module or object therein – that can be resolved by inspe
 </dl>
 <p>The input can be a filepath</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">modules_imported_by_module</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
-<span class="go">[&#39;collections&#39;, &#39;importlib.util&#39;, &#39;io&#39;, &#39;os&#39;, &#39;os.path&#39;, &#39;pathlib&#39;, &#39;re&#39;, &#39;sys&#39;, &#39;sysconfig&#39;, &#39;tec.stores&#39;, &#39;tec.util&#39;]</span>
+<span class="go">['collections', 'importlib.util', 'io', 'os', 'os.path', 'pathlib', 're', 'sys', 'sysconfig', 'tec.stores', 'tec.util']</span>
 </pre></div>
 </div>
 <p>… a imported module object</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">wave</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">modules_imported_by_module</span><span class="p">(</span><span class="n">wave</span><span class="p">))</span>
-<span class="go">[&#39;audioop&#39;, &#39;builtins&#39;, &#39;chunk&#39;, &#39;collections&#39;, &#39;struct&#39;, &#39;sys&#39;]</span>
+<span class="go">['audioop', 'builtins', 'chunk', 'collections', 'struct', 'sys']</span>
 </pre></div>
 </div>
 <p>… the string contents themselves</p>

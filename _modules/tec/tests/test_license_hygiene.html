@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tec.tests.test_license_hygiene &mdash; tec 0.0.19 documentation</title>
+  <title>tec.tests.test_license_hygiene &mdash; tec 0.0.20 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=2fd7553c"></script>
+      <script src="../../../_static/documentation_options.js?v=056c92e6"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -93,7 +93,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for tec.tests.test_license_hygiene</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Guard against foreign (licence-incompatible) source being vendored into ``tec``.</span>
+<span></span><span class="sd">"""Guard against foreign (licence-incompatible) source being vendored into ``tec``.</span>
 
 <span class="sd">``tec`` is distributed under Apache-2.0. It once shipped a vendored copy of a</span>
 <span class="sd">GPL-2.0-or-later project, which quietly made every ``tec`` release -- and every</span>
@@ -101,10 +101,10 @@
 
 <span class="sd">The test here is deliberately blunt: no file of the package may contain a foreign</span>
 <span class="sd">licence grant or a copyright notice. If a future change legitimately needs one,</span>
-<span class="sd">that is a decision to be made explicitly (by editing the package&#39;s declared</span>
+<span class="sd">that is a decision to be made explicitly (by editing the package's declared</span>
 <span class="sd">licence), not by silently pasting a file in.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
@@ -119,29 +119,29 @@
 <span class="n">THIS_FILE</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
 
 <span class="c1">#: Directory names never scanned (build/cache artifacts, not source).</span>
-<span class="n">EXCLUDED_DIR_NAMES</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">({</span><span class="s2">&quot;__pycache__&quot;</span><span class="p">,</span> <span class="s2">&quot;.ipynb_checkpoints&quot;</span><span class="p">})</span>
+<span class="n">EXCLUDED_DIR_NAMES</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">({</span><span class="s2">"__pycache__"</span><span class="p">,</span> <span class="s2">".ipynb_checkpoints"</span><span class="p">})</span>
 
 <span class="c1">#: Substrings whose presence in a source file signals a foreign licence grant.</span>
 <span class="n">FOREIGN_LICENSE_MARKERS</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s2">&quot;GNU General Public License&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;GNU Lesser General Public License&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Mozilla Public License&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;This program is free software&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;redistribute it and/or modify&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;__licence__&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;__license__&quot;</span><span class="p">,</span>
+    <span class="s2">"GNU General Public License"</span><span class="p">,</span>
+    <span class="s2">"GNU Lesser General Public License"</span><span class="p">,</span>
+    <span class="s2">"Mozilla Public License"</span><span class="p">,</span>
+    <span class="s2">"This program is free software"</span><span class="p">,</span>
+    <span class="s2">"redistribute it and/or modify"</span><span class="p">,</span>
+    <span class="s2">"__licence__"</span><span class="p">,</span>
+    <span class="s2">"__license__"</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="c1">#: A copyright notice line. Third party code almost always carries one; ``tec``&#39;s</span>
-<span class="c1">#: own modules carry none (the package&#39;s LICENSE file is the single place for it).</span>
-<span class="n">COPYRIGHT_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\s*(?:#\s*)?Copyright\b&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+<span class="c1">#: A copyright notice line. Third party code almost always carries one; ``tec``'s</span>
+<span class="c1">#: own modules carry none (the package's LICENSE file is the single place for it).</span>
+<span class="n">COPYRIGHT_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"^\s*(?:#\s*)?Copyright\b"</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="py_files_of_package">
 <a class="viewcode-back" href="../../../module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.py_files_of_package">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">py_files_of_package</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate the ``.py`` files of the ``tec`` package that should be scanned.&quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">PKG_ROOT</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">&quot;*.py&quot;</span><span class="p">)):</span>
+<span class="w">    </span><span class="sd">"""Generate the ``.py`` files of the ``tec`` package that should be scanned."""</span>
+    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">PKG_ROOT</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">"*.py"</span><span class="p">)):</span>
         <span class="k">if</span> <span class="n">EXCLUDED_DIR_NAMES</span><span class="o">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">parts</span><span class="p">)</span> <span class="ow">and</span> <span class="n">path</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span> <span class="o">!=</span> <span class="n">THIS_FILE</span><span class="p">:</span>
             <span class="k">yield</span> <span class="n">path</span></div>
 
@@ -150,7 +150,7 @@
 <div class="viewcode-block" id="test_there_are_files_to_scan">
 <a class="viewcode-back" href="../../../module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.test_there_are_files_to_scan">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_there_are_files_to_scan</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sanity check: a scan that finds nothing to scan would vacuously pass.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Sanity check: a scan that finds nothing to scan would vacuously pass."""</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">py_files_of_package</span><span class="p">()))</span> <span class="o">&gt;</span> <span class="mi">5</span></div>
 
 
@@ -158,15 +158,15 @@
 <div class="viewcode-block" id="test_no_foreign_license_grant_in_package_source">
 <a class="viewcode-back" href="../../../module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.test_no_foreign_license_grant_in_package_source">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_no_foreign_license_grant_in_package_source</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;No module of the package embeds a foreign licence grant.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""No module of the package embeds a foreign licence grant."""</span>
     <span class="n">offenders</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">py_files_of_package</span><span class="p">():</span>
-        <span class="n">contents</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;replace&quot;</span><span class="p">)</span>
+        <span class="n">contents</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"replace"</span><span class="p">)</span>
         <span class="n">found</span> <span class="o">=</span> <span class="p">[</span><span class="n">marker</span> <span class="k">for</span> <span class="n">marker</span> <span class="ow">in</span> <span class="n">FOREIGN_LICENSE_MARKERS</span> <span class="k">if</span> <span class="n">marker</span> <span class="ow">in</span> <span class="n">contents</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">found</span><span class="p">:</span>
             <span class="n">offenders</span><span class="p">[</span><span class="n">path</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">PKG_ROOT</span><span class="p">)</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()]</span> <span class="o">=</span> <span class="n">found</span>
     <span class="k">assert</span> <span class="ow">not</span> <span class="n">offenders</span><span class="p">,</span> <span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;Foreign licence text found in tec source, but tec is Apache-2.0: </span><span class="si">{</span><span class="n">offenders</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">"Foreign licence text found in tec source, but tec is Apache-2.0: </span><span class="si">{</span><span class="n">offenders</span><span class="si">}</span><span class="s2">"</span>
     <span class="p">)</span></div>
 
 
@@ -174,15 +174,15 @@
 <div class="viewcode-block" id="test_no_foreign_copyright_notice_in_package_source">
 <a class="viewcode-back" href="../../../module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.test_no_foreign_copyright_notice_in_package_source">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">test_no_foreign_copyright_notice_in_package_source</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;No module of the package carries a copyright notice of its own.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""No module of the package carries a copyright notice of its own."""</span>
     <span class="n">offenders</span> <span class="o">=</span> <span class="p">[</span>
         <span class="n">path</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">PKG_ROOT</span><span class="p">)</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">py_files_of_package</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">COPYRIGHT_RE</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;replace&quot;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">COPYRIGHT_RE</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"replace"</span><span class="p">))</span>
     <span class="p">]</span>
     <span class="k">assert</span> <span class="ow">not</span> <span class="n">offenders</span><span class="p">,</span> <span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;Copyright notice(s) found in tec source, but tec is Apache-2.0 and its &quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;only copyright statement belongs in LICENSE: </span><span class="si">{</span><span class="n">offenders</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">"Copyright notice(s) found in tec source, but tec is Apache-2.0 and its "</span>
+        <span class="sa">f</span><span class="s2">"only copyright statement belongs in LICENSE: </span><span class="si">{</span><span class="n">offenders</span><span class="si">}</span><span class="s2">"</span>
     <span class="p">)</span></div>
 
 </pre></div>

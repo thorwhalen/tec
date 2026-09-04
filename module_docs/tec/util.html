@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tec.util &mdash; tec 0.0.19 documentation</title>
+  <title>tec.util &mdash; tec 0.0.20 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=2fd7553c"></script>
+      <script src="../../_static/documentation_options.js?v=056c92e6"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -114,7 +114,7 @@
 The selector items should be, or resolve to, a <code class="docutils literal notranslate"><span class="pre">bool</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">bitmap_selection</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]))</span>
 <span class="go">[2, 6]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">tuple</span><span class="p">(</span><span class="n">bitmap_selection</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;blah&#39;</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">tuple</span><span class="p">(</span><span class="n">bitmap_selection</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="s1">'blah'</span><span class="p">]))</span>
 <span class="go">(0, 4)</span>
 </pre></div>
 </div>
@@ -128,17 +128,17 @@ The selector items should be, or resolve to, a <code class="docutils literal not
 of a query and item is, through the <cite>query_matches_item</cite> function.</p>
 <p>Example use:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">items</span> <span class="o">=</span> <span class="p">[</span>
-<span class="gp">... </span>    <span class="s1">&#39;www.google.com&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;www.yahoo.com&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;www.harvard.edu&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;web.mit.edu&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">'www.google.com'</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">'www.yahoo.com'</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">'www.harvard.edu'</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">'web.mit.edu'</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;www.harvard.edu&#39;</span><span class="p">,</span> <span class="n">items</span><span class="p">))</span>
-<span class="go">[&#39;www.harvard.edu&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;oo&#39;</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">query_matches_item</span><span class="o">=</span><span class="k">lambda</span> <span class="n">q</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">i</span><span class="p">))</span>
-<span class="go">[&#39;www.google.com&#39;, &#39;www.yahoo.com&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;edu&#39;</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">item_key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
-<span class="go">[&#39;www.harvard.edu&#39;, &#39;web.mit.edu&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="s1">'www.harvard.edu'</span><span class="p">,</span> <span class="n">items</span><span class="p">))</span>
+<span class="go">['www.harvard.edu']</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="s1">'oo'</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">query_matches_item</span><span class="o">=</span><span class="k">lambda</span> <span class="n">q</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">i</span><span class="p">))</span>
+<span class="go">['www.google.com', 'www.yahoo.com']</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="s1">'edu'</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">item_key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+<span class="go">['www.harvard.edu', 'web.mit.edu']</span>
 </pre></div>
 </div>
 <p>Often you may want to use functools.partials to make a searcher you can reuse
@@ -147,14 +147,14 @@ items you want to search).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">finder</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">find</span><span class="p">,</span> <span class="n">items</span><span class="o">=</span><span class="n">items</span><span class="p">,</span> <span class="n">query_matches_item</span><span class="o">=</span><span class="k">lambda</span> <span class="n">q</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">i</span><span class="p">,</span>
 <span class="gp">... </span>                   <span class="n">query_key</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">item_key</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">lower</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">finder</span><span class="p">(</span><span class="s1">&#39;GOOGLE&#39;</span><span class="p">))</span>
-<span class="go">[&#39;www.google.com&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">finder</span><span class="p">(</span><span class="s1">'GOOGLE'</span><span class="p">))</span>
+<span class="go">['www.google.com']</span>
 </pre></div>
 </div>
 <p>Note that the <cite>query_matches_item</cite> is sufficient.
 For example, in the above we could have done it like this:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;GOOGLE&#39;</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">q</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">q</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span>
-<span class="go">[&#39;www.google.com&#39;]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">find</span><span class="p">(</span><span class="s1">'GOOGLE'</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">q</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="n">q</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span>
+<span class="go">['www.google.com']</span>
 </pre></div>
 </div>
 <p>There’s never any actual need for the key functions, but they’re provided for
@@ -186,30 +186,30 @@ This is akin to sorting by one columns primarly, a second secondarily, etc.</p><
 </dd>
 </dl>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;li&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">objects</span><span class="o">=</span><span class="s1">&#39;bob and lilabet like to play with alice&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">pattern</span><span class="o">=</span><span class="s1">'li'</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">objects</span><span class="o">=</span><span class="s1">'bob and lilabet like to play with alice'</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">objects_to_strings</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">split</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">find_objects</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
-<span class="go">[&#39;lilabet&#39;, &#39;like&#39;, &#39;alice&#39;]</span>
+<span class="go">['lilabet', 'like', 'alice']</span>
 </pre></div>
 </div>
 <p>Sort the results in reverse length of string:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">find_objects</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">string</span><span class="p">)))</span>
-<span class="go">[&#39;lilabet&#39;, &#39;alice&#39;, &#39;like&#39;]</span>
+<span class="go">['lilabet', 'alice', 'like']</span>
 </pre></div>
 </div>
 <p>Sort the results according to how early in the string the match happens:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">methodcaller</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">find_objects</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">methodcaller</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">)))</span>
-<span class="go">[&#39;lilabet&#39;, &#39;like&#39;, &#39;alice&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">find_objects</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">methodcaller</span><span class="p">(</span><span class="s1">'span'</span><span class="p">)))</span>
+<span class="go">['lilabet', 'like', 'alice']</span>
 </pre></div>
 </div>
 <p>The same as above, but with secondary “length” sorting:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">tuple</span><span class="p">(</span>  <span class="c1"># for a change!</span>
-<span class="gp">... </span>    <span class="n">find_objects</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="p">[</span><span class="n">methodcaller</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">string</span><span class="p">)])</span>
+<span class="gp">... </span>    <span class="n">find_objects</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="p">[</span><span class="n">methodcaller</span><span class="p">(</span><span class="s1">'span'</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">string</span><span class="p">)])</span>
 <span class="gp">... </span><span class="p">)</span>
-<span class="go">(&#39;like&#39;, &#39;lilabet&#39;, &#39;alice&#39;)</span>
+<span class="go">('like', 'lilabet', 'alice')</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -263,18 +263,18 @@ that will provide the return value if <code class="docutils literal notranslate"
 </dd>
 </dl>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>  <span class="c1"># not necessary, but represents use case</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">scope</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>  <span class="c1"># you&#39;d usually put locals() here</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scope</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>  <span class="c1"># you'd usually put locals() here</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">acquire</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">import_and_add_if_available</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">acquire</span><span class="p">(</span><span class="s1">&#39;join&#39;</span><span class="p">,</span> <span class="s1">&#39;os.path&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acquire</span><span class="p">(</span><span class="s1">'join'</span><span class="p">,</span> <span class="s1">'os.path'</span><span class="p">)</span>
 <span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">acquire</span><span class="p">(</span><span class="s1">&#39;isfile&#39;</span><span class="p">,</span> <span class="s1">&#39;os.path&#39;</span><span class="p">,</span> <span class="n">as_name</span><span class="o">=</span><span class="s1">&#39;check_if_file_exists&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acquire</span><span class="p">(</span><span class="s1">'isfile'</span><span class="p">,</span> <span class="s1">'os.path'</span><span class="p">,</span> <span class="n">as_name</span><span class="o">=</span><span class="s1">'check_if_file_exists'</span><span class="p">)</span>
 <span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">acquire</span><span class="p">(</span><span class="s1">&#39;not_in_os_path&#39;</span><span class="p">,</span> <span class="s1">&#39;os.path&#39;</span><span class="p">)</span>  <span class="c1"># returns False: not found in os.path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acquire</span><span class="p">(</span><span class="s1">'not_in_os_path'</span><span class="p">,</span> <span class="s1">'os.path'</span><span class="p">)</span>  <span class="c1"># returns False: not found in os.path</span>
 <span class="go">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">acquire</span><span class="p">(</span><span class="s1">&#39;object&#39;</span><span class="p">,</span> <span class="s1">&#39;does.not.exist&#39;</span><span class="p">)</span>  <span class="c1"># returns None: the module_name not found</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acquire</span><span class="p">(</span><span class="s1">'object'</span><span class="p">,</span> <span class="s1">'does.not.exist'</span><span class="p">)</span>  <span class="c1"># returns None: the module_name not found</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="p">(</span><span class="n">scope</span> <span class="o">==</span>
-<span class="gp">... </span>    <span class="p">{</span><span class="s1">&#39;join&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">,</span> <span class="s1">&#39;check_if_file_exists&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">}</span>
+<span class="gp">... </span>    <span class="p">{</span><span class="s1">'join'</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">,</span> <span class="s1">'check_if_file_exists'</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">}</span>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
@@ -303,12 +303,12 @@ the function to get the name of a the object.</p></li>
 </dl>
 <p>Get method names of the dict class:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">name_and_object_pairs</span><span class="p">(</span><span class="nb">dict</span><span class="p">)))</span>
-<span class="go">(&#39;clear&#39;, &#39;copy&#39;, &#39;fromkeys&#39;, &#39;get&#39;, &#39;items&#39;, &#39;keys&#39;, &#39;pop&#39;, &#39;popitem&#39;, &#39;setdefault&#39;, &#39;update&#39;, &#39;values&#39;)</span>
+<span class="go">('clear', 'copy', 'fromkeys', 'get', 'items', 'keys', 'pop', 'popitem', 'setdefault', 'update', 'values')</span>
 </pre></div>
 </div>
 <p>Get only those names of dict methods that contain the string ‘keys’:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">name_and_object_pairs</span><span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="n">name_filt</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39;keys&#39;</span> <span class="ow">in</span> <span class="n">x</span><span class="p">)))</span>
-<span class="go">(&#39;fromkeys&#39;, &#39;keys&#39;)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">name_and_object_pairs</span><span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="n">name_filt</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">'keys'</span> <span class="ow">in</span> <span class="n">x</span><span class="p">)))</span>
+<span class="go">('fromkeys', 'keys')</span>
 </pre></div>
 </div>
 </dd></dl>

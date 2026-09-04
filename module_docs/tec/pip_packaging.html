@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tec.pip_packaging &mdash; tec 0.0.19 documentation</title>
+  <title>tec.pip_packaging &mdash; tec 0.0.20 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -15,7 +15,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=2fd7553c"></script>
+      <script src="../../_static/documentation_options.js?v=056c92e6"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -137,16 +137,16 @@ if not foo is given – but {foo} will remain).</p>
 </dd>
 </dl>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
-<span class="gp">... </span>    <span class="s1">&#39;filepath&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">{root}</span><span class="s1">/</span><span class="si">{file}</span><span class="s1">.</span><span class="si">{ext}</span><span class="s1">&#39;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s1">&#39;ext&#39;</span><span class="p">:</span> <span class="s1">&#39;txt&#39;</span>
+<span class="gp">... </span>    <span class="s1">'filepath'</span><span class="p">:</span> <span class="s1">'</span><span class="si">{root}</span><span class="s1">/</span><span class="si">{file}</span><span class="s1">.</span><span class="si">{ext}</span><span class="s1">'</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">'ext'</span><span class="p">:</span> <span class="s1">'txt'</span>
 <span class="gp">... </span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">format_str_vals_of_dict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="s1">&#39;ROOT&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s1">&#39;FILE&#39;</span><span class="p">)</span>
-<span class="go">{&#39;filepath&#39;: &#39;ROOT/FILE.txt&#39;, &#39;ext&#39;: &#39;txt&#39;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">format_str_vals_of_dict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="s1">'ROOT'</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s1">'FILE'</span><span class="p">)</span>
+<span class="go">{'filepath': 'ROOT/FILE.txt', 'ext': 'txt'}</span>
 </pre></div>
 </div>
 <p>Note that if the input mapping <cite>d</cite> and the kwargs have a conflict, the mapping version is used!</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">format_str_vals_of_dict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="s1">&#39;ROOT&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s1">&#39;FILE&#39;</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s1">&#39;will_not_be_used&#39;</span><span class="p">)</span>
-<span class="go">{&#39;filepath&#39;: &#39;ROOT/FILE.txt&#39;, &#39;ext&#39;: &#39;txt&#39;}</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">format_str_vals_of_dict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="s1">'ROOT'</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s1">'FILE'</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s1">'will_not_be_used'</span><span class="p">)</span>
+<span class="go">{'filepath': 'ROOT/FILE.txt', 'ext': 'txt'}</span>
 </pre></div>
 </div>
 <p>But if you want to override an input mapping, you can – the usual way:
@@ -154,10 +154,10 @@ if not foo is given – but {foo} will remain).</p>
 {‘filepath’: ‘ROOT/FILE.will_be_used’, ‘ext’: ‘will_be_used’}</p>
 <p>If you don’t provide enough fields to satisfy all the format fields in the values of <cite>d</cite>,
 you’ll be told to bugger off.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">format_str_vals_of_dict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="s1">&#39;ROOT&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">format_str_vals_of_dict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="s1">'ROOT'</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
 <span class="c">...</span>
-<span class="gr">ValueError</span>: <span class="n">I won&#39;t be able to complete that. You&#39;ll need to provide the values for:</span>
+<span class="gr">ValueError</span>: <span class="n">I won't be able to complete that. You'll need to provide the values for:</span>
 <span class="x">  file</span>
 </pre></div>
 </div>
@@ -197,8 +197,8 @@ you’ll be told to bugger off.</p>
 <p>Note that will add a / where it’s missing (as in between ‘<a class="reference external" href="https://pypi.org">https://pypi.org</a>’ and ‘project/’),
 and only use one if two consecutive tokens use respectively end and start with a /
 (as in ‘project/’ and ‘/pipoke/’).</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ujoin</span><span class="p">(</span><span class="s1">&#39;https://pypi.org&#39;</span><span class="p">,</span> <span class="s1">&#39;project/&#39;</span><span class="p">,</span> <span class="s1">&#39;/pipoke/&#39;</span><span class="p">)</span>
-<span class="go">&#39;https://pypi.org/project/pipoke/&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ujoin</span><span class="p">(</span><span class="s1">'https://pypi.org'</span><span class="p">,</span> <span class="s1">'project/'</span><span class="p">,</span> <span class="s1">'/pipoke/'</span><span class="p">)</span>
+<span class="go">'https://pypi.org/project/pipoke/'</span>
 </pre></div>
 </div>
 <p>Extremal cases
