@@ -228,22 +228,3 @@ def mk_reclone_string(rootdir, save_in_filepath=None, filt=None):
         return Path(save_in_filepath).write_text(s)
     else:
         return s
-
-
-if __name__ == "__main__":
-    from contextlib import suppress
-
-    with suppress(ModuleNotFoundError):
-        import argh
-
-        argh.dispatch_commands(
-            [
-                add_to_pth_file,
-                print_pth_file_contents,
-                get_site_packages_folder,
-                get_pth_filepath,
-                root_dirpaths_to_packages,
-                add_paths_of_packages_under_rootdir,
-                mk_reclone_string,
-            ]
-        )
