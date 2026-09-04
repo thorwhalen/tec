@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "tec"
-version = "0.0.20"
+version = "0.0.21"
 description = "Tools to inspect python objects"
 readme = "README.md"
 requires-python = ">=3.10"
