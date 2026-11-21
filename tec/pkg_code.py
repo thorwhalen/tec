@@ -56,8 +56,8 @@ def package_root_dirs(rootdir, max_levels=None, only_if_has_init=False):
         filt_iter(DirCollection, filt=dir_whose_parent_has_same_name),
         init_filt,
         wrap_kvs(
-            key_of_id=lambda x: str(Path(x).parent),
-            id_of_key=lambda x: str(Path(x) / Path(x).name),
+            key_decoder=lambda x: str(Path(x).parent),
+            key_encoder=lambda x: str(Path(x) / Path(x).name),
         ),
         cache_iter,
     )

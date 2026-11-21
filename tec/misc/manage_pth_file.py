@@ -166,7 +166,7 @@ from tec.pkg_code import (
 #  since here we look through all files to only filter for the name/name/__init__.py
 _OldPackages = Pipe(
     filt_iter(FileCollection, filt=is_package_init),
-    wrap_kvs(key_of_id=pkg_root, id_of_key=init_file_of_pkg_root),
+    wrap_kvs(key_decoder=pkg_root, key_encoder=init_file_of_pkg_root),
     cache_iter,
 )
 
