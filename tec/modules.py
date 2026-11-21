@@ -45,7 +45,7 @@ def _dot_path_to_py_path(self, dot_path):
     return dot_path_to_py_path(dot_path, root_module_str=self.root_module_str)
 
 
-@wrap_kvs(key_of_id=_py_path_to_dot_path)
+@wrap_kvs(key_decoder=_py_path_to_dot_path)
 class ModulesReader(PyFilesReader):
     def __init__(self, module_src, root_module_str=""):
         self.module_src = module_src
@@ -62,13 +62,13 @@ class ModulesReader(PyFilesReader):
         return import_module(k)
 
 
-@wrap_kvs(obj_of_data=lambda obj: {k: getattr(obj, k) for k in dir(obj)})
+@wrap_kvs(value_decoder=lambda obj: {k: getattr(obj, k) for k in dir(obj)})
 class ModuleAllAttrsReader(ModulesReader):
     """Keys are module strings and values are {attr_name: attr_obj,...} dicts of the attributes of the module"""
 
 
 @wrap_kvs(
-    obj_of_data=lambda obj: {
+    value_decoder=lambda obj: {
         k: getattr(obj, k) for k in dir(obj) if not k.startswith("_")
     }
 )
@@ -76,7 +76,7 @@ class ModuleAttrsReader(ModulesReader):
     """Like ModuleAllAttrsReader but will only give you attributes whose names don't start with an underscore."""
 
 
-@wrap_kvs(key_of_id=_py_path_to_dot_path)
+@wrap_kvs(key_decoder=_py_path_to_dot_path)
 class ModulesReader(PyFilesReader):
     def __init__(self, module_src, root_module_str=""):
         self.module_src = module_src
