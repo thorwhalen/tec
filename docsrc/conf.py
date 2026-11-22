@@ -16,21 +16,19 @@ import sys
 sys.path.insert(0, os.path.abspath(".."))
 
 # -- Project information -----------------------------------------------------
-from configparser import ConfigParser
 from pathlib import Path
+import tomllib
 
-config_file = (
-    Path(__file__).absolute().parent.parent / "setup.cfg"
-)  # same folder as setup.py
-config = ConfigParser()
-config.read_file(open(config_file))
+_pyproject = Path(__file__).absolute().parent.parent / "pyproject.toml"
+with open(_pyproject, "rb") as _f:
+    _meta = tomllib.load(_f)["project"]
 
-project = config["metadata"]["name"]
-copyright = config["metadata"].get("copyright", "")
-author = config["metadata"].get("author", "")
+project = _meta["name"]
+copyright = ""
+author = ", ".join(a["name"] for a in _meta.get("authors", []) if "name" in a)
 
 # The full version, including alpha/beta/rc tags
-release = config["metadata"].get("version", "")
+release = _meta.get("version", "")
 
 # -- General configuration ---------------------------------------------------
 
