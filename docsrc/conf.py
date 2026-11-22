@@ -37,6 +37,7 @@ release = _meta.get("version", "")
 # ones.
 extensions = [
     "sphinx.ext.autodoc",  # Include documentation from docstrings
+    "sphinx.ext.autosummary",  # api.rst uses the autosummary directive
     "sphinx.ext.doctest",  # Test snippets in the documentation
     "sphinx.ext.githubpages",  # This extension creates .nojekyll file
     "sphinx.ext.graphviz",  # Add Graphviz graphs
@@ -64,3 +65,4 @@ html_theme = "alabaster"
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
+autosummary_generate = True
