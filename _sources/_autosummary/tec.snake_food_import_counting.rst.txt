@@ -1,0 +1,21 @@
+tec.snake\_food\_import\_counting
+=================================
+
+.. automodule:: tec.snake_food_import_counting
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      base_module_imports_in_module_recursive
+      base_modules_used_in_module
+      get_filepath_iterator
+      imports_in_module
+      iter_relative_files_and_folder
+      pattern_filter
+      pip_licenses_df
+      recursive_file_walk_iterator_with_filepath_filter
+      recursive_file_walk_iterator_with_name_filter
+      requirements_packages_in_module
+   

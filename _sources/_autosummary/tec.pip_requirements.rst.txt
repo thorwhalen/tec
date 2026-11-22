@@ -1,0 +1,22 @@
+tec.pip\_requirements
+=====================
+
+.. automodule:: tec.pip_requirements
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      file_to_string
+      file_unique_identifiers
+      get_requirements_to_update_second_requirements_when_behind_first
+      print_requirements_comparison
+      requirement_file_to_df
+      requirements_comparison_df
+      requirements_comparison_df_only_when_different
+      requirements_comparison_objects
+      rm_empty_version_entries
+      updated_requirements_2_with_requirements_1_that_are_ahead
+      version_str_to_num
+   

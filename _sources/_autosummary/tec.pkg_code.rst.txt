@@ -1,0 +1,23 @@
+tec.pkg\_code
+=============
+
+.. automodule:: tec.pkg_code
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      Packages
+      dir_whose_parent_has_same_name
+      folder_has_init
+      init_file_of_pkg_root
+      init_root
+      is_package_directory
+      is_package_init
+      is_project_root
+      package_directory_of_project_root
+      package_root_dirs
+      pkg_root
+      root_dirpaths_to_packages
+   

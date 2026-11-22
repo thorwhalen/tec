@@ -1,0 +1,20 @@
+tec.import\_counting
+====================
+
+.. automodule:: tec.import_counting
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      base_module_name
+      imports_in_py_content
+      is_stdlib_module
+      mk_multiple_package_import_regex
+      mk_single_package_import_regex
+      modules_imported
+      modules_imported_by_module
+      modules_imported_count
+      modules_imported_under_folder
+   

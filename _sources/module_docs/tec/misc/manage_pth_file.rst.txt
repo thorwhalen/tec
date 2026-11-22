@@ -1,4 +1,0 @@
-tec.misc.manage_pth_file
-========================
-.. automodule:: tec.misc.manage_pth_file
-   :members:

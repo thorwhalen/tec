@@ -1,0 +1,14 @@
+tec.stores
+==========
+
+.. automodule:: tec.stores
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      file_contents_to_short_description
+      find_short_description_for_pkg
+      py_files_with_contents_matching_pattern
+   

@@ -1,4 +1,0 @@
-tec.doctest_utils
-=================
-.. automodule:: tec.doctest_utils
-   :members:

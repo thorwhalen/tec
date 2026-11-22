@@ -1,4 +1,0 @@
-tec.packages
-============
-.. automodule:: tec.packages
-   :members:

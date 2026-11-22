@@ -1,0 +1,25 @@
+tec.util
+========
+
+.. automodule:: tec.util
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      bitmap_selection
+      ddir
+      decode_or_default
+      extract_encoding_from_contents
+      find
+      find_objects
+      func_fanout
+      get_encoding
+      identity
+      import_and_add_if_available
+      name_and_object_pairs
+      print_signatures
+      resolve_module_contents
+      signature_strings
+   

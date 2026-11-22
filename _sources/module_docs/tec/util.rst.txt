@@ -1,4 +1,0 @@
-tec.util
-========
-.. automodule:: tec.util
-   :members:

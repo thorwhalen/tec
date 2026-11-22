@@ -1,0 +1,23 @@
+tec.findimports
+===============
+
+.. automodule:: tec.findimports
+
+   
+   .. rubric:: Module Attributes
+
+   .. autosummary::
+   
+      REPLACEMENT_MODULE
+      UPSTREAM_ONLY_ADVICE
+      REMOVED_NAMES
+      REMOVED_NAME_ERROR_TEMPLATE
+      DEPRECATION_MESSAGE
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      count_imports
+      re_find_imports
+   

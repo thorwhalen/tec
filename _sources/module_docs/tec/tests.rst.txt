@@ -1,4 +1,0 @@
-tec.tests
-=========
-.. automodule:: tec.tests
-   :members:

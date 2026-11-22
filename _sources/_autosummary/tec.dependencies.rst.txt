@@ -1,0 +1,17 @@
+tec.dependencies
+================
+
+.. automodule:: tec.dependencies
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      ast_scope_graph_to_dot
+      dependency_graph_for
+      edges_to_dot_graph_edges
+      get_source_string
+      source_string_to_ast_scope_graph
+      to_ast_scope_graph
+   

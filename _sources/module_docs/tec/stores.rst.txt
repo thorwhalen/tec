@@ -1,4 +1,0 @@
-tec.stores
-==========
-.. automodule:: tec.stores
-   :members:

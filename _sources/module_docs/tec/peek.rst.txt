@@ -1,4 +1,0 @@
-tec.peek
-========
-.. automodule:: tec.peek
-   :members:

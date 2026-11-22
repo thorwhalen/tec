@@ -1,0 +1,24 @@
+tec.pip\_packaging
+==================
+
+.. automodule:: tec.pip_packaging
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      create_github_repo
+      format_str_vals_of_dict
+      get_last_pypi_version_number
+      increment_version
+      my_setup
+      next_version_for_package
+      ujoin
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      PartialFormatter
+   

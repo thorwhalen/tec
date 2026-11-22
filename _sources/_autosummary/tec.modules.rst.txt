@@ -1,0 +1,36 @@
+tec.modules
+===========
+
+.. automodule:: tec.modules
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      coerce_module_spec
+      dot_path_to_py_path
+      filepath_to_dotpath
+      finding_objects_of_module_with_given_methods
+      get_imported_module_paths
+      is_from_module
+      is_module_dotpath
+      loaded_module_from_dotpath_and_filepath
+      loaded_module_from_filepath
+      module_path
+      module_spec_kind
+      obj_to_dotpath
+      objects_of_module
+      py_path_to_dot_path
+      second_party_names
+      submodules
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      ModuleAllAttrsReader
+      ModuleAttrsReader
+      ModuleSpecKind
+      ModulesReader
+   

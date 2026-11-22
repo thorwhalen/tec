@@ -1,0 +1,17 @@
+tec.peek
+========
+
+.. automodule:: tec.peek
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      aval_gen
+      not_dunder
+      print_signature
+      print_source
+      show_attrs
+      submodule_path_strings
+   

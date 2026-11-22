@@ -1,4 +1,0 @@
-tec.dependencies
-================
-.. automodule:: tec.dependencies
-   :members:

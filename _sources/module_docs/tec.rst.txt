@@ -1,4 +1,0 @@
-tec
-===
-.. automodule:: tec
-   :members:

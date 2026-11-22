@@ -1,0 +1,27 @@
+﻿tec
+===
+
+.. automodule:: tec
+
+   
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   dependencies
+   doctest_utils
+   findimports
+   import_counting
+   imports
+   misc
+   modules
+   packages
+   peek
+   pip_packaging
+   pip_requirements
+   pkg_code
+   snake_food_import_counting
+   stores
+   util

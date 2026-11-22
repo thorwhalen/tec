@@ -1,276 +1,563 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="./">
-<head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to tec’s documentation! &mdash; tec 0.0.20 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
 
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="alternate" type="text/markdown" href="index.html.md">
+<link rel="describedby" href="llms.txt" type="text/markdown">
+<link rel="alternate" type="text/markdown" href="index.html.md">
+<link rel="describedby" href="llms.txt">
+    <title>tec &#8212; tec</title>
   
-      <script src="_static/jquery.js?v=5d32c60e"></script>
-      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=056c92e6"></script>
-      <script src="_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
-      <script src="_static/toggleprompt.js?v=d7ede5d2"></script>
-      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-      <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/js/theme.js"></script>
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=75c7c72ae941e8b558d8" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=75c7c72ae941e8b558d8" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx_autodoc_typehints.css?v=057ac668" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/epythet.css?v=0e99bf0e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
+
+    <script src="_static/documentation_options.js?v=5d650c58"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=fd10adb8"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="tec" href="module_docs/tec.html" /> 
-</head>
+    <link rel="next" title="API reference" href="api.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.0.25" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
 
-          
-          
-          <a href="#" class="icon icon-home">
-            tec
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec.html">tec</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/dependencies.html">tec.dependencies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/doctest_utils.html">tec.doctest_utils</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/findimports.html">tec.findimports</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/import_counting.html">tec.import_counting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/imports.html">tec.imports</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/misc.html">tec.misc</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/misc/manage_pth_file.html">tec.misc.manage_pth_file</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/modules.html">tec.modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/packages.html">tec.packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/peek.html">tec.peek</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/pip_packaging.html">tec.pip_packaging</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/pip_requirements.html">tec.pip_requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/pkg_code.html">tec.pkg_code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/snake_food_import_counting.html">tec.snake_food_import_counting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/stores.html">tec.stores</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/tests.html">tec.tests</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/tests/test_imports.html">tec.tests.test_imports</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html">tec.tests.test_license_hygiene</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/util.html">tec.util</a></li>
-</ul>
 
-        </div>
-      </div>
-    </nav>
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation" aria-expanded="false" aria-controls="pst-primary-sidebar-modal">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">tec</a>
-      </nav>
+  
+    
+  
 
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Welcome to tec’s documentation!</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
-      </li>
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">tec</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API reference
+  </a>
+</li>
+
   </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <section id="welcome-to-tec-s-documentation">
-<h1>Welcome to tec’s documentation!<a class="headerlink" href="#welcome-to-tec-s-documentation" title="Link to this heading"></a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec.html">tec</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/dependencies.html">tec.dependencies</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/dependencies.html#tec.dependencies.dependency_graph_for"><code class="docutils literal notranslate"><span class="pre">dependency_graph_for()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/doctest_utils.html">tec.doctest_utils</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/findimports.html">tec.findimports</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.DEPRECATION_MESSAGE"><code class="docutils literal notranslate"><span class="pre">DEPRECATION_MESSAGE</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.REMOVED_NAMES"><code class="docutils literal notranslate"><span class="pre">REMOVED_NAMES</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.REMOVED_NAME_ERROR_TEMPLATE"><code class="docutils literal notranslate"><span class="pre">REMOVED_NAME_ERROR_TEMPLATE</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.REPLACEMENT_MODULE"><code class="docutils literal notranslate"><span class="pre">REPLACEMENT_MODULE</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.UPSTREAM_ONLY_ADVICE"><code class="docutils literal notranslate"><span class="pre">UPSTREAM_ONLY_ADVICE</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.count_imports"><code class="docutils literal notranslate"><span class="pre">count_imports()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/findimports.html#tec.findimports.re_find_imports"><code class="docutils literal notranslate"><span class="pre">re_find_imports()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/import_counting.html">tec.import_counting</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/import_counting.html#tec.import_counting.base_module_name"><code class="docutils literal notranslate"><span class="pre">base_module_name()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/import_counting.html#tec.import_counting.imports_in_py_content"><code class="docutils literal notranslate"><span class="pre">imports_in_py_content()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/import_counting.html#tec.import_counting.mk_multiple_package_import_regex"><code class="docutils literal notranslate"><span class="pre">mk_multiple_package_import_regex()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/import_counting.html#tec.import_counting.mk_single_package_import_regex"><code class="docutils literal notranslate"><span class="pre">mk_single_package_import_regex()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/import_counting.html#tec.import_counting.modules_imported"><code class="docutils literal notranslate"><span class="pre">modules_imported()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/import_counting.html#tec.import_counting.modules_imported_by_module"><code class="docutils literal notranslate"><span class="pre">modules_imported_by_module()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/import_counting.html#tec.import_counting.modules_imported_count"><code class="docutils literal notranslate"><span class="pre">modules_imported_count()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/import_counting.html#tec.import_counting.modules_imported_under_folder"><code class="docutils literal notranslate"><span class="pre">modules_imported_under_folder()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/imports.html">tec.imports</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.ABSOLUTE_IMPORT_LEVEL"><code class="docutils literal notranslate"><span class="pre">ABSOLUTE_IMPORT_LEVEL</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.CODE_STRING_FILENAME"><code class="docutils literal notranslate"><span class="pre">CODE_STRING_FILENAME</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.DFLT_IMPORT_KEY"><code class="docutils literal notranslate"><span class="pre">DFLT_IMPORT_KEY()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.DFLT_ON_PARSE_ERROR"><code class="docutils literal notranslate"><span class="pre">DFLT_ON_PARSE_ERROR()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.DFLT_PATH_FILT"><code class="docutils literal notranslate"><span class="pre">DFLT_PATH_FILT</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.FOREIGN_PATH_SEP"><code class="docutils literal notranslate"><span class="pre">FOREIGN_PATH_SEP</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.ImportInfo"><code class="docutils literal notranslate"><span class="pre">ImportInfo</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.ModuleImports"><code class="docutils literal notranslate"><span class="pre">ModuleImports</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.base_package_of"><code class="docutils literal notranslate"><span class="pre">base_package_of()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.count_imports"><code class="docutils literal notranslate"><span class="pre">count_imports()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.find_imports"><code class="docutils literal notranslate"><span class="pre">find_imports()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.ignore_parse_error"><code class="docutils literal notranslate"><span class="pre">ignore_parse_error()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.imports_in_code"><code class="docutils literal notranslate"><span class="pre">imports_in_code()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.imports_under_folder"><code class="docutils literal notranslate"><span class="pre">imports_under_folder()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.raise_parse_error"><code class="docutils literal notranslate"><span class="pre">raise_parse_error()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/imports.html#tec.imports.warn_of_parse_error"><code class="docutils literal notranslate"><span class="pre">warn_of_parse_error()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/misc.html">tec.misc</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/misc.html#tec.misc.infos_of_packages_under_rootdir"><code class="docutils literal notranslate"><span class="pre">infos_of_packages_under_rootdir()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/misc/manage_pth_file.html">tec.misc.manage_pth_file</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/misc/manage_pth_file.html#tec.misc.manage_pth_file.DFLT_FILENAME_FILT"><code class="docutils literal notranslate"><span class="pre">DFLT_FILENAME_FILT()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/misc/manage_pth_file.html#tec.misc.manage_pth_file.add_missing_lines"><code class="docutils literal notranslate"><span class="pre">add_missing_lines()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/misc/manage_pth_file.html#tec.misc.manage_pth_file.add_to_pth_file"><code class="docutils literal notranslate"><span class="pre">add_to_pth_file()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/misc/manage_pth_file.html#tec.misc.manage_pth_file.mk_reclone_string"><code class="docutils literal notranslate"><span class="pre">mk_reclone_string()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/misc/manage_pth_file.html#tec.misc.manage_pth_file.target_and_missing_items"><code class="docutils literal notranslate"><span class="pre">target_and_missing_items()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/modules.html">tec.modules</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/modules.html#tec.modules.ModuleAllAttrsReader"><code class="docutils literal notranslate"><span class="pre">ModuleAllAttrsReader</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/modules.html#tec.modules.ModuleAttrsReader"><code class="docutils literal notranslate"><span class="pre">ModuleAttrsReader</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/modules.html#tec.modules.ModuleSpecKind"><code class="docutils literal notranslate"><span class="pre">ModuleSpecKind</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/modules.html#tec.modules.ModulesReader"><code class="docutils literal notranslate"><span class="pre">ModulesReader</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/modules.html#tec.modules.filepath_to_dotpath"><code class="docutils literal notranslate"><span class="pre">filepath_to_dotpath()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/modules.html#tec.modules.is_from_module"><code class="docutils literal notranslate"><span class="pre">is_from_module()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/modules.html#tec.modules.is_module_dotpath"><code class="docutils literal notranslate"><span class="pre">is_module_dotpath()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/modules.html#tec.modules.loaded_module_from_dotpath_and_filepath"><code class="docutils literal notranslate"><span class="pre">loaded_module_from_dotpath_and_filepath()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/modules.html#tec.modules.loaded_module_from_filepath"><code class="docutils literal notranslate"><span class="pre">loaded_module_from_filepath()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/modules.html#tec.modules.second_party_names"><code class="docutils literal notranslate"><span class="pre">second_party_names()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/packages.html">tec.packages</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/packages.html#tec.packages.print_top_level_diagnosis"><code class="docutils literal notranslate"><span class="pre">print_top_level_diagnosis()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/peek.html">tec.peek</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/peek.html#tec.peek.print_signature"><code class="docutils literal notranslate"><span class="pre">print_signature()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/peek.html#tec.peek.print_source"><code class="docutils literal notranslate"><span class="pre">print_source()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/pip_packaging.html">tec.pip_packaging</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/pip_packaging.html#tec.pip_packaging.PartialFormatter"><code class="docutils literal notranslate"><span class="pre">PartialFormatter</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/pip_packaging.html#tec.pip_packaging.create_github_repo"><code class="docutils literal notranslate"><span class="pre">create_github_repo()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/pip_packaging.html#tec.pip_packaging.format_str_vals_of_dict"><code class="docutils literal notranslate"><span class="pre">format_str_vals_of_dict()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/pip_packaging.html#tec.pip_packaging.get_last_pypi_version_number"><code class="docutils literal notranslate"><span class="pre">get_last_pypi_version_number()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/pip_packaging.html#tec.pip_packaging.ujoin"><code class="docutils literal notranslate"><span class="pre">ujoin()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/pip_requirements.html">tec.pip_requirements</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/pip_requirements.html#tec.pip_requirements.file_to_string"><code class="docutils literal notranslate"><span class="pre">file_to_string()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/pkg_code.html">tec.pkg_code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/snake_food_import_counting.html">tec.snake_food_import_counting</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/snake_food_import_counting.html#tec.snake_food_import_counting.base_module_imports_in_module_recursive"><code class="docutils literal notranslate"><span class="pre">base_module_imports_in_module_recursive()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/snake_food_import_counting.html#tec.snake_food_import_counting.base_modules_used_in_module"><code class="docutils literal notranslate"><span class="pre">base_modules_used_in_module()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/snake_food_import_counting.html#tec.snake_food_import_counting.imports_in_module"><code class="docutils literal notranslate"><span class="pre">imports_in_module()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/snake_food_import_counting.html#tec.snake_food_import_counting.pip_licenses_df"><code class="docutils literal notranslate"><span class="pre">pip_licenses_df()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/stores.html">tec.stores</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/stores.html#tec.stores.find_short_description_for_pkg"><code class="docutils literal notranslate"><span class="pre">find_short_description_for_pkg()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/stores.html#tec.stores.py_files_with_contents_matching_pattern"><code class="docutils literal notranslate"><span class="pre">py_files_with_contents_matching_pattern()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/tests.html">tec.tests</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/tests/test_imports.html">tec.tests.test_imports</a></li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html">tec.tests.test_license_hygiene</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.COPYRIGHT_RE"><code class="docutils literal notranslate"><span class="pre">COPYRIGHT_RE</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.EXCLUDED_DIR_NAMES"><code class="docutils literal notranslate"><span class="pre">EXCLUDED_DIR_NAMES</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.FOREIGN_LICENSE_MARKERS"><code class="docutils literal notranslate"><span class="pre">FOREIGN_LICENSE_MARKERS</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.PKG_ROOT"><code class="docutils literal notranslate"><span class="pre">PKG_ROOT</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.THIS_FILE"><code class="docutils literal notranslate"><span class="pre">THIS_FILE</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.py_files_of_package"><code class="docutils literal notranslate"><span class="pre">py_files_of_package()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.test_no_foreign_copyright_notice_in_package_source"><code class="docutils literal notranslate"><span class="pre">test_no_foreign_copyright_notice_in_package_source()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.test_no_foreign_license_grant_in_package_source"><code class="docutils literal notranslate"><span class="pre">test_no_foreign_license_grant_in_package_source()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/tests/test_license_hygiene.html#tec.tests.test_license_hygiene.test_there_are_files_to_scan"><code class="docutils literal notranslate"><span class="pre">test_there_are_files_to_scan()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="module_docs/tec/util.html">tec.util</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/util.html#tec.util.bitmap_selection"><code class="docutils literal notranslate"><span class="pre">bitmap_selection()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/util.html#tec.util.find"><code class="docutils literal notranslate"><span class="pre">find()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/util.html#tec.util.find_objects"><code class="docutils literal notranslate"><span class="pre">find_objects()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/util.html#tec.util.func_fanout"><code class="docutils literal notranslate"><span class="pre">func_fanout()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/util.html#tec.util.import_and_add_if_available"><code class="docutils literal notranslate"><span class="pre">import_and_add_if_available()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/util.html#tec.util.name_and_object_pairs"><code class="docutils literal notranslate"><span class="pre">name_and_object_pairs()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/util.html#tec.util.print_signatures"><code class="docutils literal notranslate"><span class="pre">print_signatures()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="module_docs/tec/util.html#tec.util.signature_strings"><code class="docutils literal notranslate"><span class="pre">signature_strings()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</div>
-</section>
-<section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
-</ul>
-<p>Release: 0.0.20</p>
-<p>Last change: Sep 04, 2026</p>
-</section>
-
-
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="module_docs/tec.html" class="btn btn-neutral float-right" title="tec" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+</nav></div>
+      
     </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
 
-  <hr/>
-
-  <div role="contentinfo">
-    <p></p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
         </div>
-      </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+      
+      
+        <div class="navbar-item">
 
-</body>
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/thorwhalen/tec" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page" aria-expanded="false" aria-controls="pst-secondary-sidebar-modal">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal" tabindex="-1"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/thorwhalen/tec" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <!-- generated by epythet -->
+<section id="tec">
+<h1>tec<a class="headerlink" href="#tec" title="Link to this heading">#</a></h1>
+<p>Tools to inspect python objects</p>
+<p>To install:	<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tec</span></code></p>
+</section>
+<section id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h1>
+<section id="counting-imported-names">
+<h2>Counting imported names<a class="headerlink" href="#counting-imported-names" title="Link to this heading">#</a></h2>
+<section id="quickly-tec-import-counting">
+<span id="quickly-tecimport_counting"></span><h3>Quickly (<code class="docutils literal notranslate"><span class="pre">tec.import_counting</span></code>)<a class="headerlink" href="#quickly-tec-import-counting" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">modules_imported</span></code> is a generator of module names from obj.
+It uses string parsing, so is not as accurate as some other methods, but is fast and flexible,
+and doesn’t require actually running any of the code analyzed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">tec</span><span class="w"> </span><span class="kn">import</span> <span class="n">modules_imported</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">os.path</span>  <span class="c1"># single module</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">modules_imported</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="p">))</span>  <span class="c1"># list of names in the order they were found</span>
+<span class="go">['os', 'sys', 'stat', 'genericpath', 'genericpath', 'pwd', 'pwd', 're', 're']</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>  <span class="c1"># package with several modules</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Counter</span><span class="p">(</span><span class="n">modules_imported</span><span class="p">(</span><span class="n">os</span><span class="p">,</span> <span class="n">only_base_name</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span><span class="o">.</span><span class="n">most_common</span><span class="p">()</span>
+<span class="go">[('nt', 5), ('posix', 4), ... ('warnings', 1), ('subprocess', 1)]</span>
+</pre></div>
+</div>
+</section>
+<section id="accurately-tec-imports">
+<span id="accurately-tecimports"></span><h3>Accurately (<code class="docutils literal notranslate"><span class="pre">tec.imports</span></code>)<a class="headerlink" href="#accurately-tec-imports" title="Link to this heading">#</a></h3>
+<p>When accuracy matters more than speed, <code class="docutils literal notranslate"><span class="pre">tec.imports</span></code> parses the code with the
+standard library’s <code class="docutils literal notranslate"><span class="pre">ast</span></code>, so import-looking strings, comments and line
+continuations can’t fool it. Each import comes back as an <code class="docutils literal notranslate"><span class="pre">ImportInfo</span></code>
+(<code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">filename</span></code>, <code class="docutils literal notranslate"><span class="pre">lineno</span></code>, <code class="docutils literal notranslate"><span class="pre">level</span></code>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">tec</span><span class="w"> </span><span class="kn">import</span> <span class="n">imports_in_code</span><span class="p">,</span> <span class="n">count_imports</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">imp</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">imports_in_code</span><span class="p">(</span><span class="s2">"import os</span><span class="se">\n</span><span class="s2">from json import dumps"</span><span class="p">)]</span>
+<span class="go">['os', 'json.dumps']</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count_imports</span><span class="p">(</span><span class="n">some_package_or_folder</span><span class="p">)</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">[('os', 12), ('dol', 7), ('re', 5)]</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">count_imports</span></code> (and <code class="docutils literal notranslate"><span class="pre">imports_under_folder</span></code>) take a folder path, a module
+object, a package, or an <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> path; what gets counted is decided by the
+<code class="docutils literal notranslate"><span class="pre">import_key</span></code> argument, which defaults to the top-level package name.</p>
+<blockquote>
+<div><p><strong>Note.</strong> <code class="docutils literal notranslate"><span class="pre">tec.imports</span></code> replaces <code class="docutils literal notranslate"><span class="pre">tec.findimports</span></code>, which held a vendored copy
+of the GPL-2.0-or-later <code class="docutils literal notranslate"><span class="pre">findimports</span></code> project – incompatible with <code class="docutils literal notranslate"><span class="pre">tec</span></code>’s own
+Apache-2.0 licence, and therefore removed. <code class="docutils literal notranslate"><span class="pre">tec.findimports</span></code> remains as a
+deprecated forwarding layer. The module-<em>graph</em> part of that old API has no <code class="docutils literal notranslate"><span class="pre">tec</span></code>
+equivalent; install the upstream project yourself if you need it.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="modules">
+<h2>Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h2>
+<div class="highlight-pydocstring notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; from tec import modules
+&gt;&gt;&gt; sorted(modules.second_party_names(modules))[:5]
+['DOTPATH', 'FILEPATH', 'FOLDERPATH', 'LOADED', 'ModuleSpecKind']
+&gt;&gt;&gt; sorted(modules.second_party_names(modules, callable))[:4]
+['ModuleSpecKind', 'coerce_module_spec', 'filepath_to_dotpath', 'finding_objects_of_module_with_given_methods']
+&gt;&gt;&gt; sorted(modules.second_party_names(modules, lambda obj: isinstance(obj, type)))
+['ModuleSpecKind']
+</pre></div>
+</div>
+</section>
+<section id="packages">
+<h2>Packages<a class="headerlink" href="#packages" title="Link to this heading">#</a></h2>
+<p>A few functions to investigate what objects can be imported from a module
+(and the depth of the dot-path to import those objects directly).</p>
+<p>The main function, <code class="docutils literal notranslate"><span class="pre">print_top_level_diagnosis</span></code>,
+prints a diagnosis of the imports that can be optained from the (top level) module.
+That is, those objects that can by imported by doing:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">module</span><span class="w"> </span><span class="kn">import</span> <span class="n">obj</span>
+</pre></div>
+</div>
+<p>though the object’s code may be several package levels down (say module.sub1.sub2.obj).</p>
+<div class="highlight-pydocstring notranslate"><div class="highlight"><pre><span></span>&gt;&gt; import numpy, pandas, scipy
+&gt;&gt; print_top_level_diagnosis(numpy)
+--------- numpy ---------
+601 objects can be imported from top level numpy:
+  20 modules
+  300 functions
+  104 types
+
+depth	count
+0	163
+1	406
+2	2
+3	29
+4	1
+
+&gt;&gt; print_top_level_diagnosis(pandas)
+--------- pandas ---------
+115 objects can be imported from top level pandas:
+  12 modules
+  55 functions
+  40 types
+
+depth	count
+0	12
+3	37
+4	65
+5	1
+
+&gt;&gt; print_top_level_diagnosis(scipy)
+--------- scipy ---------
+582 objects can be imported from top level scipy:
+  9 modules
+  412 functions
+  96 types
+
+depth	count
+0	61
+1	395
+2	4
+3	122
+</pre></div>
+</div>
+</section>
+<section id="peek">
+<h2>Peek<a class="headerlink" href="#peek" title="Link to this heading">#</a></h2>
+<div class="highlight-pydocstring notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; from tec.peek import print_signature
+&gt;&gt;&gt; print_signature(print_signature)
+func
+sep: Union[str, NoneType] = '\\n'
+prefix: str = ''
+suffix: str = ''
+&gt;&gt;&gt; print_signature(print_signature, None)
+(func, sep: Union[str, NoneType] = '\\n', prefix: str = '', suffix: str = '')
+&gt;&gt;&gt; print_signature(print_signature, '\\n * ', prefix=' * ', suffix='\\n')
+ * func
+ * sep: Union[str, NoneType] = '\\n'
+ * prefix: str = ''
+ * suffix: str = ''
+&lt;BLANKLINE&gt;
+</pre></div>
+</div>
+<p class="epythet-aggregates">This documentation as a single file: <a href="tec.md">tec.md</a> (Markdown, for agents).</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+<p class="epythet-provenance" style="font-size:.8em;opacity:.65;margin-top:2.5em;text-align:right">built 2026-11-22 17:00 UTC from <a href="https://github.com/thorwhalen/tec/commit/c561a5580c66799999e5504f9c05618d0caa03c7">c561a55</a> (master) · tec 0.0.25 · <a href="about-this-build.html">about this build</a></p>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="api.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">API reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal" tabindex="-1"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">tec</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#counting-imported-names">Counting imported names</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quickly-tec-import-counting">Quickly (<code class="docutils literal notranslate"><span class="pre">tec.import_counting</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accurately-tec-imports">Accurately (<code class="docutils literal notranslate"><span class="pre">tec.imports</span></code>)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#peek">Peek</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/index.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.24.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
 </html>

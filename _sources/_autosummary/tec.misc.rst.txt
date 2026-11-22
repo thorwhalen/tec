@@ -1,0 +1,20 @@
+tec.misc
+========
+
+.. automodule:: tec.misc
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      infos_of_packages_under_rootdir
+      readme_path_for_setup_path
+   
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   manage_pth_file

@@ -1,0 +1,17 @@
+tec.packages
+============
+
+.. automodule:: tec.packages
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      get_module_name
+      obj_module_depth_counts
+      print_top_level_diagnosis
+      read_requirements
+      take_everything
+      top_level_objs
+   

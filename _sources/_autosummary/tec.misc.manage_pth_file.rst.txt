@@ -1,0 +1,29 @@
+tec.misc.manage\_pth\_file
+==========================
+
+.. automodule:: tec.misc.manage_pth_file
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      add_missing_items
+      add_missing_lines
+      add_paths_of_packages_under_rootdir
+      add_to_pth_file
+      all_pth_file_names
+      filtered_pth_file_names
+      first_pth_file_found
+      first_site_packages_folder_found
+      get_lines
+      get_pth_filepath
+      get_site_packages_folder
+      lines_of_file
+      missing_items
+      mk_reclone_string
+      print_pth_file_contents
+      reclone_pkg_commands
+      simple_run_command
+      target_and_missing_items
+   

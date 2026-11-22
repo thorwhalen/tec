@@ -1,0 +1,39 @@
+tec.imports
+===========
+
+.. automodule:: tec.imports
+
+   
+   .. rubric:: Module Attributes
+
+   .. autosummary::
+   
+      CODE_STRING_FILENAME
+      ABSOLUTE_IMPORT_LEVEL
+      DFLT_IMPORT_KEY
+      DFLT_PATH_FILT
+      DFLT_ON_PARSE_ERROR
+      FOREIGN_PATH_SEP
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      DFLT_IMPORT_KEY
+      DFLT_ON_PARSE_ERROR
+      base_package_of
+      count_imports
+      find_imports
+      ignore_parse_error
+      imports_in_code
+      imports_under_folder
+      raise_parse_error
+      warn_of_parse_error
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      ImportInfo
+      ModuleImports
+   

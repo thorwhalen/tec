@@ -1,0 +1,6 @@
+tec.doctest\_utils
+==================
+
+.. automodule:: tec.doctest_utils
+
+   
